@@ -1,2 +1,2 @@
-# buddydesign
+# https://whosaldo.de/
 shopify
