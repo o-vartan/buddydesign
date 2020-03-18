@@ -1,0 +1,45 @@
+<aside id="secondary" class="sidebar widget-area engoj-collection-sidebar engoc_sw_filter_tag" role="complementary">
+	
+  <div class="close-sidebar-collection hidden-lg hidden-md">
+      <span>{{section.settings.text_filter2}}</span><i class="icon_close ion-close"></i>
+  </div>
+  {%include 'filter-category'%}
+  <div class="filter filter-group">
+      <h3 class="widget-blog-title">{{section.settings.text_filter}}</h3>
+      {%include 'filter-price'%}
+      {%include 'filter-brand'%}
+    	{%include 'filter-size'%}
+      {%include 'filter-color'%}
+    	
+  </div>
+  <div class="filter filter-product e-category">
+      <h3 class="widget-blog-title">{{section.settings.sidebar_text}}</h3>
+      <div class="owl-carousel owl-theme js-owl-post">
+          {% if section.blocks.size > 0 %} 
+                        {% for block in section.blocks %}
+                  {% if block.type == 'sidebarproduct' %}
+                  {% assign products_limit = block.settings.product_limit %}
+                  {% assign col = block.settings.product_collection %}
+          <div class="item">
+              {% for product in collections[col].products limit: products_limit %}
+                    {% include 'product-category-list-v2' %}
+                        {% else %}
+                    {% include 'empty-product-category-v2' %}
+                {% endfor %}
+          </div>
+          {% endif %}  
+                {% endfor %}
+                    {% endif %}  
+      </div>
+  </div>
+  <div class="banner">
+      <a class="image-bd hover-images" href="{{section.settings.widget_banner_url}}">
+        {% if section.settings.widget_banner_img == blank %}
+      	<img src="https://placehold.it/320x384" alt="" class="img-reponsive">
+                      {%else%}
+          <img src="{{section.settings.widget_banner_img | img_url:'master'}}" class="img-reponsive" alt="" />
+        {%endif%}
+      </a>
+  </div>
+  
+</aside>

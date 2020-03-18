@@ -1,0 +1,21 @@
+{% comment %}
+Add default products to help with onboarding for collections/all only.
+
+The onboarding styles and products are only loaded if the
+store has no products.
+{% endcomment %}
+
+{% for i in (1..4) %}
+<div class="cate-item">
+    <div class="product-img">
+        <a href="/admin/products">
+          {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+      						{{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+      	</a>
+    </div>
+    <div class="product-info">
+        <h3 class="product-title"><a href="/admin/products">ShopiLaunch Product</a></h3>
+        <div class="product-price v2"><span>$780.00</span></div>
+    </div>
+</div>
+{% endfor %}

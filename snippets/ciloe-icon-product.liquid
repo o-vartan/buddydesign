@@ -1,0 +1,36 @@
+{% assign sold_out = true %}
+{% if product.available %}
+{% assign sold_out = false %}
+{% endif %}
+{% comment%}
+<div class="product-icon text-center absolute">
+  {% if sold_out %}
+  <form class="inline-block icon-addcart margin_right_10 box-shadow">
+    <button class="btn-default">
+      <i class="ti-na" style="padding-top: 3px;display: inline-block;"></i>
+    </button>
+  </form>
+  {% else %}
+  <form  method="post" action="/cart/add" enctype="multipart/form-data" class="inline-block icon-addcart margin_right_10 box-shadow">
+    <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+
+    <button type="{% if product.type != 'Poster' %}submit {% else %}button{% endif %}" name="{% if product.type != 'Poster' %}add{% endif %}" class="enj-add-to-cart-btn btn-default   setObjectForm {% if product.type == 'Poster' %} Poster {% endif %}">
+
+      {% if settings.icon-addcart == blank %}
+      <i class="icon-bag"></i>
+      {% else %}
+      <i class="{{settings.icon-addcart}}"></i>
+      {% endif %}
+    </button>
+  </form>
+  {% endif %}
+  <a href="#" class="engoj_btn_quickview icon-quickview inline-block box-shadow" title="quickview" data-id="{{ product.handle }}">
+    {% if settings.icon-quickview == blank %}
+    <i class="icon-magnifier"></i>
+    {% else %}
+      <i class="{{settings.icon-quickview}}"></i>
+    {% endif %}
+  </a>
+  {% include 'ciloe-add-wishlist' %}
+</div>
+{% endcomment%}

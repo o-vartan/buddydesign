@@ -1,0 +1,9 @@
+<aside id="secondary" class="sidebar widget-area engoj-collection-sidebar engoc_sw_filter_tag" role="complementary">
+  {% for i in (1..6) %}
+  {% capture collection_widget %}collection_widget_{{i}}{% endcapture %}
+  {% if section.settings[collection_widget] != blank %}
+  {% include section.settings[collection_widget] %}
+  {% endif %}
+  {% endfor %}
+</aside>
+<!-- #secondary -->

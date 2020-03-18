@@ -1,0 +1,88 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  
+    {% include 'ciloe-title-section' %}
+  <div class="container-fluid container_35 margin_bottom_70 trending_classic">
+    <div class="row" id="fade-it-1">
+    {% assign products_limit = section.settings.limit %}
+    {% assign col = section.settings.collection %}
+      {%- assign i = 2 -%}
+    {% for product in collections[col].products limit: products_limit %}
+    <div class="col-lg-2 col-md-3 col-sm-6 col-xs-6 product-col-5" id="fade-it-{{i}}">
+      {% include 'ciloe-product' %}
+    </div>
+      {%- assign i = i | plus : 1 -%}
+    {% endfor %}
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Trending Classic",
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Trending"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_btn",
+      "label": "Enable button",
+      "default": true
+    },
+	{
+      "type": "url",
+      "id": "url",
+      "label": "URL button",
+      "default": "/collections/all"
+    },
+	{
+      "type": "text",
+      "id": "btn_name",
+      "label": "button name",
+      "default": "shop now"
+    },
+    {
+      "type": "textarea",
+      "id": "des",
+      "label": "Description",
+      "default": "Get the latest news & updates from Ciloe"
+    },
+	{
+      "type": "text",
+      "id": "limit",
+      "label": "Limit product",
+      "default": "10"
+    },
+	{
+      "type": "collection",
+      "id": "collection",
+      "label": "Chose collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trending Classic",
+      "category": "Home Classic"
+    }
+  ]
+}
+{% endschema %}

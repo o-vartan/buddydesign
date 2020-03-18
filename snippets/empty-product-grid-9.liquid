@@ -1,0 +1,45 @@
+{% comment %}
+Add default products to help with onboarding for collections/all only.
+
+The onboarding styles and products are only loaded if the
+store has no products.
+{% endcomment %}
+
+{% for i in (1..9) %}
+<div class="product-item">
+    <div class="pd-bd product-inner">
+        <div class="product-img">
+            <a href="/admin/products">
+              {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+            </a>
+        </div>
+        <div class="product-info">
+            <div class="color-group">
+            </div>
+            
+            <div class="element-list element-list-middle">
+                
+                <p class="product-cate">Audio Speakers</p>
+                <h3 class="product-title" title="ShopiLaunch Product"><a href="/admin/products"  title="ShopiLaunch Product">ShopiLaunch Product</a></h3>
+                <div class="product-bottom">
+                    <div class="product-price"><span>$1,215.00</span></div>
+
+                </div>
+                
+            </div>
+            <div class="product-button-group">
+                <a href="#" class="btn-icon">
+                        <span class="icon-bg icon-cart"></span>
+                    </a>
+              <a href="#" class="btn-icon btn-view">
+                            <span class="icon-bg icon-view"></span>
+                        </a>
+                <a href="#" class="btn-icon">
+                        <span class="icon-bg icon-wishlist"></span>
+                    </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}

@@ -1,0 +1,29 @@
+{% comment %}
+Add default products to help with onboarding for collections/all only.
+
+The onboarding styles and products are only loaded if the
+store has no products.
+{% endcomment %}
+
+{% for i in (1..5) %}
+ <div class="item">
+   <div class="product-images">
+     <a href="/admin/products" class="hover-images effect">
+      {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+      {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+    </a>
+     <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
+     
+   </div>
+   <div class="product-info-ver2">
+     <h3 class="product-title"><a href="#">Tia Slides in Brandy</a></h3>
+     <div class="product-after-switch">
+       <div class="product-price">$295.00</div>
+       <div class="product-after-button">
+         <a href="#" class="addcart">ADD TO CART</a>
+       </div>
+     </div>
+     <div class="product-price">$292.00</div>
+   </div>
+</div>
+{% endfor %}

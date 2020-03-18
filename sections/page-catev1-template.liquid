@@ -1,0 +1,344 @@
+<div class="container container-240">
+    <div class="e-cat">
+        <div class="banner">
+            <a href="{{section.settings.bg_url}}" class="image-bd effect_img2">
+                <img {%if section.settings.bg_img == blank%}src="{{'o-banner.jpg'| asset_url }}" 
+                  {%else%}
+                src="{{section.settings.bg_img | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" />  
+            </a>
+        </div>
+        {% include 'breadcrumb' %}
+        <div class="section-cate">
+            <h3 class="e-title text-center">{{section.settings.cate_title}}</h3>
+            <div class="owl-carousel owl-theme owl-cate js-owl-cate">
+                {% if section.blocks.size > 0 %}
+                {% for block in section.blocks %}
+                {% if block.type == 'catetab' %}
+                <div class="item item-pd">
+                    <div class="product-img">
+                        <a href="{{block.settings.cate_url}}">
+                            <img {%if block.settings.cate_img == blank%}src="{{'pd1.jpg'| asset_url }}" 
+                            {%else%}
+                            src="{{block.settings.cate_img | img_url:'master'}}" {%endif%} alt="" />
+                        </a>
+                    </div>
+                    <h3>{{block.settings.text1}}</h3>
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+
+            </div>
+        </div>
+        <div class="bestseller">
+            <div class="ecome-heading style3 spc3">
+                <h3>{{section.settings.list_name1}}</h3>
+                <a href="{{section.settings.list_btn_url1}}" class="btn-show">{{section.settings.list_btn_name1}}<i class="ion-ios-arrow-forward"></i></a>
+            </div>
+            <div class="owl-carousel owl-theme owl-cate v2 js-owl-cate">
+                {%for product in collections[section.settings.product_collection1].products limit:section.settings.product_limit1%}
+                      {% include 'product-grid-12' %}
+                          {% else %} 
+                      {% include 'empty-product-grid-12'%}
+                  {% endfor %}
+            </div>
+        </div>
+
+        <div class="onsale">
+            <div class="ecome-heading style3 spc3">
+                <h3>{{section.settings.list_name2}}</h3>
+                <a href="{{section.settings.list_btn_url2}}" class="btn-show">{{section.settings.list_btn_name2}}<i class="ion-ios-arrow-forward"></i></a>
+            </div>
+            <div class="owl-carousel owl-theme owl-cate v3 js-owl-cate">
+                {%for product in collections[section.settings.product_collection2].products limit:section.settings.product_limit2%}
+                      {% include 'product-grid-12' %}
+                          {% else %} 
+                      {% include 'empty-product-grid-12'%}
+                  {% endfor %}
+            </div>
+        </div>
+        <!-- Brand -->
+      	<div class="brand">
+            <div class="ecome-heading style3 spc3">
+                
+                    <h3>{{section.settings.text1}}</h3>
+                <a href="{{section.settings.btn_url}}" class="btn-show">{{section.settings.btn_name}}<i class="ion-ios-arrow-forward"></i></a>
+            </div>
+
+            <div class="owl-carousel owl-theme owl-brand js-owl-brand">
+                {% if section.blocks.size > 0 %} 
+                                        {% for block in section.blocks %}
+              	{% if block.type == 'brandtab' %}
+                    <div class="brand-item">
+                        <a href="{{block.settings.brand_url}}" class="hover-images">
+                          <img {%if block.settings.brand_img == blank%}src="{{'brandlogo1.png'| asset_url }}" 
+                                          {%else%}
+                                        src="{{block.settings.brand_img | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" />  
+                        </a>
+                    </div>
+              		{% endif %}  
+                    {% endfor %}
+                                    {% endif %}  
+            </div>
+            <div class="about-brand">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-sm-3 col-md-4">
+                        <div class="about-brand-info text-center">
+                            <div class="brand-img">
+                                <a href="{{section.settings.btn_url}}" class="hover-images">
+                                  	<img {%if section.settings.brand_img == blank%}src="{{'sony_info.jpg'| asset_url }}" 
+                                      {%else%}
+                                  	src="{{section.settings.brand_img | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" />  
+                                </a>
+                            </div>
+                            <div class="brand-info">
+                                <p>{{section.settings.brand_desc}}</p>
+                            </div>
+                            <a href="{{section.settings.btn_url}}" class="btn-gradient btn-brand">{{section.settings.brand_name}} <i class="ion-ios-arrow-forward"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-sm-8 col-md-8">
+                        <div class="row engoc-equal-row">
+                            {%for product in collections[section.settings.product_collection3].products limit:section.settings.product_limit3%}
+
+                              {% include 'product-grid-4' %}
+                                  {% else %} 
+                              {% include 'empty-product-grid-4'%}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% schema %}
+{
+  "name": "Page Category Full Width",
+  "settings": [
+	{
+      "type": "header",
+      "content": "Heading"
+    },
+	{
+      "type": "text",
+      "id": "cate_title",
+      "label": "Title",
+      "default": "Cell Phones & Accessories"
+    },
+    {
+      "type": "header",
+      "content": "Banner Top"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_img",
+      "label": "Image",
+      "info": "1398x191 recommended"
+    },
+	{
+      "id": "bg_url",
+      "type": "url",
+      "default": "/collections/all",
+      "label": "Button link"
+    },
+	{
+      "type": "header",
+      "content": "List Products 1"
+    },
+	{
+      "type": "text",
+      "id": "list_name1",
+      "label": "Title",
+      "default": "Beseller Products"
+    },
+	{
+      "type":"header",
+      "content":"Button"
+    },
+    {
+      "type": "text",
+      "id": "list_btn_name1",
+      "label": "Title button",
+      "default": "Shop more"
+    },
+	{
+      "type": "url",
+      "id": "list_btn_url1",
+      "label": "URL"
+    },
+    {
+      "type": "collection",
+      "id": "product_collection1",
+      "label": "Select collection"
+    },
+    {
+      "type": "text",
+      "id": "product_limit1",
+      "label": "Limit number",
+      "default": "12"
+    },
+	{
+      "type": "header",
+      "content": "List Products 2"
+    },
+	{
+      "type": "text",
+      "id": "list_name2",
+      "label": "Title",
+      "default": "On Sale Products"
+    },
+	{
+      "type":"header",
+      "content":"Button"
+    },
+    {
+      "type": "text",
+      "id": "list_btn_name2",
+      "label": "Title button",
+      "default": "Shop more"
+    },
+	{
+      "type": "url",
+      "id": "list_btn_url2",
+      "label": "URL"
+    },
+    {
+      "type": "collection",
+      "id": "product_collection2",
+      "label": "Select collection"
+    },
+    {
+      "type": "text",
+      "id": "product_limit2",
+      "label": "Limit number",
+      "default": "12"
+    },
+		{
+      "type": "header",
+      "content": "Brand"
+    },
+	{
+      "type": "text",
+      "id": "text1",
+      "label": "Title",
+      "default": "Shop by brand"
+    },
+	{
+      "type":"header",
+      "content":"Button"
+    },
+    {
+      "type": "text",
+      "id": "btn_name",
+      "label": "Title button",
+      "default": "Shop more"
+    },
+	{
+      "type": "url",
+      "id": "btn_url",
+      "label": "URL"
+    },
+    {
+      "type": "header",
+      "content": "Brand"
+    },
+    {
+      "type": "image_picker",
+      "id": "brand_img",
+      "label": "Brand Image",
+      "info": "209x37 recommended"
+    },
+	{
+      "type": "text",
+      "id": "brand_desc",
+      "label": "Brand Description",
+      "default": "brand desc"
+    },
+	{
+      "type": "text",
+      "id": "brand_name",
+      "label": "Title button",
+      "default": "Shop this brand"
+    },
+	{
+      "type": "url",
+      "id": "brand_url",
+      "label": "URL"
+    },
+	{
+      "type": "header",
+      "content": "List Products 3"
+    },
+    {
+      "type": "collection",
+      "id": "product_collection3",
+      "label": "Select collection"
+    },
+    {
+      "type": "text",
+      "id": "product_limit3",
+      "label": "Limit number",
+      "default": "4"
+    }
+	
+ 
+  ],
+	"blocks": [
+    {
+      "type": "catetab",
+      "name": "Category Block",
+      "limit": 12,
+      "settings": [
+		{
+          "type": "image_picker",
+          "id": "cate_img",
+          "label": "Image",
+			"info": "320x320px recommended"
+        },
+        {
+          "type": "text",
+          "id": "text1",
+          "label": "Title",
+          "default": "Our vision"
+        },
+        {
+          "id": "cate_url",
+          "type": "url",
+          "default": "/collections/all",
+          "label": "Button link"
+        }
+      ]
+    },
+	{
+      "type": "brandtab",
+      "name": "Brand Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "brand_img",
+          "label": "Image",
+          "info": "200 x 100px Recommended"
+        },
+        {
+          "type": "url",
+          "id": "brand_url",
+          "label": "URL"
+        }
+      ]
+    }
+	
+  ],
+  "presets": [
+    {
+      "name": "Category Full Width"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

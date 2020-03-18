@@ -1,0 +1,30 @@
+<div class="col-md-3 col-sm-3 col-xs-12 col-left collection-sidebar v2" id="filter-sidebar">
+    <div class="banner">
+        <a class="image-bd hover-images" href="">
+            <img {%if section.settings.sidebar_img == blank%}src="{{'s-banner.jpg'| asset_url }}" 
+                        {%else%}
+                    src="{{section.settings.sidebar_img | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" />
+        </a>
+    </div>
+    <div class="filter filter-product e-category">
+        <h3 class="widget-blog-title">{{section.settings.sidebar_text}}</h3>
+        <div class="owl-carousel owl-theme js-owl-post">
+            {% if section.blocks.size > 0 %} 
+                          {% for block in section.blocks %}
+                    {% if block.type == 'sidebarproduct' %}
+                    {% assign products_limit = block.settings.product_limit %}
+                    {% assign col = block.settings.product_collection %}
+            <div class="item">
+                {% for product in collections[col].products limit: products_limit %}
+                      {% include 'product-category-list-v2' %}
+                          {% else %}
+                      {% include 'empty-product-category-v2' %}
+                  {% endfor %}
+            </div>
+            {% endif %}  
+                  {% endfor %}
+                      {% endif %}  
+            
+        </div>
+    </div>
+</div>

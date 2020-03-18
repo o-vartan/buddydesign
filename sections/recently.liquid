@@ -1,0 +1,105 @@
+<div data-section-id="{{ section.id }}" data-section-type="recently" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+	<!--wrapper product-->
+  <div class="recent spc5 bg-gradient bg-insinde">
+      <div class="container container-240">
+          <div class="row">
+              <div class="col-md-8 col-sm-6 col-xs-12">
+                  <div class="title-icon">
+                      <h3>{{section.settings.text1}}</h3>
+                  </div>
+                  <div class="multiple-row js-multiple-row3">
+                      {%for product in collections[section.settings.product_collection].products limit:section.settings.product_limit%}
+                        {% include 'product-grid-18' %}
+                            {% else %} 
+                        {% include 'empty-product-grid-12v2'%}
+                      {% endfor %}
+                  </div>
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-12">
+                  {% if section.settings.product_single_1 != blank %}
+                    {% include 'product-single-item-v1' %}
+                  {% else %}
+                    {% include 'empty-product-single-item-v1' %}
+                  {% endif %}
+              </div>
+          </div>
+      </div>
+  </div>
+<!--end wrapper product-->
+</div>  
+{% schema %}
+{
+  "name": "Recently",
+  "class": "index-section",
+  "settings": [
+	{
+      "type": "header",
+      "content": "Heading"
+    },
+	{
+      "type": "text",
+      "id": "text1",
+      "label": "Title",
+      "default": "Recently Added"
+    },
+	{
+      "type": "header",
+      "content": "List Products"
+    },
+    {
+      "type": "collection",
+      "id": "product_collection",
+      "label": "Select collection"
+    },
+    {
+      "type": "text",
+      "id": "product_limit",
+      "label": "Limit number",
+      "default": "12"
+    },
+	{
+      "type": "header",
+      "content": "Product (Right)"
+    },
+    {
+      "type": "product",
+      "id": "product_single_1",
+      "label": "Select product"
+    },
+	{
+      "type": "header",
+      "content": "Countdown"
+    },
+	{
+        "type": "text",
+        "label": "Deadline Countdown",
+        "id": "hp_countdown",
+        "info": "Format datatime: YYYY-MM-DD-hh-mm-ss",
+        "default": "08-31-2018-00-00-00"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  
+  "presets": [
+    {
+      "name": "Recently",
+      "category": "Products"
+    }
+  ]
+}
+{% endschema %}

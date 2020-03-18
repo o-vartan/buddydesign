@@ -1,0 +1,120 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  
+<div class="recent-product space_top_bot_140">  
+    <div class="ciloe-title-section margin_bottom_50 container relative">
+    <h2 class="margin_bottom_20 text-center fw-500">{{section.settings.title}}</h2>
+</div>
+  <div class="container  ">
+    <div class="row" id="fade-it-1">
+    {% assign products_limit = section.settings.limit %}
+    {% assign col = section.settings.collection %}
+      {%- assign i = 2 -%}
+    {% for product in collections[col].products limit: products_limit %}
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 " id="fade-it-{{i}}">
+      {% include 'ciloe-product' %}
+    </div>
+      {%- assign i = i | plus : 1 -%}
+    {% endfor %}
+    </div>
+        {% if section.settings.enable_btn %}
+      <div class="btn-loadmore text-center col-md-12">
+        <a href="#" id="loadMore" class="btn-ciloe-2 inline-block"><i class="ti-reload"></i>{{section.settings.btn_loadmore}}</a>
+      </div>
+    {% endif %}
+  </div>
+</div>
+</div>
+<style>
+    .recent-product .product .img-product{
+  	background:{{section.settings.bg_img}}
+  }
+  .recent-product .product .info-product {
+  	background:{{section.settings.bg_infor}}
+  }
+  .recent-product{
+  	background:{{section.settings.bg_section}}
+  }
+</style>
+{% schema %}
+{
+  "name": "Product v2",
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+            "type": "color",
+          	"id": "bg_section",
+          	"label": "Background section",
+			"default": "#f3f3f3"
+    },
+	{
+            "type": "color",
+          	"id": "bg_img",
+          	"label": "Background img",
+			"default": "#fdfdfd"
+    },
+	{
+            "type": "color",
+          	"id": "bg_infor",
+          	"label": "Background infor",
+			"default": "#f9f9f9"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Recent Products"
+    },
+	{
+      "type": "text",
+      "id": "limit",
+      "label": "Limit product",
+      "default": "12"
+    },
+	{
+      "type": "collection",
+      "id": "collection",
+      "label": "Chose collection"
+    },
+	{
+      "type": "header",
+      "content": "Button load more"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_btn",
+      "label": "Enable button",
+      "default": true
+    },
+
+	{
+          "type": "text",
+          "id": "btn_loadmore",
+          "label": "Button load more name",
+	  	  "default":   "load more"
+    }
+
+  ],
+  "presets": [
+    {
+      "name": "Product v2",
+      "category": "Page Minim"
+    }
+  ]
+}
+{% endschema %}

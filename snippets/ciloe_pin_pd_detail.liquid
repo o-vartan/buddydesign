@@ -1,0 +1,36 @@
+<div class="margin_bottom_50 ciloe_pin_pd_detail">
+  <h1 class="title text-center margin_bottom_30">{{section.settings.title_pin}}</h1>
+  <p class="line" style="margin:0 auto 30px;"></p>
+  <p class="des margin_bottom_10 text-center">{{section.settings.des_pin_1}}</p>
+  <div class="text-center">
+    <div class="relative inline-block">
+      {% if section.settings.img_pin != blank %}
+      <img src="{{section.settings.img_pin | img_url:'master'}}" class="img-responsive inline-block">
+      {% endif %}
+        {% for i in (1..6) %}
+      {% capture enable_btn %}enable_btn_{{i}}{% endcapture %}
+        {% capture top %}top_{{i}}{% endcapture %}
+       {% capture left %}left_{{i}}{% endcapture %}
+      {% if section.settings[enable_btn] %}
+        <div class="absolute hover_popup" style="top:{{section.settings[top]}}%;left:{{section.settings[left]}}%;">
+		
+          {% capture img_btn_popup %}img_btn_popup_{{i}}{% endcapture %}
+          {% capture url %}url_{{i}}{% endcapture %}
+          <div class="content_pd_popup relative">
+            {% if section.settings[img_btn_popup] != blank %}
+            <a href="{{section.settings[url]}}" class="btn_popup inline-block delay03">
+              
+              <img src="{{section.settings[img_btn_popup] | img_url:'master'}}" class="img-responsive">
+              
+            </a>
+            {% endif %}
+            
+          </div>
+          
+          
+        </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>

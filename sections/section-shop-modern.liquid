@@ -1,0 +1,120 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="container-fluid margin_bottom_30 shop_modern">
+    <h1 class="margin_bottom_20 {% if section.settings.local_text == 'center' %} text-center {% elsif section.settings.local_text == 'left' %} text-left {% elsif section.settings.local_text == 'right' %} text-right {% endif %}">{{section.settings.title}}</h1>
+    <p class="margin_bottom_80 {% if section.settings.local_text == 'center' %} text-center {% elsif section.settings.local_text == 'left' %} text-left {% elsif section.settings.local_text == 'right' %} text-right {% endif %}">{{section.settings.des}}</p>
+    <div class="row">
+    {% assign products_limit = section.settings.limit %}
+    {% assign col = section.settings.collection %}
+    {% for product in collections[col].products limit: products_limit %}
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 product-modern">
+      {% include 'ciloe-product' %}
+    </div>
+    {% endfor %}
+    </div>
+  </div>
+</div>
+<style>
+  .shop_modern{
+  	padding:0 365px;
+  }
+  .shop_modern h1{
+  	font-size:36px;
+  }
+  .shop_modern p{
+  	color:#999;
+  }
+  @media (max-width:1600px){
+  	.shop_modern{
+  	padding:0 200px;
+  }
+  }
+  @media (max-width:1400px){
+  	.shop_modern{
+  	padding:0 100px;
+  }
+  }
+  @media (max-width:991px){
+  	.shop_modern{
+  	padding:0 20px;
+  }
+    .shop_modern h1{
+  	font-size:26px;
+  }
+  }
+</style>
+{% schema %}
+{
+  "name": "Shop this look modern",
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+   "type":      "select",
+   "id":        "local_text",
+   "label":     "Location Text",
+   "options": [
+     {
+       
+       "value": "center",
+       "label": "Center"
+     },
+     {
+      
+       "value": "left",
+       "label": "Left"
+     },
+     {
+      
+       "value": "right",
+       "label": "Right"
+     }
+   ],
+   "default":   "center"
+	},
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Shop this looks"
+    },
+    {
+      "type": "textarea",
+      "id": "des",
+      "label": "Description",
+      "default": "Browse our website for the hottest items in the marketplace now."
+    },
+	{
+      "type": "text",
+      "id": "limit",
+      "label": "Limit product",
+      "default": "4"
+    },
+	{
+      "type": "collection",
+      "id": "collection",
+      "label": "Chose collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop this look modern",
+      "category": "Home Modern"
+    }
+  ]
+}
+{% endschema %}

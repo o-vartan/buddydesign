@@ -1,0 +1,78 @@
+<div data-section-id="{{ section.id }}" data-section-type="banner-v9" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+<!--slide-->
+  <div class="container container-240">
+     <div class="banner-callus spc2 spc5 image-bd effect_img2">
+          <a href="{{section.settings.button_url}}">
+            <img {%if section.settings.bg_img == blank%}src="{{'h5_b5.jpg'| asset_url }}" 
+           				{%else%}
+           			src="{{section.settings.bg_img | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" />
+        	</a>
+          <div class="box-center">
+              <p>{{section.settings.text_1}}</p>
+              <a href="{{section.settings.button_url}}" class="btn-callus">{{section.settings.btn_name}}</a>
+          </div>
+      </div>
+  </div>
+        <!--endslide-->
+</div>
+{% schema %}
+{
+  "name": "Banner v4",
+  
+  "class": "index-section",
+  "settings": [
+  {
+    "type": "header",
+    "content": "Section Space"
+  },
+  {
+    "type": "text",
+    "id": "margin_top",
+    "label": "Margin Top",
+    "info": "Defined in pixels. Do not add the 'px' unit."
+  },
+  {
+    "type": "text",
+    "id": "margin_bottom",
+    "label": "Margin Bottom",
+    "info": "Defined in pixels. Do not add the 'px' unit."
+  },
+  {
+    "type": "header",
+    "content": "Image"
+  },
+  {
+    "type": "image_picker",
+    "id": "bg_img",
+    "label": "Image",
+    "info": "1401x277 recommended"
+  },
+	      {
+        "type": "text",
+        "id": "text_1",
+        "default": "Free Shipping on Orders $50",
+        "label": "Content"
+      },
+	{
+        "type": "text",
+        "id": "btn_name",
+        "label": "Button Name",
+        "default": "Shop now"
+      },
+      {
+        "id": "button_url",
+        "type": "url",
+        "default": "/collections/all",
+        "label": "Button link"
+      }
+],
+
+
+  "presets": [
+    {
+      "name": "Banner v4",
+      "category": "Single Banner"
+    }
+  ]
+}
+{% endschema %}

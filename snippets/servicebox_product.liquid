@@ -1,0 +1,32 @@
+<div class="single-product-feature s-50 sm-mg-top-30">
+    <div class="bd-7">
+        {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+        {% if block.type == 'section_service_box' %}
+        <div class="single-feature-box">
+            <div class="single-feature-img">
+                <img {%if block.settings.servicebox_img == blank%}src="{{'credit-card2.png'| asset_url }}" 
+                {%else%}
+                src="{{block.settings.servicebox_img | img_url:'master'}}" {%endif%} alt="" />  
+            </div>
+            <div class="single-feature-info">
+                <h3>{{block.settings.servicebox_title}}</h3>
+                <p>{{block.settings.servicebox_desc}}</p>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        
+    </div>
+    <div class="hot-line e-gradient">
+        <p>{{section.settings.servicebox_title}}</p>
+        <div class="flex align-center tele">
+            <img src="{{'hotline.png'| asset_url }}" alt="">
+            <div class="phone-number">
+                <p>{{section.settings.servicebox_phone1}}</p>
+                <p>{{section.settings.servicebox_phone2}}</p>
+            </div>
+        </div>
+    </div>
+</div>

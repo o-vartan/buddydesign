@@ -1,0 +1,52 @@
+<!-- Push cart -->
+<div class="pushmenu pushmenu-left cart-box-container">
+  <div class="cart-list enj-minicart-ajax">
+    <div class="cart-list-heading">
+      <span class="close-menu-mobile js-close"></span>
+      <h3 class="cart-title">your cart</h3>
+      <span class="minicart-number-items enj-cartcount">{{ cart.item_count }}</span>
+    </div>
+    {% if cart.item_count > 0 %}
+    <div class="cart-inside">
+      <ul class="list">
+        {% for item in cart.items %}
+        <li class="item-cart">
+          <div class="product-img-wrap">
+            <a href="{{item.url}}" title="Product"><img src="{{ item.image | product_img_url: '70x70' }}" alt="{{ item.title }}" class="img-responsive"></a>
+          </div>
+          <div class="product-details">
+            <div class="inner-left">
+              <div class="product-name"><a href="{{item.url}}">{{ item.title}}</a></div>
+              <div class="product-price"><span>{{ item.price | money }}</span></div>
+              <div class="product-qtt">
+                QTY : {{ item.quantity }}
+              </div>
+            </div>
+          </div>
+          <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="btn-del"><i class="ti-close"></i></a>
+        </li>
+        {% endfor %}
+      </ul>
+      <div class="cart-bottom">
+        <div class="cart-price">
+          <span>Total</span>
+          <span class="price-total">{{cart.total_price | money}}</span>
+        </div>
+        <div class="cart-button">
+          <a class="ciloe-btn checkout" href="/cart" title="">View cart</a>
+          <a class="ciloe-btn checkout" href="/checkout" title="">Check out</a>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <div class="empty-cart">
+      <p class="fz-18">No products in the cart.</p>
+      <div class="flex center">
+      	<a href="/collections/all" class="capital">start shopping</a>
+      </div>
+    </div>
+    {% endif %}
+    <!-- End cart bottom -->
+  </div>
+</div>
+<!-- End pushcart -->

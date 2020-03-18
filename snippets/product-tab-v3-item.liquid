@@ -1,0 +1,10 @@
+<div class="product-img">
+  <a href="{{product.url}}" class="hover-images effect">
+    <img src="{{ product.featured_image.src | img_url: 'master' }}" alt="{{ product.featured_image.alt | escape }}" class="img-reponsive">
+  </a>
+  <div class="product-info overlay-img ver2 box-center">
+    <h3 class="product-title"><a href="{{product.url}}">{{product.title}}</a></h3>
+    <a href="{{product.url}}" class="btn-quickview"><i class="icon-eye f-20"></i></a>
+  </div>
+  <div class="ribbon-price ver2"><span>{{product.price|money}}</span></div>
+</div>

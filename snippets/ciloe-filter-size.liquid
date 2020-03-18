@@ -1,0 +1,16 @@
+<div class="filter space_bot_30  filter-tag">
+  <div class="flex margin_bottom_20">
+    <h4 class="fz-12 widget_title ">{{section.settings.title_size}}</h4>
+  </div>
+  <ul>
+    {% assign tags = section.settings.shop_by_size_list_tags | split: ',' %}
+
+    {% for t in tags %}
+    {% assign tag = t | strip %}
+    {% assign tag_value = tag | handleize %}
+    <li class="inline-block cat-item{% if current_tags contains tag %} current-cat{% endif %}">
+      <input class="hidden" type="checkbox" value="{{ tag_value | split: '|' | first }}" {% if current_tags contains tag %}checked{% endif %}/>
+      <a href="javascript:void(0)" title="{{tag}}" class="filter_size">{{tag}}</a>
+      {% endfor %}
+  </ul>
+</div>

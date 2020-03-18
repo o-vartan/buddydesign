@@ -1,0 +1,92 @@
+<header id="header" class="header-v3 delay05 {% if settings.enable_fix_hdv3 %}fixed{% endif %} full-width space_top_bot_20 ">
+  	<div class="container space_top_bot_20">
+      <div class="row flex">
+        <div class="hidden-lg hidden-md col-sm-4 col-xs-4">
+          <a href="#" class="link-menu delay03 inline-block hidden-md hidden-lg space_top_30 btn-push-menu icon-pushmenu">
+            {% if settings.icon-pushmenu == blank %}
+            <svg width="26" height="16" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 66 41" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
+              <g>
+                <line class="st0" x1="1.5" y1="1.5" x2="64.5" y2="1.5"></line>
+                <line class="st0" x1="1.5" y1="20.5" x2="64.5" y2="20.5"></line>
+                <line class="st0" x1="1.5" y1="39.5" x2="64.5" y2="39.5"></line>
+              </g>
+            </svg>
+            {% else %}
+            <i class="{{ settings.icon-pushmenu }}"></i>
+            {% endif %}
+          </a>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 logo_header">
+          <a href="{{shop.url}}" class="left">
+            {% if settings.hdv1_logo == blank %}
+          	<img alt="{{shop.name}}" src="{{'logo.png' | asset_url}}" class="img-logo">
+            {% else %}
+            <img alt="{{shop.name}}" src="{{settings.hdv1_logo | img_url:'master'}}" class="img-logo">
+            {% endif %}
+          </a>
+        </div>
+        <div class="col-lg-6 col-md-6 hidden-sm hidden-xs flex center">
+        	{% include 'ciloe-horizon-menu' %}
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 text-right icon-main">
+          <a href="#" class="delay03 inline-block" id="btn-search">
+            {% if settings.icon-search == blank %}
+            <i class="icon-magnifier"></i>
+            {% else %}
+            <i class="{{ settings.icon-search }}"></i>
+            {% endif %}
+          </a>
+          <!-- {% if customer.email != blank %}
+          <a class="delay03 inline-block hidden-sm hidden-xs" href="/account/logout" title="logout">
+            {% if settings.icon-logout == blank %}
+            <i class="icon-power"></i>
+            {% else %}
+            <i class="{{ settings.icon-logout }}"></i>
+            {% endif %}
+          </a>
+          {% else %}
+          <a href="#login_form" class="delay03 inline-block hidden-sm hidden-xs" id="btn-login">
+            {% if settings.icon-login == blank %}
+            <i class="zoa-icon-user"></i>
+            {% else %}
+            <i class="{{ settings.icon-login }}"></i>
+            {% endif %}
+          </a>
+          {% endif %} -->
+          <a href="#" class="delay03 relative inline-block text-center icon-cart" id="btn-cart">
+            {% if settings.icon-cart == blank %}
+            <i class="icon-bag"></i>
+            {% else %}
+            <i class="{{ settings.icon-cart }}"></i>
+            {% endif %}
+            <figure class="absolute label-cart enj-cartcount">{{ cart.item_count }}</figure>
+          </a>
+          
+        </div>
+      </div>
+      {% comment %}
+      <div class="row">
+        <div class="hidden-lg hidden-md col-sm-12 col-xs-12 form_search_mobile space_top_40">
+          <form method="get" action="/search" role="search" class=" flex">
+            <input type="text" class="form-control control-search" value="" autocomplete="off" placeholder="Search ..." aria-label="SEARCH" name="q">
+            <button class="button_search absolute" type="submit">
+              {% if settings.icon-search == blank %}
+              <i class="icon-magnifier fz-18"></i>
+              {% else %}
+              <i class="{{ settings.icon-search }} fz-18"></i>
+              {% endif %}
+            </button>
+          </form> 
+        </div>
+      </div>
+      {% endcomment %}
+   	</div>
+</header>
+<style>
+  .header-v3{
+    background: {{settings.bg_header_v3}};
+  }
+  .border-bot{
+    border-bottom: {{settings.border_size_v3}}px solid {{settings.border_color_v3}};
+  }
+</style>

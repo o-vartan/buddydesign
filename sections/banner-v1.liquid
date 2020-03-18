@@ -1,0 +1,210 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+
+  <div class="container banner_minimal margin_bottom_50 space_top_50 relative">
+
+    <div class=" flex">
+	{% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+      <div class="relative content-banner">
+        <a href="{{block.settings.url_1}}" class="inline-block relative overlay-banner over-hidden">
+          <img src="{{block.settings.img_1 | img_url:'master'}}" class="img-responsive hover-zoom-out">
+        </a>
+        <div class="absolute text-banner">
+          <p class="lt-1 fw-600 {% if block.settings.local_text_1 == 'center' %} text-center {% elsif block.settings.local_text_1 == 'left' %} text-left {% elsif block.settings.local_text_1 == 'right' %} text-right {% endif %}">{{block.settings.text-top-1}}</p>
+          <h1 class="{% if block.settings.local_text_1 == 'center' %} text-center {% elsif block.settings.local_text_1 == 'left' %} text-left {% elsif block.settings.local_text_1 == 'right' %} text-right {% endif %} capital margin_bottom_10">{{block.settings.text-mid-1}}</h1>
+        </div>
+      </div>
+	{% endfor %}
+    {% endif %}
+    </div>
+  </div>
+
+</div>
+<style>
+
+
+  .banner_minimal .content-banner .overlay-banner:hover img{
+  	overflow: hidden;
+    transition: all 2s ease;
+    transform: scale(1.05);
+  }
+  .banner_minimal .content-banner .overlay-banner:before{
+  	content:'';
+    display:inline-block;
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background:rgba(0,0,0,.7);
+    opacity:0;
+    transition:all .3s ease;
+  }
+  .banner_minimal .text-banner{
+  	top:21%;
+    left:10%;
+    right:10%;
+    color:{{section.settings.color_text2}};
+  }
+  .banner_minimal .text-banner h1{
+    text-transform: inherit;
+  	font-size:48px;
+  }
+  .banner_minimal .text-banner p{
+  	margin-bottom:25px;
+    font-size:12px;
+     color:{{section.settings.color_text}};
+    
+  }
+  .banner_minimal .text-banner .line{
+    border-bottom: 1px solid {{section.settings.color_text}};
+    width:80px;
+  }
+  .banner_minimal .text-banner a{
+    color:{{section.settings.color_text}};
+  }
+  .banner_minimal .content-banner .text-banner .ciloe-btn-default-2:before{
+  	background:{{section.settings.color_text}};
+  }
+  .banner_minimal .text-banner a:hover{
+    color:{{section.settings.color_text_hover}};
+  }
+  .banner_minimal .content-banner:hover .text-banner p{
+  	animation:text-translate 1s ease;
+    -webkit-animation:text-translate 1s ease;
+  }
+  .banner_minimal .content-banner:hover .text-banner h1,.banner .content-banner:hover .text-banner p.line{
+  	animation:text-translate2 1s ease;
+    -webkit-animation:text-translate2 1s ease;
+  }
+  .banner_minimal .content-banner:hover .text-banner .ciloe-btn-default-2{
+  	animation:text-translate3 1.2s ease;
+    -webkit-animation:text-translate3 1.2s ease;
+  }
+  .banner_minimal .content-banner .text-banner .ciloe-btn-default-2:hover::before{
+  	background:{{section.settings.color_text_hover}};
+  }
+  @media (max-width:567px){
+    .banner_minimal .content-banner{
+    	padding-bottom:15px;
+    }
+  }
+    @media (max-width:567px){
+    .banner_minimal .text-banner h1{
+    font-size:24px;
+    }
+  	.banner_minimal .flex{
+  	flex-direction: column;
+  }
+    .banner_minimal .flex .content-banner{
+  	padding-bottom:20px;
+  }
+  }
+</style>
+{% schema %}
+{
+  "name": "Banner v1",
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      "type": "header",
+      "content": "Chose color text"
+    },
+	{
+            "type": "color",
+          	"id": "color_text",
+          	"label": "Color",
+			"default": "#cfcfcf"
+    },
+	{
+            "type": "color",
+          	"id": "color_text2",
+          	"label": "Color Title",
+			"default": "#3c3c3c"
+    }
+  ],
+"blocks": [
+      {
+        "type": "image",
+        "name": "Image banner",
+		"limit":6,
+        "settings": [
+	{
+            "type": "header",
+          	"content": "banner"
+     },
+	 {
+   			"type":      "select",
+   			"id":        "local_text_1",
+   			"label":     "Select local text",
+   			"options": [
+     {
+       
+       "value": "center",
+       "label": "Center"
+     },
+     {
+       
+       "value": "left",
+       "label": "Left"
+     },
+     {
+       
+       "value": "right",
+       "label": "Right"
+     }
+   ],
+   "default":   "center"
+   
+			},
+		  {
+            "type": "url",
+          	"id": "url_1",
+          	"label": "Url",
+			"default": "/collections/all"
+          },
+          {
+            "type": "image_picker",
+          	"id": "img_1",
+          	"label": "Image banner",
+			"info": "48 x 39px recommended"
+          },
+          {
+            "type": "text",
+          	"id": "text-top-1",
+          	"label": "Text",
+			"default": "Sale up to 50%"
+          },
+          {
+            "type": "text",
+          	"id": "text-mid-1",
+          	"label": "Title",
+			"default": "arm chair"
+          }
+]
+}
+],
+  "presets": [
+    {
+      "name": "Banner v1",
+      "category": "Page Minim"
+    }
+  ]
+}
+{% endschema %}

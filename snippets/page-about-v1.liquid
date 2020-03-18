@@ -1,0 +1,49 @@
+{% include 'ciloe-banner' %}
+
+<div class="container-fluid content_about_page">
+    <div class="row">
+      {% if section.settings.show_content_1 %}
+      <div class="container">
+        <div class="row margin_bottom_100 row-content1">
+          <div class="about-text col-lg-6 col-md-6 col-sm-6 col-xs-12 margin_bottom_20">
+            <div>
+              <div>
+                <h1 class="title_about margin_bottom_30">{{section.settings.title_about_1}}</h1>
+                <p class="content_about ">{{section.settings.content_about_1}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="about-img col-lg-6 col-md-6 col-sm-6 col-xs-12 margin_bottom_20">
+            <a href="#" class="over-hidden inline-block">
+              <img {%if section.settings.about_img_1 == blank%}src="{{'about_1.jpg'| asset_url }}" 
+                   {%else%}
+                   src="{{section.settings.about_img_1 | img_url:'master'}}"{%endif%} class="img-responsive hover-zoom-out" alt="" /> 
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% if section.settings.show_content_2 %}
+      <div class="row margin_bottom_20 row-content1">
+        <div class="about-img col-lg-6 col-md-6 col-sm-6 col-xs-12 margin_bottom_20">
+          <a href="#" class="over-hidden inline-block">
+            <img {%if section.settings.about_img_2 == blank%}src="{{'about_1.jpg'| asset_url }}" 
+                 {%else%}
+                 src="{{section.settings.about_img_2 | img_url:'master'}}"{%endif%} class="img-reponsive hover-zoom-out" alt="" /> 
+          </a>
+        </div>
+        <div class="about-text v2 col-lg-6 col-md-6 col-sm-6 col-xs-12 margin_bottom_20">
+          <div>
+            <div>
+              <h1 class="title_about margin_bottom_30">{{section.settings.title_about_2}}</h1>
+              <p class="content_about ">{{section.settings.content_about_2}}</p>
+              <img {%if section.settings.about_img_3 == blank%}src="{{'about_1.jpg'| asset_url }}" 
+                   {%else%}
+                   src="{{section.settings.about_img_3 | img_url:'master'}}"{%endif%} class="img-responsive " alt="" /> 
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>

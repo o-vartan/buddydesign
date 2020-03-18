@@ -1,0 +1,90 @@
+<div id="quick-view" class="hidden-label br-product-popup hidden">
+  <div class="quickview-wrapper">
+    <div class="quick-modal show">
+      <div class="content" id="quickview-content">
+        <a href="javascript:void(0)" class=" close-window close-btn quickview-close"></a>
+        <div class="single-product-detail">
+          <div class="row">
+            <div class="col-md-6 col-sm-6">
+              <div class="product-media thumbnai-left">
+                <div class="featured-image product-single-photos br-product__media br-product-slide-vertical-image pb-0" style="margin-bottom: 5px;"></div>
+                <div class="more-views owl-carousel-play pt-5 {% if settings.enable_rtl %}engoc_no_rtl{% endif %}">
+                  <div class="owl-carousel"  data-items="4" data-dots="false" data-lazyLoad="true" data-nav="false" data-autoHeight="false"></div>
+                </div>
+              </div>
+      		</div>
+            <div class="col-md-6 col-sm-6">
+                <div class="single-flex">
+                	<div class="single-product-info product-info product-grid-v2 s-50 js-price-wrapper">
+                    <p class="product-cate"></p>
+    				<div class="product-rating">
+                       <span class="shopify-product-reviews-badge" data-id=""></span>
+                    </div>
+              
+
+                <h3 class="product-title"><a>&nbsp;</a></h3>
+
+                <div class="details clearfix">
+                  <form action="/cart/add" method="post" class="variants CartContainer">
+                    <div class="product-price">
+                      <span class="price f-24"></span>
+                      <span class="price old compare-price mr-10"></span>
+                      
+
+                    </div>
+
+
+					
+                    <p class="product-desc"></p>
+					
+
+                    <select name='id' style="display:none;" class="engoj-except-select2 product-single__variants">
+					
+                    </select>
+					
+                    <div class="single-product-button-group v2">
+
+                        
+                        <div class="e-btn cart-qtt">
+                          <div class="e-quantity">
+                            <input type="text" name="quantity" value="1" class="qty input-text product_quantity_number js-number">
+                            <button  class='qtyminus quantity-left-minus btn btn-number js-minus ' data-field='quantity'><i class="fa fa-caret-down"></i></button>
+
+                            <button class='qtyplus quantity-right-plus btn btn-number js-plus' data-field='quantity'><i class="fa fa-caret-up"></i></button>
+                          </div>
+						<button type="button" class="btn-addToCart  btn-add-cart">{{ 'products.product.addtocart' | t }}<p class="icon-bg icon-cart v2"></p></button>
+
+                        </div>
+                        <div class="total-price product-price">
+    <!--                       <label class="engoc_subtt_qw">{{ 'products.general.subtotal_price' | t }}:</label>
+                          <span class="br-product__price fz-16"></span> -->
+                        </div>
+
+
+
+                    </div>
+                  </form>
+                </div>
+
+
+              
+            </div>
+                </div>
+            </div>
+          </div>
+      </div>
+          
+    </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .single-product-detail .single-product-info .action .quantity {
+    float: initial;
+  }
+</style>
+
+<script type="text/javascript">
+  Shopify.doNotTriggerClickOnThumb = false;
+</script>

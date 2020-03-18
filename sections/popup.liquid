@@ -1,0 +1,432 @@
+<section class="section-popup" style="{% if section.settings.enable_popup %} display: flex; {% endif %}" data-section-id="{{ section.id }}">
+
+        <div class="popup">
+            <div class="popup__close">
+                <button id="popupClose">&#10761;</button>
+            </div>
+    
+            <div class="popup__title_div" style="color: {{section.settings.color_popup_title}}">
+                <h2 class="">{{section.settings.popup_title}}</h2>
+            </div>
+    
+            <div class="popup__line">
+                <span></span>
+            </div>
+    
+            <div class="popup__text_div" style="color: {{section.settings.color_popup_text}}">
+                <p class="">{{section.settings.popup_text}}</p>
+            </div>
+            <form action="/cart/add" method="post" enctype="multipart/form-data" >
+                <div class="popup__data-area_div">
+    
+                    <div class="popup__data-input_div">
+                        <input id="popupName" name="popup-name" placeholder="Name" type="text" >
+                        <input id="popupDate" name="popup-date" placeholder="2018-01-01" type="date" min="1990-01-01" max="2030-12-31" >
+                        <input disabled id="popupPersonality" name="popup-personality" placeholder="{{ product.title }}" type="text" >
+
+                        <input type="hidden" name="id" value="">
+                    </div>
+                    <div class="popup__data-textarea_div">
+                        <textarea id="popupTextarea" name="" placeholder="Persönlichkeit" ></textarea>
+                    </div>
+
+                </div>
+                <div class="popup__button_div" style="background-color: {{section.settings.color_popup_button}}; color: {{section.settings.color_popup_text_button}}">    
+                    <input type="button" style="color: {{section.settings.color_popup_text_button}}" value="{{section.settings.popup_button}}">
+                
+                </div>
+            </form>
+    
+        </div>
+    
+    </section>
+
+
+  <script>
+
+$('.setObjectForm').on('click', function() {
+    console.log($(this).closest(".engoj_grid_parent").find(".title-product a").html());
+
+    let breedName = $(this).closest(".engoj_grid_parent").find(".title-product a").html();
+    $('#popupPersonality').attr('placeholder', breedName);
+})
+
+
+
+
+$(document).mouseup(function(e) {
+    var div = $(".section-popup");
+    if (!div.is(e.target) &&
+        div.has(e.target).length === 0) {
+        div.hide();
+    }
+});
+
+$('#popupClose').on('click', function() {
+    $('.section-popup').hide();
+})
+
+
+
+$('.btn-add-cart, .enj-add-to-cart-btn').on('click', function() {  
+
+  if($(this).hasClass('Poster')){
+    $('.section-popup').show();
+    var productForm = $(this).closest('.product-form')
+    var id = productForm.find('select[name="id"]').val();
+    sessionStorage.setItem('current', id);
+  }
+});
+
+
+$('.popup__button_div input').click(function() {
+    id = sessionStorage.getItem('current');
+    var uarray = $(this).closest('form').serializeArray();
+    var indexed_array = {};
+    $.map(uarray, function(n, i) {
+        indexed_array[n['name']] = n['value'];
+    });
+
+
+
+    $("#formAddToCartUs #productSelect").append('<input style="display: none;" id="animalName" type="text" name="properties[Name]" value="' + $('#popupName').val() + '">');
+
+    $("#formAddToCartUs").append('<input style="display: none;" id="animalBirth" type="text" name="properties[Birth]" value="' +
+        $('#popupDate').val() + '">');
+
+    $("#formAddToCartUs").append('<input style="display: none;" id="animalPersonality" type="text" name="properties[Personality]" value="' + $('#popupPersonality').val() + '">');
+
+    $("#formAddToCartUs").append('<input style="display: none;" id="animalText" type="text" name="properties[Text]" value="' +
+        $('#popupTextarea').val() + '">');
+
+
+    $('#formAddToCartUs').submit();
+    $("#animalName, #animalBirth, #animalPersonality, #animalText").remove()
+    sessionStorage.setItem(id, JSON.stringify(indexed_array));
+
+    $('.section-popup').hide();
+
+    e.preventDefault();
+})
+
+function showHideToEditForm(id) {
+    $('.View-' + id).toggle();
+    $('.Edit-' + id).toggle();
+    $('.Save-' + id).toggle();
+}
+
+$('.animalDataEdit').on('click', function() {
+    event.preventDefault();
+    id = $(this).data('id');
+
+    // console.log(id);
+    showHideToEditForm(id);
+
+
+});
+
+
+let form;
+$('.setObjectForm').on('click', function() {
+    form = $(this).parent();
+});
+
+$('.popup__button_div').on('click', function() {
+
+
+    form.append('<input style="display: none;" id="animalName" type="text" name="properties[Name]" value="' + $('#popupName').val() + '">');
+
+    form.append('<input style="display: none;" id="animalBirth" type="text" name="properties[Birth]" value="' +
+        $('#popupDate').val() + '">');
+
+    form.append('<input style="display: none;" id="animalPersonality" type="text" name="properties[Personality]" value="' + $('#popupPersonality').val() + '">');
+
+    form.append('<input style="display: none;" id="animalText" type="text" name="properties[Text]" value="' +
+        $('#popupTextarea').val() + '">');
+
+
+    form.submit();
+    $("#animalName, #animalBirth, #animalPersonality, #animalText").remove()
+
+});
+
+$('.animalDataSave').on('click', function() {
+    event.preventDefault();
+    id = $(this).data('id');
+
+    // console.log(id);
+    showHideToEditForm(id);
+
+    $('#productSelect').val(id);
+
+    arr = $('.Edit-' + id)
+
+    for (let i = 0; i < arr.length; i++) {
+        $('#animal-' + i).val(arr[i].value);
+    }
+
+    url = $('.Delete-' + id).attr('href');
+
+    $.ajax({
+        url: url,
+        data: {},
+        dataType: {},
+        success: function() {
+            alert('error');
+        },
+        error: function() {
+            $('#formAddToCartUs').submit();
+        }
+    });
+
+});
+
+
+  
+  </script>
+
+
+  <style>
+      .section-popup{
+        display: none;
+      }
+      .popup{
+        z-index: 10;
+        position: fixed;
+        top: 20%;
+        left: 50%;
+        margin-left: -400px;
+        width: 800px;
+        min-height: 540px;
+        background: #FFFFFF;
+        border: 1px solid #DDDDDD;
+        padding: 50px 90px 60px 90px;
+      }   
+      .popup__close{
+        font-size: 25px;
+        position: absolute;
+        right: 30px;
+        top: 15px;
+      }   
+      .popup__title_div {
+      }
+      .popup__title_div h2{
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 20px;
+        text-align: center;
+      }
+      .popup__line{
+        width: 100%;
+        margin-top: 27px;
+        display: flex;
+        justify-content: center;
+      }
+      .popup__line span{
+        width: 120px;
+        height: 1px;
+        background: #EDEDED;
+      }
+      .popup__text_div{
+        margin-top: 23px;
+        display: flex;
+        justify-content: center;
+      }
+      .popup__text_div p{
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 24px;
+        text-align: center;
+        width: 373px;
+      }
+
+
+      .popup__data-input_div{
+        margin-top: 47px;
+        display: flex;
+        justify-content: space-between;
+      }
+      .popup__data-input_div input{
+        width: 31%;
+        height: 50px;
+        border: 1px solid #DDDDDD;
+        padding: 13px 23px;
+        color: #555555;
+      }   
+
+     
+      .popup__data-textarea_div{
+        margin-top: 10px;
+        height: 110px;
+      }
+      .popup__data-textarea_div textarea{
+        width: 100%;
+        height: 100%;
+        padding: 13px 23px;
+        border: 1px solid #DDDDDD;
+        resize: none; 
+      }
+      
+      .popup__button_div{
+        margin-top: 44px;
+        width: 250px;
+        height: 50px;
+        border-radius: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 47px auto 0 auto;
+      }
+      .popup__button_div input{ 
+        background-color: transparent;
+        border: 0;
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 12px;
+        letter-spacing: 0.2em;
+      }
+      @media (max-width: 992px) {
+        .popup {
+            position: fixed;
+            top: 3%;
+            width: 90%;
+            left: 5%;
+            margin-left: 0;
+            min-height: 540px;
+            background: #FFFFFF;
+            border: 1px solid #DDDDDD;
+            padding: 25px 15px;
+        }
+
+
+        .popup__text_div{
+            margin-top: 0px;
+            display: flex;
+            justify-content: center;
+        }
+        .popup__text_div p{
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: 300;
+            font-size: 14px;
+            line-height: 24px;
+            text-align: center;
+            width: 373px;
+        }
+
+
+        .popup__data-input_div{
+            margin-top: 0px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .popup__data-input_div input{
+            margin-top: 10px;
+            width: 100%;
+            height: 50px;
+            border: 1px solid #DDDDDD;
+            padding: 13px 23px;
+            color: #555555;
+        }   
+
+        .popup__data-input_div input::placeholder,
+        .popup__data-input_div textarea::placeholder{          
+            color: #555555;
+        }  
+
+        .popup__data-textarea_div{
+        margin-top: 10px;
+        height: 110px;
+        }
+        .popup__data-textarea_div textarea{
+            width: 100%;
+            height: 100%;
+            padding: 13px 23px;
+            border: 1px solid #DDDDDD;
+            resize: none; 
+        }
+
+        .popup__button_div{
+            min-height: 50px;
+            background: #0D4D7F;
+            border-radius: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto 0 auto;
+        }
+        .popup__button_div input{ 
+            text-transform: uppercase;
+            font-weight: 600;
+            font-size: 12px;
+            letter-spacing: 0.2em;
+        }
+
+      }
+      
+  </style>
+  {% schema %}
+  { 
+    "name":"Popup",
+    "settings":[ 
+        { 
+        "type":"checkbox",
+        "id":"enable_popup",
+        "label":"Enable?",
+        "default":false
+        },
+       { 
+          "type":"text",
+          "id":"popup_title",
+          "label":"Popup title"
+       },
+       { 
+          "type":"text",
+          "id":"popup_text",
+          "label":"Popup text"
+       },
+       { 
+          "type":"text",
+          "id":"popup_button",
+          "label":"Popup button"
+       },
+       { 
+          "type":"header",
+          "content":"Enable popup"
+       },
+       { 
+          "type":"header",
+          "content":"Chose color text"
+       },
+       { 
+          "type":"color",
+          "id":"color_popup_title",
+          "label":"Color title",
+          "default":"#333333"
+       },
+       { 
+          "type":"color",
+          "id":"color_popup_text",
+          "label":"Color text",
+          "default":"#999999"
+       },
+       { 
+        "type":"color",
+        "id":"color_popup_text_button",
+        "label":"Color text button",
+        "default":"#ffffff"
+        },
+        { 
+        "type":"color",
+        "id":"color_popup_button",
+        "label":"Color button",
+        "default":"#0D4D7F"
+        }
+    ]
+ }
+  {% endschema %}

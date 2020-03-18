@@ -1,0 +1,25 @@
+<div class="sidebar col-lg-3 col-md-3 engoj-collection-sidebar">
+  
+  {% if section.settings.enable_filter_cate %}
+  {% include 'ciloe-filter-cate' %}
+  {% endif %}
+  <div class="filter">
+  <h4 class=" widget_title space_bot_30 ">{{section.settings.icon_filter}}</h4>
+  </div>
+    {% if section.settings.enable_filter_price %}
+  {% include 'ciloe-filter-price' %}
+  {% endif %}
+    {% if section.settings.enable_filter_size %}
+  {% include 'ciloe-filter-size' %}
+  {% endif %}
+    {% if section.settings.enable_filter_color %}
+  {% include 'filter-color' %}
+  {% endif %}
+    {% if section.settings.enable_filter_sort %}
+  {% include 'ciloe-filter-sort' %}
+  {% endif %}
+  {% if section.settings.enable_filter_sort %}
+  {% include 'filter-brand' %}
+  {% endif %}
+  
+</div>

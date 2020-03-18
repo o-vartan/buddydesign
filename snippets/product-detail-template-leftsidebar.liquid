@@ -1,0 +1,283 @@
+<style>
+ 
+    .entry-inside.v4{
+    	padding:0;
+    
+  }
+</style>
+<div class="container container-240">
+     <div class="product-bundle product-aff">
+        {%include 'breadcrumb'%}
+       <div class="row shop-colect">
+          	{% include 'product-detail-sidebar'%}
+         	<div class="col-md-9 col-sm-12 col-xs-12 collection-list single-product-detail v2">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-8">
+
+                    <div class="flex product-img-slide">
+
+
+                        <div class="product-images">
+                            <div class="main-img js-product-slider">
+                                {% for image in product.images %}
+                                <a href="#" onClick="return false;" class="hover-images effect"><img src="{{ image.src | img_url: 'master' }}" alt="{{ image.alt | escape }}" class="engoj_img_main img-responsive"></a>
+                                {% endfor %}
+                            </div>
+                          {%if section.settings.show_360%}
+                          <div class="e-product-button" data-toggle="modal" data-target="#my360"><span>360˚</span></div>
+                        {%endif%}
+                          {% if section.settings.show_label%}
+                          
+                            <div class="ribbon-price v2 red">
+                              {% capture product_discount %}{{ product.variants.first.compare_at_price | minus:product.variants.first.price | times:100 | divided_by:product.variants.first.compare_at_price }}% {% endcapture %}
+                               <span>{% if product.compare_at_price %}
+                                - {{product_discount}}{% endif %}
+                                </span>
+                            </div>
+                          
+                          {% endif %}
+                          {% comment %}
+                          Setup MetaFields Editor: https://apps.shopify.com/metafields-editor
+
+                          If you’ve added to a product a metafield with the following attributes to store extra description for your products.
+                          Namespace: engo_video
+                          Key: video_link
+                          Value: https://vimeo.com/56962340
+                          Value_type: string
+
+                          Namespace: engo_external
+                          Key: external_name
+                          Value: Purchase On Amazon
+                          Value_type: string
+
+                          Namespace: engo_external
+                          Key: external_url
+                          Value: https://www.amazon.com/
+                          Value_type: string
+
+                          You can output the value of this metafield in product.liquid with this Liquid tag:
+                          product.metafields.Namespace.Key
+
+                          {{product.metafields.engo_video.video_link}}
+                          {{product.metafields.engo_external.external_name}}
+                          {{product.metafields.engo_external.external_url}}
+                          {{product.metafields.engo_summary.summary_content}}
+
+                          {% endcomment %}
+                          {% if product.metafields.engo_video.video_link != blank %}
+                          <div class="e-product-button"{%if section.settings.show_360%}style="right:17px; left:unset;"{%endif%} data-fancybox href="{{product.metafields.engo_video.video_link}}"><span>Video</span></div>
+                          {% endif %}
+                        </div>
+                        <div class="multiple-img-list-ver2 js-click-product">
+                            {% for image in product.images %}
+                            <div class="product-col">
+                                <div class="engoj_img_variant img">
+                                    <img src="{{ image.src | img_url: 'master' }}" alt="{{ image.alt | escape }}" class="img-reponsive">
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="single-flex">
+                        <div class="single-product-info product-info product-grid-v2 s-50">
+                            <p class="product-cate">{{product.type}}</p>
+                            {% if section.settings.show_rating%}
+                            <div class="product-rating">
+                                <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+                                <div class="number-rating">{{product.reviews_count}}
+                                </div>
+                            </div>
+                            {% endif%}
+                            <h3 class="product-title"><a>{{product.title}}</a></h3>
+                            <div class="product-price enj-product-price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                                <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+                                <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+
+                                {% if product.compare_at_price > product.price %}
+                                <span class="price old">{{ product.compare_at_price | money }}</span>
+                                {% endif %}
+                                <span class="price engoj_price_main">{{ product.price | money }}</span>
+
+                            </div>
+                            <div class="availability">
+                                <p class="product-inventory"> 
+                                    <label>{{ 'products.product.status' | t }} : </label>
+                                    {% if product.available %}
+                                      <span> {{ 'products.product.in_stock' | t }}</span>
+                                      {%else%}
+                                      <span>{{ 'products.product.out_of_stock' | t }}</span>
+                                    {%endif%}
+                                </p>
+                            </div>
+                            {% if section.settings.show_vendor %}
+                            <div class="product-brand">
+                                <p>{{ 'products.product.brand' | t }} {{product.vendor}}</p>
+
+                            </div>
+                            {% endif %}
+                          {% if section.settings.show_sku%}
+                            <div class="product-sku">
+                                <label>{{ 'products.product.sku' | t }} :</label>
+                                {% assign current_variant = product.selected_or_first_available_variant %}
+                                <span> {{ current_variant.sku }}</span>
+                            </div>
+                          {%endif%}
+                            {% if section.settings.show_sdes %}
+                            <div class="short-desc">
+                                {{product.metafields.engo_summary.summary_content}}
+                            </div>
+                            {% endif%}
+                     <div class="single-product-button-group">
+                            <form action="/cart/add" method="post" enctype="multipart/form-data" class="product-form product-form-{{ section.id }}{% unless section.settings.show_variant_labels %} product-form--hide-variant-labels{% endunless %}" data-section="{{ section.id }}">
+                              <select name="id" id="productSelect" class="engoj-except-select2 product-single__variants">
+                                {% for variant in product.variants %}
+                                {% if variant.available %}
+                                {% assign sku = variant.sku %}
+
+                                <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
+
+                                {% else %}
+                                <option disabled="disabled">
+                                  {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+                                </option>
+                                {% endif %}
+                                {% endfor %}
+                              </select>
+
+                              {% if product.available and product.variants.size > 1 %}
+                              {% for option in product.options %}
+                              {% include 'swatch' with option %}
+                              {% endfor %}
+                              {% endif %}
+
+                              {% if product.metafields.engo_external.external_name != blank %}
+                              <div class="single-product-button-group">
+                                <div class="e-btn cart-qtt no-qtt v2 btn-gradient">
+                                  <a href="{{product.metafields.engo_external.external_url}}" class="btn-add-cart btn-amazon">{{product.metafields.engo_external.external_name}}</a>
+                                </div>  
+                                {% include 'add-wishlist-v1'%}
+
+                               </div>
+                       </div>    
+                              {% else %}
+
+                                <div class="e-btn cart-qtt {% unless current_variant.available %} no-qtt{%else%}btn-gradient {% endunless %}">
+                                {% unless current_variant.available %}
+                                  {%else%}
+                                  {% if section.settings.show_quantity %}
+                                  <div class="product-form__item product-form__item--quantity e-quantity">
+                                    <input type="number" id="Quantity" name="quantity" value="1" min="1" class="product-form__input" pattern="[0-9]*">
+                                  </div>
+                                  {% endif %}
+                                  {% endunless %}
+                                  <div class="product-form__item product-form__item--submit">
+                                    <button type="submit" name="add" id="AddToCart" {% unless current_variant.available %}disabled="disabled"{% endunless %} class="btn-add-cart{% unless current_variant.available %} btn-outofstock{% endunless %}{% if product.options.size == 1 and product.variants[0].title == 'Default Title' %} product-form__cart-submit--small{% endif %}">
+
+                                      <span id="AddToCartText-{{ section.id }}">
+                                        {% unless current_variant.available %}
+                                        {{ 'products.product.sold_out' | t }}
+                                        {% else %}
+                                        {{ 'products.product.addtocart' | t }}
+                                        {% endunless %}
+                                      </span>
+                                      {% unless current_variant.available %}
+                                      {%else%}
+                                      {%if settings.pia_addcart_show %}
+                                        <p class="icon-bg {% if settings.icon_cart_display == 'default'%}icon-cart v2{%else%}{{settings.pia_addcart}} f-20{%endif%}"></p>
+                                        {% endif %}
+                                        {% endunless %}
+                                    </button>
+                                  </div>
+
+                              </div>
+
+                              {% endif %}
+                            </form>
+
+                            {% unless product.metafields.engo_external.external_name != blank %}
+                            <div class="e-btn btn-icon">
+                            {% include 'add-wishlist-v1'%}
+                            </div>
+                      </div>
+                            {% endunless %}
+                            {% if section.settings.show_tag %}
+                            <div class="product-tags">
+                                <label>{{ 'products.product.tags' | t }} :</label>
+                                {% for tag in product.tags %}
+                                 <a href="/collections/all?constraint={{ tag | handle }}">{{ tag }}</a>{% unless forloop.last %},{% endunless %}
+                                {% endfor %}
+                            </div>
+                            {%endif%}
+                        </div>
+
+                    </div>
+            </div>
+          </div>
+      
+          {% if section.settings.enable_alltab %}
+              {% include 'product-detail-tab' %}
+          {% endif %}
+      </div>
+        </div>
+  </div>
+      {% if section.settings.show_product_related %}
+          {% include 'related-product'%}
+      {% endif %}
+      {% if section.settings.show_product_question %} 	
+      {% include 'faq-product'%}
+
+      {% endif %}
+      {% if section.settings.show_product_similar_brand %}
+      {% include 'similar-product'%}
+
+      {% endif %}
+</div>
+
+{%- capture _array_img_360 -%}
+{% for image in product.images %}
+{{ image.src | img_url: 'master'}},
+{% if forloop.last %}
+{%- assign limit_img = forloop.index -%}
+{% endif %}
+{% endfor %}
+{%- endcapture -%}
+
+{%- assign array_img_360 = _array_img_360 | split: ',' -%}
+
+{%if section.settings.show_360%}
+<div class="modal fade" id="my360" role="dialog">
+  <div class="modal-dialog modal-lg modal-sm">
+    <div class="modal-content product-360-view-wrapper">
+      <button type="button" class="close close-popup" data-dismiss="modal">&times;</button>
+      <div class="threesixty e-threed-view js-product-360-{{product.id}}">
+        <ul class="threesixty_images"></ul>
+        <div class="spinner"><span>0%</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+{%endif%}
+<script>
+  jQuery(document).ready(function( $ ) {
+
+
+    $('.js-product-360-{{product.id}}').ThreeSixty({
+      totalFrames: {{limit_img}}, // Total no. of image you have for 360 slider
+      endFrame: {{limit_img}}, // end frame for the auto spin animation
+      currentFrame: 1, // This the start frame for auto spin
+      imgList: '.threesixty_images', // selector for image list
+      progress: '.spinner', // selector to show the loading progress
+      imgArray: {{array_img_360 | json}}, // path of the image assets
+      filePrefix: '', // file prefix if any
+      ext: '.jpg', // extention for the assets
+      // responsive: true,
+      navigation: true
+
+    });   
+  });
+</script>
+

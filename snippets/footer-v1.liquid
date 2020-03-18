@@ -1,0 +1,34 @@
+<footer class="footer-v1 container-fluid container_40 space_top_bot_80">
+  <div class="container-fluid container_80 ">
+  <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 space_top_bot_20  fv1-group-link">
+        <div>
+          <a href="{{ shop.url }}">
+            {% if settings.fv1_logo == blank %}
+            <img alt="{{shop.name}}" src="{{'logo.png' | asset_url}}" class="img-logo">
+            {% else %}
+            <img alt="{{shop.name}}" src="{{settings.fv1_logo | img_url:'master'}}" class="img-logo">
+            {% endif %}
+          </a>
+        </div>
+        <p class="fz-12" style="color:{{settings.color_text}}; margin-top:20px; line-height:24px;">{{settings.fv1_text_copy}}</p>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 space_top_bot_20 form-newletter">
+      <h3 class="fw-600  fz-14">Newsletter</h3>
+      <form action="{{ form_action }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-group des-font flex relative" target="_blank">
+        <input type="email" name="EMAIL" class="form-control full-width relative bg-letter fz-12" placeholder="{{settings.fv1_newsletter_input_placeholder}}" value="{% if customer %}{{ customer.email }}{% endif %}">
+        <button type="submit" class="absolute delay03">
+          <i class="{{settings.icon-submit-footer1}}"></i>
+        </button>
+      </form>
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 space_top_bot_20 fv1_social">
+      <div class="right">
+      <h3 class="fw-600  fz-14">{{settings.fv1_payment_title}}</h3>
+		<img alt="" src="{{settings.fv1_logo2 | img_url:'master'}}">
+      </div>
+    </div>
+  </div>
+  </div>
+</footer>

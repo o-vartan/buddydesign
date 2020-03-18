@@ -1,0 +1,169 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+<div class="container-1300 about-v3 border-bot border-top">
+  <div class="ciloe-title-section  container relative text-center">
+    <div class="vertical-line" style="border-right: 1px solid #cfcfcf; height: 70px; width: 50%;     margin: 70px 0 35px 0;"></div>
+  <p class="fz-12 uppercase" style="padding-top: 35px">{{section.settings.des}}</p>
+    <h2 class="margin_top_20 fw-600">{{section.settings.title}}</h2>
+  
+</div>
+<div class="container aubout-us space_top_80">
+  <div class="col-md-4 col-sm-4 col-xs-12  space_bot_50 text-center">
+                <img {%if section.settings.about2_img_1 == blank%}src="{{'about_1.jpg'| asset_url }}" 
+                   {%else%}
+                   src="{{section.settings.about2_img_1 | img_url:'master'}}"{%endif%} class="img-responsive margin_auto" alt="" />
+    <h4 class="space_top_40 space_bot_30">{{section.settings.title_about2_1}}</h4>
+    <p class="space_bot_30">{{section.settings.title_about2_11}}</p>
+    {%comment%}
+    <a href="{{section.settings.url1}}" class="over-hidden inline-block a1"><i class="ti-close"></i></a>
+    {%endcomment%}
+  </div>
+  <div class="col-md-4 col-sm-4 col-xs-12 space_bot_50 text-center">
+                <img {%if section.settings.about2_img_2 == blank%}src="{{'about_1.jpg'| asset_url }}" 
+                   {%else%}
+                   src="{{section.settings.about2_img_2 | img_url:'master'}}"{%endif%} class="img-responsive margin_auto" alt="" />
+    <h4 class="space_top_40 space_bot_30">{{section.settings.title_about2_2}}</h4>
+    <p class="space_bot_30" >{{section.settings.title_about2_22}}</p>
+    {%comment%}
+    <a href="{{section.settings.url2}}" class="over-hidden inline-block a2"><i class="ti-close"></i></a>
+    {%endcomment%}
+  </div>
+    <div class="col-md-4 col-sm-4 col-xs-12 space_bot_50 text-center">
+                <img {%if section.settings.about2_img_3 == blank%}src="{{'about_1.jpg'| asset_url }}" 
+                   {%else%}
+                   src="{{section.settings.about2_img_3 | img_url:'master'}}"{%endif%} class="img-responsive margin_auto" alt="" />
+    <h4 class="space_top_40 space_bot_30">{{section.settings.title_about2_3}}</h4>
+    <p class="space_bot_30" >{{section.settings.title_about2_33}}</p>
+    {%comment%}
+    <a href="{{section.settings.url3}}" class="over-hidden inline-block a3"><i class="ti-close"></i></a>
+    {%endcomment%}
+  </div>
+</div>
+</div>
+</div>
+<style>
+  .about-v3{
+  background:{{section.settings.bg-section}}
+  }
+  </style>
+{% schema %}
+{
+  "name": "Banner About v3",
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      "type": "color",
+      "id": "bg-section",
+      "label": "Background section",
+      "default": "#fff"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Welcome to Minim"
+    },
+	{
+      "type": "text",
+      "id": "des",
+      "label": "Des",
+      "default": "Beauty you can afford"
+    },
+	{
+      "type": "header",
+      "content": "About Us"
+    },
+	{
+      "type": "image_picker",
+      "id": "about2_img_1",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "title_about2_1",
+      "label": "Title",
+      "default": "Who we are"
+    },
+    {
+      "type": "text",
+      "id": "title_about2_11",
+      "label": "Content",
+      "default": "Whether you need a living room, bedroom or dining room set you will find it here in our feet beautifully decorated showroom."
+    },
+	{
+      "type": "url",
+      "id": "url1",
+      "label": "URL button",
+      "default": "/collections/all"
+    },
+	{
+      "type": "image_picker",
+      "id": "about2_img_2",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "title_about2_2",
+      "label": "Title",
+      "default": "Who we are"
+    },
+    {
+      "type": "text",
+      "id": "title_about2_22",
+      "label": "Content",
+      "default": "Whether you need a living room, bedroom or dining room set you will find it here in our feet beautifully decorated showroom."
+    },
+	{
+      "type": "url",
+      "id": "url2",
+      "label": "URL button",
+      "default": "/collections/all"
+    },
+	{
+      "type": "image_picker",
+      "id": "about2_img_3",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "title_about2_3",
+      "label": "Title",
+      "default": "Who we are"
+    },
+    {
+      "type": "text",
+      "id": "title_about2_33",
+      "label": "Content",
+      "default": "Whether you need a living room, bedroom or dining room set you will find it here in our feet beautifully decorated showroom."
+    },
+	{
+      "type": "url",
+      "id": "url3",
+      "label": "URL button",
+      "default": "/collections/all"
+    }
+  ],
+
+  "presets": [
+    {
+      "name": "Banner About v3",
+      "category": "Page Minim"
+    }
+  ]
+}
+{% endschema %}

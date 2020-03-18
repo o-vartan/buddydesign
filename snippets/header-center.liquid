@@ -1,0 +1,72 @@
+
+<div class="col-lg-7 col-md-7 v-center header-search hidden-xs hidden-sm">
+    <form method class="searchform" action="/search">
+        <input type="text" name="q" class="form-control" placeholder="{{settings.hcenter_placeholder}}">
+        <div class="search-panel">
+            <a class="dropdown-toggle" data-toggle="dropdown" href='#'>All categories <span class="fa fa-caret-down"></span></a>
+            {% assign collection_menu = settings.hcenter_search_menu%}
+            <ul id="category" class="dropdown-menu dropdown-category">
+                {% for link in linklists[collection_menu].links %}
+                    <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+                {%endfor%}
+            </ul>
+        </div>
+        <span class="input-group-btn">
+             <button class="button_search" type="submit"><i class="{{settings.hcenter_search_icon}}"></i></button>
+        </span>
+    </form>
+    <div class="tags">
+        {% assign tags_menu = settings.hcenter_tag%}
+        <span>{{settings.hcenter_tag_title}}</span>
+        {% for link in linklists[tags_menu].links %}
+            <a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
+        {%endfor%}
+    </div>
+</div>
+<div class="col-lg-3  col-md-3 col-sm-6 col-xs-6 v-center header-sub">
+    <div class="right-panel">
+        <div class="header-sub-element hidden-xs hidden-sm">
+            <div class="sub-left">
+                <img src="{{'icon-call.png'|asset_url}}" alt="">
+            </div>
+            <div class="sub-right">
+                <span>{{settings.hcenter_text_1}}</span>
+                <div class="phone">{{settings.hcenter_text_2}}</div>
+            </div>
+        </div>
+        <div class="header-sub-element row">
+          {% if customer.email != blank %}
+          	<a class="hidden-xs hidden-sm" href="/account/logout" title="logout"><i class="icon-logout f-25"></i></a>
+			{% else %}
+          	<a class="hidden-xs hidden-sm" href="/account/login">
+              {%if settings.hcenter_icon_type_1 =='Image' %}
+                    <img src="{{'icon-user.png'|asset_url}}" alt="">
+                    {%else%}
+                    <i class="{{settings.hcenter_icon_1}}"></i>
+              {% endif %}
+            </a>
+          	{%endif%}
+            <a href="/pages/wishlist">
+              {%if settings.hcenter_icon_type_2 =='Image' %}
+                    <img src="{{'icon-heart.png'|asset_url}}" alt="">
+                    {%else%}
+                    <i class="{{settings.hcenter_icon_2}}"></i>
+              {% endif %}
+            </a>
+            <div class="cart">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="label5">
+                  	{%if settings.hcenter_icon_type_3 =='Image' %}
+                          <img src="{{'icon-cart.png'|asset_url}}" alt="">
+                          {%else%}
+                          <i class="{{settings.hcenter_icon_3}}"></i>
+                    {% endif %}
+                    <span class="count cart-count enj-cartcount">{{ cart.item_count }}</span>
+                </a>
+                {% include 'mini-cart'%}
+            </div>
+            <a href=“#” onClick="return false;" class="hidden-md hidden-lg icon-pushmenu js-push-menu">
+                <i class="fa fa-bars f-15"></i>
+            </a>
+        </div>
+    </div>
+</div>

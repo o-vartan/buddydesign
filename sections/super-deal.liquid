@@ -1,0 +1,86 @@
+<div data-section-id="{{ section.id }}" data-section-type="super-deal-v2" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+	<!--wrapper product list-->
+  <div class="super-deal v2">
+      <div class="container container-240">
+          
+              
+          	{% if section.settings.product_single_1 != blank %}
+                    {% include 'product-single-item-v3' %}
+                  {% else %}
+                    {% include 'empty-product-superdeal-v2' %}
+                  {% endif %}
+      </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Super Deal v2",
+  "class": "index-section",
+  "settings": [
+	{
+      "type": "header",
+      "content": "Heading"
+    },
+	{
+      "type": "text",
+      "id": "text1",
+      "label": "Title",
+      "default": "Super Deals"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_progress",
+      "label": "Enable Deal Progress",
+      "default": true
+    },
+	{
+      "type": "header",
+      "content": "Countdown"
+    },
+	{
+        "type": "text",
+        "label": "Deadline Countdown",
+        "id": "hp_countdown",
+        "info": "Format datatime: YYYY-MM-DD-hh-mm-ss",
+        "default": "08-31-2018-00-00-00"
+    },
+	{
+      "type": "text",
+      "id": "text2",
+      "label": "Title",
+      "default": "Deal ends in :"
+    },
+	{
+      "type": "header",
+      "content": "Product"
+    },
+	{
+      "type": "product",
+      "id": "product_single_1",
+      "label": "Select product"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Super Deal v2",
+      "category": "Products"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,12 @@
+<div class="filter margin_bottom_30 space_bot_30 ">
+  <div class="flex margin_bottom_20">
+    <h4 class=" widget_title ">{{section.settings.title_cate}}</h4>
+  </div>
+  <ul class="filter-brand" style="max-height: 200px;overflow: auto;">
+    {% for collection in collections %}
+    <li {% if collection_title == collection.title %}class="active" {% endif %}>
+      <a href="{{ collection.url }}" title="{{ collection.title }}">{{ collection.title }} </a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>

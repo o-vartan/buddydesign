@@ -1,0 +1,26 @@
+<h4 class="post-title-related widget-title margin_bottom_30 ">{{ section.settings.title_relate_article }}</h4>
+{%- assign blog_selected = section.settings.choose_blog -%}
+<div class="post-related-slide border-bot">
+
+
+  <div class="js_relate_article">
+    {% for article in blogs[blog_selected].articles %}
+    <div class="blog-post-item post-item">
+      <div class="blog-post-img relative">
+        <a class="hover-images" href="#"><img src="{{ article.image.src | img_url: 'original' }}" alt="{{ article.title }}"></a>
+      </div>
+      <div class="blog-post-info space_top_30">
+        <div class="blog-post-tags blog-post-author">
+          {% for tag in article.tags %}
+          <a class="uppercase fz-12 author" href="{{ blog.url }}/tagged/{{ tag | handle }}" rel="category tag">{{ tag }}</a>{% unless forloop.last %},{% endunless %}
+          {% endfor %}
+        </div>
+        <h3 class="post-name margin_bottom_20"><a href="{{ article.url }}">{{ article.title }}</a></h3>
+        <a href="{{ article.url }}" class="button-blog ">{{section.settings.btn_blog}}</a> 
+      </div>
+    </div>  
+    {% endfor %}
+  </div>
+
+
+</div>

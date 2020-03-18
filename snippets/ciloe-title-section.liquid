@@ -1,0 +1,9 @@
+<div class="ciloe-title-section margin_bottom_70 container relative">
+  <div class="flex">
+    <h1 class="margin_bottom_20">{{section.settings.title}}</h1>
+    {% if section.settings.enable_btn %}
+    <a href="{{section.settings.url}}" class="uppercase lt-2 delay03 default relative">{{section.settings.btn_name}}</a>
+    {% endif %}
+  </div>
+  <p class="fz-18">{{section.settings.des}}</p>
+</div>

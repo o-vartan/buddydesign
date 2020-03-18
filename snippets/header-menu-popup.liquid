@@ -1,0 +1,16 @@
+<div class="pushmenu menu-home5">
+  <div class="menu-push">
+    <span class="close-left js-close"><i class="icon-close f-20"></i></span>
+    <div class="clearfix"></div>
+    <form role="search" method="get" id="searchform" class="searchform" action="/search">
+        <div>
+            <label class="screen-reader-text" for="q"></label>
+            <input type="text" placeholder="{{settings.mmobile_search_place}}" value="" name="q" id="q" autocomplete="off">
+            <input type="hidden" name="type" value="product">
+            <button type="submit" id="searchsubmit"><i class="{{settings.mmobile_search_icon}}"></i></button>
+        </div>
+    </form>
+  	{% include 'menu-mobile'%}
+  </div>
+  
+</div>

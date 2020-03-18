@@ -1,0 +1,49 @@
+<div class="e-qa">
+    <div class="cmt-title v2 text-center abs"><h3 class="oval-bd btn-gradient">{{section.settings.question_title}}</h3></div>
+    <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6">
+                {% if section.blocks.size > 0 %}
+                {% for block in section.blocks %}
+                {% if block.type == 'faqblock' %}
+                <div class="qa-element">
+                    <div class="qa-quest">
+                        <span class="qa-icon">{{block.settings.faq_icon1}}</span>
+                        <h3>{{block.settings.faq_title}}</h3>
+                    </div>
+                    <div class="qa-answer">
+                        <span class="qa-icon">{{block.settings.faq_icon2}}</span>
+                        <p>{{block.settings.faq_content}} </p>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6">
+                {% if section.blocks.size > 0 %}
+                {% for block in section.blocks %}
+                {% if block.type == 'faqblock2' %}
+                <div class="qa-element">
+                    <div class="qa-quest">
+                        <span class="qa-icon">{{block.settings.faq_icon3}}</span>
+                        <h3>{{block.settings.faq_title2}}</h3>
+                    </div>
+                    <div class="qa-answer">
+                        <span class="qa-icon">{{block.settings.faq_icon4}}</span>
+                        <p>{{block.settings.faq_content2}} </p>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+            </div>
+    </div>
+    
+    <form class="form_newsletter" method="get" action="/search">
+        <input type="hidden" name="type" value="product">
+        <input type="text" value="" placeholder="{{section.settings.qa_placeholder}}" class="newsletter-input form-control">
+        <button id="subscribe2" class="button_mini btn btn-gradient" type="submit">
+            {{section.settings.qa_btn}}<i class="ion-ios-arrow-forward"></i>
+        </button>
+    </form>
+</div>

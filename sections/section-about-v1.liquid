@@ -1,0 +1,208 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+
+
+  <div class="container space_top_60 banner_about">
+
+    <div class="row">
+      <div class="text_banner col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="relative">
+          <h2 class="margin_bottom_30">{{section.settings.title}}</h2>
+          <div class="content_bottom">
+            <p class=" content">{{section.settings.des}}</p>
+            <a href="{{section.settings.url}}" class="inline-block over-hidden ciloe-btn-default fw-600  relative">{{section.settings.btn_name}}</a>
+          </div>
+        </div>
+      </div>
+      <div class="img_banner col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <img src="{{section.settings.img_banner | img_url:'master'}}" class="img-responsive">
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+   .text_banner .ciloe-btn-default:before {
+    content: "\f054";
+    font-family: FontAwesome;
+    margin-right: 10px;
+    font-size: 9px;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background: {{section.settings.bg_button}};
+    line-height: 30px;
+    text-align: center;
+    border-radius: 50%;
+    transition: .3s;
+}
+  .text_banner .ciloe-btn-default:after {
+   display:none;
+  }
+  .banner_about .text_banner a{
+  color:{{section.settings.color_text1}};
+    font-size:13px;
+  }
+  .banner_about .text_banner .ciloe-btn-default:hover:before{
+    background:{{section.settings.bg_button_hover}};
+  }
+
+ .banner_about .text_banner{
+  	padding-top:20px;
+   	padding-left:50px;
+  }
+  .banner_about .text_banner h2{
+   color:{{section.settings.color_title}};
+    font-weight:400;
+  }
+  .banner_about .text_banner p.content	{
+  	font-size:18px;
+    color:{{section.settings.color_des}};
+    line-height:2;
+    padding-bottom:30px;
+    font-weight:300;
+  }
+  @media (max-width:767px){
+    .banner_about .text_banner{
+      padding-left:15px;
+    }
+    .banner_about .text_banner h2{
+    	margin-bottom:10px;
+    }
+    .banner_about .text_banner p.content{
+    	font-size:15px;
+      padding-bottom:10px;
+    }
+    .banner_about .text_banner .content_bottom .column-70.content{
+    	width:90%;
+      padding-top:20px;
+      padding-bottom:20px;
+    }
+  }
+          .banner_about .img_banner {
+  	padding-left:30px;
+  }
+    @media (min-width:1025px){
+        .banner_about .img_banner {
+  	padding-left:100px;
+  }
+      .banner_about .text_banner h2{
+      	line-height:47px;
+      }
+   .banner_about .text_banner{
+  	padding-top:50px;
+   	padding-left:200px;
+  }
+  }
+</style>
+{% schema %}
+{
+  "name": "Banner About v1",
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      "type": "image_picker",
+      "id": "img_banner",
+      "label": "Image"
+    },
+	{
+   "type":      "select",
+   "id":        "local_text",
+   "label":     "Chose position title",
+   "options": [
+     {
+       "value": "left",
+       "label": "Left"
+     },
+     {
+       "value": "center",
+       "label": "Center"
+     },
+     {
+       "value": "right",
+       "label": "Right"
+     }
+   ],
+   		"default":   "center"
+	},
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Furniture Solotions. Affordable Prices."
+    },
+	{
+            "type": "color",
+          	"id": "color_title",
+          	"label": "Color Title",
+			"default": "#3c3c3c"
+    },
+	{
+      "type": "header",
+      "content": "Content"
+    },
+	{
+      "type": "textarea",
+      "id": "des",
+      "label": "Content",
+      "default": "We’ve got everything to help you create a living room that’s ready for entertaining."
+    },
+	{
+            "type": "color",
+          	"id": "color_des",
+          	"label": "Color content",
+			"default": "#999"
+    },
+	{
+            "type": "color",
+          	"id": "color_text1",
+          	"label": "Color button",
+			"default": "#cfcfcf"
+    },
+		{
+            "type": "color",
+          	"id": "bg_button",
+          	"label": "Background button",
+			"default": "#f3f3f3"
+    },
+	{
+            "type": "color",
+          	"id": "bg_button_hover",
+          	"label": "Background hover button",
+			"default": "#0D4C82"
+    },
+	{
+      "type": "url",
+      "id": "url",
+      "label": "URL button"
+    },
+    {
+      "type": "text",
+      "id": "btn_name",
+      "label": "Button name",
+      "default": "Learn more about us"
+    }
+  ],
+
+  "presets": [
+    {
+      "name": "Banner About v1",
+      "category": "Page Minim"
+    }
+  ]
+}
+{% endschema %}

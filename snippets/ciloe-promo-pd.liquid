@@ -1,0 +1,36 @@
+<div class="promo_info_single_product fixed box-shadow delay1 over-hidden hidden-xs">
+  <div class="container relative">
+    <div class="row flex">
+      <div class="col-md-9 col-sm-6 col-xs-7">
+        <div class="info flex">
+          <div class="border-bot border-top border-left border-right">
+            {% for image in product.images %}
+            {% if forloop.first %}
+            <img src="{{ image.src | img_url: '50x50' }}" alt="{{ image.alt | escape }}">
+            {% endif %}
+            {% endfor %}
+          </div>
+          <div class="container_15">
+            <h4><a>{{product.title}}</a></h4>
+            <div class="product-rating">
+              <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-5">
+        <form method="post" action="/cart/add" enctype="multipart/form-data" class="inline-block icon-addcart">
+          <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+          <button type="submit" name="add" class="enj-add-to-cart-btn btn-default">
+            ADD TO CART
+          </button>
+        </form>
+      </div>
+    </div>
+    {% comment %}
+    <div class="absolute close_promo_pd">
+      <i class="ti-close"></i>
+    </div>
+    {% endcomment %}
+  </div>
+</div>

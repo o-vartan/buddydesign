@@ -1,0 +1,21 @@
+
+  <ul class="pagination text-center">
+    {% if paginate.previous.is_link %}
+    <li>
+      
+      <a href="{{ paginate.previous.url }}"><i class="ion-ios-arrow-back"></i></a>
+      
+    </li>
+    {% endif %}
+    {% assign count = paginate.pages %}
+    {% for part in (1..count) %}
+    <li class="active" {% if paginate.current_page == part %}class="active"{% endif %}><a {% if paginate.current_page == part %}class="active"{% endif %} href="{{ collection.url }}?page={{ forloop.index }}">{{ forloop.index }}</a></li>
+    {% endfor %}
+    {% if paginate.next.is_link %}
+    <li>
+      
+      <a href="{{ paginate.next.url }}"><i class="ion-ios-arrow-forward"></i></a>
+      
+    </li>
+    {% endif %}
+  </ul>

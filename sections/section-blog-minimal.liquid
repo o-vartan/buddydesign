@@ -1,0 +1,243 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+<!--slide-->
+  <div class="container-fluid blog-minimal margin_bottom_50">
+    <div class="row">
+      <h1 class="title-blog {% if section.settings.local_text == 'center' %} text-center {% elsif section.settings.local_text == 'left' %} text-left {% elsif section.settings.local_text == 'right' %} text-right {% endif %}">{{section.settings.title}}</h1>
+      <p class="des-blog margin_bottom_80 {% if section.settings.local_text == 'center' %} text-center {% elsif section.settings.local_text == 'left' %} text-left {% elsif section.settings.local_text == 'right' %} text-right {% endif %}">{{section.settings.des}}</p>
+    </div>
+      {% if section.blocks.size > 0 %}
+    {% for block in section.blocks %}
+    <div class="row {% unless forloop.last %} border-bot {% endunless %}">
+      {% assign products_limit = block.settings.limit %}
+      {% assign col = block.settings.blog %}
+      {% for article in blogs[col].articles limit: products_limit %}
+      <div class="content-blog col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="row">
+          <div class="inline-block relative col-lg-4 col-md-4 col-sm-4 col-xs-12 clear-space-left">
+            <a href="{{ article.url }}" class="inline-block over-hidden">
+              {{ article | img_url: 'master' | img_tag: article.title }}
+            </a>
+            <p class="day-post lt-2 uppercase absolute">{{article.published_at | date: "%b"}} - {{article.published_at | date: "%d"}}</p>
+          </div>
+          <div class="info-blog col-lg-8 col-md-8 col-sm-8 col-xs-12">
+            <p class="uppercase author">{{ article.author }}</p>
+            <h2 class="title-post"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+            <div><a href="{{ article.url }}" class="ciloe-btn-default">{{block.settings.btn-name}}</a></div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endfor %}
+    {% endif %}
+  </div>
+<!--endslide-->
+</div>
+<style>
+  {% if section.settings.display == 'box' %}
+  .blog-minimal{
+    padding:0 365px;
+  }
+  @media (max-width:1600px){
+  .blog-minimal{
+    padding:0 200px;
+  }
+  }
+  @media (max-width:1400px){
+  .blog-minimal{
+    padding:0 100px;
+  }
+  }
+  @media (max-width:991px){
+  .blog-minimal{
+    padding:0 50px;
+  }
+  }
+  @media (max-width:567px){
+  .blog-minimal{
+    padding:0 35px;
+  }
+  }
+  {% endif %}
+  .blog-minimal{
+    background:{{section.settings.bg_blog}};
+  }
+  .blog-minimal .title-blog{
+  	font-size:36px;
+    margin-bottom:20px;
+    color:{{section.settings.color_title_blog}};
+  }
+  .blog-minimal .des-blog{
+    color:{{section.settings.color_des_blog}};
+  }
+  .blog-minimal .content-blog{
+    padding-top:45px;
+    padding-bottom:45px;
+  }
+  .blog-minimal .content-blog img{
+    min-height: 200px;
+    object-fit: cover;
+  }
+  .blog-minimal .content-blog a.over-hidden img{
+    transition:all .3s ease;
+  }
+  .blog-minimal .content-blog a.over-hidden img:hover{
+  	transform: scale(1.2);
+  }
+  .blog-minimal .content-blog .title-post{
+  	font-size:20px;
+    font-weight:400;
+    padding:25px 0 45px 0;
+  }
+  .blog-minimal .content-blog .day-post{
+  	font-size:12px;
+    font-weight:500;
+    color:{{section.settings.color_day_post}};
+    padding:10px;
+    background:{{section.settings.bg_color_day_post}};
+    bottom:0;
+  }
+  .blog-minimal .content-blog .info-blog .ciloe-btn-default{
+  	font-weight:500;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Blog Minimal",
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+   "type":      "select",
+   "id":        "local_text",
+   "label":     "Location Text",
+   "options": [
+     {
+       
+       "value": "center",
+       "label": "Center"
+     },
+     {
+      
+       "value": "left",
+       "label": "Left"
+     },
+     {
+      
+       "value": "right",
+       "label": "Right"
+     }
+   ],
+   "default":   "left"
+	},
+	{
+        	"type": "text",
+        	"id": "title",
+        	"label": "Title Blog",
+        	"default": "Blog"
+    },
+	{
+        	"type": "textarea",
+        	"id": "des",
+        	"label": "Description Blog",
+        	"default": "Browse our website for the hottest items in the marketplace now."
+    },
+	{
+   "type":      "select",
+   "id":        "display",
+   "label":     "Display content blog",
+   "options": [
+     {
+       
+       "value": "box",
+       "label": "Box"
+     },
+     {
+      
+       "value": "full",
+       "label": "Full width"
+     }
+   ],
+   "default":   "box"
+	},
+	
+    {
+      "type": "color",
+      "id": "bg_blog",
+      "label": "Background Section blog",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "color_day_post",
+      "label": "Color Day Post",
+      "default": "#000"
+    },
+	{
+      "type": "color",
+      "id": "bg_color_day_post",
+      "label": "Background Color Day Post",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "color_title_blog",
+      "label": "Color Title blog",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "color_des_blog",
+      "label": "Color Description blog",
+      "default": "#999"
+    }
+  ],
+"blocks": [
+      {
+        "type": "image",
+        "name": "Content blog",
+        "settings": [
+	{
+        	"type": "blog",
+        	"id": "blog",
+        	"label": "Chose Blog"
+    },
+	{
+        	"type": "text",
+        	"id": "limit",
+        	"label": "Limit Blog",
+        	"default": "2"
+    },
+	{
+        	"type": "text",
+        	"id": "btn-name",
+        	"label": "Name button more",
+        	"default": "Read more"
+    }
+]
+}
+],
+  "presets": [
+    {
+      "name": "Blog Minimal",
+      "category": "Home Minimal"
+    }
+  ]
+}
+{% endschema %}

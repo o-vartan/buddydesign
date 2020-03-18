@@ -1,0 +1,124 @@
+<div data-section-id="{{ section.id }}" data-section-type="super-deal-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+	<!--wrapper product list-->
+  <div class="super-deal">
+    <div class="container container-240">
+        <div class="row">
+          	<div class="col-md-9 col-sm-8 col-xs-12">
+                
+                  	{% if section.settings.product_single_1 != blank %}
+                    {% include 'product-single-item-v4' %}
+                  {% else %}
+                    {% include 'empty-product-superdeal-v1' %}
+                  {% endif %}
+              	
+          	</div>
+          	<div class="col-md-3 col-sm-4 col-xs-12">
+              <div class="filter filter-product e-category">
+                  <h3 class="widget-blog-title">{{section.settings.text3}}</h3>
+                  {%for product in collections[section.settings.product_collection_4].products limit:section.settings.product_limit_4%}
+                      {% include 'product-category-list-v2' %}
+                          {% else %}
+                      {% include 'empty-product-category-v2' %}
+                  {% endfor %}
+              </div>
+          </div>
+      	</div>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Super Deal v1",
+  "class": "index-section",
+  "settings": [
+	{
+      "type": "header",
+      "content": "Heading"
+    },
+	{
+      "type": "text",
+      "id": "text1",
+      "label": "Title",
+      "default": "Super deal"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_progress",
+      "label": "Enable Deal Progress",
+      "default": true
+    },
+	{
+      "type": "header",
+      "content": "Countdown"
+    },
+	{
+        "type": "text",
+        "label": "Deadline Countdown",
+        "id": "hp_countdown",
+        "info": "Format datatime: YYYY-MM-DD-hh-mm-ss",
+        "default": "08-31-2018-00-00-00"
+    },
+	{
+      "type": "text",
+      "id": "text2",
+      "label": "Title",
+      "default": "Deal ends in :"
+    },
+	{  "type": "header",
+      "content": "Product"
+    },
+	{
+      "type": "product",
+      "id": "product_single_1",
+      "label": "Select product"
+    },
+	{
+      "type": "header",
+      "content": "List Products (Right)"
+    },
+	{
+      "type": "text",
+      "id": "text3",
+      "label": "Heading",
+      "default": "Staffpick Products"
+    },
+	{
+      "type": "header",
+      "content": "List Products"
+    },
+    {
+      "type": "collection",
+      "id": "product_collection_4",
+      "label": "Select collection"
+    },
+    {
+      "type": "text",
+      "id": "product_limit_4",
+      "label": "Limit number",
+      "default": "4"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Super Deal v1",
+      "category": "Products"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,955 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  
+  <div class="container-fluid container_35 popup_instagram margin_bottom_20">
+    {% if section.settings.enable_img_top %}
+    <div class="text-center image_top">
+      {% if section.settings.img_top == blank %}
+      	<img src="{{'hdv5_logo.png' | asset_url}}" class="inline-block img-responsive">
+      	{% else %}
+    	<img src="{{section.settings.img_top | img_url:'master'}}" class="inline-block img-responsive">
+      {% endif %}
+    </div>
+    {% endif %}
+    <h1 class="margin_bottom_30 {% if section.settings.text == 'left' %} text-left {% elsif section.settings.text == 'right' %} text-right {% elsif section.settings.text == 'center' %} text-center {% endif %}">{{section.settings.title}}</h1>
+    <p class="{% if section.settings.text == 'left' %} text-left {% elsif section.settings.text == 'right' %} text-right {% elsif section.settings.text == 'center' %} text-center {% endif %}">{{section.settings.des_1}}</p>
+    <p class="margin_bottom_70 {% if section.settings.text == 'left' %} text-left {% elsif section.settings.text == 'right' %} text-right {% elsif section.settings.text == 'center' %} text-center {% endif %}">{{section.settings.des_2}}</p>
+      
+    <div class="row">
+      
+      
+      {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+      {% for i in (1..4) %}
+      {% capture url %}url_{{i}}{% endcapture %}
+      {% capture img %}img_{{i}}{% endcapture %}
+      <div class="relative content_popup col-lg-3 col-md-3 col-sm-6 col-xs-6 space_bot_10">
+
+        <div class="relative img_popup">
+          <a href="{{block.settings[url]}}" class="inline-block relative over-hidden">
+            <img src="{{block.settings[img] | img_url:'master'}}" class="img-responsive hover-zoom-out-2">
+          </a>
+          {% for j in (1..3) %}
+          {% capture btn_name %}btn_name_{{i}}_{{j}}{% endcapture %}
+          {% capture enable_btn %}enable_btn_{{i}}_{{j}}{% endcapture %}
+          {% capture top %}top_{{i}}_{{j}}{% endcapture %}
+          {% capture left %}left_{{i}}_{{j}}{% endcapture %}
+          {% capture enable_right_pd %}enable_right_pd_{{i}}_{{j}}{% endcapture %}
+          {% if block.settings[enable_btn] %}
+          <div class="absolute hover_popup" style="top:{{block.settings[top]}}%;left:{{block.settings[left]}}%;">
+
+            <div class="content_pd_popup relative">
+
+              <a href="{{block.settings[url]}}" class="btn_popup inline-block delay03">{{block.settings[btn_name]}}</a>
+              <div class="pd_popup absolute box-shadow {% if block.settings[enable_right_pd] %} pd_popup_right {% endif %}">
+                	{% capture col %}pd_popup_{{i}}_{{j}}{% endcapture %}
+					{% assign product = all_products[block.settings[col]] %}
+                <h4><a href="{{ product.url | within: collection }}">{{product.title}}</a></h4>
+                <div class="flex border-bot price"><span class="left">{{ product.price | money }}</span><span class="right"></span></div>
+                <div class="border-bot flex info_popup">
+                  <a href="{{ product.url | within: collection }}" class="inline-block">
+                    <img src="{{ product.featured_image.src | img_url: '100x130' }}" class="img-responsive" alt="{{ product.featured_image.alt | escape }}">
+                  </a>
+                  <p class="space_left_10">{{product.description | truncatewords: 10}}</p>
+                </div>
+                <div>
+                  <form method="post" action="/cart/add" enctype="multipart/form-data" class="text-center icon-addcart">
+                    <input type="hidden" name="id" value="" />
+                    <button type="submit" name="add" class="enj-add-to-cart-btn btn-popup uppercase text-center"><i class="icon-bag margin_right_10"></i>add to cart</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+
+      </div>
+      {% endfor %}
+      {% endfor %}
+      {% endif %}
+    </div>
+
+  </div>
+
+</div>
+<style>
+  .popup_instagram .image_top{
+  	margin-bottom:20px;
+  }
+  @media (min-width:1200px){
+    .popup_instagram .image_top{
+      margin-bottom:50px;
+    }
+  }
+  .popup_instagram .content_popup .hover_popup .content_pd_popup .pd_popup{
+  	z-index: 3;
+    min-width: 310px;
+    background: {{section.settings.bg_popup}};
+    padding: 20px;
+    left: calc(100% + 8px) !important;
+    right:auto !important;
+    display: block;
+/*     border: 1px solid #f1f1f1;
+    border-radius: 3px; */
+    transform: translateY(-50%);
+    opacity: 0;
+    visibility: hidden;
+    transition:all .5s ease;
+  }
+  .popup_instagram .img_popup .hover-zoom-out-2{
+  	transition:all 5s ease;
+  }
+  .popup_instagram .img_popup:hover .hover-zoom-out-2{
+  	transform:scale(1.2);
+  }
+  .popup_instagram .content_popup .hover_popup .content_pd_popup .pd_popup.pd_popup_right{
+  	
+    right: calc(100% + 8px) !important;
+    left:auto !important;
+    
+  }
+  .popup_instagram .content_popup .hover_popup .content_pd_popup .pd_popup:before{
+    left: -16px;
+    top: calc(50% - 20px);
+    content: '';
+    position: absolute;
+    z-index: 5;
+    border: 8px solid transparent;
+    border-right: 8px solid #fff;
+  }
+  .popup_instagram .content_popup .hover_popup .content_pd_popup .pd_popup.pd_popup_right:before{
+    border-left: 8px solid #fff;
+    right: -8px;
+    border-right: unset;
+    left:unset;
+  }
+  .popup_instagram .content_popup .hover_popup .content_pd_popup .btn_popup{
+  	width: 25px;
+    height: 25px;
+    line-height: 21px;
+    text-align: center;
+    color:{{section.settings.color_btn}};
+    background:{{section.settings.bg_btn}};
+    border-radius: 50%;
+    font-size: 12px;
+    border: 2px solid {{section.settings.color_border}};
+    transition:all .3s ease;
+  }
+  .popup_instagram .content_popup .hover_popup .content_pd_popup:hover .pd_popup{
+  	opacity: 1;
+    visibility: visible;
+  }
+  .popup_instagram .content_popup .hover_popup .content_pd_popup .pd_popup h4{
+  	font-weight:600;
+    font-size:16px;
+    margin-bottom:20px;
+    color:{{section.settings.color_title_pd}};
+  }
+  .popup_instagram .content_popup .hover_popup .content_pd_popup .pd_popup .price{
+    padding-bottom:20px;
+    color:{{section.settings.color_price}};
+  }
+  .popup_instagram .content_popup .hover_popup .content_pd_popup .pd_popup .info_popup{
+  	padding:20px 0;
+  }
+  .popup_instagram .content_popup .hover_popup .content_pd_popup .pd_popup form button{
+  	padding:20px 0 0 0;
+    color:{{section.settings.color_btn_add}};
+    font-weight:600;
+    font-size:12px;
+  }
+  .popup_instagram .content_popup:hover .hover_popup .content_pd_popup .btn_popup{
+  	transform: scale(1.2);
+    background:{{section.settings.bg_color_btn_hover}};
+    color:{{section.settings.color_btn_hover}};
+  }
+  @media (max-width:767px){
+    .popup_instagram .content_popup .hover_popup .content_pd_popup .pd_popup{
+    	left:0 !important;
+      	top:calc(100% + 8px);
+      	transform: translateX(-65%);
+    }
+    .collection_instagram{
+    	margin-bottom:30px;
+    }
+  }
+</style>
+{% schema %}
+{
+  "name": "Popup Instagram",
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      "type": "header",
+      "content": "Image top"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_img_top",
+      "label": "Enable image",
+      "default": true
+    },
+	{
+      "type": "image_picker",
+      "id": "img_top",
+      "label": "Image"
+    },
+	{
+   	  "type":      "select",
+   	  "id":        "text",
+   	  "label":     "Local Title",
+   	  "options": [
+     {
+       "value": "left",
+       "label": "Left"
+     },
+     {
+       "value": "center",
+       "label": "Center"
+     },
+     {
+       "value": "right",
+       "label": "Right"
+     }
+   ],
+   	  "default":   "center"
+	},
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Shop Our 'Gram & Join Our 3+ Million Followers"
+    },
+    {
+      "type": "textarea",
+      "id": "des_1",
+      "label": "Description 1",
+      "default": "Take a pic of how cute you look wearing our clothes + use the hashtag "
+    },
+    {
+      "type": "textarea",
+      "id": "des_2",
+      "label": "Description 2",
+      "default": "#ciloe to get featured here!"
+    },
+	{
+      "type": "header",
+      "content": "Background popup"
+    },
+	{
+      "type": "color",
+      "id": "bg_popup",
+      "label": "BG Color popup",
+      "default": "#fff"
+    },
+	{
+      "type": "header",
+      "content": "Color button popup"
+    },
+	{
+      "type": "color",
+      "id": "color_btn",
+      "label": "Color button popup",
+      "default": "#000"
+    },
+	{
+      "type": "color",
+      "id": "bg_btn",
+      "label": "Background Color button popup",
+      "default": "#dcd4d4"
+    },
+	{
+      "type": "color",
+      "id": "color_border",
+      "label": "Color border button popup",
+      "default": "#fff"
+    },
+	{
+      "type": "header",
+      "content": "Color hover button popup"
+    },
+	{
+      "type": "color",
+      "id": "color_btn_hover",
+      "label": "Color button popup hover",
+      "default": "#fff"
+    },
+	{
+      "type": "color",
+      "id": "bg_color_btn_hover",
+      "label": "BG Color button popup hover",
+      "default": "#000"
+    },
+	{
+      "type": "header",
+      "content": "Color text product popup"
+    },
+	{
+      "type": "color",
+      "id": "color_title_pd",
+      "label": "Color title product popup",
+      "default": "#000"
+    },
+	{
+      "type": "color",
+      "id": "color_price",
+      "label": "Color price product popup",
+      "default": "#999"
+    },
+	{
+      "type": "color",
+      "id": "color_btn_add",
+      "label": "Color button product popup",
+      "default": "#41cce5"
+    }
+  ],
+"blocks": [
+      {
+        "type": "image",
+        "name": "Image",
+		"limit":12,
+        "settings": [
+	{
+      "type": "header",
+      "content": "Image 1"
+    },
+	{
+      "type": "url",
+      "id": "url_1",
+      "label": "URL collection",
+      "default": "/collections/all"
+    },
+	{
+      "type": "image_picker",
+      "id": "img_1",
+      "label": "Image collection"
+    },
+	{
+      "type": "header",
+      "content": "Number popup"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_btn_1_1",
+      "label": "Enable button 1",
+      "default": true
+    },
+	{
+      "type": "text",
+      "id": "btn_name_1_1",
+      "label": "Number 1",
+      "default": "1"
+    },
+	{
+      "type": "header",
+      "content": "Chose position for Button 1"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_right_pd_1_1",
+      "label": "Enable popup right",
+      "default": false
+    },
+	{
+      "type": "range",
+      "id": "top_1_1",
+      "label": "Chose position top",
+      "default": 50,
+	  "min":0,
+	  "max":100,
+	  "unit":"%"
+    },
+	{
+      "type": "range",
+      "id": "left_1_1",
+      "label": "Chose position left",
+      "default": 50,
+	  "min":0,
+	  "max":100,
+	  "unit":"%"
+    },
+	{
+      "type": "product",
+      "id": "pd_popup_1_1",
+      "label": "Chose product 1"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_btn_1_2",
+      "label": "Enable button 2",
+      "default": false
+    },
+	{
+      "type": "text",
+      "id": "btn_name_1_2",
+      "label": "Number 2",
+      "default": "2"
+    },
+	{
+      "type": "header",
+      "content": "Chose position for Button 2"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_right_pd_1_2",
+      "label": "Enable popup right",
+      "default": false
+    },
+	{
+      "type": "range",
+      "id": "top_1_2",
+      "label": "Chose position top",
+      "default": 20,
+	  "min":0,
+	  "max":100,
+	  "unit":"%"
+    },
+	{
+      "type": "range",
+      "id": "left_1_2",
+      "label": "Chose position left",
+      "default": 70,
+	  "min":0,
+	  "max":100,
+	  "unit":"%"
+    },
+	{
+      "type": "product",
+      "id": "pd_popup_1_2",
+      "label": "Chose product 2"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_btn_1_3",
+      "label": "Enable button 3",
+      "default": false
+    },
+	{
+      "type": "text",
+      "id": "btn_name_1_3",
+      "label": "Number 3",
+      "default": "3"
+    },
+	{
+      "type": "header",
+      "content": "Chose position for Button 3"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_right_pd_1_3",
+      "label": "Enable popup right",
+      "default": false
+    },
+	{
+      "type": "range",
+      "id": "top_1_3",
+      "label": "Chose position top",
+      "default": 30,
+	  "min":0,
+	  "max":100,
+	  "unit":"%"
+    },
+	{
+      "type": "range",
+      "id": "left_1_3",
+      "label": "Chose position left",
+      "default": 30,
+	  "min":0,
+	  "max":100,
+	  "unit":"%"
+    },
+	{
+      "type": "product",
+      "id": "pd_popup_1_3",
+      "label": "Chose product 3"
+    },
+	{
+      "type": "header",
+      "content": "Image 2"
+    },
+	{
+      "type": "url",
+      "id": "url_2",
+      "label": "URL collection",
+      "default": "/collections/all"
+    },
+	{
+      "type": "image_picker",
+      "id": "img_2",
+      "label": "Image collection"
+    },
+	{
+      "type": "header",
+      "content": "Number popup"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_btn_2_1",
+      "label": "Enable button 1",
+      "default": true
+    },
+	{
+      "type": "text",
+      "id": "btn_name_2_1",
+      "label": "Number 1",
+      "default": "1"
+    },
+	{
+      "type": "header",
+      "content": "Chose position for Button 1"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_right_pd_2_1",
+      "label": "Enable popup right",
+      "default": false
+    },
+	{
+      "type": "range",
+      "id": "top_2_1",
+      "label": "Chose position top",
+      "default": 50,
+	  "min":0,
+	  "max":100,
+	  "unit":"%"
+    },
+	{
+      "type": "range",
+      "id": "left_2_1",
+      "label": "Chose position left",
+      "default": 50,
+	  "min":0,
+	  "max":100,
+	  "unit":"%"
+    },
+	{
+      "type": "product",
+      "id": "pd_popup_2_1",
+      "label": "Chose product 1"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_btn_2_2",
+      "label": "Enable button 2",
+      "default": false
+    },
+	{
+      "type": "text",
+      "id": "btn_name_2_2",
+      "label": "Number 2",
+      "default": "2"
+    },
+	{
+      "type": "header",
+      "content": "Chose position for Button 2"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_right_pd_2_2",
+      "label": "Enable popup right",
+      "default": false
+    },
+	{
+      "type": "range",
+      "id": "top_2_2",
+      "label": "Chose position top",
+      "default": 50,
+	  "min":0,
+	  "max":100,
+	  "unit":"%"
+    },
+	{
+      "type": "range",
+      "id": "left_2_2",
+      "label": "Chose position left",
+      "default": 70,
+	  "min":0,
+	  "max":100,
+	  "unit":"%"
+    },
+	{
+      "type": "product",
+      "id": "pd_popup_2_2",
+      "label": "Chose product 2"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_btn_2_3",
+      "label": "Enable button 3",
+      "default": false
+    },
+	{
+      "type": "text",
+      "id": "btn_name_2_3",
+      "label": "Number 3",
+      "default": "3"
+    },
+	{
+      "type": "header",
+      "content": "Chose position for Button 3"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_right_pd_2_3",
+      "label": "Enable popup right",
+      "default": false
+    },
+	{
+      "type": "range",
+      "id": "top_2_3",
+      "label": "Chose position top",
+      "default": 30,
+	  "min":0,
+	  "max":100,
+	  "unit":"%"
+    },
+	{
+      "type": "range",
+      "id": "left_2_3",
+      "label": "Chose position left",
+      "default": 30,
+	  "min":0,
+	  "max":100,
+	  "unit":"%"
+    },
+	{
+      "type": "product",
+      "id": "pd_popup_2_3",
+      "label": "Chose product 3"
+    },
+	{
+      "type": "header",
+      "content": "Image 3"
+    },
+	{
+      "type": "url",
+      "id": "url_3",
+      "label": "URL collection",
+      "default": "/collections/all"
+    },
+	{
+      "type": "image_picker",
+      "id": "img_3",
+      "label": "Image collection"
+    },
+	{
+      "type": "header",
+      "content": "Number popup"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_btn_3_1",
+      "label": "Enable button 1",
+      "default": true
+    },
+	{
+      "type": "text",
+      "id": "btn_name_3_1",
+      "label": "Number 1",
+      "default": "1"
+    },
+	{
+      "type": "header",
+      "content": "Chose position for Button 1"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_right_pd_3_1",
+      "label": "Enable popup right",
+      "default": false
+    },
+	{
+      "type": "range",
+      "id": "top_3_1",
+      "label": "Chose position top",
+      "default": 50,
+	  "min":0,
+	  "max":100,
+	  "unit":"%"
+    },
+	{
+      "type": "range",
+      "id": "left_3_1",
+      "label": "Chose position left",
+      "default": 50,
+	  "min":0,
+	  "max":100,
+	  "unit":"%"
+    },
+	{
+      "type": "product",
+      "id": "pd_popup_3_1",
+      "label": "Chose product 1"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_btn_3_2",
+      "label": "Enable button 2",
+      "default": false
+    },
+	{
+      "type": "text",
+      "id": "btn_name_3_2",
+      "label": "Number 2",
+      "default": "2"
+    },
+	{
+      "type": "header",
+      "content": "Chose position for Button 2"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_right_pd_3_2",
+      "label": "Enable popup right",
+      "default": false
+    },
+	{
+      "type": "range",
+      "id": "top_3_2",
+      "label": "Chose position top",
+      "default": 50,
+	  "min":0,
+	  "max":100,
+	  "unit":"%"
+    },
+	{
+      "type": "range",
+      "id": "left_3_2",
+      "label": "Chose position left",
+      "default": 70,
+	  "min":0,
+	  "max":100,
+	  "unit":"%"
+    },
+	{
+      "type": "product",
+      "id": "pd_popup_3_2",
+      "label": "Chose product 2"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_btn_3_3",
+      "label": "Enable button 3",
+      "default": false
+    },
+	{
+      "type": "text",
+      "id": "btn_name_3_3",
+      "label": "Number 3",
+      "default": "3"
+    },
+	{
+      "type": "header",
+      "content": "Chose position for Button 3"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_right_pd_3_3",
+      "label": "Enable popup right",
+      "default": false
+    },
+	{
+      "type": "range",
+      "id": "top_3_3",
+      "label": "Chose position top",
+      "default": 30,
+	  "min":0,
+	  "max":100,
+	  "unit":"%"
+    },
+	{
+      "type": "range",
+      "id": "left_3_3",
+      "label": "Chose position left",
+      "default": 30,
+	  "min":0,
+	  "max":100,
+	  "unit":"%"
+    },
+	{
+      "type": "product",
+      "id": "pd_popup_3_3",
+      "label": "Chose product 3"
+    },
+	{
+      "type": "header",
+      "content": "Image 4"
+    },
+	{
+      "type": "url",
+      "id": "url_4",
+      "label": "URL collection",
+      "default": "/collections/all"
+    },
+	{
+      "type": "image_picker",
+      "id": "img_4",
+      "label": "Image collection"
+    },
+	{
+      "type": "header",
+      "content": "Number popup"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_btn_4_1",
+      "label": "Enable button 1",
+      "default": true
+    },
+	{
+      "type": "text",
+      "id": "btn_name_4_1",
+      "label": "Number 1",
+      "default": "1"
+    },
+	{
+      "type": "header",
+      "content": "Chose position for Button 1"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_right_pd_4_1",
+      "label": "Enable popup right",
+      "default": true
+    },
+	{
+      "type": "range",
+      "id": "top_4_1",
+      "label": "Chose position top",
+      "default": 50,
+	  "min":0,
+	  "max":100,
+	  "unit":"%"
+    },
+	{
+      "type": "range",
+      "id": "left_4_1",
+      "label": "Chose position left",
+      "default": 50,
+	  "min":0,
+	  "max":100,
+	  "unit":"%"
+    },
+	{
+      "type": "product",
+      "id": "pd_popup_4_1",
+      "label": "Chose product 1"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_btn_4_2",
+      "label": "Enable button 2",
+      "default": false
+    },
+	{
+      "type": "text",
+      "id": "btn_name_4_2",
+      "label": "Number 2",
+      "default": "2"
+    },
+	{
+      "type": "header",
+      "content": "Chose position for Button 2"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_right_pd_4_2",
+      "label": "Enable popup right",
+      "default": true
+    },
+	{
+      "type": "range",
+      "id": "top_4_2",
+      "label": "Chose position top",
+      "default": 50,
+	  "min":0,
+	  "max":100,
+	  "unit":"%"
+    },
+	{
+      "type": "range",
+      "id": "left_4_2",
+      "label": "Chose position left",
+      "default": 70,
+	  "min":0,
+	  "max":100,
+	  "unit":"%"
+    },
+	{
+      "type": "product",
+      "id": "pd_popup_4_2",
+      "label": "Chose product 2"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_btn_4_3",
+      "label": "Enable button 3",
+      "default": false
+    },
+	{
+      "type": "text",
+      "id": "btn_name_4_3",
+      "label": "Number 3",
+      "default": "3"
+    },
+	{
+      "type": "header",
+      "content": "Chose position for Button 3"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_right_pd_4_3",
+      "label": "Enable popup right",
+      "default": true
+    },
+	{
+      "type": "range",
+      "id": "top_4_3",
+      "label": "Chose position top",
+      "default": 30,
+	  "min":0,
+	  "max":100,
+	  "unit":"%"
+    },
+	{
+      "type": "range",
+      "id": "left_4_3",
+      "label": "Chose position left",
+      "default": 30,
+	  "min":0,
+	  "max":100,
+	  "unit":"%"
+    },
+	{
+      "type": "product",
+      "id": "pd_popup_4_3",
+      "label": "Chose product 3"
+    }
+]
+}
+],
+  "presets": [
+    {
+      "name": "Popup Instagram",
+      "category": "Home Instagram"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,100 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+<!--slide-->
+  <div class="container-fluid slider-home-fullwidth">
+    <div class="row">
+      <div class="table">
+      <div class="ciloe-inner">
+      {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+      <div class="column-20 btn-slider {% if forloop.first %} active {% endif %}">
+        <div class="cat-content">
+          <div class="img-slider absolute delay05" style="background-image:url('{{block.settings.img | img_url:'master'}}')"></div>
+          <div class="cat-content-inner delay05">
+            <h3 class="title"> 
+              <a href="{{block.settings.url}}" class="delay05">{{block.settings.title}}</a>
+            </h3> 
+            <a class="link-cat uppercase lt-2 delay05 inline-block text-left" href="{{block.settings.url}}" target="_blank"> 
+              <span class="{{block.settings.icon}}"></span> 
+              {{block.settings.shopnow}}
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% endif %}
+      </div>
+      </div>
+    </div>
+  </div>
+<!--endslide-->
+</div>
+{% schema %}
+{
+  "name": "Slide fullwidth",
+  "max_blocks": 5,
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+
+"blocks": [
+      {
+        "type": "image",
+        "name": "Image slide",
+        "settings": [
+          {
+            "type": "image_picker",
+          	"id": "img",
+          	"label": "Image Slider",
+			"info": "1920 x 1080px recommended"
+          },
+		{
+          "type": "url",
+          "id": "url",
+          "default": "/collections/all",
+          "label": "URL"
+        },
+		{
+          "type": "text",
+          "id": "title",
+		  "default": "Featured",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "icon",
+          "default": "icon-bag",
+          "label": "Icon"
+        },
+  		{
+        "type": "text",
+        "id": "shopnow",
+        "default": "shop now",
+        "label": "Text shop now"
+      	}
+        ]
+      }
+    ],
+  "presets": [
+    {
+      "name": "Slide fullwidth",
+      "category": "Slider"
+    }
+  ]
+}
+{% endschema %}

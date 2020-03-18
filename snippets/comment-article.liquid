@@ -1,0 +1,84 @@
+{% comment %}
+Just like blog.liquid page, define how many comments should be on each page.
+{% endcomment %}
+
+{% paginate article.comments by 5 %}
+
+{% comment %}
+#comments is required, it is used as an anchor link by Shopify.
+{% endcomment %}
+
+<div class="blog-comment">
+    
+    <div class="blog-comment-content">
+        {% if article.comments_count > 0 %}
+        <div class="cmt-title text-center"><h3 class="">{{ 'blogs.comments.comments_with_count' | t: count: article.comments_count }} ({{article.comments_count}})</h3></div>
+        {% endif %}
+        {% if comment and comment.created_at %}
+          <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <p>
+              {% if blog.moderated? %}
+              {{ 'blogs.comments.success_moderated' | t }}
+              {% else %}
+              {{ 'blogs.comments.success' | t }}
+              {% endif %}
+            </p>
+          </div>
+          {% endif %}
+          {% if article.comments_count > 0 %}
+        <ul>
+        {% comment %}
+        If a comment was just submitted with no blank field, show it.
+        {% endcomment %}
+        {% if comment and comment.created_at %}
+        {% include 'comment' %}
+        {% endif %}
+
+        {% comment %}
+        Showing the rest of the comments.
+        {% endcomment %}
+        {% for comment in article.comments %}
+        {% include 'comment' %}
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+    {% comment %}
+        <div class="blog-comment-bottom">
+            <div class="cmt-title "><h3 class="margin_bottom_20">{{ section.settings.cmt_title }}</h3></div>
+            {% form 'new_comment', article %}
+            <div class="cmt-form">
+                <div class="login-form">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6 col-xs-12">
+                                <input type="text" id="author" class="form-control bdr" name="comment[author]" value="{{ form.author }}" placeholder="{{ 'blogs.comments.name' | t }}">
+                            </div>
+                            <div class="col-md-6 col-xs-12">
+                                <input type="email" id="email" class="form-control bdr" name="comment[email]" value="{{ form.email }}" placeholder="{{ 'blogs.comments.email' | t }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <textarea id="message" class="form-control" name="comment[body]" rows="12" placeholder="{{ 'blogs.comments.message' | t }}">{{form.body}}</textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <button type="submit" class="btn btn-submit">
+                            {{ section.settings.btn_submit }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endform %}
+        </div>
+    {% endcomment %}
+</div>
+<!-- /.comments__respond -->
+
+{% endpaginate %}

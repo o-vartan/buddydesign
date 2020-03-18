@@ -1,0 +1,192 @@
+<div data-section-id="{{ section.id }}" data-section-type="brand-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <style>
+  	  @media (min-width: 1025px) {
+    .about-brand-info {
+      padding: {{section.settings.position_product_single2}}px 11px; } }
+  @media (min-width: 1681px) {
+    .about-brand-info {
+      padding:{{section.settings.position_product_single1}}px 30px; } }
+  </style>
+  <div class="container container-240">
+        <div class="brand">
+            <div class="ecome-heading style5v3 spc4">
+                <div class="title-icon t-inline t-line">
+                    <img src="{{'iconbrand.png'|asset_url}}" alt="">
+                    <h3>{{section.settings.text1}}</h3>
+                </div>
+                <a href="{{section.settings.btn_url}}" class="btn-show">{{section.settings.btn_name}}<i class="ion-ios-arrow-forward"></i></a>
+            </div>
+
+            <div class="owl-carousel owl-theme owl-brand js-owl-brand">
+                {% if section.blocks.size > 0 %} 
+                                        {% for block in section.blocks %}
+                    <div class="brand-item">
+                        <a href="{{block.settings.brand_url}}" class="hover-images">
+                          <img {%if block.settings.brand_img == blank%}src="{{'brandlogo1.png'| asset_url }}" 
+                                          {%else%}
+                                        src="{{block.settings.brand_img | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" />  
+                        </a>
+                    </div>
+                    {% endfor %}
+                                    {% endif %}  
+            </div>
+            <div class="about-brand">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-sm-3 col-md-4">
+                        <div class="about-brand-info text-center">
+                            <div class="brand-img">
+                                <a href="{{section.settings.btn_url}}" class="hover-images">
+                                  	<img {%if section.settings.bg_img == blank%}src="{{'sony_info.png'| asset_url }}" 
+                                      {%else%}
+                                  	src="{{section.settings.bg_img | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" />  
+                                </a>
+                            </div>
+                            <div class="brand-info">
+                                <p>{{section.settings.brand_desc}}</p>
+                            </div>
+                            <a href="{{section.settings.btn_url}}" class="btn-gradient btn-brand">{{section.settings.brand_name}} <i class="ion-ios-arrow-forward"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-sm-8 col-md-8">
+                        <div class="row engoc-equal-row">
+                            {%for product in collections[section.settings.product_collection].products limit:section.settings.product_limit%}
+
+                              {% include 'product-grid-4' %}
+                                  {% else %} 
+                              {% include 'empty-product-grid-4'%}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% schema %}
+{
+  "name": "Brand v1",
+  "max_blocks": 7,  
+  "class": "index-section",
+  "settings": [
+  {
+    "type": "header",
+    "content": "Section Space"
+  },
+  {
+    "type": "text",
+    "id": "margin_top",
+    "label": "Margin Top",
+    "info": "Defined in pixels. Do not add the 'px' unit."
+  },
+  {
+    "type": "text",
+    "id": "margin_bottom",
+    "label": "Margin Bottom",
+    "info": "Defined in pixels. Do not add the 'px' unit."
+  },
+	{
+      "type": "header",
+      "content": "Heading"
+    },
+	{
+      "type": "text",
+      "id": "text1",
+      "label": "Title",
+      "default": "Shop by brand"
+    },
+	{
+      "type":"header",
+      "content":"Button"
+    },
+    {
+      "type": "text",
+      "id": "btn_name",
+      "label": "Title button",
+      "default": "Shop more"
+    },
+	{
+      "type": "url",
+      "id": "btn_url",
+      "label": "URL"
+    },
+    {
+      "type": "header",
+      "content": "Brand"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_img",
+      "label": "Brand Image",
+      "info": "209x37 recommended"
+    },
+	{
+      "type": "text",
+      "id": "brand_desc",
+      "label": "Brand Description",
+      "default": "brand desc"
+    },
+	{
+      "type": "text",
+      "id": "brand_name",
+      "label": "Title button",
+      "default": "Shop this brand"
+    },
+	{
+      "type": "url",
+      "id": "brand_url",
+      "label": "URL"
+    },
+	{
+      "type": "textarea",
+      "id": "position_product_single1",
+      "label": "Padding Brand Block [Resolutions HD+ , FullHD]"
+    },
+    {
+      "type": "textarea",
+      "id": "position_product_single2",
+      "label": "Padding Brand Block [Small Device]"
+    },
+	{
+      "type": "header",
+      "content": "List Products"
+    },
+    {
+      "type": "collection",
+      "id": "product_collection",
+      "label": "Select collection"
+    },
+    {
+      "type": "text",
+      "id": "product_limit",
+      "label": "Limit number",
+      "default": "4"
+    }
+],
+"blocks": [
+    {
+      "type": "image",
+      "name": "Brand Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "brand_img",
+          "label": "Image",
+          "info": "200 x 100px Recommended"
+        },
+        {
+          "type": "url",
+          "id": "brand_url",
+          "label": "URL"
+        }
+      ]
+    }
+  ],
+
+  "presets": [
+    {
+      "name": "Brand v1",
+      "category": "Brand"
+    }
+  ]
+}
+{% endschema %}

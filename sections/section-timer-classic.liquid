@@ -1,0 +1,83 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  
+  <div class="container-fluid container_35 margin_bottom_100 relative deal-classic over-hidden">
+    <div class="img-bg inline-block over-hidden">
+      {% if section.settings.img != blank %}
+      <a href="{{section.settings.url}}"><img src="{{section.settings.img | img_url:'master'}}" class="img-responsive delay03"></a>
+      {% endif %}
+    </div>
+    <div class="info text-center full-width absolute">
+      <h1 class="title-deal-classic">{{section.settings.title}}</h1>
+      <p class="fz-18 des-deal-classic">{{section.settings.des}}</p>
+      <div class="time timer-2 margin_bottom_50" data-countdown="countdown" data-date="{{section.settings.timer}}"></div>
+      <div><a href="{{section.settings.url}}" class="btn-ciloe-2 inline-block">{{section.settings.btn_name}}</a></div>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Timer Classic",
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      "type": "image_picker",
+      "id": "img",
+      "label": "Image background",
+      "info": "1900x600"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Deal of the day"
+    },
+	{
+      "type": "text",
+      "id": "des",
+      "label": "Description",
+      "default": "Ciloe staffpic collection"
+    },
+	{
+      "type": "text",
+      "id": "timer",
+      "label": "Time",
+      "default": "01-01-2019-10-20-30",
+      "info": "format mm-dd-yyyy-hh-mm-ss"
+    },
+	{
+      "type": "url",
+      "id": "url",
+      "label": "URL button",
+      "default": "/collections/all"
+    },
+	{
+      "type": "text",
+      "id": "btn_name",
+      "label": "button name",
+      "default": "shop now"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Timer Classic",
+      "category": "Home Classic"
+    }
+  ]
+}
+{% endschema %}

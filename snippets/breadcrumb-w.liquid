@@ -1,0 +1,60 @@
+<!-- /snippets/breadcrumb.liquid -->
+{% comment %}
+Documentation - http://docs.shopify.com/support/your-website/navigation/creating-a-breadcrumb-navigation
+{% endcomment %}
+
+{% unless template == 'index' %}
+<ul class="breadcrumb white">
+  <li class="">
+    <a href="/" title="{{ 'general.breadcrumbs.home_link_title' | t }}">{{ 'general.breadcrumbs.home' | t }}</a>
+  </li>
+  {% if template contains 'product' %}
+
+    {% if collection %}
+      {% if collection.handle %}
+      {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+        <li class="trail-item trail-end">
+          <a>{{ collection.title | link_to: url }}</a>
+        </li>
+      {% endif %}
+    {% endif %}
+  <li class="active"><a>{{ product.title }}</a></li>
+
+  {% elsif template contains 'collection' and collection.handle %}
+    {% if current_tags %}
+    {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+    <li class="">
+      <a>{{ collection.title | link_to: url }}</a>
+    </li>
+    <li class=""><a>{{ current_tags | join: " + " }}</a></li>
+    {% else %}
+    <li class=""><a>{{ collection.title }}</a></li>
+    {% endif %}
+
+  {% elsif template == 'blog' %}
+    {% if current_tags %}
+    <li class="">
+      <a>{{ blog.title | link_to: blog.url }}</a>
+    </li>
+  <li class=""> <a>{{ current_tags | join: " + " }}</a></li>
+    {% else %}
+  <li class=""> <a>{{ blog.title }}</a></li>
+  	{% endif %}
+
+  {% elsif template == 'article' %}
+    <li class="trail-item">
+      {{ blog.title | link_to: blog.url }}
+    </li>
+    <li class="trail-item trail-end">{{ article.title }}</li>
+
+  {% elsif template contains 'page' %}
+  	<li class="trail-item trail-end">{{ page.title }}</li>
+
+  {% else %}
+  	<li class="trail-item trail-end">{{ page_title }}</li>
+
+  {% endif %}
+</ul>
+{% endunless %}
+
+

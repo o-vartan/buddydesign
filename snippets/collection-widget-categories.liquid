@@ -1,0 +1,31 @@
+<div class="filter filter-category">
+  <h3 class="filtertitle">
+    {{section.settings.widget_cate_title}}
+  </h3>
+
+  <ul class="filter-content js-filter-menu">
+    {% for link in linklists[section.settings.widget_cate_menu].links %}
+
+    {% assign item = link.title | downcase %}
+    {% assign child_list_handle = link.title | handleize %}
+    
+    {% if linklists[child_list_handle].links != blank %}
+    <li>
+      <a href="{{ link.url }}">{{ link.title }}</a>
+      <span class="plus js-plus-icon"></span>
+      <ul class="filter-menu">
+        {% for childlink in linklists[child_list_handle].links %}
+        <li><a href="{{ childlink.url }}">{{ childlink.title | escape }}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
+
+    {% else %}
+    <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+    {% endif %}
+
+    {% endfor %}
+    
+  </ul>
+
+</div>

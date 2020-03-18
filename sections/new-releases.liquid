@@ -1,0 +1,135 @@
+<div data-section-id="{{ section.id }}" data-section-type="new-releases" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+	<!--wrapper product-->
+  <div class="releases {% if section.settings.layoutstyle_select == 's_s1'%}spc1 bg-gradient bg-insinde{%else%} v2{%endif%}">
+      <div class="container container-240">
+          <div class="title-icon t-column mg-50">
+              <div class="t-inside">
+                  <img src="{{'real.png'|asset_url}}" alt="">
+              </div>
+              <h3>{{section.settings.text1}}</h3>
+          </div>
+          <ul class="product-tab-sw2">
+              {% if section.blocks.size > 0 %}
+              {%- assign i = 1 -%}
+              {% for block in section.blocks %}
+              <li class="{% if forloop.first %}active{% endif %}">
+                  <a href="#{{i}}_{{ section.id }}" data-toggle="tab">{{block.settings.tab_title}}</a>
+              </li>
+              {%- assign i = i | plus : 1 -%}
+              {% endfor %}
+              {% endif %}
+          </ul>
+          <div class="tab-content">
+              {% if section.blocks.size > 0 %}
+              {%- assign i = 1 -%}
+              {% for block in section.blocks %}
+
+              {% assign products_limit = block.settings.tab_limit %}
+              {% assign col = block.settings.tab_collection %}
+              <div id="{{i}}_{{ section.id }}" class="tab-pane fade {% if forloop.first %}active in{% endif %}">
+                {% if section.settings.layoutstyle_select == 's_s1'%}
+                  <div class="owl-carousel owl-theme owl-cate v3 js-owl-cate">
+                      {% for product in collections[col].products limit: products_limit %}
+                        {% include 'product-grid-12' %}
+                      {% else %}
+                        {% include 'empty-product-grid-12' %}
+                      {% endfor %}
+                  </div>
+               	{%else%}
+                	<div class="js-multiple-row2">
+                		{% for product in collections[col].products limit: products_limit %}
+                          {% include 'product-grid-12' %}
+                        {% else %}
+                          {% include 'empty-product-grid-24' %}
+                        {% endfor %}
+                	</div>
+                {%endif%}
+              </div>
+              {%- assign i = i | plus : 1 -%}
+              {% endfor %}
+              {% endif %}
+          </div>
+      </div>
+  </div>
+<!--end wrapper product-->
+</div>  
+{% schema %}
+{
+  "name": "New Releases",
+  "class": "index-section",
+  "settings": [
+	{
+      "type": "select",
+      "id": "layoutstyle_select",
+      "options": [
+        {
+          "value": "s_s1",
+          "label": "Style 1"
+        },
+        {
+          "value": "s_s2",
+          "label": "Style 2"
+        }
+      ],
+      "label": "Layout style"
+    },
+	{
+      "type": "header",
+      "content": "Heading"
+    },
+	{
+      "type": "text",
+      "id": "text1",
+      "label": "Title",
+      "default": "New releases"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Title",
+          "info": "Sale products"
+        },
+        {
+          "type": "collection",
+          "id": "tab_collection",
+          "label": "Choose Collection"
+        },
+        {
+          "type": "text",
+          "id": "tab_limit",
+          "label": "Limit number of products",
+          "default": "12"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "New Releases",
+      "category": "Product Tab"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,214 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="BG-section v2 margin_bottom_20 Testimonal">
+  <div class="container  space_top_120 space_bot_120">
+    <div class="row">
+    <div class="col-sm-push-6 col-md-push-6 col-md-6 col-sm-6 col-xs-12 ciloe-title-section2 margin_bottom_70  relative">
+      <p class="fz-12 space_bot_30 uppercase fw-500">{{section.settings.des}}</p>
+    <h1 class="margin_bottom_20">{{section.settings.title}}</h1> 	
+</div>
+	<div class="col-sm-pull-6 col-md-pull-6 col-md-6 col-sm-6 col-xs-12">
+    <div class="slick-Testimonal2">
+      {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+      <div class="content-comment relative delay03 ">
+        <h3 class="space_top_70">{{block.settings.title_tes}}</h3>
+        <h4 class="des-comment space_top_bot_30 color-text">{{block.settings.content | truncatewords: 40}}</h4>        
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+    </div>
+    </div>
+  </div>
+</div>
+</div>
+<style>
+  .slick-Testimonal2 .slick-dots li:hover:before{
+        content: '';
+    display: inline-block;
+    position: absolute;
+    width: 15px;
+    height: 1px;
+    background: #3c3c3c;
+    bottom: 0;
+  }
+  .slick-Testimonal2 .slick-dots li a{
+   color:#cecece;
+    font-size:12px;
+    font-weight:600;
+  }
+  .slick-Testimonal2 .slick-dots li.slick-active:before {
+      content: '';
+    display: inline-block;
+    position: absolute;
+    width: 15px;
+    height: 1px;
+    background: #3c3c3c;
+    bottom: 0;
+  }
+  .slick-Testimonal2 .slick-dots li a:hover, .slick-Testimonal2 .slick-dots li.slick-active a {
+  	color:#3c3c3c;
+  }
+  @media (min-width:1025px){
+    .ciloe-title-section2{
+     padding-left:115px;
+    }
+      .ciloe-title-section2 h1{
+    line-height: 60px;
+  }
+    .Testimonal .col-md-pull-6 {
+    	padding-left:85px;
+      padding-right:85px;
+    }
+  }
+  .slick-Testimonal2 .slick-dots {
+  	top:0;
+    bottom: inherit;
+  }
+  .ciloe-title-section2 p {
+  	color:#cecece;
+  }
+  .ciloe-title-section2 h1{
+  	color:{{section.settings.color_title}};
+    max-width:400px;
+    text-transform: inherit;
+  }
+    .slick-Testimonal2 .content-comment h4{
+  	color:{{section.settings.color_content}};
+    font-weight:300;
+    text-transform: inherit;
+      line-height:34px;
+  }
+  .slick-Testimonal2 .content-comment h3{
+  	color:{{section.settings.color_title}};
+    font-weight:500;
+  }
+  .slick-prev, .slick-next{
+  display:none!important;
+  }
+  {% if section.settings.select_color == 'image' %}
+  .BG-section.v2{
+  	background-image:url({{section.settings.bg-img | img_url:'master'}});
+    background-position:center center;
+    background-size:cover;
+  }
+  {% else %}
+  .BG-section.v2{
+    background:{{section.settings.bg-color}};
+  }
+  {% endif %}
+</style>
+{% schema %}
+{
+  "name": "Testimonal v2",
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+   "type":      "select",
+   "id":        "select_color",
+   "label":     "Select background",
+   "options": [
+     {
+      
+       "value": "image",
+       "label": "Image"
+     },
+     {
+      
+       "value": "color",
+       "label": "Color"
+     }
+   ],
+   "default":   "image"
+	},
+	{
+      "type": "image_picker",
+      "id": "bg-img",
+      "label": "Background Image",
+      "info": "1920x1000 px"
+    },
+	{
+      "type": "color",
+      "id": "bg-color",
+      "label": "Background Color",
+      "default": "#fff"
+    },
+	{
+      "type": "color",
+      "id": "bg-content",
+      "label": "Color content",
+      "default": "#fff"
+    },
+	{
+      "type": "color",
+      "id": "color_title",
+      "label": "Color Title",
+      "default": "#0D4C82"
+    },
+	{
+      "type": "color",
+      "id": "color_content",
+      "label": "Color content",
+      "default": "#999999"
+    },
+    {
+      "type": "textarea",
+      "id": "des",
+      "label": "Description",
+      "default": "Why choose us"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "A little things about Minim"
+    }
+
+  ],
+"blocks": [
+      {
+        "type": "image",
+        "name": "Image slide",
+		"limit":10,
+        "settings": [
+	{
+      "type": "text",
+      "id": "title_tes",
+      "label": "Title Content",
+      "default": "Reasonable Price"
+    },
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "Content Tetimonal",
+      "default": "One of our mission is to make sure that everyone could be able to afford our products, in general. So with this in mind, we’ve worked hard to reduce the cost and bring our the best offer for our beloved customers."
+    }
+
+		
+]
+}
+],
+  "presets": [
+    {
+      "name": "Testimonal v2",
+      "category": "Page Minim"
+    }
+  ]
+}
+{% endschema %}

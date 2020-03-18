@@ -1,0 +1,70 @@
+<div class="ciloe-size-guide relative">
+  <a href="#" class="btn_size_guide">Size guide</a>
+  <div class="content_size_guide fixed delay05 text-center">
+    <div class="layout_size_guide text-center">
+      <div class="relative inline-block">
+        {% if section.settings.img_size_men == blank %}
+        <img src="{{ 'size-men.jpg' | asset_url }}" class="img-responsive">
+        {% else %}
+        <img src="{{ section.settings.img_size_men | img_url:'master' }}" class="img-responsive">
+        {% endif %}
+        <div class="close_size_guide absolute">
+          <a href="#"><i class="ti-close"></i></a>
+        </div>
+      </div>
+      {% if section.settings.img_size_women == blank %}
+      <img src="{{ 'sizeguide-clothes.jpg' | asset_url }}" class="img-responsive">
+      {% else %}
+      <img src="{{ section.settings.img_size_women | img_url:'master' }}" class="img-responsive">
+      {% endif %}
+    </div>
+  </div>
+
+</div>
+<style>
+  .ciloe-size-guide .close_size_guide{
+  	top: 0;
+    right: -30px;
+  }
+  .ciloe-size-guide .close_size_guide a{
+  	color:#fff;
+  }
+  .ciloe-size-guide .close_size_guide a:hover{
+  	color:#41cce5;
+  }
+  .ciloe-size-guide .btn_size_guide{
+  	font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+    line-height: 24px;
+    display: inline-block;
+    padding-left: 30px;
+    cursor: pointer;
+    background: url({{'Forma-1.png' | asset_url}}) no-repeat;
+  }
+  .ciloe-size-guide .content_size_guide{
+  	top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    overflow-y:auto;
+    z-index:30;
+    display:inline-block;
+    transform:scale(0);
+  }
+  .ciloe-size-guide .content_size_guide .layout_size_guide{
+  	max-width:750px;
+    margin:5% auto;
+  }
+  .ciloe-size-guide .content_size_guide.active{
+    transform:scale(1);
+  }
+  .ciloe-size-guide .content_size_guide img{
+  	margin:0 auto;
+  }
+  @media (max-width:767px){
+    .ciloe-size-guide .content_size_guide .layout_size_guide{
+      max-width:290px;
+    }
+  }
+</style>

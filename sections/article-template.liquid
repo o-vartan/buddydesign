@@ -1,0 +1,343 @@
+<!-- /sections/article-template.liquid -->
+{% include 'ciloe-banner' %}
+<div class="container">
+  <div class="row">
+    <div class="blog_post">
+      	<div class="blog-single-post">
+      {% include 'blog-sidebar' %}
+        <div class="blog-content  col-md-9 col-sm-12 col-md-pull-3  col-xs-12">
+            <div class="blog-post-item border-bot">
+                 <div class="blog-info-bd">
+                    <div class="blog-info space_bot_50">
+                        <div class="blog-post-tags blog-post-author">
+                            {% for tag in article.tags %}
+                            <a class="uppercase fz-12 author" href="{{ blog.url }}/tagged/{{ tag | handle }}" rel="category tag">{{ tag }}</a>{% unless forloop.last %},{% endunless %}
+                            {% endfor %}
+                        </div>
+                        <h3 class="blog-post-title v2"><a href="{{ article.url }}">{{ article.title }}</a></h3>
+                    </div>
+                </div>
+                {% if article.image %}
+                <div class="blog-img">
+                    <a href="#" class="hover-images"><img src="{{ article.image.src | img_url: 'master' }}" class="img-responsive" alt="" /></a>
+                </div>
+                {% endif %}
+                <div class="blog-info-bd">
+                    <div class="blog-info">
+                        <div class="blog-post-desc">
+                            {{ article.content}}
+                          <div class="blog-post-tags blog-post-author ">
+                            <span class="tags-post space_top_20">Tags:{% for tag in article.tags %}
+                            <a class="uppercase fz-12 author" href="{{ blog.url }}/tagged/{{ tag | handle }}" rel="category tag">{{ tag }}</a>{% unless forloop.last %},{% endunless %}
+                            {% endfor %}
+                              </span>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          {% include 'related-article'%}
+            {% include 'comment-article'%}
+        </div>        
+    </div>
+</div>
+    </div>
+  </div>
+<style>
+    @media (min-width: 1024px) {
+    .left-post{
+    	width:46%!important;
+    }
+     .right-post{
+    	width:54%!important;
+    }
+  }
+     .right-post p{
+    	line-height:25px;
+    }
+  .name-post{
+      padding-left: 65px;
+    border-left: 4px solid #0D4C82;
+        max-width: 650px;
+  }
+  .name-post .name{
+   color: #3e3e3e;
+    font-weight: 600;
+  }
+  .name-post .name span{
+   color:#cfcfcf;
+    font-weight: 300;
+  }
+  .tags-post{
+  color:#3c3c3c;
+  }
+   .blog-post-author .tags-post  a{
+  color:#999999;.
+     letter-spacing: 0px;
+    text-transform: lowercase;      
+  }
+      .tags-post a:hover{
+  color:#3e976b;
+  }
+  .blog-post-desc p{
+   color:#999999;
+  }
+  .blog-post-desc h4{
+    text-transform: initial;
+  color:#3b3b3b;
+    font-weight:400;
+    line-height:30px;
+  }
+  .blog-post-banner{
+  	padding:80px 0 70px 0;
+  }
+  .blog-post-banner h1{
+  	line-height:2;
+  }
+  .blog-post-banner p{
+  	font-weight:500;
+  }
+  .blog-post-banner .post-date{
+  	font-weight:600;
+    color:#000;
+  }
+  .post-content .article_content{
+  	line-height:2;
+    color:#999;
+    padding-bottom:50px;
+  }
+  .special_post .content{
+    background-image:url({{section.settings.bg_special | img_url:'master'}});
+    background-size:cover;
+    line-height:2;
+    font-size:18px;
+    padding: 80px 50px 30px;
+  }
+  .special_post .content span{
+    color:#999;
+    font-weight:500;
+    font-size:12px;
+    letter-spacing:2px;
+  }
+  .special_post .content span:before{
+    content:'';
+    display:inline-block;
+    width:20px;
+    height:1px;
+    background:#999;
+    position:relative;
+    margin-right:10px;
+    top:-7px;
+  }
+  .post-content .post-share{
+    margin-bottom:55px;
+  	padding:30px 0;
+    border-bottom:1px solid #ddd;
+    border-top:1px solid #ddd;
+  }
+  .post-content .post-share h2{
+  	font-weight:600;
+    margin-bottom:20px;
+  }
+  .post-content .post-share .social-share li a{
+  	width:45px;
+    height:45px;
+    display: inline-block;
+    line-height:42px;
+    border:2px solid #000;
+    border-radius:50%;
+    text-align:center;
+    font-size:16px;
+    margin:10px;
+  }
+  .blog-post-author{
+  padding-top:0px;
+  }
+  .post-title-related{
+  	font-weight:400;
+    
+  }
+</style>
+
+
+{% schema %}
+{
+  "name": "Blog pages",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Banner"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_banner",
+      "label": "Image banner",
+      "info": "1398x316px recommended"
+    },
+    {
+      "id": "url_banner",
+      "type": "url",
+      "default": "/collections/all",
+      "label": "Banner link"
+    },
+    {
+      "type": "header",
+      "content": "Text Banner"
+    },
+	{
+      "type": "select",
+        "id": "local_text",
+        "label": "Position Text",
+        "default": "center",
+        "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+
+    {
+      "type": "text",
+      "id": "title_page",
+      "label": "Title page",
+      "default": "Blog"
+    },
+{
+     "type": "header",
+     "content": "Post relate"
+    },
+	{
+      "type": "text",
+      "id": "title_relate_article",
+      "label": "Title",
+      "default": "Related Post"
+    },
+    {
+            "type": "blog",
+            "id": "choose_blog",
+            "label": "Select Blog"
+    },
+    {
+      "type": "text",
+      "id": "btn_blog",
+      "label": "Button ",
+      "default": "Read More"
+    },
+	{
+      "type": "text",
+      "id": "cmt_title",
+      "label": "Title",
+      "default": "Leave a comments"
+    },
+	{
+      "type": "text",
+      "id": "btn_submit",
+      "label": "Button name",
+      "default": "Send Us"
+    },
+    {
+      "type": "header",
+      "content": "Blog sidebar",
+	  "info": "*only for layout Standard"
+    },
+	
+    {
+      "type": "header",
+      "content": "Widget Search"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_widget_search",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "serch_placeholder",
+      "label": "Input placeholder",
+      "default": "ENTER KAYWORDS . . ."
+    },
+    {
+      "type": "header",
+      "content": "Widget Recent Posts"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_widget_rposts",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "widget_recent_title",
+      "label": "Widget Title",
+      "default": "RECENT POST"
+    },
+    {
+      "type": "header",
+      "content": "Widget Categories"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_widget_categories",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "widget_categories_title",
+      "label": "Widget Title",
+      "default": "Categories"
+    },
+    {
+      "type": "header",
+      "content": "Widget Banner"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_widget_banner",
+      "label": "Enbale?",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "widget_tag_title",
+      "label": "Title",
+      "default": "Popular Tags"
+    }
+  ],
+  "blocks": [
+	{
+      "type": "pproduct",
+      "name": "Popular Post",
+      "limit": 3,
+      "settings": [
+          {
+            "type": "header",
+            "content": "List Post"
+          },
+          {
+            "type": "blog",
+            "id": "blog_collection",
+            "label": "Select collection"
+          },
+          {
+            "type": "text",
+            "id": "blog_limit",
+            "label": "Limit number",
+            "default": "3"
+          }
+      ]
+    }
+	]
+}
+{% endschema %}

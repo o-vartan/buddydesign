@@ -1,0 +1,182 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+<!--slide-->
+  <div class="container tab-pd-clean margin_bottom_40">
+    <h1 class="text-center space_bot_60">{{section.settings.title}}</h1>
+    <div class="row">
+
+      <ul class="nav nav-tabs flex title-tab-2 ">
+        {% if section.blocks.size > 0 %}
+        {%- assign i = 1 -%}
+        {% for block in section.blocks %}
+        <li class="{% if forloop.first %}active{% endif %}">
+          <a href="#{{i}}_{{ section.id }}" data-toggle="tab" class="fz-18 delay03">{{block.settings.tab_title}}</a>
+        </li>
+        {%- assign i = i | plus : 1 -%}
+        {% endfor %}
+        {% endif %}
+      </ul>
+      <div class="tab-content">
+        {% if section.blocks.size > 0 %}
+        {%- assign i = 1 -%}
+        {% for block in section.blocks %}
+
+        {% assign products_limit = block.settings.tab_limit %}
+        {% assign col = block.settings.tab_collection %}
+        <div id="{{i}}_{{ section.id }}" class="tab-pane fade {% if forloop.first %}active in{% endif %}">
+          
+            {% for product in collections[col].products limit: products_limit %}
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 product-tab-pd loader">
+            {% include 'ciloe-product' %}
+            </div>
+            {% endfor %}
+
+          
+        </div>
+        {%- assign i = i | plus : 1 -%}
+        {% endfor %}
+        {% endif %}
+      </div>
+      {% comment %}
+      <div class="btn-loadmore text-center col-md-12">
+        <a href="#" id="loadMore" class="btn-ciloe-2 inline-block"><i class="ti-reload"></i>{{section.settings.btn_loadmore}}</a>
+      </div>
+      {% endcomment %}
+    </div>
+  </div>
+<!--endslide-->
+</div>
+<style>
+  .tab-pd-clean h1 {
+  color:{{section.settings.color_title}};
+  }
+  .tab-content > .tab-pane.active{
+   width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+  
+  .tab-pd-clean .title-tab-2{
+  	border-bottom:0;
+  }
+  .tab-pd-clean .title-tab-2 li a{
+	opacity:0.7;
+    padding-bottom:20px;
+    position:relative;
+    background:transparent;
+    color:{{section.settings.color}};
+    font-size:18px;
+    font-weight:300;
+    border:0;
+  }
+  .tab-pd-clean .title-tab-2 li a:hover{
+	opacity:1;
+    border:0;
+    border-radius:0;
+    color:{{section.settings.color_active}};
+  }
+  .tab-pd-clean .title-tab-2 li a:hover::before{
+	left:15px;
+    right:15px;
+    
+  }
+  .tab-pd-clean .title-tab-2{
+  	margin-bottom:40px;
+  }
+  .tab-pd-clean .title-tab-2 li.active a{
+	opacity:1;
+    color:{{section.settings.color_active}};
+  }
+  .tab-pd-clean .title-tab-2 li.active a:before{
+	left:15px;
+    right:15px;
+  }
+  .tab-pd-clean .title-tab-2 li.active a:hover,.tab-pd-clean .title-tab-2 li.active a:focus{
+	background:transparent;
+  }
+</style>
+{% schema %}
+{
+  "name": "Tab product v1",
+  "max_blocks": 5,
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+		{
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+	  	  "default":   "Our Products"
+        },
+	{
+      "type": "header",
+      "content": "Color Title"
+    },
+	{
+          "type": "color",
+          "id": "color_title",
+          "label": "Color Title",
+	  	  "default":   "#3c3c3c"
+    },
+	{
+          "type": "color",
+          "id": "color",
+          "label": "Color Title Tab",
+	  	  "default":   "#999999"
+    },
+	{
+          "type": "color",
+          "id": "color_active",
+          "label": "Color Title Tab active",
+	  	  "default":   "#0D4C82"
+    }
+  ],
+
+"blocks": [
+      {
+        "type": "image",
+        "name": "Image slide",
+        "settings": [
+		{
+          "type": "text",
+          "id": "tab_title",
+          "label": "Title tab",
+	  	  "default":   "New Products"
+        },
+		{
+          "type": "collection",
+          "id": "tab_collection",
+          "label": "Chose collection"
+        },
+		{
+          "type": "text",
+          "id": "tab_limit",
+          "label": "Limit product",
+	  	  "default":   "8"
+        }
+        ]
+      }
+    ],
+  "presets": [
+    {
+      "name": "Tab product v1",
+      "category": "Page Minim"
+    }
+  ]
+}
+{% endschema %}

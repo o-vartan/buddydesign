@@ -1,0 +1,107 @@
+  <div class="container e-contact space_bot_30 space_top_60">       
+    <div class="row">
+      <div class="col-xs-12 col-sm-4 col-md-4 space_bot_50">
+        <div class="info space_bot_50">
+          <h3 class="space_bot_20">{{section.settings.title_info}}</h3>
+          <p class="lh-30">{{section.settings.text_info}}</p>
+        </div>
+        <div class="contact-info footer-about space_bot_20 inline-block">
+          <!-- <div class="icon">
+            <img src="{{section.settings.img_phone | img_url:'master'}}" class="img-responsive">
+          </div> -->
+          <div class="text">
+            <h3 class="contact-title spc uppercase lt-2"><i class="fa fa-phone" aria-hidden="true"></i>{{section.settings.abus_info_title3}}</h3>
+            <ul class="footer-block-content">
+              <li class="fs-18">
+                <span>{{section.settings.abus_info_content1}}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="e-contact-address footer-about border-top border-bot space_bot_20 space_top_20 inline-block">
+          <!-- <div class="icon">
+            <img src="{{section.settings.img_add | img_url:'master'}}" class="img-responsive">
+          </div> -->
+          <div class="text">
+            <h3 class="contact-title spc uppercase lt-2"><i class="fa fa-map-marker" aria-hidden="true"></i>{{section.settings.abus_info_title1}}</h3> 
+            <ul class="footer-block-content">
+              <li class="fs-18">
+                <span>{{section.settings.abus_info_content3}}</span>
+              </li>
+              <li class="fs-14">
+                <span>{{section.settings.abus_info_content4}}</span>
+              </li>                       
+            </ul>
+          </div>
+        </div>
+
+        <div class="e-contact-address footer-about space_top_20 inline-block">
+          <!-- <div class="icon">
+            <img src="{{section.settings.img_email | img_url:'master'}}" class="img-responsive">
+          </div> -->
+          <div class="text">
+            <h3 class="contact-title spc uppercase lt-2"><i class="fa fa-envelope" aria-hidden="true"></i>{{section.settings.abus_info_title2}}</h3> 
+            <ul class="footer-block-content">
+              <li class="fs-18">
+                <span>{{section.settings.abus_info_content5}}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-8 col-md-8 pdl">
+
+        {% form 'contact' %}
+
+        {% if form.posted_successfully? %}
+        <div class="alert alert-success alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <p style="margin-bottom: 5px;">
+            {{ 'contact.form.post_success' | t }}
+          </p>
+        </div>
+        {% endif %}
+
+        {% if form.errors %}
+        <div class="alert alert-success alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <!-- {{ form.errors.size }} or {{ form.errors | size }} -->
+          <p style="margin-bottom: 5px;">Your contact form has {{ form.errors | size | pluralize: "an error", "a few errors" }}. To submit your form, make the following changes and try again:</p>
+          {% for field in form.errors %}
+          <p style="margin-bottom: 5px;">The {{ field | capitalize | replace: 'Body', 'Message' }} field {{ form.errors.messages[field] }}.</p>
+          {% endfor %}
+        </div>
+        {% endif %}
+        <div class="info space_bot_50">
+          <h3 class="space_bot_20">{{section.settings.title_form}}</h3>
+          <p class="lh-30">{{section.settings.text_form}}</p>
+        </div>
+        <div class="login-form">
+          <div class="form-group row ">
+            <div class=" col-sm-6 col-md-6 col-xs-12">
+              <input type="text" id="author" class=" form-control bdr" name="contact[author]" value="" placeholder="{{section.settings.abus_contact_input1_name}}">
+            </div>
+            <div class=" col-sm-6 col-md-6 col-xs-12">
+              <input type="email" id="email" class=" col-sm-6 col-md-6 col-xs-12 form-control bdr" name="contact[email]" value="" placeholder="{{section.settings.abus_contact_input2_name}}">
+            </div>
+            <div class=" col-sm-12 col-md-12 col-xs-12">
+              <input type="text" id="contactSubject" class=" col-sm-6 col-md-6 col-xs-12 form-control bdr" name="contact[subject]" value="" placeholder="{{section.settings.abus_contact_input4_name}}">
+            </div>
+            <div class=" col-sm-12 col-md-12 col-xs-12">
+              <textarea id="message" class="form-control bdr" name="contact[body]" rows="10" placeholder="{{section.settings.abus_contact_input3_name}}"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-submit">
+              {{section.settings.abus_contact_btn_name}}
+            </button>
+          </div>
+        </div>
+        {% endform %}
+      </div>
+    </div>
+
+  </div>
+  <div class="e-contact">  
+    <div id="googlemap1" class="map"></div>
+  </div>

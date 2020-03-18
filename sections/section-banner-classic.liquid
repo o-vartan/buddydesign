@@ -1,0 +1,394 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  
+  <div class="container-fluid container_35 banner margin_bottom_90">
+
+    <div class="row">
+      {% if section.settings.number_banner == 'two' %}
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 relative content-banner">
+        <a href="{{section.settings.url_1}}" class="inline-block relative {% if section.settings.enable_overlay %}overlay-banner{% endif %}">
+          <img src="{{section.settings.img_1 | img_url:'master'}}" class="img-responsive">
+        </a>
+        <div class="absolute text-banner column-40 {% if section.settings.enable_ver_2 %}v2{% endif %}">
+        <h4 class="uppercase lt-2 {% if section.settings.local_text_1 == 'center' %} text-center {% elsif section.settings.local_text_1 == 'left' %} text-left {% elsif section.settings.local_text_1 == 'right' %} text-right {% endif %}">{{section.settings.text-top-1}}</h4>
+        <h2 class="{% if section.settings.local_text_1 == 'center' %} text-center {% elsif section.settings.local_text_1 == 'left' %} text-left {% elsif section.settings.local_text_1 == 'right' %} text-right {% endif %} capital margin_bottom_10">{{section.settings.text-mid-1}}</h2>
+        <h2 class="{% if section.settings.local_text_1 == 'center' %} text-center {% elsif section.settings.local_text_1 == 'left' %} text-left {% elsif section.settings.local_text_1 == 'right' %} text-right {% endif %} capital">{{section.settings.text-mid-2}}</h2>
+        <p class="line" style="{% if section.settings.local_text_1 == 'center' %} margin:30px auto; {% elsif section.settings.local_text_1 == 'left' %} margin:30px auto 30px 0; {% elsif section.settings.local_text_1 == 'right' %} margin:30px 0 30px auto; {% endif %}"></p>
+        <div class="{% if section.settings.local_text_1 == 'center' %} text-center {% elsif section.settings.local_text_1 == 'left' %} text-left {% elsif section.settings.local_text_1 == 'right' %} text-right {% endif %}"><a href="{{section.settings.url_1}}" class="ciloe-btn-default inline-block">{{section.settings.btn-name}}</a></div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 relative content-banner">
+        <a href="{{section.settings.url_2}}" class="inline-block relative {% if section.settings.enable_overlay %}overlay-banner{% endif %}">
+          <img src="{{section.settings.img_2 | img_url:'master'}}" class="img-responsive">
+        </a>
+        <div class="absolute text-banner column-40 {% if section.settings.enable_ver_2 %}v2{% endif %}">
+        <h4 class="uppercase lt-2 {% if section.settings.local_text_2 == 'center' %} text-center {% elsif section.settings.local_text_2 == 'left' %} text-left {% elsif section.settings.local_text_2 == 'right' %} text-right {% endif %}">{{section.settings.text-top-2}}</h4>
+        <h2 class="{% if section.settings.local_text_2 == 'center' %} text-center {% elsif section.settings.local_text_2 == 'left' %} text-left {% elsif section.settings.local_text_2 == 'right' %} text-right {% endif %} capital margin_bottom_10">{{section.settings.text-mid-3}}</h2>
+        <h2 class="{% if section.settings.local_text_2 == 'center' %} text-center {% elsif section.settings.local_text_2 == 'left' %} text-left {% elsif section.settings.local_text_2 == 'right' %} text-right {% endif %} capital">{{section.settings.text-mid-4}}</h2>
+        <p class="line" style="{% if section.settings.local_text_2 == 'center' %} margin:30px auto; {% elsif section.settings.local_text_2 == 'left' %} margin:30px auto 30px 0; {% elsif section.settings.local_text_2 == 'right' %} margin:30px 0 30px auto; {% endif %}"></p>
+        <div class="{% if section.settings.local_text_2 == 'center' %} text-center {% elsif section.settings.local_text_2 == 'left' %} text-left {% elsif section.settings.local_text_2 == 'right' %} text-right {% endif %}"><a href="{{section.settings.url_2}}" class="ciloe-btn-default inline-block">{{section.settings.btn-name}}</a></div>
+        </div>
+      </div>
+      {% else %}
+      <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 relative content-banner">
+        <a href="{{section.settings.url_1}}" class="inline-block relative {% if section.settings.enable_overlay %}overlay-banner{% endif %}">
+          <img src="{{section.settings.img_1 | img_url:'master'}}" class="img-responsive">
+        </a>
+        <div class="absolute text-banner {% if section.settings.enable_ver_2 %}v2{% endif %}">
+        <h4 class="uppercase lt-2 {% if section.settings.local_text_1 == 'center' %} text-center {% elsif section.settings.local_text_1 == 'left' %} text-left {% elsif section.settings.local_text_1 == 'right' %} text-right {% endif %}">{{section.settings.text-top-1}}</h4>
+        <h2 class="{% if section.settings.local_text_1 == 'center' %} text-center {% elsif section.settings.local_text_1 == 'left' %} text-left {% elsif section.settings.local_text_1 == 'right' %} text-right {% endif %} capital margin_bottom_10">{{section.settings.text-mid-1}}</h2>
+        <h2 class="{% if section.settings.local_text_1 == 'center' %} text-center {% elsif section.settings.local_text_1 == 'left' %} text-left {% elsif section.settings.local_text_1 == 'right' %} text-right {% endif %} capital">{{section.settings.text-mid-2}}</h2>
+        <p class="line" style="{% if section.settings.local_text_1 == 'center' %} margin:30px auto; {% elsif section.settings.local_text_1 == 'left' %} margin:30px auto 30px 0; {% elsif section.settings.local_text_1 == 'right' %} margin:30px 0 30px auto; {% endif %}"></p>
+        <div class="{% if section.settings.local_text_1 == 'center' %} text-center {% elsif section.settings.local_text_1 == 'left' %} text-left {% elsif section.settings.local_text_1 == 'right' %} text-right {% endif %}"><a href="{{section.settings.url_1}}" class="ciloe-btn-default inline-block">{{section.settings.btn-name}}</a></div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 relative content-banner">
+        <a href="{{section.settings.url_2}}" class="inline-block relative {% if section.settings.enable_overlay %}overlay-banner{% endif %}">
+          <img src="{{section.settings.img_2 | img_url:'master'}}" class="img-responsive">
+        </a>
+        <div class="absolute text-banner {% if section.settings.enable_ver_2 %}v2{% endif %}">
+        <h4 class="uppercase lt-2 {% if section.settings.local_text_2 == 'center' %} text-center {% elsif section.settings.local_text_2 == 'left' %} text-left {% elsif section.settings.local_text_2 == 'right' %} text-right {% endif %}">{{section.settings.text-top-2}}</h4>
+        <h2 class="{% if section.settings.local_text_2 == 'center' %} text-center {% elsif section.settings.local_text_2 == 'left' %} text-left {% elsif section.settings.local_text_2 == 'right' %} text-right {% endif %} capital margin_bottom_10">{{section.settings.text-mid-3}}</h2>
+        <h2 class="{% if section.settings.local_text_2 == 'center' %} text-center {% elsif section.settings.local_text_2 == 'left' %} text-left {% elsif section.settings.local_text_2 == 'right' %} text-right {% endif %} capital">{{section.settings.text-mid-4}}</h2>
+        <p class="line" style="{% if section.settings.local_text_2 == 'center' %} margin:30px auto; {% elsif section.settings.local_text_2 == 'left' %} margin:30px auto 30px 0; {% elsif section.settings.local_text_2 == 'right' %} margin:30px 0 30px auto; {% endif %}"></p>
+        <div class="{% if section.settings.local_text_2 == 'center' %} text-center {% elsif section.settings.local_text_2 == 'left' %} text-left {% elsif section.settings.local_text_2 == 'right' %} text-right {% endif %}"><a href="{{section.settings.url_2}}" class="ciloe-btn-default inline-block">{{section.settings.btn-name}}</a></div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 hidden-sm col-xs-12 relative content-banner">
+        <a href="{{section.settings.url_3}}" class="inline-block relative {% if section.settings.enable_overlay %}overlay-banner{% endif %}">
+          <img src="{{section.settings.img_3 | img_url:'master'}}" class="img-responsive">
+        </a>
+        <div class="absolute text-banner {% if section.settings.enable_ver_2 %}v2{% endif %}">
+        <h4 class="uppercase lt-2 {% if section.settings.local_text_3 == 'center' %} text-center {% elsif section.settings.local_text_3 == 'left' %} text-left {% elsif section.settings.local_text_3 == 'right' %} text-right {% endif %}">{{section.settings.text-top-3}}</h4>
+        <h2 class="{% if section.settings.local_text_3 == 'center' %} text-center {% elsif section.settings.local_text_3 == 'left' %} text-left {% elsif section.settings.local_text_3 == 'right' %} text-right {% endif %} capital margin_bottom_10">{{section.settings.text-mid-5}}</h2>
+        <h2 class="{% if section.settings.local_text_3 == 'center' %} text-center {% elsif section.settings.local_text_3 == 'left' %} text-left {% elsif section.settings.local_text_3 == 'right' %} text-right {% endif %} capital">{{section.settings.text-mid-6}}</h2>
+        <p class="line" style="{% if section.settings.local_text_3 == 'center' %} margin:30px auto; {% elsif section.settings.local_text_3 == 'left' %} margin:30px auto 30px 0; {% elsif section.settings.local_text_3 == 'right' %} margin:30px 0 30px auto; {% endif %}"></p>
+        <div class="{% if section.settings.local_text_3 == 'center' %} text-center {% elsif section.settings.local_text_3 == 'left' %} text-left {% elsif section.settings.local_text_3 == 'right' %} text-right {% endif %}"><a href="{{section.settings.url_3}}" class="ciloe-btn-default inline-block">{{section.settings.btn-name}}</a></div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+
+  </div>
+
+</div>
+<style>
+  .banner .content-banner .overlay-banner:before{
+  	content:'';
+    display:inline-block;
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background:rgba(0,0,0,.7);
+    opacity:0;
+    transition:all .3s ease;
+  }
+  .banner .content-banner:hover .overlay-banner:before{
+    opacity:1;
+  }
+  .banner .text-banner{
+  	top:30%;
+    left:10%;
+    right:10%;
+    color:{{section.settings.color_text}};
+  }
+  @media (max-width:1400px){
+    .banner .text-banner.v2{
+  	top:10%;
+  }
+  }
+  .banner .text-banner h4{
+  	margin-bottom:20px;
+  }
+  .banner .text-banner .line{
+    border-bottom: 1px solid {{section.settings.color_text}};
+    width:80px;
+  }
+  .banner .text-banner a{
+    color:{{section.settings.color_text}};
+  }
+  .banner .text-banner a:hover{
+    color:{{section.settings.color_text_hover}};
+  }
+  .banner .content-banner:hover .text-banner h4{
+  	animation:text-translate 1s ease;
+    -webkit-animation:text-translate 1s ease;
+  }
+  .banner .content-banner:hover .text-banner h2,.banner .content-banner:hover .text-banner p.line{
+  	animation:text-translate2 1s ease;
+    -webkit-animation:text-translate2 1s ease;
+  }
+  .banner .content-banner:hover .text-banner .ciloe-btn-default{
+  	animation:text-translate3 1.2s ease;
+    -webkit-animation:text-translate3 1.2s ease;
+  }
+  @media (max-width:567px){
+    .banner .content-banner{
+    	padding-bottom:15px;
+    }
+  }
+</style>
+{% schema %}
+{
+  "name": "Banner Classic",
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      "type": "header",
+      "content": "Enable overlay"
+    },
+	{
+            "type": "checkbox",
+          	"id": "enable_overlay",
+          	"label": "Enable?",
+			"default": true
+    },
+	{
+      "type": "header",
+      "content": "Chose color text"
+    },
+	{
+            "type": "color",
+          	"id": "color_text",
+          	"label": "Color",
+			"default": "#fff"
+    },
+	{
+            "type": "color",
+          	"id": "color_text_hover",
+          	"label": "Color hover button",
+			"default": "#41cce5"
+    },
+		  {
+   "type":      "select",
+   "id":        "number_banner",
+   "label":     "Select number banner",
+   "options": [
+     {
+       
+       "value": "two",
+       "label": "Two"
+     },
+     {
+       
+       "value": "three",
+       "label": "Three"
+     }
+   ],
+   "default":   "two"
+   
+			},
+	{
+      "type": "checkbox",
+      "id": "enable_ver_2",
+      "label": "Enable text ver 2",
+      "default": false
+    },
+		  {
+            "type": "header",
+          	"content": "banner 1"
+          },
+		  {
+   "type":      "select",
+   "id":        "local_text_1",
+   "label":     "Select local text",
+   "options": [
+     {
+       
+       "value": "center",
+       "label": "Center"
+     },
+     {
+       
+       "value": "left",
+       "label": "Left"
+     },
+     {
+       
+       "value": "right",
+       "label": "Right"
+     }
+   ],
+   "default":   "center"
+   
+			},
+		  {
+            "type": "url",
+          	"id": "url_1",
+          	"label": "Url",
+			"default": "/collections/all"
+          },
+          {
+            "type": "image_picker",
+          	"id": "img_1",
+          	"label": "Image banner",
+			"info": "48 x 39px recommended"
+          },
+          {
+            "type": "text",
+          	"id": "text-top-1",
+          	"label": "Title top",
+			"default": "trending"
+          },
+          {
+            "type": "text",
+          	"id": "text-mid-1",
+          	"label": "Title mid 1",
+			"default": "spring summer"
+          },
+          {
+            "type": "text",
+          	"id": "text-mid-2",
+          	"label": "Title mid 2",
+			"default": "collection"
+          },
+          {
+            "type": "text",
+          	"id": "btn-name",
+          	"label": "button name",
+			"default": "shop now"
+          },
+          {
+            "type": "header",
+          	"content": "banner 2"
+          },
+		  {
+   "type":      "select",
+   "id":        "local_text_2",
+   "label":     "Select local text",
+   "options": [
+     {
+       
+       "value": "center",
+       "label": "Center"
+     },
+     {
+       
+       "value": "left",
+       "label": "Left"
+     },
+     {
+       
+       "value": "right",
+       "label": "Right"
+     }
+   ],
+   "default":   "center"
+   
+			},
+		  {
+            "type": "url",
+          	"id": "url_2",
+          	"label": "Url",
+			"default": "/collections/all"
+          },
+          {
+            "type": "image_picker",
+          	"id": "img_2",
+          	"label": "Image banner",
+			"info": "48 x 39px recommended"
+          },
+          {
+            "type": "text",
+          	"id": "text-top-2",
+          	"label": "Title top",
+			"default": "trending"
+          },
+          {
+            "type": "text",
+          	"id": "text-mid-3",
+          	"label": "Title mid 3",
+			"default": "spring summer"
+          },
+          {
+            "type": "text",
+          	"id": "text-mid-4",
+          	"label": "Title mid 4",
+			"default": "collection"
+          },
+          {
+            "type": "header",
+          	"content": "banner 3"
+          },
+		  {
+   "type":      "select",
+   "id":        "local_text_3",
+   "label":     "Select local text",
+   "options": [
+     {
+       
+       "value": "center",
+       "label": "Center"
+     },
+     {
+       
+       "value": "left",
+       "label": "Left"
+     },
+     {
+       
+       "value": "right",
+       "label": "Right"
+     }
+   ],
+   "default":   "center"
+   
+			},
+		  {
+            "type": "url",
+          	"id": "url_3",
+          	"label": "Url",
+			"default": "/collections/all"
+          },
+          {
+            "type": "image_picker",
+          	"id": "img_3",
+          	"label": "Image banner",
+			"info": "48 x 39px recommended"
+          },
+          {
+            "type": "text",
+          	"id": "text-top-3",
+          	"label": "Title top",
+			"default": "trending"
+          },
+          {
+            "type": "text",
+          	"id": "text-mid-5",
+          	"label": "Title mid 5",
+			"default": "spring summer"
+          },
+          {
+            "type": "text",
+          	"id": "text-mid-6",
+          	"label": "Title mid 6",
+			"default": "collection"
+          }
+	
+  ],
+
+  "presets": [
+    {
+      "name": "Banner Classic",
+      "category": "Home Classic"
+    }
+  ]
+}
+{% endschema %}

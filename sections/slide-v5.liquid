@@ -1,0 +1,294 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+<!--slide-->
+  <div class="container-fluid slider-home-classic v2">
+    <div class="row">
+      	<div class="js-slider-home-classic">
+      {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+      	<div class="content-slider">
+          <div class="relative">
+            {% if block.settings.bg-img == blank %}
+          	<img src="{{'slider-classic-1.jpg' | asset_url}}" class="img-responsive img-bg-slider">
+            {% else %}
+            <img src="{{block.settings.bg-img | img_url:'master'}}" class="img-responsive img-bg-slider">
+            {% endif %}
+            <div class="absolute text-slider {% if block.settings.local_text == 'center' %} text-center {% elsif block.settings.local_text == 'left' %} text-left {% elsif block.settings.local_text == 'right' %} text-right {% endif %}">
+
+              <h1  class="text-animate-1  ">{{block.settings.title-1}}</h1>
+              <h1 class="text-animate-2 ">{{block.settings.title-2}}</h1>                        
+              <h1 class="text-animate-3 margin_bottom_30">{{block.settings.title-3}}</h1>              
+             <a  class=" btn-slider v2 delay03 fz-12 inline-block " href="{{block.settings.url-btn}}" >{{block.settings.btn-name}}</a>             
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      {% endif %}
+        </div>
+    </div>
+  </div>
+<!--endslide-->
+</div>
+<style>
+  .slider-home-classic.v2 .slick-dotted.slick-slider{
+  	margin-bottom:0;
+  }
+     .text-slider .btn-slider.v2:before {
+    content: "\f054";
+    font-family: FontAwesome;
+    margin-right: 10px;
+    font-size: 9px;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background: {{section.settings.bg_button}};
+    line-height: 30px;
+    text-align: center;
+    border-radius: 50%;
+    transition: .3s;
+}
+  .text-slider .btn-slider.v2{
+  color:{{block.settings.color_c1}}
+  }
+    .text-slider .btn-slider.v2:hover:before{
+    background:{{section.settings.bg_button_hover}};
+  }
+    @media (min-width:1025px){
+    }
+  .slider-home-classic .text-slider h1{
+  	 color:{{section.settings.color_text_slide}};
+  }
+  {% if section.settings.content_reverse %}
+  .slider-home-classic .text-slider h1,.slider-home-classic .text-slider p{
+    color:{{section.settings.color_text_slide}} !important;
+  }
+  .slider-home-classic .text-slider a{
+    color:{{section.settings.color_text_slide}};
+    border-color:{{section.settings.color_text_slide}};
+  }
+  .slider-home-classic .text-slider a:hover{
+    color:{{section.settings.color_text_slide}};
+    border-color:{{section.settings.color_hover_text_slide}};
+  }
+  .slider-home-classic .img-slider-1{
+    bottom:0;
+    left: 15%;
+    
+  }
+  .slider-home-classic .img-slider-2{
+    bottom:0;
+    left: 25%;
+    
+  }
+  .slider-home-classic .text-slider{
+    bottom:40%;
+    right:10%;
+    left:unset;
+    z-index: 2;
+  }
+  @media (max-width: 1400px){
+  .slider-home-classic .text-slider{
+  	bottom:18%;
+  }
+  }
+  @media (max-width: 567px){
+  .slider-home-classic .text-slider{
+    right: 5%;
+    bottom:15%;
+  }
+    .slider-home-classic .text-slider .text-animate-1{
+    	margin-bottom:10px;
+    }
+    .slider-home-classic .text-slider .lt-3{
+    	letter-spacing:1px;
+    }
+  }
+  {% endif %}
+  .slider-home-classic .text-slider .line_slider{
+  	height: 60px;
+    width: 1px;
+    background: #8c8f9e;
+    margin: 0 auto;
+    transform: translateY(-85px);
+    transition: all 1s ease;
+  }
+  @media (max-width: 1400px){
+  .slider-home-classic .text-slider .line_slider{
+  	height: 30px;
+  }
+  }
+  
+  .slider-home-classic .slick-current.slick-active .text-slider .line_slider{
+    transform: translateY(0);
+  }
+ 
+  {% if section.settings.hidden_dot %}
+  .slider-home-classic .js-slider-home-classic .slick-dots{
+  	display:none !important;
+  }
+  {% endif %}
+  .btn-ciloe{
+  	background:{{section.settings.bg-btn}}
+  }
+  .btn-ciloe:hover{
+  	background:{{section.settings.bg-btn-hover}}
+  }
+  {% if section.settings.enable_prev %}
+  .js-slider-home-classic .slick-next{
+  	display:none !important;
+  }
+  .js-slider-home-classic .slick-prev{
+  	display:none !important;
+  }
+  {% endif %}
+  .js-slider-home-classic .slick-prev{
+  	left: 15px;
+  }
+</style>
+{% schema %}
+{
+  "name": "Slide Home5",
+  "max_blocks": 5,
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      "type": "header",
+      "content": "Color"
+    },
+	{
+      "type": "color",
+      "id": "color_text_slide",
+      "label": "Color Title",
+      "default": "#3c3c3c"
+    },
+        {
+          "type": "color",
+          "id": "color_c1",
+          "default": "#999999",
+          "label": "Color button"
+        },
+		{
+            "type": "color",
+          	"id": "bg_button",
+          	"label": "Background button",
+			"default": "#e8e8e8"
+    },
+	{
+            "type": "color",
+          	"id": "bg_button_hover",
+          	"label": "Background hover button",
+			"default": "#0D4C82"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_prev",
+      "label": "Hidden button next & prev slick",
+      "default": true
+    },
+	{
+      "type": "header",
+      "content": "Hidden slick dots"
+    },
+	{
+      "type": "checkbox",
+      "id": "hidden_dot",
+      "label": "Hidden slick dots",
+      "default": false
+    }
+  ],
+
+"blocks": [
+      {
+        "type": "image",
+        "name": "Image slide",
+        "settings": [
+          {
+            "type": "image_picker",
+          	"id": "bg-img",
+          	"label": "Background Image Slider",
+			"info": "1920 x 1080px recommended"
+          },
+		{
+      		"type": "header",
+      		"content": "Text"
+    	},
+	{
+   "type":      "select",
+   "id":        "local_text",
+   "label":     "Location Text",
+   "options": [
+     {
+       
+       "value": "center",
+       "label": "Center"
+     },
+     {
+      
+       "value": "left",
+       "label": "Left"
+     },
+     {
+      
+       "value": "right",
+       "label": "Right"
+     }
+   ],
+   "default":   "left"
+	},
+		{
+      		"type": "header",
+      		"content": "Button slider"
+    	},
+  		{
+        "type": "url",
+        "id": "url-btn",
+        "label": "URL button",
+		"default": "/collections/all"
+      	},
+  		{
+        "type": "text",
+        "id": "btn-name",
+        "label": "button name",
+		"default": "Shop this product"
+      	},
+		{
+          "type": "text",
+          "id": "title-1",
+          "label": "Title top"
+        },
+        {
+          "type": "text",
+          "id": "title-2",
+          "label": "Title midle"
+        },
+  		{
+        "type": "text",
+        "id": "title-3",
+        "label": "Title bottom"
+      	}
+        ]
+      }
+    ],
+  "presets": [
+    {
+      "name": "Slide Home5",
+      "category": "Page Minim"
+    }
+  ]
+}
+{% endschema %}

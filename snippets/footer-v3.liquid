@@ -1,0 +1,86 @@
+<footer >
+  <div class="footer-v3 {% if settings.width_footer_3 == 'width-1300' %} container-1300 {% elsif settings.width_footer_3 == 'full-width' %} full-width {% endif %}"> 
+  <div class="container border-bot">
+    <div class="row">
+      <div class="col-lg-3 col-md-3 col-sm-8 col-xs-9 space_bot_30">
+        <div class="margin_bottom_30">
+          <a href="{{ shop.url }}">
+            {% if settings.fv3_logo == blank %}
+            <div class="logo_header-svg-link">      
+              {{ 'logo-svg.svg' | asset_url | img_tag }}
+            </div> 
+            {% comment %}
+            <img alt="{{shop.name}}" src="{{'logo.png' | asset_url}}" class="img-logo">
+            {% endcomment %}
+            {% else %}
+            <img alt="{{shop.name}}" src="{{settings.fv3_logo | img_url:'master'}}" class="img-logo">
+            {% endif %}
+          </a>
+        </div>
+        <p class="des-footer-v3 margin_bottom_30 uppercase">{{settings.des-fv3}}</p>
+        <ul class="social flex">
+          <li class="space_right_10">
+            <a href="{{settings.fv3_social_url1}}"  target="_blank"><i class="{{settings.fv3_social_icon1}}"></i></a>
+          </li>
+          <li class="space_right_10">
+            <a href="{{settings.fv3_social_url2}}"  target="_blank"><i class="{{settings.fv3_social_icon2}}"></i></a>
+          </li>
+          <li class="space_right_10">
+            <a href="{{settings.fv3_social_url3}}"  target="_blank"><i class="{{settings.fv3_social_icon3}}"></i></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-md-3 col-sm-4 col-xs-3 space_bot_30" style="margin: 0 16px;">
+        <h1 class="title-fv3 margin_bottom_30 ">{{settings.title_fv3_1}}</h1>
+        {% assign footer_menu = settings.fv3_menu_1 %}
+        <ul class="menu_fv3_1">
+          {% for link in linklists[footer_menu].links %}
+          <li><a href="{{ link.url }}" title="{{ link.title }}" class="delay03">{{ link.title }}</a></li>
+          {%endfor%}
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-md-3 col-sm-4 col-xs-3 space_bot_30" style="margin: 0 16px;">
+        <h1 class="title-fv3 margin_bottom_30 ">{{settings.title_fv3_2}}</h1>
+        {% assign footer_menu_2 = settings.fv3_menu_2 %}
+        <ul class="menu_fv3_2">
+          {% for link in linklists[footer_menu_2].links %}
+          <li><a href="{{ link.url }}" title="{{ link.title }}" class="delay03">{{ link.title }}</a></li>
+          {%endfor%}
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-md-3 col-sm-4 col-xs-3 space_bot_30" style="margin: 0 16px;">
+        <h1 class="title-fv3 margin_bottom_30 ">{{settings.title_fv3_3}}</h1>
+        {% assign footer_menu_3 = settings.fv3_menu_3 %}
+        <ul class="menu_fv3_2">
+          {% for link in linklists[footer_menu_3].links %}
+          <li><a href="{{ link.url }}" title="{{ link.title }}" class="delay03">{{ link.title }}</a></li>
+          {%endfor%}
+        </ul>
+      </div>
+      
+
+      
+    </div>
+    </div>
+  <div class="container">
+    <div class="row">
+      <div class="copy_fv3 col-md-6 col-sm-6 col-xs-4">
+        <p class="fz-12">{{settings.copy_fv3}}</p>
+      </div>
+            <div class="copy_fv3 col-md-6 col-sm-6 col-xs-8">
+                <div class="menu-footer text-center space_bot_30 uppercase right space_top_30">
+          {% assign footer_menu = settings.fv3_c2_menu %}
+          <ul class="flex">
+            {% for link in linklists[footer_menu].links %}
+            <li class="space_right_30"><a href="{{ link.url }}" title="{{ link.title }}" class="delay03 fz-12">{{ link.title }}</a></li>
+            {%endfor%}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</footer>

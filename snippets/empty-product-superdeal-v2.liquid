@@ -1,0 +1,62 @@
+{% comment %}
+Add default products to help with onboarding for collections/all only.
+
+The onboarding styles and products are only loaded if the
+store has no products.
+{% endcomment %}
+
+
+<div class="row">
+  <div class="col-md-4 col-sm-12 col-xs-12">
+      <div class="product-countd pd-bd spc2 bg product-inner">
+          <div class="product-item-countd">
+              <div class="product-info">
+                  <h3 class="deal-title text-center">Super Deals</h3>
+                  <h3 class="product-title text-center v4"><a href="/admin/products">ShopiLaunch Product</a></h3>
+                  <div class="product-price thin-price v3 no-bg bd">
+                      <span class="red">$79.00</span>
+                      <span class="old">$99.00</span>
+                  </div>
+                  <div class="deal-progress">
+                      <div class="deal-stock">
+                          <span class="stock-sold">19% already claimed</span>
+                          <span class="stock-available">Available: <strong>22</strong></span>
+                      </div>
+                      <div class="progress">
+                          <span class="progress-bar" style="width:27.5956%"></span>
+                      </div>
+                  </div>
+                  <div class="time-cound">
+                      <p class="text-center">{{section.settings.text2}}</p>
+                      <div class="countdown countdown-time" data-countdown="countdown" data-date="{{section.settings.hp_countdown}}">
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="col-md-8 col-sm-12 col-xs-12">
+      <div class="product-wrapper">
+          <div class="flex product-img-slide">
+              <div class="product-images v2">
+                  <div class="main-img v2 js-product-slider">
+                    {% for j in (1..4) %}
+                     {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+      						{{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                    {% endfor %}
+                  </div>
+              </div>
+              <div class="multiple-img-list-ver2 v2 js-click-product">
+                {% for j in (1..4) %}
+                  <div class="product-col v2">
+                      <div class="img active">
+                          {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+      						{{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                      </div>
+                  </div>
+				{% endfor %}
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,202 @@
+<div data-section-id="{{ section.id }}" data-section-type="product-tab-v3" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+	<!--wrapper product-->
+   <div class="top-product-tab">
+      <div class="container container-240">
+          <div class="row">
+              <div class="col-md-3 col-sm-4 col-xs-12">
+                  <div class="filter filter-product e-category">
+                      <h3 class="widget-blog-title">{{section.settings.text1}}</h3>
+              <div class="owl-carousel owl-theme js-owl-post">
+                  {% if section.blocks.size > 0 %} 
+                          {% for block in section.blocks %}
+                	{% if block.type == 'topproduct' %}
+                {% assign products_limit = block.settings.product_limit %}
+                          {% assign col = block.settings.product_collection %}
+                  <div class="item">
+                      {% for product in collections[col].products limit: products_limit %}
+
+                        {% include 'product-category-list' %}
+                            {% else %} 
+                        {% include 'empty-product-list6'%}
+                      {% endfor %}
+                  </div>
+                	{% endif %}  
+                  {% endfor %}
+                      {% endif %}  
+              </div>
+                  </div>
+              </div>
+              <div class="col-md-9 col-sm-8 col-xs-12">
+                  <div class="product-tab spc3">
+                      <ul class="product-tab-sw v2">
+                        	
+                          {% if section.blocks.size > 0 %}
+                        
+                          {%- assign i = 1 -%}
+                          {% for block in section.blocks %}
+                        	{% if block.type == 'tab' %}
+                          <li class="{% if forloop.first %}active{% endif %}">
+                              <a href="#{{i}}_{{ section.id }}" data-toggle="tab">{{block.settings.tab_title}}</a>
+                          </li>
+                          {%- assign i = i | plus : 1 -%}
+                        	{% endif %}
+                          {% endfor %}
+                          
+                        {% endif %}
+                      </ul>
+                      <div class="tab-content">
+                        
+                          {% if section.blocks.size > 0 %}
+                        	
+                          {%- assign i = 1 -%}
+                          {% for block in section.blocks %}
+							{% if block.type == 'tab' %}
+                          {% assign products_limit = block.settings.tab_limit %}
+                          {% assign col = block.settings.tab_collection %}
+                          <div id="{{i}}_{{ section.id }}" class="tab-pane fade {% if forloop.first %}active in{% endif %}">
+
+                              <div class="product-tab-pd owl-carousel owl-theme js-owl-product2">
+                                  {% for product in collections[col].products limit: products_limit %}
+                                    {% include 'product-list-24' %}
+                                  {% else %}
+                                    {% include 'empty-product-grid-9' %}
+                                  {% endfor %}
+                              </div>
+                          </div>
+                          {%- assign i = i | plus : 1 -%}
+                        	{% endif %}
+                          {% endfor %}
+                          
+                        {% endif %}
+                      </div>
+                  </div>
+                  <div class="homepage-banner">
+                      <div class="row">
+                          {% if section.blocks.size > 0 %} 
+                              {% for block in section.blocks %}
+                        	{% if block.type == 'banner' %}
+                          <div class="col-md-6 col-sm-6 col-xs-6">
+                              <div class="image-bd effect-img3 plus-zoom">
+                                  <a href="{{block.settings.banner_url}}">
+                                      <img {%if block.settings.banner_img == blank%}src="{{'h3_b3.jpg'| asset_url }}" 
+                                        {%else%}
+                                      src="{{block.settings.banner_img | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" />  
+                                  </a>
+                                </div>
+                          </div>
+                        	{% endif %} 
+                          {% endfor %}
+                          {% endif %} 
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+<!--end wrapper product-->
+</div>  
+{% schema %}
+{
+  "name": "Product Tab v3",
+  "class": "index-section",
+  "settings": [
+	{
+      "type": "header",
+      "content": "Heading (Left)"
+    },
+	{
+      "type": "text",
+      "id": "text1",
+      "label": "Title",
+      "default": "Top Products"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "blocks": [
+	{
+      "type": "topproduct",
+      "name": "Top Products",
+      "limit": 3,
+      "settings": [
+          {
+            "type": "header",
+            "content": "List Products"
+          },
+          {
+            "type": "collection",
+            "id": "product_collection",
+            "label": "Select collection"
+          },
+          {
+            "type": "text",
+            "id": "product_limit",
+            "label": "Limit number",
+            "default": "6"
+          }
+      ]
+    },
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Title",
+          "info": "Sale products"
+        },
+        {
+          "type": "collection",
+          "id": "tab_collection",
+          "label": "Choose Collection"
+        },
+        {
+          "type": "text",
+          "id": "tab_limit",
+          "label": "Limit number of products",
+          "default": "3"
+        }
+      ]
+    },
+	{
+      "type": "banner",
+      "name": "Banner",
+	"limit": 2,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "banner_img",
+          "label": "Image",
+          "info": "500 x 228px Recommended"
+        },
+        {
+          "type": "url",
+          "id": "banner_url",
+          "label": "URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Tab v3",
+      "category": "Product Tab"
+    }
+  ]
+}
+{% endschema %}

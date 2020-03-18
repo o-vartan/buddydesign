@@ -1,0 +1,19 @@
+{% for i in (1..9) %}
+ <div class="blog-post-item v3">
+    <div class="blog-img">
+        <a href="#" class="hover-images"><img src="{{'h2_blog3.jpg'| asset_url }}" alt="" class="img-reponsive"></a>
+    </div>
+    <div class="heading-blog flex align-center">
+        <div class="blog-post-date e-gradient">
+            <span class="b-date">14</span>
+            <span class="b-month">dec</span>
+        </div>
+        <h3 class="blog-post-title"><a href="#">Ricoh's latest spherical camera nets quality images</a></h3>
+    </div>
+    <p class="blog-post-desc">Here are many variations of passages of Lorem Ipsum availablethe majority have suffered alteration in some form...</p>
+    <div class="blog-post-author">
+        <div class="author">Posted by <span class="c-black">Admin</span></div>
+        <div class="blog-post-comment"><span class="c-black"></span>2</div>
+    </div>
+</div>
+{% endfor %}

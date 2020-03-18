@@ -1,0 +1,291 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+<!--slide-->
+  <div class="container-1300 slider-home-v8">
+  <div class="container  space_bot_70">
+      	<div class="js-slider-home-classic">
+      {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+      	<div class="content-slider">
+          <div class="relative">
+            {% if block.settings.bg-img == blank %}
+          	<img src="{{'slider-classic-1.jpg' | asset_url}}" class="img-responsive img-bg-slider">
+            {% else %}
+            <img src="{{block.settings.bg-img | img_url:'master'}}" class="img-responsive img-bg-slider">
+            {% endif %}
+            
+            <div class="absolute text-slider {% if block.settings.local_text == 'center' %} text-center {% elsif block.settings.local_text == 'left' %} text-left {% elsif block.settings.local_text == 'right' %} text-right {% endif %}">
+              <p  class="text-animate-1 fz-12 uppercase space_bot_10">{{block.settings.title-4}}</p>
+              <h1 class="text-animate-2  uppercase">{{block.settings.title-2}}</h1>
+             
+              
+              <h1 class="text-animate-3 margin_bottom_30 uppercase">{{block.settings.title-3}}</h1>
+              
+              
+              <div class="btn-slider">
+              <a class=" delay03 fz-13 inline-block" href="{{block.settings.url-btn}}" >{{block.settings.btn-name}}</a>
+              </div>
+            </div>          
+          </div>
+        </div>
+      {% endfor %}
+      {% endif %}
+        </div>
+    </div>
+  </div>
+<!--endslide-->
+</div>
+<style>
+  .slider-home-v8{
+  background:{{section.settings.bg-slide}}
+  }
+  .content-slider .btn-ciloe {
+  	text-transform: capitalize;
+    padding: 12px 24px;
+    letter-spacing: 1px;
+  }
+    .slider-home-v8 .text-slider h1{
+    color:{{section.settings.color_text_slide}} !important;
+  }
+  {% if section.settings.content_reverse %}
+
+  .slider-home-v3 .text-slider a:hover{
+    color:{{section.settings.color_text_slide}};
+    border-color:{{section.settings.color_hover_text_slide}};
+  }
+  .slider-home-v8 .img-slider-1{
+    bottom:0;
+    left: 15%;
+    
+  }
+  .slider-home-v8 .text-slider{
+    bottom:40%;
+    right:10%;
+    left:unset;
+    z-index: 2;
+  }
+  @media (max-width: 1400px){
+  .slider-home-v8 .text-slider{
+  	bottom:18%;
+  }
+  }
+  @media (max-width: 567px){
+  .slider-home-v8 .text-slider{
+    right: 5%;
+    bottom:15%;
+  }
+    .slider-home-v8 .text-slider .text-animate-1{
+    	margin-bottom:10px;
+    }
+    .slider-home-v8 .text-slider .lt-3{
+    	letter-spacing:1px;
+    }
+  }
+  {% endif %}
+  .slider-home-v8 .text-slider .line_slider{
+  	height: 60px;
+    width: 1px;
+    background: #8c8f9e;
+    margin: 0 auto;
+    transform: translateY(-85px);
+    transition: all 1s ease;
+  }
+  @media (max-width: 1400px){
+  .slider-home-v8 .text-slider .line_slider{
+  	height: 30px;
+  }
+  }
+  
+  .slider-home-v8 .slick-current.slick-active .text-slider .line_slider{
+    transform: translateY(0);
+  }
+ 
+  {% if section.settings.hidden_dot %}
+  .slider-home-v8 .js-slider-home-classic .slick-dots{
+  	display:none !important;
+  }
+  {% endif %}
+
+  @media (min-width:1025px){
+    .slider-home-v8 .text-slider {
+      left:24%;
+    }
+    .slider-home-v8{
+    padding-top:180px;
+    }
+  }
+.slider-home-v8 .text-slider p.text-animate-1{
+	color:{{section.settings.color_text_slide}};
+}
+  .btn-slider a{
+     color:{{section.settings.color_button}};
+  }
+  .btn-slider a:hover{
+      color:{{section.settings.color_hover_text_slide}};
+  }
+  {% if section.settings.enable_prev %}
+  .js-slider-home-classic .slick-next{
+  	display:none !important;
+  }
+  .js-slider-home-classic .slick-prev{
+  	display:none !important;
+  }
+  {% endif %}
+  .js-slider-home-classic .slick-prev{
+  	left: 15px;
+  }
+</style>
+{% schema %}
+{
+  "name": "Slide Home8",
+  "max_blocks": 5,
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      "type": "header",
+      "content": "Enable reverse content slider"
+    },
+	{
+      "type": "checkbox",
+      "id": "content_reverse",
+      "label": "Enable?",
+      "default": false
+    },
+	{
+      "type": "header",
+      "content": "Color"
+    },
+	{
+      "type": "color",
+      "id": "bg-slide",
+      "label": "Background section",
+      "default": "#fff"
+    },
+	{
+      "type": "color",
+      "id": "color_text_slide",
+      "label": "Color Text",
+      "default": "#fff"
+    },
+	{
+      "type": "color",
+      "id": "color_button",
+      "label": "Color  button",
+      "default": "#0D4C82"
+    },
+	{
+      "type": "color",
+      "id": "color_hover_text_slide",
+      "label": "Color hover button",
+      "default": "#0D4C82"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_prev",
+      "label": "Hidden button next & prev slick",
+      "default": true
+    },
+	{
+      "type": "header",
+      "content": "Hidden slick dots"
+    },
+	{
+      "type": "checkbox",
+      "id": "hidden_dot",
+      "label": "Hidden slick dots",
+      "default": true
+    }
+  ],
+
+"blocks": [
+      {
+        "type": "image",
+        "name": "Image slide",
+        "settings": [
+          {
+            "type": "image_picker",
+          	"id": "bg-img",
+          	"label": "Background Image Slider",
+			"info": "1170 x 600px recommended"
+          },
+		{
+      		"type": "header",
+      		"content": "Text"
+    	},
+	{
+   "type":      "select",
+   "id":        "local_text",
+   "label":     "Location Text",
+   "options": [
+     {
+       
+       "value": "center",
+       "label": "Center"
+     },
+     {
+      
+       "value": "left",
+       "label": "Left"
+     },
+     {
+      
+       "value": "right",
+       "label": "Right"
+     }
+   ],
+   "default":   "left"
+	},
+		{
+        "type": "text",
+        "id": "title-4",
+        "label": "Description top",
+		"default": "Beauty you can afford"
+      	},
+        {
+          "type": "text",
+          "id": "title-2",
+          "label": "Title midle"
+        },
+  		{
+        "type": "text",
+        "id": "title-3",
+        "label": "Title bottom"
+      	},
+  		{
+        "type": "url",
+        "id": "url-btn",
+        "label": "URL button",
+		"default": "/collections/all"
+      	},
+  		{
+        "type": "text",
+        "id": "btn-name",
+        "label": "button name",
+		"default": "Explore Our Products"
+      	}
+        ]
+      }
+    ],
+  "presets": [
+    {
+      "name": "Slide Home8",
+      "category": "Page Minim"
+    }
+  ]
+}
+{% endschema %}

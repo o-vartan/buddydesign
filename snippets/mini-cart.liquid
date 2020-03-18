@@ -1,0 +1,41 @@
+<div class="dropdown-menu dropdown-cart">
+  <div class="enj-minicart-ajax">
+  {% if cart.item_count > 0 %}
+      <ul class="list mini-products-list">
+       	{% for item in cart.items %}
+          <li class="item-cart">
+              <div class="product-img-wrap">
+                  <a href="{{item.url}}"><img src="{{ item.image | product_img_url: '37x50' }}" alt="{{ item.title }}"></a>
+              </div>
+              <div class="product-details">
+                  <div class="inner-left">
+                      <div class="product-name"><a href="{{ item.url }}" tabindex="0">{{ item.title}}</a></div>
+                      <div class="product-price">
+                          {{ item.price | money }} <span>( x{{ item.quantity }})</span>
+                      </div>
+                  </div>
+              </div>
+              
+          </li>
+          {% endfor %}
+      </ul>
+      <div class="bottom-cart">
+          <div class="cart-price">
+              <span>Subtotal</span>
+              <span class="price-total">{{cart.total_price | money}}</span>
+          </div>
+          <div class="button-cart">
+              <a href="/cart" class="cart-btn btn-viewcart">{{ 'minicart.general.view_cart' | t }}</a>
+              <a href="/checkout" class="cart-btn e-checkout btn-gradient">{{ 'minicart.general.checkout' | t }}</a>
+          </div>
+      </div>
+  {% else %}
+    <div class="text-center">
+      <p class="empty-cart-title">{{ 'minicart.general.empty' | t }}</p>
+    </div>
+    <div class="text-center">
+      <a href="/collections/all" class="btn-back btn-gradient">{{ 'minicart.general.shop_now' | t }}</a>
+    </div>
+  {% endif %}
+  </div>
+</div>

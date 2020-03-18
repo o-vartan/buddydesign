@@ -1,0 +1,87 @@
+<div class=" btn_layout_shop margin_bottom_30 hidden-xs">
+  <div class="row">
+    <div class=" space_bot_20 flex ">
+      <div class="col-lg-4 col-md-4 col-sm-4 hidden-xs btn_function left ">
+        <div class="wrap-filter-sorting">
+          <div class="dropdown">
+            <button class="dropdown-toggle text-left" data-toggle="dropdown" aria-expanded="false">
+              {{ 'collections.sorting.title' | t }}
+              <span class="dropdown-label">{{ 'collections.sorting.featured' | t }}</span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="manual">{{ 'collections.sorting.featured' | t }}</a></li>   
+              <li><a href="best-selling">{{ 'collections.sorting.best_selling' | t }}</a></li>
+              <li><a href="title-ascending">{{ 'collections.sorting.az' | t }}</a></li>
+              <li><a href="title-descending">{{ 'collections.sorting.za' | t }}</a></li>
+              <li><a href="price-descending">{{ 'collections.sorting.price_descending' | t }}</a></li>
+              <li><a href="price-ascending">{{ 'collections.sorting.price_ascending' | t }}</a></li>
+              <li><a href="created-ascending">{{ 'collections.sorting.date_ascending' | t }}</a></li>
+              <li><a href="created-descending">{{ 'collections.sorting.date_descending' | t }}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      {% comment %}
+    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 btn_function text-center ">
+      {% if section.settings.btn_grid == 'image' %}
+        {% if section.settings.img_grid == blank %}
+          <img src="{{ 'btn_grid.png' | asset_url }}" class="img-responsive inline-block btn_grid_layout">
+         {% else %}
+          <img src="{{section.settings.img_grid | img_url:'master'}}" class="img-responsive inline-block btn_grid_layout">
+        {% endif %}
+      {% else %}
+      	<i class="{{section.settings.icon_grid}} btn_grid_layout"></i>
+      {% endif %}
+    </div>
+      {% endcomment %}
+<!--      -->
+      <div class="col-lg-4 col-md-4 col-sm-6 hidden-xs btn_function text-center ">
+      </div>
+<!--      -->
+      {% comment %}
+    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 btn_function text-center ">
+      {% if section.settings.btn_list == 'image' %}
+        {% if section.settings.img_list == blank %}
+          <img src="{{ 'btn_list.png' | asset_url }}" class="img-responsive inline-block btn_list_layout">
+         {% else %}
+          <img src="{{section.settings.img_list | img_url:'master'}}" class="img-responsive inline-block btn_list_layout">
+        {% endif %}
+      {% else %}
+      	<i class="{{section.settings.icon_list}} btn_list_layout"></i>
+      {% endif %}
+    </div>
+       {% endcomment %}
+<!--      -->
+    <div class="col-lg-3 col-md-3 hidden-sm hidden-xs btn_function gr_btn_product_size">
+      <p>See: </p>
+      <button class="products-size size_3 delay03 active">3</button>
+      <button class="products-size size_4 delay03">4</button>
+      <button class="products-size size_5 delay03">5</button>
+    </div>
+          <div class="col-lg-1 col-md-1 col-sm-2 col-xs-4 btn_function text-center filter-button ">
+      	<h4  class="btn_filter_full" data-click-state="0">{{section.settings.icon_filter}}</h4>
+
+    </div>
+    </div>
+    <div class="filter_full col-md-12 over-hidden delay05 engoj-collection-sidebar">
+      <div class="content_filter_full row" >
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 space_bot_20">
+          {% include 'ciloe-filter-price' %}
+        </div>
+		<!--          -->
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 space_bot_20">
+          {% include 'ciloe-filter-size' %}
+        </div>
+		<!--          -->
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 space_bot_20">
+          {% include 'filter-color' %}
+        </div>
+		<!--          -->
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 space_bot_20">
+          {% include 'filter-brand' %}
+        </div>
+		<!--          -->
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,341 @@
+<div class="page-width" data-section-id="{{ section.id }}" data-section-type="cart-template">
+
+<!-- /templates/cart.liquid -->
+{% comment %}
+
+For info on test orders:
+- General http://docs.shopify.com/manual/your-store/orders/test-orders
+- Shopify Payments - http://docs.shopify.com/manual/more/shopify-payments/testing-shopify-payments
+
+{% endcomment %}
+<!-- PAGE TITLE -->
+
+<!-- BOX TITLE -->
+
+<!-- SHOPPING CART -->
+
+
+<!--main content-->
+  {% include 'ciloe-banner' %}
+        <div class="container container-240">
+            <div class="checkout">
+              
+                {% if cart.item_count > 0 %}
+                <form action="/cart" method="post" novalidate>
+		<div class="row">
+            <div class="col-md-8 col-sm-12 col-xs-12">
+                <div class="shopping-cart bd-7">
+                    <div class="cmt-title text-center abs">
+                        <h3 class="page-title v2">{{ 'cart.general.title' | t }}</h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table cart-table">
+                            
+                            <tbody>
+                                {% for item in cart.items %}
+                                <tr class="item_cart">
+                                    <td class="product-name flex align-center">
+                                        <a  href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="btn-del Delete-{{ item.id }}"><i class="ion-ios-close-empty"></i></a>
+                                        <div class="product-img">
+                                            <img src="{{ item | img_url: '79x79' }}" alt="{{ item.title | escape }}">
+                                        </div>
+                                        <div class="product-info">
+                                            <a href="{{ item.url }}">{{ item.product.title }}</a>
+                                            {% unless item.variant.title contains 'Default' %}
+                                            <small style="display: block;font-weight: 300;font-size: 12px;letter-spacing: 1px;margin-bottom: 5px;">{{ item.variant.title }}</small>
+                                            {% endunless %}
+                                            {% if settings.cart_vendor_enable %}
+                                            <p>{{ item.vendor }}</p>
+                                            {% endif %}                                            
+                                        
+                                            
+
+                                        </div>
+                                    </td>
+                                    
+                                    <td class="bcart-quantity single-product-detail">
+                                        <div class="single-product-info">
+                                            {% if item.quantity > 1 %}
+                                                <input type="number" name="updates[]" value="{{ item.quantity }}">
+                                                {% else %}
+                                                <input type="number" name="updates[]" value="1">
+                                              {% endif %}
+                                        </div>
+                                    </td>
+                                    <td class="total-price">
+                                        <p class="price">{{ item.line_price | money }}</p>
+                                    </td>
+
+                                    <td class="animal-data">
+                                      {% assign property_size = item.properties | size %}                                  
+                                      {% if property_size > 0 %}
+                                      {% for p in item.properties %}
+                                      {% unless p.last == blank %}
+      
+                                      <small  class='View-{{ item.id }}'>
+                                        <!-- {{ p.first }}: -->
+      
+                                        {% comment %}
+                                        Check if there was an uploaded file associated
+                                        {% endcomment %}
+                                        {% if p.last contains '/uploads/' %}
+                                        <a href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
+                                        {% else %}
+                                        {{ p.last }}                                          
+                                        {% endif %}
+
+                                      </small>
+
+                                      {% if p.first contains 'Text' %}
+                                          <input class='Edit-{{ item.id }}' type="textarea" style="display: none;" value="{{ p.last }}">
+                                        {% else %}
+                                          <input class='Edit-{{ item.id }}' style="display: none;" value="{{ p.last }}">
+                                        {% endif %}
+
+                                      {% endunless %}
+                                      {% endfor %}
+                                      {% endif %}
+
+                                    <button class="animalDataSave Save-{{ item.id }}" data-id='{{ item.id }}' style="display: none;    margin: 0 10px 0 20px;
+                                    ">Save</button>
+
+                                    <button class="animalDataEdit" data-id='{{ item.id }}'>Edit</button>
+                                    </td>                                 
+
+
+
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        
+                    </div>
+                    
+                    
+
+                    <div class="table-cart-bottom">                        
+                        <a href="/collections/all" class="btn btn-update ">{{ 'cart.general.continue_browsing_html' | t }}</a>  
+                        <input type="submit" name="update" class="btn btn-update" value="{{ 'cart.general.update' | t }}">
+                    </div>
+    
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12 col-xs-12">
+                <div class="cart-total bd-7">
+                    <div class="cmt-title text-center abs">
+                        <h3 class="page-title v3">{{ 'cart.label.cart_total' | t }}</h3>
+                    </div>
+                  	<div class="cart-total-bottom pp-checkout align-center v-center">
+                      	{% if section.settings.cart_notes_enable %}
+                      	<h3 class="cate-title">{{ 'cart.label.cart_note' | t }}</h3>
+                        <div class="contact-form coupon">
+						
+                          <div class=" medium-up--one-half ">
+                              <label for="CartSpecialInstructions" class="cart-note cart-note_text_label small--text-center">{{ 'cart.general.note' | t }}</label>
+                              <textarea rows="6" name="note" id="CartSpecialInstructions" class="cart-note__input form-control note--input">{{ cart.note }}</textarea>
+                          </div>
+                        </div>
+                      	{%endif %}
+                    </div>
+                    <div class="table-responsive">
+                        <table class="shop_table">
+                            <tbody>
+                                <tr class="cart-subtotal">
+                                    <th>{{ 'cart.label.subtotal' | t }}</th>
+                                    <td><span id="bk-cart-subtotal-price"><span id="revy-cart-subtotal-price"><span id="revy-cart-subtotal-price">{{ cart.total_price | money }}</span></span></span></td>
+                                </tr>
+                            
+                                <tr class="order-total">
+                                    <th>{{ 'cart.label.total' | t }}</th>
+                                    <td><span id="bk-cart-subtotal-price"><span id="revy-cart-subtotal-price"><span id="revy-cart-subtotal-price">{{ cart.total_price | money }}</span></span></span></td>
+                                </tr>
+
+
+                                <tr class="order-vat">
+
+                                  <th id="order-vat__view">inkl. 19% MwSt</th>
+                                  <td id="order-vat__total"></td>
+                                  <script>
+                                    let orderPriceTotal = document.querySelector('#revy-cart-subtotal-price span').innerHTML;
+                                    let orderPriceTotalNum =  parseInt(orderPriceTotal.replace(/\D+/g,""));
+                                    let priceVat = 19;
+                                    let priceVatTotal = ( orderPriceTotalNum  / (100 + priceVat) * priceVat / 100 ).toFixed(2);  
+                                    // console.log(priceVatTotal);
+                                    let viewPriceVatTotal = document.querySelector('#order-vat__total');
+                                    viewPriceVatTotal.append( priceVatTotal.replace(/\./g,',') + '€');  
+                                  </script>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="cart-total-bottom">
+                        <a href="/checkout" class="btn-back btn-checkout">{{ 'cart.general.checkout' | t }}</a>
+                    </div>
+                    <div class="sign-in-divider">
+                      {% if section.settings.paypal_enable %}
+                        <span>or</span>
+                      {% endif %}
+                    </div>
+                  	{% if section.settings.paypal_enable %}
+
+                      {% if additional_checkout_buttons %}
+                        <div class="cart-total-bottom pp-checkout additional-checkout-buttons">
+                          {{ content_for_additional_checkout_buttons }}
+                        </div>
+                      {% endif %}
+                  	{% endif %}
+                    
+                </div>
+              	
+              		
+              	
+            </div>
+        </div>
+                <!-- End container -->
+                </form>
+
+                <form action="/cart/add" method="post" enctype="multipart/form-data" id="formAddToCartUs" data-section="product-template" style='display: none;'>
+
+                  <input name='id' id="productSelect" value="">
+                  <!-- <input type="number" id="quantity" name="quantity" value=""> -->
+
+                  <input style="display: none;" id="animal-0" type="text" name="properties[Name]" value="">
+                  <input style="display: none;" id="animal-1" type="text" name="properties[Birth]" value="">
+                  <input style="display: none;" id="animal-2" type="text" name="properties[Personality]" value="">
+                  <input style="display: none;" id="animal-3" type="text" name="properties[Text]" value="">
+                </form>
+        {% else %}
+        {% include 'cart-empty'%}
+        {% endif %}
+            </div>
+            <!-- End cat-box-container -->
+        </div>
+        <!-- end main content-->
+</div>
+
+<style>
+  /* .hideEl{
+    display: none;
+  } */
+.shopping-cart .table-responsive{
+  display: flex;
+  flex-direction: column-reverse;
+}
+.shopping-cart .table-responsive .table{
+  margin-bottom: 0px;
+}
+.shopping-cart .table-responsive .table tbody tr{
+  display: flex;
+  flex-wrap: wrap;
+}
+.animal-data {
+  padding: 0 0 14px 190px !important;
+  border-bottom: 1px solid #f1f1f1 !important;
+}
+.animal-data small{
+  font-size: 14px;
+  font-weight: 500;
+  padding-right: 8px;
+}
+.animal-data > small:nth-child(5){
+  display: block ;
+  opacity: 0.7 ;
+  padding: 10px 200px 0 0 ;
+}
+.animal-data button{
+  padding: 10px 0 0 0;
+    color: #0D4C82;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+@media (min-width:1230px){
+  .animal-data {
+  padding: 0 0 14px 84px ;
+  border-bottom: 1px solid #f1f1f1 !important;
+}
+}
+@media (max-width: 768px) {
+  .shopping-cart .table-responsive .table tbody tr{
+    flex-wrap: nowrap;
+  }
+  .animal-data {
+    padding: 10px 14px 0px !important;
+  }
+  .animal-data > small:nth-child(7){
+  display: block !important;
+  opacity: 0.7 !important;
+  padding: 10px 0 0 0 !important;
+  }
+  .animal-data button {
+    padding: 10px 0 0 14px;
+  }
+}
+</style>
+
+{% schema %}    
+  {
+    "name": "Cart page",
+    "settings": [
+		{
+      "type": "header",
+      "content": "Banner"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_banner",
+      "label": "Image banner",
+      "info": "1398x316px recommended"
+    },
+    {
+      "id": "url_banner",
+      "type": "url",
+      "default": "/collections/all",
+      "label": "Banner link"
+    },
+    {
+      "type": "header",
+      "content": "Text Banner"
+    },
+	{
+      "type": "select",
+        "id": "local_text",
+        "label": "Position Text",
+        "default": "center",
+        "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "title_page",
+      "label": "Title page",
+      "default": "Cart"
+    },
+      {
+        "type": "checkbox",
+        "id": "cart_notes_enable",
+        "label": "Enable cart notes",
+        "default": false
+      },
+	{
+        "type": "checkbox",
+        "id": "paypal_enable",
+        "label": "Enable Paypal payment",
+        "default": false
+      }
+    ]
+  }
+{% endschema %}

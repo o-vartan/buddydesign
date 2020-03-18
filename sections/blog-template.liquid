@@ -1,0 +1,199 @@
+{% paginate blog.articles by 3 %}
+<!--hero-section-->
+{% include 'ciloe-banner' %}
+<div class="container ">
+    <div class="row">
+    <div class="blog ciloe_blog_page space_top_100">
+      	<div class="blog-single-post blog-standar">
+
+        {% include 'blog-sidebar' %}
+                  <div class="blog-content col-md-pull-3 col-sm-12  col-md-9  col-xs-12">
+            {% for article in blog.articles %}
+            <div class="blog-post-item v2  border-bot">
+                {% if article.image %}
+                <div class="blog-img">
+                    <a href="{{ article.url }}" class="hover-images">{{ article | img_url: 'master' | img_tag: article.title }}</a>
+                </div>
+                {% endif %}
+                <div class="blog-info-bd">
+                    <div class="blog-info">
+                       <div class="blog-post-tags blog-post-author">
+                            {% for tag in article.tags %}
+                            <a class="uppercase fz-12 author margin_top_20" href="{{ blog.url }}/tagged/{{ tag | handle }}" rel="category tag">{{ tag }}</a>{% unless forloop.last %},{% endunless %}
+                            {% endfor %}
+                        </div>
+                        <h3 class="blog-post-title v2"><a href="{{ article.url }}">{{ article.title }}</a></h3>
+                        <div class="blog-post-desc space_bot_20">
+                          {{article.excerpt | strip_html | strip_newlines | truncatewords: 90}}
+                        </div>
+                      <a href="{{ article.url }}" class="button-blog ">{{section.settings.btn_blog}}</a> 
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+          <div class="row">
+            <div class="col-md-12 content_pagination">
+              {% include 'pagination' %}
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+    </div>
+  </div>
+
+
+{% endpaginate %}
+
+{% schema %}
+{
+  "name": "Blog pages",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Banner"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_banner",
+      "label": "Image banner",
+      "info": "1398x316px recommended"
+    },
+    {
+      "id": "url_banner",
+      "type": "url",
+      "default": "/collections/all",
+      "label": "Banner link"
+    },
+    {
+      "type": "header",
+      "content": "Text Banner"
+    },
+	{
+      "type": "select",
+        "id": "local_text",
+        "label": "Position Text",
+        "default": "center",
+        "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "btn_blog",
+      "label": "Button ",
+      "default": "Read More"
+    },
+    {
+      "type": "text",
+      "id": "title_page",
+      "label": "Title page",
+      "default": "Blog"
+    },
+    {
+      "type": "header",
+      "content": "Blog sidebar",
+	  "info": "*only for layout Standard"
+    },
+    {
+      "type": "header",
+      "content": "Widget Search"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_widget_search",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "serch_placeholder",
+      "label": "Input placeholder",
+      "default": "ENTER KAYWORDS . . ."
+    },
+    {
+      "type": "header",
+      "content": "Widget Recent Posts"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_widget_rposts",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "widget_recent_title",
+      "label": "Widget Title",
+      "default": "RECENT POST"
+    },
+    {
+      "type": "header",
+      "content": "Widget Categories"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_widget_categories",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "widget_categories_title",
+      "label": "Widget Title",
+      "default": "Categories"
+    },
+    {
+      "type": "header",
+      "content": "Widget Banner"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_widget_banner",
+      "label": "Enbale?",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "widget_tag_title",
+      "label": "Title",
+      "default": "Popular Tags"
+    }
+  ],
+  "blocks": [
+	{
+      "type": "pproduct",
+      "name": "Popular Post",
+      "limit": 3,
+      "settings": [
+          {
+            "type": "header",
+            "content": "List Post"
+          },
+          {
+            "type": "blog",
+            "id": "blog_collection",
+            "label": "Select collection"
+          },
+          {
+            "type": "text",
+            "id": "blog_limit",
+            "label": "Limit number",
+            "default": "3"
+          }
+      ]
+    }
+	]
+}
+{% endschema %}

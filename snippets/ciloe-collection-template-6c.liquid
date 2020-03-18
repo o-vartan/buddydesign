@@ -1,0 +1,85 @@
+<div class="shop_page">
+  {% include 'ciloe-banner' %}
+
+  <div class=" space_top_70">
+    {% include 'ciloe-btn-layout3' %}
+    <div class="container-fluid container_100 content_shop ">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 product_shop product-collection-grid product_full">
+          <div class="row">
+            {% for product in collection.products %}
+            <div class="col-lg-2 col-md-3 col-sm-6 col-xs-6 layout_product_shop delay05 column-6 layout_pd_6c">
+              {% include 'ciloe-product' %}
+            </div>
+            {% endfor %}
+            <div class="text-center col-md-12 col-xs-12 content_pagination">
+              {% include 'pagination' %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  @media (min-width:992px){
+  .layout_pd_list_shop:nth-child(2n+1){
+  	clear:left;
+  }
+  .layout_pd_list_shop:nth-child(6n+1){
+  	clear:none;
+  }
+  
+  .layout_pd_6c.column-3:nth-child(6n+1){
+  	clear:none !important;
+  }
+  .layout_pd_6c.column-3:nth-child(5n+1){
+  	clear:none !important;
+  }
+  .layout_pd_6c.column-3:nth-child(3n+1){
+  	clear:left !important;
+  }
+  .layout_pd_6c.column-4:nth-child(6n+1){
+  	clear:none !important;
+  }
+  .layout_pd_6c.column-4:nth-child(5n+1){
+  	clear:none !important;
+  }
+  .layout_pd_6c.column-4:nth-child(4n+1){
+  	clear:left !important;
+  }
+  .layout_pd_6c.column-20:nth-child(6n+1){
+  	clear:none !important;
+  }
+  .layout_pd_6c.column-20:nth-child(5n+1){
+  	clear:left !important;
+  }
+  .layout_pd_6c.column-6{
+  	width: 16.6666667%;
+  }
+  .layout_pd_6c.column-6:nth-child(5n+1){
+  	clear:none !important;
+  }
+  .layout_pd_6c.column-6:nth-child(6n+1){
+  	clear:left !important;
+  }
+  .layout_pd_6c.column-3{
+  	width: 33.33333%;
+  }
+  .layout_pd_6c.column-4{
+  	width: 25%;
+  }
+  .layout_pd_6c.column-6{
+  	width: 16.6666667%;
+  }
+  .layout_pd_6c.column-50{
+  	width: 50%;
+  }
+  .layout_pd_6c.column-50:nth-child(5n+1){
+  	clear:none!important;
+  }
+  .layout_pd_6c.column-50:nth-child(2n+1){
+  	clear:left!important;
+  }
+  }
+</style>

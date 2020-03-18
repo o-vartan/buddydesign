@@ -1,0 +1,135 @@
+<div data-section-id="{{ section.id }}" data-section-type="product-tab-v4" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+	<!--wrapper product-->
+ <div class="product-tab v2">
+      <div class="container container-240">
+          <div class="ecome-heading style4 spc4">
+              <div class="title-icon e-gradient v2">
+                  {{section.settings.text1}}
+              </div>
+              <ul class="product-tab-sw2">
+                  {% if section.blocks.size > 0 %}
+                  {%- assign i = 1 -%}
+                  {% for block in section.blocks %}
+                  <li class="{% if forloop.first %}active{% endif %}">
+                      <a href="#{{i}}_{{ section.id }}" data-toggle="tab">{{block.settings.tab_title}}</a>
+                  </li>
+                  {%- assign i = i | plus : 1 -%}
+                  {% endfor %}
+                  {% endif %}
+              </ul>
+          </div>
+          <div class="tab-content">
+              {% if section.blocks.size > 0 %}
+              {%- assign i = 1 -%}
+              {% for block in section.blocks %}
+
+              {% assign products_limit = block.settings.tab_limit %}
+              {% assign col = block.settings.tab_collection %}
+              <div id="{{i}}_{{ section.id }}" class="tab-pane fade {% if forloop.first %}active in{% endif %}">
+                  <div class="row">
+                      <div class="col-xs-12 col-sm-3 col-md-3 hidden-sm">
+                          <div class="ads">
+                             <div class="image-bd effect-img3 plus-zoom">
+                              <a href="{{block.settings.banner_url}}">
+                                  <img {%if block.settings.banner_img == blank%}src="{{'h4_b3.jpg'| asset_url }}" 
+                                    {%else%}
+                                  src="{{block.settings.banner_img | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" />  
+                              </a>
+                          	</div>
+                         </div>
+                      </div>
+                      <div class="col-xs-12 col-sm-12 col-md-9">
+                          <div class="row">
+                              {% for product in collections[col].products limit: products_limit %}
+                                {% include 'product-grid-6' %}
+                              {% else %}
+                                {% include 'empty-product-grid-3v2' %}
+                              {% endfor %}
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              {%- assign i = i | plus : 1 -%}
+              {% endfor %}
+              {% endif %}
+          </div>
+      </div>
+  </div>
+<!--end wrapper product-->
+</div>  
+{% schema %}
+{
+  "name": "Product Tab v4",
+  "class": "index-section",
+  "settings": [
+	{
+      "type": "header",
+      "content": "Heading"
+    },
+	{
+      "type": "text",
+      "id": "text1",
+      "label": "Title",
+      "default": "Tivi & Video"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Title",
+          "info": "Sale products"
+        },
+        {
+          "type": "collection",
+          "id": "tab_collection",
+          "label": "Choose Collection"
+        },
+        {
+          "type": "text",
+          "id": "tab_limit",
+          "label": "Limit number of products",
+          "default": "3"
+        },
+		{
+          "type": "image_picker",
+          "id": "banner_img",
+          "label": "Image",
+          "info": "319 x 376px Recommended"
+        },
+        {
+          "type": "url",
+          "id": "banner_url",
+          "label": "URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Tab v4",
+      "category": "Product Tab"
+    }
+  ]
+}
+{% endschema %}

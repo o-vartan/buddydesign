@@ -1,0 +1,235 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <!--slide-->
+  <div class="container-1300 slider-blog-clean  space_bot_100 border-bot">
+    <div class="ciloe-title-section  container relative text-center space_bot_70">
+      <div class="vertical-line" style="border-right:2px solid #000; width:4px; margin: 70px 0 35px 0;"></div>
+      <p class="fz-12 uppercase">{{section.settings.des}}</p>
+      <h2 class="margin_top_20 fw-600">{{section.settings.title}}</h2>
+
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="js-slider-blog">
+          {% assign products_limit = section.settings.limit %}
+          {% assign col = section.settings.blog %}
+          {% for article in blogs[col].articles limit: products_limit %}
+          <div class="content-blog v1">
+            <div class="blog-post-item ">
+              {% if article.image %}
+              <div class="blog-img inline-block">
+                <a href="{{ article.url }}" class="hover-images">{{ article | img_url: 'master' | img_tag: article.title }}</a>
+              </div>
+              {% endif %}
+              <div class="blog-info-bd">
+                <div class="blog-info text-center">
+                  <div class="blog-post-tags blog-post-author center">
+                    {% for tag in article.tags %}
+                    <a class="uppercase fz-12 author margin_top_10" href="{{ blog.url }}/tagged/{{ tag | handle }}" rel="category tag">{{ tag }}</a>{% unless forloop.last %},{% endunless %}
+                    {% endfor %}
+                  </div>
+                  <h3 class="blog-post-title margin_bottom_10"><a href="{{ article.url }}">{{ article.title }}</a></h3>
+                  <a href="{{ article.url }}" class="button-blog ">{{section.settings.btn_blog}}</a> 
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="text-center">
+          <a href="{{section.settings.url}}" class="delay03  relative btn-section">{{section.settings.btn_name}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--endslide-->
+</div>
+<style>
+    @media (max-width:767px){
+     .slider-blog-clean .blog-post-item{
+       padding-bottom:0;
+      }
+    }
+    {% if section.settings.select_color == 'image' %}
+  .slider-blog-clean{
+  	background-image:url({{section.settings.bg-img | img_url:'master'}});
+    background-position:center center;
+    background-size:cover;
+  }
+  {% else %}
+  .slider-blog-clean{
+    background:{{section.settings.bg_blog}};
+  }
+  {% endif %}
+  .slider-blog-clean{
+    padding:50px 0;
+  }
+    .slider-blog-clean .content-blog.v1 .blog-info{
+  	padding:0 20px;
+  }
+  @media (min-width:1025px){
+      .slider-blog-clean{
+    padding:100px 0;
+  }
+        .slider-blog-clean .content-blog.v1 .blog-info{
+  	padding:0 60px;
+  }
+  }
+  .slider-blog-clean .title-blog{
+  	font-size:30px;
+    margin-bottom:30px;
+  }
+  .slider-blog-clean .button-blog {
+    font-weight: 500;
+    color: #cfcfcf;
+    letter-spacing: 0.5px;
+}
+  .slider-blog-clean .content-blog.v1 .blog-info .blog-post-title{
+    font-weight:500;
+  }
+  .slider-blog-clean .content-blog.v1 .blog-info .blog-post-desc{
+  	margin-bottom:20px;
+  }
+
+  .slider-blog-clean .content-blog.v1 img{
+  	min-height:300px;
+    object-fit:cover;
+  }
+  .slider-blog-clean .content-blog.v1 a.over-hidden img{
+    transition:all .3s ease;
+  }
+  .slider-blog-clean .content-blog.v1 a.over-hidden img:hover{
+  	transform: scale(1.2);
+  }
+  .slider-blog-clean .content-blog.v1 .title-post{
+  	font-size:20px;
+    font-weight:400;
+  }
+  .slider-blog-clean .content-blog.v1 .day-post{
+  	font-size:12px;
+    font-weight:500;
+    color:{{section.settings.color_day_post}};
+    margin:20px 0;
+  }
+  .slider-blog-clean .js-slider-blog .slick-slide{
+  	margin:0 15px;
+  }
+  .slider-blog-clean .js-slider-blog .slick-prev{
+  	left:-5%;
+    opacity:0;
+    transition:all .5s ease;
+  }
+  .slider-blog-clean .js-slider-blog .slick-next{
+  	right:-5%;
+    opacity:0;
+    transition:all .8s ease;
+  }
+  .slider-blog-clean:hover .js-slider-blog .slick-prev{
+  	left:-10%;
+    opacity:1;
+  }
+  .slider-blog-clean:hover .js-slider-blog .slick-next{
+  	right:-10%;
+    opacity:1;
+  }
+
+</style>
+
+{% schema %}
+{
+  "name": "Blog v5",
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+   "type":      "select",
+   "id":        "select_color",
+   "label":     "Select background",
+   "options": [
+     {
+      
+       "value": "image",
+       "label": "Image"
+     },
+     {
+      
+       "value": "color",
+       "label": "Color"
+     }
+   ],
+   "default":   "color"
+	},
+	{
+      "type": "image_picker",
+      "id": "bg-img",
+      "label": "Background Image"
+    },
+
+    {
+      "type": "color",
+      "id": "bg_blog",
+      "label": "Background Section blog"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "From Our Blog"
+    },
+	{
+      "type": "text",
+      "id": "des",
+      "label": "Des",
+      "default": "Come clean us now"
+    },
+    {
+      "type": "text",
+      "id": "btn_blog",
+      "label": "Button ",
+      "default": "Read More"
+    },
+	{
+        	"type": "blog",
+        	"id": "blog",
+        	"label": "Chose Blog"
+    },
+	{
+        	"type": "text",
+        	"id": "limit",
+        	"label": "Limit Blog",
+        	"default": "3"
+    },
+	{
+      "type": "url",
+      "id": "url",
+      "label": "URL button"
+    },
+	{
+      "type": "text",
+      "id": "btn_name",
+      "label": "button name",
+      "default": "All Blog Post"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blog v5",
+      "category": "Page Minim"
+    }
+  ]
+}
+{% endschema %}

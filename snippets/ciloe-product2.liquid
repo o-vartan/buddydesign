@@ -1,0 +1,66 @@
+{% assign product_label_new = false %}
+{% capture _time %}{{settings.product_new_time | times:86400}}{% endcapture %} 
+{% assign time = _time|plus:0 %}
+{% assign now = 'now' | date: '%s'|plus:0 %}
+
+{% capture _value %}{{product.published_at | date: "%s" | plus : time }}{% endcapture %} 
+{% assign value = _value|plus:0 %}
+
+{% if now < value %}
+{% assign product_label_new = true %}
+{% endif %}
+
+
+{% assign label_popular = false %}
+{% if product.tags contains "popular" %}
+{% assign label_popular = true %}
+{% endif %} 
+
+{% assign label_hot = false %}
+{% if product.tags contains "hot" %}
+{% assign label_hot = true %}
+{% endif %}
+
+{% assign on_sale = false %}
+{% if product.compare_at_price > product.price %}
+{% assign on_sale = true %}
+{% endif %}
+
+{% assign sold_out = true %}
+{% if product.available %}
+{% assign sold_out = false %}
+{% endif %}
+<div class="product margin_bottom_50 engoj_grid_parent relative">
+  <div class="img-product relative">
+    <a href="{{ product.url | within: collection }} " class="engoj_find_img">
+     
+      <img src="{{ product.featured_image.src | img_url: 'master' }}" class="img-responsive full-width" alt="{{ product.featured_image.alt | escape }}">
+      {% for image in product.images %}
+      {% if forloop.last %}
+      <img src="{{ image.src | product_img_url: 'master' }}" class="img-responsive absolute img-product-hover full-width" alt="{{ product.featured_image.alt | escape }}">
+      {% endif %}
+      {% endfor %}
+    </a>
+    {% include 'ciloe-label-product' %}
+    {% include 'ciloe-icon-product' %}
+    {% if settings.show_variant %}
+    	{% include 'ciloe-variant-product' %}
+    {% endif %}
+    {% if sold_out %}
+    {% include 'ciloe-sold-out' %}
+    {% endif %}
+    {% include 'ciloe-timer-sale-product' %}
+  </div>
+  <div class="info-product text-center">
+    <h4 class="des-font capital title-product space_top_bot_20">
+      <a href="{{ product.url | within: collection }}">{{ product.title}}</a>
+    </h4>
+    {% include 'ciloe-price' %}
+    {% if template.name contains 'collection' %}
+    	{% include 'ciloe-des-product' %}
+    {% endif %}
+    {% if settings.show_thumbnai_pd %}
+    {% include 'ciloe-thumbnai-product' %}
+    {% endif %}
+  </div>
+</div>

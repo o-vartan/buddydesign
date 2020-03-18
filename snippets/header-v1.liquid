@@ -1,0 +1,118 @@
+<header id="header" class="header-v1 delay05 {% if settings.enable_fix_hdv1 %}fixed{% endif %}">
+  	<div class="container-fluid v1700">
+      <div class="row flex">
+        <div class="hidden-lg hidden-md col-sm-5 col-xs-4">
+          <a href="#" class="link-menu delay03 inline-block hidden-md hidden-lg space_top_30 btn-push-menu icon-pushmenu">
+            {% if settings.icon-pushmenu == blank %}
+            <svg width="26" height="16" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 66 41" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
+              <g>
+                <line class="st0" x1="1.5" y1="1.5" x2="64.5" y2="1.5"></line>
+                <line class="st0" x1="1.5" y1="20.5" x2="64.5" y2="20.5"></line>
+                <line class="st0" x1="1.5" y1="39.5" x2="64.5" y2="39.5"></line>
+              </g>
+            </svg>
+            {% else %}
+            <i class="{{ settings.icon-pushmenu }}"></i>
+            {% endif %}
+          </a>
+        </div>
+        <div class="col-lg-5 col-md-5 hidden-sm hidden-xs">
+                  <div class="topbar-right inline-block hidden-xs">
+                    {%comment%}
+                    <div class="element element-leaguage">
+                      <a id="label2" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                        aria-expanded="false">
+                        <span>{{settings.language_default}}</span>
+                        <span class="ion-ios-arrow-down f-10 e-arrow"></span>
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="label2">
+                        {%for i in (1..6)%}
+                        {%capture _enable%}language{{i}}_enable{%endcapture%}
+                        {%capture _text%}language{{i}}_text{%endcapture%}
+                        {%capture _url%}Language{{i}}_url{%endcapture%}
+
+                        {%assign enable = settings[_enable]%}
+                        {%assign text = settings[_text]%}
+                        {%assign url = settings[_url]%}
+                        <li><a href="{{url}}" title="{{text}}">{{text}}</a></li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                        {%endcomment%}
+                    <div class="element element-currency">
+                      <a id="label3" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                        aria-expanded="false">
+
+                        <span>{{shop.currency}}</span>
+                        <span class="ion-ios-arrow-down f-10 e-arrow"></span>
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="label3">
+                        {% assign supported = settings.supported_currencies | split: ' ' %}
+                        {% for c in supported %}
+                        <li><a data-currency="{{c}}">{{c}}</a></li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+        	{% include 'ciloe-horizon-menu-2' %}
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 logo_header">
+          <a href="{{shop.url}}" class="left">
+            {% if settings.hdv1_logo == blank %}
+          	<img alt="{{shop.name}}" src="{{'logo.png' | asset_url}}" class="img-logo">
+            {% else %}
+            <img alt="{{shop.name}}" src="{{settings.hdv1_logo | img_url:'master'}}" class="img-logo">
+            {% endif %}
+          </a>
+        </div>
+        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-4 text-right icon-main">
+          <a href="#" class="delay03 inline-block" id="btn-search">
+            {% if settings.icon-search == blank %}
+            <i class="icon-magnifier"></i>
+            {% else %}
+            <i class="{{ settings.icon-search }}"></i>
+            {% endif %}
+          </a>
+          {% if customer.email != blank %}
+          <a class="delay03 inline-block hidden-sm hidden-xs" href="/account/logout" title="logout">
+            {% if settings.icon-logout == blank %}
+            <i class="icon-power"></i>
+            {% else %}
+            <i class="{{ settings.icon-logout }}"></i>
+            {% endif %}
+          </a>
+          {% else %}
+          <a href="#login_form" class="delay03 inline-block hidden-sm hidden-xs" id="btn-login">
+            {% if settings.icon-login == blank %}
+            <i class="zoa-icon-user"></i>
+            {% else %}
+            <i class="{{ settings.icon-login }}"></i>
+            {% endif %}
+          </a>
+          {% endif %}
+          <a href="#" class="delay03 relative inline-block text-center icon-cart" id="btn-cart">
+            {% if settings.icon-cart == blank %}
+            <i class="icon-bag"></i>
+            {% else %}
+            <i class="{{ settings.icon-cart }}"></i>
+            {% endif %}
+            <figure class="absolute label-cart enj-cartcount">{{ cart.item_count }}</figure>
+          </a>
+                    <a href="#" class="link-menu delay03 inline-block hidden-sm hidden-xs space_top_30 btn-push-menu icon-pushmenu">
+            {% if settings.icon-pushmenu == blank %}
+            <svg width="26" height="16" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 66 41" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
+              <g>
+                <line class="st0" x1="1.5" y1="1.5" x2="64.5" y2="1.5"></line>
+                <line class="st0" x1="1.5" y1="20.5" x2="64.5" y2="20.5"></line>
+                <line class="st0" x1="1.5" y1="39.5" x2="64.5" y2="39.5"></line>
+              </g>
+            </svg>
+            {% else %}
+            <i class="{{ settings.icon-pushmenu }}"></i>
+            {% endif %}
+          </a>
+        </div>
+      </div>
+      
+   	</div>
+</header>

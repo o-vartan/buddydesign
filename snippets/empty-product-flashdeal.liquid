@@ -1,0 +1,40 @@
+{% comment %}
+Add default products to help with onboarding for collections/all only.
+
+The onboarding styles and products are only loaded if the
+store has no products.
+{% endcomment %}
+
+{% for i in (1..9) %}
+<div class="product-countd pd-bd product-inner">
+    <div class="product-item-countd">
+        <div class="product-head product-img">
+            <a href="/admin/products">{% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+      						{{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}</a>
+            <div class="ribbon-price v3 red"><span>- 30% </span></div>
+        </div>
+        <div class="product-info">
+            <p class="product-cate text-center">Head phones</p>
+            <div class="product-price thin-price v3">
+                <span class="red">$79.00</span>
+                <span class="old">$99.00</span>
+            </div>
+            <h3 class="product-title text-center v2" title="ShopiLaunch Product"><a href="/admin/products">ShopiLaunch Product</a></h3>
+            <div class="deal-progress">
+                <div class="deal-stock">
+                    <span class="stock-sold">19% already claimed</span>
+                    <span class="stock-available">Available: <strong>22</strong></span>
+                </div>
+                <div class="progress">
+                    <span class="progress-bar" style="width:27.5956%"></span>
+                </div>
+            </div>
+            <div class="time-cound">
+                <p class="text-center">{{section.settings.text2}}</p>
+                <div class="countdown countdown-time" data-countdown="countdown" data-date="{{section.settings.hp_countdown}}">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endfor%}

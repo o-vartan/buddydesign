@@ -1,0 +1,215 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+<!--slide-->
+  <div class="container-fluid slider-blog-clean">
+    <h1 class="title-blog {% if section.settings.local_text == 'center' %} text-center {% elsif section.settings.local_text == 'left' %} text-left {% elsif section.settings.local_text == 'right' %} text-right {% endif %}">{{section.settings.title}}</h1>
+    <p class="des-blog fz-18 {% if section.settings.local_text == 'center' %} text-center {% elsif section.settings.local_text == 'left' %} text-left {% elsif section.settings.local_text == 'right' %} text-right {% endif %}">{{section.settings.des}}</p>
+    <div class="js-slider-blog">
+      {% assign products_limit = section.settings.limit %}
+      {% assign col = section.settings.blog %}
+      {% for article in blogs[col].articles limit: products_limit %}
+      <div class="content-blog">
+        <div class="inline-block">
+          <a href="{{ article.url }}" class="inline-block over-hidden">
+            {{ article | img_url: 'master' | img_tag: article.title }}
+          </a>
+        </div>
+        <p class="day-post lt-2 uppercase">{{article.published_at | date: '%b.%d.%Y'}}</p>
+        <h2 class="title-post"><a href="{{ article.url }}">{{ article.title }}</a></h2>  
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+<!--endslide-->
+</div>
+<style>
+  .slider-blog-clean{
+    background:{{section.settings.bg_blog}};
+    {% if section.settings.display == 'box' %}
+    padding:80px 300px;
+    {% else %}
+    padding:80px 35px;
+    {% endif %}
+  }
+  @media (max-width:1600px){
+  	.slider-blog-clean{
+    background:{{section.settings.bg_blog}};
+    {% if section.settings.display == 'box' %}
+    padding:80px 100px;
+    {% else %}
+    padding:80px 35px;
+    {% endif %}
+  }
+  }
+  @media (max-width:1200px){
+  	.slider-blog-clean{
+    background:{{section.settings.bg_blog}};
+    {% if section.settings.display == 'box' %}
+    padding:80px 35px;
+    {% else %}
+    padding:80px 35px;
+    {% endif %}
+  }
+  }
+  .slider-blog-clean .title-blog{
+  	font-size:30px;
+    margin-bottom:30px;
+  }
+  .slider-blog-clean .des-blog{
+    margin-bottom:65px;
+    color:{{section.settings.color_des_blog}};
+  }
+  .slider-blog-clean .content-blog img{
+  	min-height:360px;
+    object-fit:cover;
+  }
+  .slider-blog-clean .content-blog a.over-hidden img{
+    transition:all .3s ease;
+  }
+  .slider-blog-clean .content-blog a.over-hidden img:hover{
+  	transform: scale(1.2);
+  }
+  .slider-blog-clean .content-blog .title-post{
+  	font-size:20px;
+    font-weight:400;
+  }
+  .slider-blog-clean .content-blog .day-post{
+  	font-size:12px;
+    font-weight:500;
+    color:{{section.settings.color_day_post}};
+    margin:20px 0;
+  }
+  .slider-blog-clean .js-slider-blog .slick-slide{
+  	margin:0 15px;
+  }
+  .slider-blog-clean .js-slider-blog .slick-prev{
+  	left:-5%;
+    opacity:0;
+    transition:all .5s ease;
+  }
+  .slider-blog-clean .js-slider-blog .slick-next{
+  	right:-5%;
+    opacity:0;
+    transition:all .8s ease;
+  }
+  .slider-blog-clean:hover .js-slider-blog .slick-prev{
+  	left:-10%;
+    opacity:1;
+  }
+  .slider-blog-clean:hover .js-slider-blog .slick-next{
+  	right:-10%;
+    opacity:1;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Blog Clean",
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+   "type":      "select",
+   "id":        "local_text",
+   "label":     "Location Text",
+   "options": [
+     {
+       
+       "value": "center",
+       "label": "Center"
+     },
+     {
+      
+       "value": "left",
+       "label": "Left"
+     },
+     {
+      
+       "value": "right",
+       "label": "Right"
+     }
+   ],
+   "default":   "center"
+	},
+	{
+        	"type": "text",
+        	"id": "title",
+        	"label": "Title Blog",
+        	"default": "From blog"
+    },
+	{
+        	"type": "textarea",
+        	"id": "des",
+        	"label": "Description Blog",
+        	"default": "Get the latest news & updates from Amely"
+    },
+	{
+   "type":      "select",
+   "id":        "display",
+   "label":     "Display content slider blog",
+   "options": [
+     {
+       
+       "value": "box",
+       "label": "Box"
+     },
+     {
+      
+       "value": "full",
+       "label": "Full width"
+     }
+   ],
+   "default":   "box"
+	},
+	{
+        	"type": "blog",
+        	"id": "blog",
+        	"label": "Chose Blog"
+    },
+	{
+        	"type": "text",
+        	"id": "limit",
+        	"label": "Limit Blog",
+        	"default": "10"
+    },
+    {
+      "type": "color",
+      "id": "bg_blog",
+      "label": "Background Section blog",
+      "default": "#f8f8f8"
+    },
+    {
+      "type": "color",
+      "id": "color_day_post",
+      "label": "Color Day Post",
+      "default": "#999999"
+    },
+    {
+      "type": "color",
+      "id": "color_des_blog",
+      "label": "Color Description blog",
+      "default": "#666666"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blog Clean",
+      "category": "Home Clean"
+    }
+  ]
+}
+{% endschema %}

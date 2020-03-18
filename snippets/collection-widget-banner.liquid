@@ -1,0 +1,9 @@
+<div class="sidebar-banner">
+  <a href="{{section.settings.widget_banner_url}}">
+    {% if section.settings.widget_banner_img == blank %}
+    <img src="https://placehold.it/400x508" alt="" class="img-reponsive">
+    {% else %}
+    <img src="{{section.settings.widget_banner_img|img_url:'master'}}" alt="" class="img-reponsive">
+    {% endif %}
+  </a>
+</div>

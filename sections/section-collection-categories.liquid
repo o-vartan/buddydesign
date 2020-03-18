@@ -1,0 +1,508 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  
+  <div class="container-fluid container_35 collection_categories margin_bottom_80">
+
+    <div class="row flex">
+      
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 relative content_collection">
+        <div class="row">
+          {% for i in (1..4) %}
+          {% capture url %}url_{{i}}{% endcapture %}
+          {% capture img %}img_{{i}}{% endcapture %}
+          {% capture local_text %}local_text_{{i}}{% endcapture %}
+          {% capture title %}title_{{i}}{% endcapture %}
+          {% capture btn_name %}btn_name_{{i}}{% endcapture %}
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 relative collection">
+            <a href="{{section.settings[url]}}" class="inline-block relative {% if section.settings.enable_overlay %}overlay_banner{% endif %}  over-hidden">
+              <img src="{{section.settings[img] | img_url:'master'}}" class="img-responsive hover-zoom-out">
+            </a>
+            <div class="absolute text_collection">
+              <h4 class=" {% if section.settings[local_text] == 'center' %} text-center {% elsif section.settings[local_text] == 'left' %} text-left {% elsif section.settings[local_text] == 'right' %} text-right {% endif %}">{{section.settings[title]}}</h4>
+              <div class=" over-hidden {% if section.settings[local_text] == 'center' %} text-center {% elsif section.settings[local_text] == 'left' %} text-left {% elsif section.settings[local_text] == 'right' %} text-right {% endif %}"><a href="{{section.settings[url]}}" class="ciloe-btn-default inline-block over-hidden">{{section.settings[btn_name]}}</a></div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+<!--        -->
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 relative banner-collection">
+        <a href="{{section.settings.url_banner}}" class="inline-block relative overlay_banner over-hidden">
+          <img src="{{section.settings.img_banner | img_url:'master'}}" class="img-responsive hover-zoom-out">
+        </a>
+        <div class="absolute text_collection">
+          <h4 class="lt-2 {% if section.settings.local_text_banner == 'center' %} text-center {% elsif section.settings.local_text_banner == 'left' %} text-left {% elsif section.settings.local_text_banner == 'right' %} text-right {% endif %}">{{section.settings.title_banner}}</h4>
+          <div class=" over-hidden {% if section.settings.local_text_banner == 'center' %} text-center {% elsif section.settings.local_text_banner == 'left' %} text-left {% elsif section.settings.local_text_banner == 'right' %} text-right {% endif %}"><a href="{{section.settings.url_banner}}" class="ciloe-btn-default-2 inline-block over-hidden relative">{{section.settings.btn_name_banner}}</a></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<style>
+  {% if section.settings.display == 'right' %}
+  .collection_categories .row.flex{
+  	flex-direction: row;
+  }
+  .collection_categories .content_collection .collection{
+  	padding-right: 0;
+    padding-bottom: 10px;
+  }
+  @media (max-width:991px){
+  	.collection_categories .row.flex{
+  	flex-direction: column;
+  }
+  }
+  {% else %}
+  .collection_categories .content_collection .collection{
+  	padding-left: 0;
+    padding-bottom: 10px;
+  }
+  .collection_categories .row.flex{
+  	flex-direction: row-reverse;
+  }
+  @media (max-width:991px){
+  	.collection_categories .row.flex{
+  	flex-direction: column-reverse;
+  }
+  }
+  {% endif %}
+  .collection_categories .content_collection .collection .overlay_banner:before,.collection_categories .banner-collection .overlay_banner:before{
+  	content:'';
+    display:inline-block;
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background:rgba(0,0,0,.7);
+    opacity:0;
+    transition:all .3s ease;
+  }
+  .collection_categories .content_collection .collection:hover .overlay_banner:before,.collection_categories .banner-collection:hover .overlay_banner:before{
+    opacity:1;
+    z-index:1;
+  }
+  .collection_categories .banner-collection:hover .overlay_banner img{
+    transform:scale(1.05);
+  }
+  .collection_categories .content_collection .collection .text_collection{
+  	bottom:50px;
+    left:10%;
+    right:10%;
+    color:{{section.settings.color_text}};
+  }
+  .collection_categories .banner-collection .text_collection{
+  	top:45%;
+    left:10%;
+    right:10%;
+    color:{{section.settings.color_text_banner}};
+    z-index:2;
+  }
+  .collection_categories .banner-collection .text_collection h4{
+  	font-size:50px;
+    margin-bottom:20px;
+  }
+  .collection_categories .banner-collection .text_collection .ciloe-btn-default-2{
+    color:{{section.settings.color_link_banner}};
+  }
+  .collection_categories .banner-collection .text_collection .ciloe-btn-default-2:before{
+  	background:{{section.settings.color_link_banner}};
+  }
+  .collection_categories .banner-collection .text_collection .ciloe-btn-default-2:hover{
+    color:{{section.settings.color_hover_link_banner}};
+  }
+  .collection_categories .banner-collection .text_collection .ciloe-btn-default-2:hover::before{
+    background:{{section.settings.color_hover_link_banner}};
+  }
+  .collection_categories .content_collection .collection .text_collection h4{
+  	margin-bottom:15px;
+    font-size:26px;
+  }
+  
+  .collection_categories .content_collection .collection .text_collection a{
+    color:{{section.settings.color_link}};
+  }
+  .collection_categories .content_collection .collection .text_collection a:hover{
+    color:{{section.settings.color_text_hover}};
+  }
+  .collection_categories .content_collection .collection:hover .text_collection h4,.collection_categories .banner-collection:hover .text_collection h4{
+  	animation:text-translate 1s ease;
+    -webkit-animation:text-translate 1s ease;
+  }
+  .collection_categories .content_collection .collection:hover .text_collection .ciloe-btn-default,.collection_categories .banner-collection:hover .text_collection .ciloe-btn-default-2{
+  	animation:text-translate3 1.2s ease;
+    -webkit-animation:text-translate3 1.2s ease;
+  }
+  @media (max-width:567px){
+    
+  }
+</style>
+{% schema %}
+{
+  "name": "Collection Categories",
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      "type": "header",
+      "content": "Enable overlay"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_overlay",
+      "label": "Enable?",
+      "default": false
+    },
+	{
+      "type": "header",
+      "content": "Select Banner"
+    },
+	{
+   			"type":      "select",
+   			"id":        "display",
+   			"label":     "Select position banner",
+   			"options": [
+     {
+       
+       "value": "left",
+       "label": "Banner Left"
+     },
+     {
+       
+       "value": "right",
+       "label": "Banner Right"
+     }
+   ],
+   		"default":   "left"
+   
+	},
+	{
+      "type": "header",
+      "content": "Chose color text content collection"
+    },
+	{
+            "type": "color",
+          	"id": "color_text",
+          	"label": "Color title",
+			"default": "#000"
+    },
+	{
+            "type": "color",
+          	"id": "color_link",
+          	"label": "Color link",
+			"default": "#999"
+    },
+	{
+            "type": "color",
+          	"id": "color_text_hover",
+          	"label": "Color hover button",
+			"default": "#41cce5"
+    },
+	{
+      "type": "header",
+      "content": "Chose color text banner collection"
+    },
+	{
+            "type": "color",
+          	"id": "color_text_banner",
+          	"label": "Color title banner",
+			"default": "#fff"
+    },
+	{
+            "type": "color",
+          	"id": "color_link_banner",
+          	"label": "Color link banner",
+			"default": "#fff"
+    },
+	{
+            "type": "color",
+          	"id": "color_hover_link_banner",
+          	"label": "Color hover link banner",
+			"default": "#41cce5"
+    },
+	{
+            "type": "header",
+          	"content": "Collection 1"
+    },
+	{
+            "type": "url",
+          	"id": "url_1",
+          	"label": "URL collection 1",
+			"default": "/collections/all"
+    },
+	{
+            "type": "image_picker",
+          	"id": "img_1",
+          	"label": "Image collection 1",
+			"info": "450x450 image size"
+    },
+	{
+   			"type":      "select",
+   			"id":        "local_text_1",
+   			"label":     "Select position text collection",
+   			"options": [
+     {
+       
+       "value": "left",
+       "label": "Left"
+     },
+     {
+       
+       "value": "center",
+       "label": "Center"
+     },
+     {
+       
+       "value": "right",
+       "label": "Right"
+     }
+   ],
+   		"default":   "left"
+   
+			},
+	{
+            "type": "text",
+          	"id": "title_1",
+          	"label": "Title collection 1",
+			"default": "Shose"
+    },
+	{
+            "type": "text",
+          	"id": "btn_name_1",
+          	"label": "Button collection 1",
+			"default": "shop now"
+    },
+	{
+            "type": "header",
+          	"content": "Collection 2"
+    },
+	{
+            "type": "url",
+          	"id": "url_2",
+          	"label": "URL collection 2",
+			"default": "/collections/all"
+    },
+	{
+            "type": "image_picker",
+          	"id": "img_2",
+          	"label": "Image collection 2",
+			"info": "450x450 image size"
+    },
+	{
+   			"type":      "select",
+   			"id":        "local_text_2",
+   			"label":     "Select position text collection",
+   			"options": [
+     {
+       
+       "value": "left",
+       "label": "Left"
+     },
+     {
+       
+       "value": "center",
+       "label": "Center"
+     },
+     {
+       
+       "value": "right",
+       "label": "Right"
+     }
+   ],
+   		"default":   "left"
+   
+			},
+	{
+            "type": "text",
+          	"id": "title_2",
+          	"label": "Title collection 2",
+			"default": "T.O.P"
+    },
+	{
+            "type": "text",
+          	"id": "btn_name_2",
+          	"label": "Button collection 2",
+			"default": "shop now"
+    },
+	{
+            "type": "header",
+          	"content": "Collection 3"
+    },
+	{
+            "type": "url",
+          	"id": "url_3",
+          	"label": "URL collection 3",
+			"default": "/collections/all"
+    },
+	{
+            "type": "image_picker",
+          	"id": "img_3",
+          	"label": "Image collection 3",
+			"info": "450x450 image size"
+    },
+	{
+   			"type":      "select",
+   			"id":        "local_text_3",
+   			"label":     "Select position text collection",
+   			"options": [
+     {
+       
+       "value": "left",
+       "label": "Left"
+     },
+     {
+       
+       "value": "center",
+       "label": "Center"
+     },
+     {
+       
+       "value": "right",
+       "label": "Right"
+     }
+   ],
+   		"default":   "left"
+   
+			},
+	{
+            "type": "text",
+          	"id": "title_3",
+          	"label": "Title collection 3",
+			"default": "Outerwear"
+    },
+	{
+            "type": "text",
+          	"id": "btn_name_3",
+          	"label": "Button collection 3",
+			"default": "shop now"
+    },
+	{
+            "type": "header",
+          	"content": "Collection 4"
+    },
+	{
+            "type": "url",
+          	"id": "url_4",
+          	"label": "URL collection 4",
+			"default": "/collections/all"
+    },
+	{
+            "type": "image_picker",
+          	"id": "img_4",
+          	"label": "Image collection 4",
+			"info": "450x450 image size"
+    },
+	{
+   			"type":      "select",
+   			"id":        "local_text_4",
+   			"label":     "Select position text collection",
+   			"options": [
+     {
+       
+       "value": "left",
+       "label": "Left"
+     },
+     {
+       
+       "value": "center",
+       "label": "Center"
+     },
+     {
+       
+       "value": "right",
+       "label": "Right"
+     }
+   ],
+   		"default":   "left"
+   
+			},
+	{
+            "type": "text",
+          	"id": "title_4",
+          	"label": "Title collection 4",
+			"default": "Accessories"
+    },
+	{
+            "type": "text",
+          	"id": "btn_name_4",
+          	"label": "Button collection 4",
+			"default": "shop now"
+    },
+	{
+            "type": "header",
+          	"content": "Banner collection"
+    },
+	{
+            "type": "url",
+          	"id": "url_banner",
+          	"label": "URL collection banner",
+			"default": "/collections/all"
+    },
+	{
+            "type": "image_picker",
+          	"id": "img_banner",
+          	"label": "Image collection banner",
+			"info": "903x918 image size"
+    },
+	{
+   			"type":      "select",
+   			"id":        "local_text_banner",
+   			"label":     "Select position text collection",
+   			"options": [
+     {
+       
+       "value": "left",
+       "label": "Left"
+     },
+     {
+       
+       "value": "center",
+       "label": "Center"
+     },
+     {
+       
+       "value": "right",
+       "label": "Right"
+     }
+   ],
+   		"default":   "center"
+   
+			},
+	{
+            "type": "text",
+          	"id": "title_banner",
+          	"label": "Title collection banner",
+			"default": "Trending now"
+    },
+	{
+            "type": "text",
+          	"id": "btn_name_banner",
+          	"label": "Button collection banner",
+			"default": "shop now"
+    }
+  ],
+
+  "presets": [
+    {
+      "name": "Collection Categories",
+      "category": "Home Categories"
+    }
+  ]
+}
+{% endschema %}

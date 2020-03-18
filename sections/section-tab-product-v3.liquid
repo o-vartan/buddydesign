@@ -1,0 +1,384 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <!--slide-->
+  <div class="tab-pd-v3 ">
+    <div class="container-fluid tab-nav ">
+      <div class="container btn_layout_shop">
+        <div class="row">
+          <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">    
+            <ul class="nav nav-tabs flex title-tab-3 ">
+              {% if section.blocks.size > 0 %}
+              {%- assign i = 1 -%}
+              {% for block in section.blocks %}
+              <li class="{% if forloop.first %}active{% endif %}">
+                <a href="#{{i}}_{{ section.id }}" data-toggle="tab" class=" delay03">{{block.settings.tab_title}}</a>
+              </li>
+              {%- assign i = i | plus : 1 -%}
+              {% endfor %}
+              {% endif %}
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 btn_function  filter-button text-right space_top_20 hidden-xs">
+            <h4  class="btn_filter_full" data-click-state="0">{{section.settings.icon_filter}}</h4>
+          </div>
+        </div>
+      <div class="filter_full col-md-12 over-hidden delay05 engoj-collection-sidebar hidden-xs">
+      <div class="content_filter_full row" >
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 space_bot_20">
+          {% include 'ciloe-filter-price' %}
+        </div>
+		<!--          -->
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 space_bot_20">
+          {% include 'ciloe-filter-size' %}
+        </div>
+		<!--          -->
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 space_bot_20">
+          {% include 'filter-color' %}
+        </div>
+		<!--          -->
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 space_bot_20">
+          {% include 'filter-brand' %}
+        </div>
+		<!--          -->
+      </div>
+    </div>
+      </div>
+    </div>
+      <div class="tab-content container-fluid product_shop product-collection-grid">
+        {% if section.blocks.size > 0 %}
+        {%- assign i = 1 -%}
+        {% for block in section.blocks %}
+
+        {% assign products_limit = block.settings.tab_limit %}
+        {% assign col = block.settings.tab_collection %}
+        <div id="{{i}}_{{ section.id }}" class="tab-pane fade {% if forloop.first %}active in{% endif %}">
+          
+            {% for product in collections[col].products limit: products_limit %}
+            <div class=" product-col-5 col-lg-2 col-md-3 col-sm-4 col-xs-6 product-tab-pd loader">
+            {% include 'ciloe-product2' %}
+            </div>
+            {% endfor %}
+
+          
+        </div>
+        {%- assign i = i | plus : 1 -%}
+        {% endfor %}
+        {% endif %}
+              <div class="btn-loadmore text-center col-md-12 space_top_50 margin_bottom_80">
+        <a href="#" id="loadMore" class="btn-ciloe inline-block  "><img alt="" src="{{'loadmore.png' | asset_url}}" class="img-logo"></a>
+      </div>
+      </div>
+
+  </div>
+<!--endslide-->
+</div>
+<style>
+  .tab-nav {
+  background:{{section.settings.menu_tab}};
+  }
+  .btn-loadmore .btn-ciloe {
+    text-transform: capitalize;
+    padding: 12px 24px;
+    letter-spacing: 0px;
+    transition: .3s;
+    font-size:13px;
+    
+}
+  .btn-loadmore .btn-ciloe img{
+  	transition:.3s;
+  }
+    .btn-loadmore .btn-ciloe img:hover{
+  	opacity:0.6;
+  }
+  .tab-pd-v3 .title-tab-3 {
+      align-items: baseline;
+    border-bottom:0;
+    margin-bottom:5px;
+    margin-top:15px;
+  }
+  .tab-content > .tab-pane.active{
+   width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+  .tab-pd-v3 .title-tab-3 li a{
+	opacity:0.7;
+    padding-bottom:20px;
+    position:relative;
+    background:transparent;
+    border:0;
+    transition:0s;
+    color:{{section.settings.color}};
+  }
+  .tab-pd-v3 .title-tab-3 li a:hover{
+	opacity:1;
+    border:0;
+    border-radius:0;
+    color:{{section.settings.color_active}};
+  }
+  .tab-pd-v3 .title-tab-3 li a:hover::before{
+	left:15px;
+    right:15px;
+    
+  }
+  .tab-pd-v3 .title-tab-3 li.active a{
+	opacity:1;
+    color:{{section.settings.color_active}};
+  }
+  .tab-pd-v3 .title-tab-3 li.active a:before{
+	left:15px;
+    right:15px;
+  }
+  .tab-pd-v3 .title-tab-3 li.active a:hover,.tab-pd-v3 .title-tab-3 li.active a:focus{
+	background:transparent;
+  }
+    .tab-pd-v3 .product{     
+      margin-bottom:0;
+  }
+  .tab-pd-v3 .product-tab-pd{
+  padding:0;
+    border-bottom: 1px solid {{section.settings.color_border}};
+    border-right: 1px solid {{section.settings.color_border}};
+        transition: .3s;
+  }
+  .tab-pd-v3 .product .info-product{
+  	padding-bottom:20px;
+    border-top: 1px solid {{section.settings.color_border}};
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  @media (max-width: 768px){
+    .tab-pd-v3 .col-xs-6:nth-child(2n+2){
+        border-right:none;
+    }
+  }
+  
+    @media (min-width: 768px){
+   .tab-pd-v3 .col-sm-4:nth-child(3n+1){
+    clear: none;
+    }
+        @media (min-width: 992px){
+  .tab-pd-v3 .col-md-3:nth-child(4n+1){
+      clear: none;
+    }
+  }
+  @media (min-width: 1200px){
+    .product-col-5:nth-child(5n+5){
+    border-right: 1px solid transparent;
+    }
+  }
+
+
+  
+  .tab-pd-v3 .product-tab-pd:hover{
+          box-shadow: 0 10px 60px 0 rgba(0, 0, 0, 0.07);
+    z-index: 9;
+  }
+</style>
+{% schema %}
+{
+  "name": "Tab product v3",
+  "max_blocks": 6,
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      "type": "header",
+      "content": "Color Title"
+    },
+	{
+          "type": "color",
+          "id": "menu_tab",
+          "label": "Background",
+	  	  "default":   "#f9f9f9"
+    },
+	{
+          "type": "color",
+          "id": "color",
+          "label": "Color  Tab",
+	  	  "default":   "#999999"
+    },
+	{
+          "type": "color",
+          "id": "color_active",
+          "label": "Color  Tab active",
+	  	  "default":   "#0D4C82"
+    },
+	{
+          "type": "color",
+          "id": "color_border",
+          "label": "Color  border",
+	  	  "default":   "#e4e4e4"
+    },
+	{
+      "type": "header",
+      "content": "Button filter"
+    },
+	{
+      "type": "text",
+      "id": "icon_filter",
+      "label": "Filter",
+      "default": "Filters"
+    },
+    {
+      "type": "header",
+      "content": "Widget config"
+    },
+    {
+      "type": "header",
+      "content": "Widget Filter Categories"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_filter_cate",
+      "label": "Enable widget?",
+      "default": true
+    },
+	{
+      "type": "text",
+      "id": "title_cate",
+      "label": "Title widget",
+      "default": "CATEGORIES"
+    },
+    {
+      "type": "header",
+      "content": "Widget Filter by Color"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_filter_color",
+      "label": "Enable widget?",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "title_color",
+      "label": "Title Widget",
+      "default": "COLOR"
+    },
+    {
+      "type": "textarea",
+      "id": "shop_by_color_list_tags",
+      "info": "Shop by Color list tags is tags in product",
+      "label": "Shop by Color list tags"
+    },
+    {
+      "type": "header",
+      "content": "Widget Filter by Size"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_filter_size",
+      "label": "Enable widget?",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "title_size",
+      "label": "Title Widget",
+      "default": " BY SIZE"
+    },
+    {
+      "type": "textarea",
+      "id": "shop_by_size_list_tags",
+      "info": "Shop by Size list tags is tags in product",
+      "label": "Shop by Size list tags"
+    },
+	{
+      "type": "header",
+      "content": "Widget Filter by Price"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_filter_price",
+      "label": "Enable widget?",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "title_price",
+      "label": "Title Widget",
+      "default": "PRICE"
+    },
+    {
+      "type": "textarea",
+      "id": "shop_by_price_list_tags",
+      "info": "Shop by Price list tags is tags in product",
+      "label": "Shop by Price list tags"
+    },
+	{
+      "type": "header",
+      "content": "Widget Filter by Brand"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_filter_tag",
+      "label": "Enable widget?",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "shop_by_brand_title",
+      "label": "Title Widget",
+      "default": "BY BRANDS"
+    },
+	{
+      "type": "header",
+      "content": "Widget Filter fullwidth"
+    },
+    {
+      "type": "color",
+      "id": "bg_filter_full",
+      "label": "BG color widget",
+      "default": "#f8f8f8"
+    }
+  ],
+
+"blocks": [
+      {
+        "type": "image",
+        "name": "Image slide",
+        "settings": [
+		{
+          "type": "text",
+          "id": "tab_title",
+          "label": "Title tab",
+	  	  "default":   "New Products"
+        },
+		{
+          "type": "collection",
+          "id": "tab_collection",
+          "label": "Chose collection"
+        },
+		{
+          "type": "text",
+          "id": "tab_limit",
+          "label": "Limit product",
+	  	  "default":   "25"
+        }
+        ]
+      }
+    ],
+  "presets": [
+    {
+      "name": "Tab product v3",
+      "category": "Page Minim"
+    }
+  ]
+}
+{% endschema %}

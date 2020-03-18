@@ -1,0 +1,11 @@
+<div class="widget woocommerce widget_product_categories filter filter-price">
+  <h3 class="filtertitle" data-init="widgetToggle">{{section.settings.shop_by_brand_title}}</h3>
+  <ul class="product-categories filter-content">
+    {% for product_vendor in collection.all_vendors %}
+    <li class="cat-item">
+      {{ product_vendor | link_to_vendor }}
+    </li>
+    {% endfor %}
+  </ul>
+  <!-- /.product-categories -->
+</div>

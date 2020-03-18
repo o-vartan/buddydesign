@@ -1,0 +1,143 @@
+
+<div class="container-fuid page_404 bg-404 relative">
+
+  <img src="{{settings.bg-img | img_url:'master'}}" class="img-responsive  " alt="" /> 
+  <div class="header-404 absolute ">
+    <div class="container header-v4">
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 logo_header ">
+        <a href="{{shop.url}}" class="">
+          {% if settings.notfor_logo == blank %}
+          <img alt="{{shop.name}}" src="{{'logo.png' | asset_url}}" class="img-logo inline-block">
+          {% else %}
+          <img alt="{{shop.name}}" src="{{settings.notfor_logo | img_url:'master'}}" class="img-logo inline-block">
+          {% endif %}
+        </a>
+      </div>
+      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-right icon-main">
+        <a href="#" class="delay03 inline-block" id="btn-search">
+          {% if settings.icon-search == blank %}
+          <i class="icon-magnifier"></i>
+          {% else %}
+          <i class="{{ settings.icon-search }}"></i>
+          {% endif %}
+        </a>
+        {% if customer.email != blank %}
+        <a class="delay03 inline-block hidden-sm hidden-xs" href="/account/logout" title="logout">
+          {% if settings.icon-logout == blank %}
+          <i class="icon-power"></i>
+          {% else %}
+          <i class="{{ settings.icon-logout }}"></i>
+          {% endif %}
+        </a>
+        {% else %}
+        <a href="#login_form" class="delay03 inline-block hidden-sm hidden-xs" id="btn-login">
+          {% if settings.icon-login == blank %}
+          <i class="zoa-icon-user"></i>
+          {% else %}
+          <i class="{{ settings.icon-login }}"></i>
+          {% endif %}
+        </a>
+        {% endif %}
+        <a href="#" class="delay03 relative inline-block text-center icon-cart" id="btn-cart">
+          {% if settings.icon-cart == blank %}
+          <i class="icon-bag"></i>
+          {% else %}
+          <i class="{{ settings.icon-cart }}"></i>
+          {% endif %}
+          <figure class="absolute label-cart enj-cartcount">{{ cart.item_count }}</figure>
+        </a>
+
+      </div>
+    </div>
+  </div>
+  <div class="content-404 absolute ">
+    <div class="container ">
+      <div class="error-page text-center">
+        <h1 class="error-title text-center">{{settings.error_title}}</h1>
+        <h2 class="text-center content">{{settings.error_content}} <a href="{{settings.error_btn_url}}">{{settings.error_btn_name}}</a></h2>
+      </div>
+    </div>
+  </div>
+  <div class="footer-404 absolute ">
+    <div class="container ">
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-left ">
+        <p class="uppercase">{{settings.email-404}} </p>     
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center ">
+        <p class="uppercase"> {{settings.phone-404}}</p>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right ">
+        <p class="uppercase"> {{settings.add-404}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .header-v4{
+      background: transparent!important;
+  }
+  .content-404{
+  	top:50%;
+    width:100%;
+        transform: translateY(-50%);
+  }
+  .footer-404 p{
+  	color:{{settings.color_footer_error}};
+  }
+  .page_404 .error-page .content{
+  color:{{settings.color_error_content}};
+}
+.page_404 .error-page .content a{
+  color:{{settings.color_error_btn_name}};
+}
+    .header-404{
+  	top:6%;
+    width:100%;
+  }
+      .footer-404{
+  	bottom:10%;
+    width:100%;
+  }
+  footer{
+   display:none;
+  }
+  header{
+  display:none;
+  }
+  body{
+      height: 100%;
+    overflow: hidden;
+  }
+  .bg-404 > img{
+    height: 100%;
+    object-fit: cover;
+    z-index:-1;
+    width:100%;
+    min-height:900px;
+  }
+  .bg-404{
+    overflow: hidden;
+  	height:100vh;
+  }
+  @media (max-width: 568px ){
+        .content-404{
+    top:43%;
+    }
+    .page_404 .error-page .error-title{
+    	font-size:30px;
+    }
+    .page_404 .error-page .content{
+    	font-size:16px;
+    }
+  .footer-404 .col-xs-4{
+  	width:100%;
+    text-align:center!important;
+    padding:10px;
+  }
+          .footer-404{
+  	bottom:2%;
+    width:100%;
+  }
+  }
+    
+</style>

@@ -1,0 +1,284 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  
+  <div class="container-fluid instagram margin_bottom_100">
+    {% if section.settings.enable_img_title %}
+    <div class="img-title {% if section.settings.text == 'left' %} text-left {% elsif section.settings.text == 'right' %} text-right {% elsif section.settings.text == 'center' %} text-center {% endif %}">
+      <img src="{{section.settings.img_title | img_url:'master'}}" class="img-responsive inline-block">
+    </div>
+    {% endif %}
+    <h1 class="title-insta {% if section.settings.text == 'left' %} text-left {% elsif section.settings.text == 'right' %} text-right {% elsif section.settings.text == 'center' %} text-center {% endif %}margin_bottom_20">{{section.settings.title}}</h1>
+    <p class="des-insta fz-18 {% if section.settings.text == 'left' %} text-left {% elsif section.settings.text == 'right' %} text-right {% elsif section.settings.text == 'center' %} text-center {% endif %} margin_bottom_80">{{section.settings.des}}</p>
+    <div class="flex center {% if section.settings.enable_container %}container_340 {% else %} row {% endif %}">
+      {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+      <div class="gr_ins_classic flex">
+        <div class="content-insta {% if block.settings.space_right %}margin_right_30{% endif %} relative {% if block.settings.hidden_content_1 %} hidden {% endif %}">
+          <a href="{{block.settings.url_1}}" class="inline-block over-hidden relative parent" target="_blank">
+            <img src="{{block.settings.img_1 | img_url:'master'}}" class="img-responsive delay07">
+            <div class="absolute infor-insta text-center delay05">
+              <a href="instagram.com" class="delay03 inline-block fz-18"><i class="ti-instagram"></i></a>
+            </div>
+          </a>
+        </div>
+        <div class="content-insta {% if block.settings.space_right %}margin_right_30{% endif %} relative {% if block.settings.hidden_content_2 %} hidden {% endif %}">
+          <a href="{{block.settings.url_2}}" class="inline-block over-hidden relative parent" target="_blank">
+            <img src="{{block.settings.img_2 | img_url:'master'}}" class="img-responsive delay07">
+            <div class="absolute infor-insta text-center delay05">
+              <a href="instagram.com" class="delay03 inline-block fz-18"><i class="ti-instagram"></i></a>
+            </div>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+
+  </div>
+
+</div>
+<style>
+  {% if section.settings.enable_img_title %}
+  .instagram .img-title{
+  	margin:35px 0;
+  }
+  {% endif %}
+  .instagram .title-insta{
+    font-size:{{section.settings.font_size_title}}px;
+    position:relative;
+    color:{{section.settings.color_title}};
+  }
+  .instagram .des-insta{
+    color:{{section.settings.color_des}};
+  }
+  {% if section.settings.enable_line_title %}
+  .instagram .title-insta:before{
+    content:'';
+    display:inline-block;
+    position:relative;
+    width:80px;
+    height:1px;
+    background:{{section.settings.bg_line_title}};
+    top: -5px;
+    left: -15px;
+  }
+  .instagram .title-insta:after{
+    content:'';
+    display:inline-block;
+    position:relative;
+    width:80px;
+    height:1px;
+    background:{{section.settings.bg_line_title}};
+    top: -5px;
+    right: -15px;
+  }
+  {% endif %}
+  .instagram .container_340{
+  	padding:0 340px;
+  }
+  .instagram .content-insta img{
+  	transition: all .7s ease;
+  }
+  .instagram .content-insta:hover img{
+  	transform:scale(1.2);
+  }
+  .instagram .content-insta .parent:before{
+  	content:'';
+    display:inline-block;
+    position:absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    background:rgba(0,0,0,.7);
+    opacity:0;
+    transition:all .3s ease;
+    z-index:2;
+  }
+  .instagram .content-insta:hover .parent::before{
+  	opacity:1;
+  }
+  .instagram .content-insta .infor-insta{
+  	top:50%;
+    width:100%;
+    transform:scale(0);
+    z-index:3;
+  }
+  .instagram .content-insta:hover .infor-insta{
+    transform:scale(1);
+  }
+  .instagram .content-insta:hover .infor-insta a{
+    color:#fff;
+  }
+  .instagram .content-insta:hover .infor-insta a:hover{
+    color:#41cce5;
+  }
+</style>
+{% schema %}
+{
+  "name": "Instagram Classic",
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      "type": "select",
+      "id": "text",
+      "label": "Select local Title",
+      "default": "center",
+	  "options": [
+     {
+       
+       "value": "left",
+       "label": "Left"
+     },
+     {
+       
+       "value": "right",
+       "label": "Right"
+     },
+     {
+       
+       "value": "center",
+       "label": "Center"
+     }
+   	]
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_img_title",
+      "label": "Enable Image title",
+      "default": false
+    },
+	{
+      "type": "image_picker",
+      "id": "img_title",
+      "label": "Image Title"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_line_title",
+      "label": "Enable line title",
+      "default": false
+    },
+	{
+      "type": "color",
+      "id": "bg_line_title",
+      "label": "Background line title",
+      "default": "#e6e6e6"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Instagram"
+    },
+	{
+      "type": "color",
+      "id": "color_title",
+      "label": "Color title",
+      "default": "#000"
+    },
+	{
+      "type": "range",
+      "id": "font_size_title",
+      "min":       14,
+      "max":       50,
+      "step":      1,
+      "unit":      "px",
+      "label":     "Font size title",
+      "default":   40
+    },
+    {
+      "type": "text",
+      "id": "des",
+      "label": "Description",
+      "default": "Get the latest news & updates from Ciloe"
+    },
+	{
+      "type": "color",
+      "id": "color_des",
+      "label": "Color Description",
+      "default": "#999"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_container",
+      "label": "Enable box",
+      "default": true
+    }
+	
+  ],
+"blocks": [
+      {
+        "type": "image",
+        "name": "Image slide",
+		"limit":10,
+        "settings": [
+		  {
+            "type": "checkbox",
+            "id": "hidden_content_1",
+            "label": "Hidden content 1",
+            "default": false
+          },
+		  {
+            "type": "url",
+          	"id": "url_1",
+          	"label": "Url 1",
+			"default": "/collections/all"
+          },
+          {
+            "type": "image_picker",
+          	"id": "img_1",
+          	"label": "Image brand 1",
+			"info": "48 x 39px recommended"
+          },
+		  {
+            "type": "url",
+          	"id": "url_2",
+          	"label": "Url 2",
+			"default": "/collections/all"
+          },
+          {
+            "type": "image_picker",
+          	"id": "img_2",
+          	"label": "Image brand 2",
+			"info": "48 x 39px recommended"
+          },
+          {
+            "type": "checkbox",
+            "id": "space_right",
+            "label": "Space content",
+            "default": true
+          },
+          {
+            "type": "checkbox",
+            "id": "hidden_content_2",
+            "label": "Hidden content 2",
+            "default": false
+          }
+    
+]
+}
+],
+  "presets": [
+    {
+      "name": "Instagram Classic",
+      "category": "Home Classic"
+    }
+  ]
+}
+{% endschema %}

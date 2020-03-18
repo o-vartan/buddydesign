@@ -1,0 +1,128 @@
+<!-- /templates/customers/account.liquid -->
+{% comment %}
+
+For all available customer liquid tags:
+- http://docs.shopify.com/themes/liquid-variables/customer
+
+{% endcomment %}
+
+<section>
+    <div class="container container-240">
+      
+        <div class="breadcrumbs">
+          {% include 'breadcrumb-v3' %}
+        </div>
+        <!-- /.breadcrumbs -->
+        <h1 class="e-title text-center">{{ page_title }}</h1>
+      
+      <!-- /.cosre-page-title__main -->
+    </div>
+  <!-- /.cosre-page-title -->
+</section>
+<!-- ACCOUNT -->
+<section>
+  <div class="mb-50 border-bottom">
+    <div class="container container-240">
+      <div class="cosre-myaccount black-text pt-80 pb-80">
+        <div class="cosre-myaccount__header text-center">
+          <p class="f-15">Hello {{ customer.email }}</p>
+          
+          <p class="mb-30 secondary-text">(not {{ customer.email }}? <a href="/account/logout">Sign out</a>).</p>
+          <p class="w-620 mb-50 margin-center">From your account dashboard you can view your <a href="#engo-orders">recent orders</a>, manage your <a href="/account/addresses">shipping and billing addresses</a> and <a href="/account/login">edit your password and account details</a>.</p>
+        </div>
+        <div class="cosre-myaccount__content">
+          
+            <div class="col-md-8">
+          <h2 class="cosre-myaccount__title text-uppercase f-20 space-30" id="engo-orders">{{ 'customer.orders.title' | t }}</h2>
+          {% comment %}
+          If we have past orders, loop through each one
+          {% endcomment %}
+          {% paginate customer.orders by 20 %}
+          {% if customer.orders.size != 0 %}
+          <div class="cosre-myaccount__wrap table-responsive mb-30">
+            <table class="table table-hover black-text">
+              <thead>
+                <tr>
+                  <th>{{ 'customer.orders.order_number' | t }}</th>
+                  <th>{{ 'customer.orders.date' | t }}</th>
+                  <th>{{ 'customer.orders.payment_status' | t }}</th>
+                  <th>{{ 'customer.orders.fulfillment_status' | t }}</th>
+                  <th>{{ 'customer.orders.total' | t }}</th>
+                  <th>&nbsp;</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for order in customer.orders %}
+                <tr>
+                  <td><a href="{{ order.customer_url }}" class="twitter-text">{{ order.name }}</a></td>
+                  <td>{{ order.created_at | date: format: 'month_day_year' }}</td>
+                  <td>{{ order.financial_status_label }}</td>
+                  <td>{{ order.fulfillment_status_label }}</td>
+                  <td><span class="primary-text font-600">{{ order.total_price | money }}</span></td>
+                  <td class="text-right">
+                    <a href="{{ order.customer_url }}" class="btn btn-cosre btn-waves btn-sm btn-default btn-rounded w-95">View</a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          {% else %}
+
+          <p class="mb-30">{{ 'customer.orders.none' | t }}</p>
+
+          {% endif %}
+          {% if paginate.pages > 1 %}
+          <div class="pagination">
+            {{ paginate | default_pagination | replace: '&laquo; Previous', '&larr;' | replace: 'Next &raquo;', '&rarr;' }}
+          </div>
+          {% endif %}
+          {% endpaginate %}
+            </div>
+          	<div class="col-md-4">
+          <h2 class="cosre-myaccount__title text-uppercase f-20 space-30" id="engo-address">
+            <span class="text-middle">{{ 'customer.account.details' | t }}</span>
+            <a href="/account/addresses" class="btn btn-cosre btn-waves btn-sm btn-sharp btn-default w-95">Edit</a>
+          </h2>
+          <div class="cosre-myaccount__wrap">
+            {% if customer.default_address != nil %}
+            <p>
+              {{ customer.default_address.address1 }}<br>
+
+              {% if customer.default_address.address2 != "" %}
+              {{ customer.default_address.address2 }}<br>
+              {% endif %}
+
+              {% if customer.default_address.city != "" %}
+              {{ customer.default_address.city }}<br>
+              {% endif %}
+
+              {% if customer.default_address.province_code != "" %}
+              {{ customer.default_address.province_code | upcase }}<br>
+              {% endif %}
+
+              {% if customer.default_address.zip != "" %}
+              {{ customer.default_address.zip | upcase }}<br>
+              {% endif %}
+
+              {% if customer.default_address.country != "" %}
+              {{ customer.default_address.country }}<br>
+              {% endif %}
+
+              {% if customer.default_address.phone != "" %}
+              {{ customer.default_address.phone }}
+              {% endif %}
+            </p>
+            {% endif %}
+            
+          </div>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+

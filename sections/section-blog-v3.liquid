@@ -1,0 +1,143 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+      
+  <div class=" blog-new space_top_140 space_bot_90">
+   <div class="container">
+    <div class="row">
+      <div class="blog-v3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        	 <h3 class="margin_bottom_50  fw-500">{{section.settings.title}}</h3>
+            {% assign products_limit = section.settings.limit %}
+              {% assign col = section.settings.blog %}
+              {% for article in blogs[col].articles limit: products_limit %}
+              <div class="content-blog v2">
+                <div class="blog-post-item ">
+                  <div class="blog-info-bd">
+                    <div class="blog-info">
+                      <p class="line"></p>
+                      <div class="blog-post-tags blog-post-author">
+                        {% for tag in article.tags %}
+                        <a class="uppercase fz-12 author margin_top_10" href="{{ blog.url }}/tagged/{{ tag | handle }}" rel="category tag">{{ tag }}</a>{% unless forloop.last %},{% endunless %}
+                        {% endfor %}
+                      </div>
+                      <h3 class="blog-post-title margin_bottom_10 "><a class="fw-500" href="{{ article.url }}">{{ article.title }}</a></h3>
+                      <div class="blog-post-desc ">
+                        {{article.excerpt | strip_html | strip_newlines | truncatewords: 19}}
+                      </div>
+                      <a href="{{ article.url }}" class="button-blog ">{{section.settings.btn_blog}}</a> 
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+      <div class="img_banner relative">
+        <div class="text-center absolute full-width">
+          <a href="{{section.settings.url}}" class="btn_banner lt-2 delay03">{{section.settings.btn_name}}</a>
+        </div>
+      </div>
+      </div>
+      <div class="newlet-v2 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <h3 class="title-fv4 margin_bottom_50 fw-500">{{section.settings.title2}}</h3>
+        <p class="line "></p>
+        <p class="space_top_bot_30">{{section.settings.des_new}}</p>
+        <form action="{{ form_action }}" method="post" name="mc-embedded-subscribe-form" target="_blank"  class="subscible-form relative">
+            <input class="engoc-input-form" type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="ENTER KAYWORDS..." name="EMAIL" aria-label="{{ 'general.newsletter_form.newsletter_email' | t }}" autocorrect="off" autocapitalize="off">
+            <button type="submit" class="btn-section margin_top_10"  name="subscribe">{{section.settings.btn_submit}}</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<style>
+  .blog-new {
+      	background-image:url({{section.settings.bg-img | img_url:'master'}});
+    background-position:center center;
+    background-size:cover;
+  }
+</style>
+{% schema %}
+{
+  "name": "Blog v3",
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      "type": "image_picker",
+      "id": "bg-img",
+      "label": "Background Image",
+      "info": "1920x1000 px"
+    },
+    {
+      "type": "header",
+      "content": "Blog"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Lates News"
+    },
+	{
+        	"type": "blog",
+        	"id": "blog",
+        	"label": "Chose Blog"
+    },
+	{
+        	"type": "text",
+        	"id": "limit",
+        	"label": "Limit Blog",
+        	"default": "2"
+    },
+    {
+      "type": "text",
+      "id": "btn_blog",
+      "label": "Button Blog",
+      "default": "Read More"
+    },
+    {
+      "type": "header",
+      "content": "Newletter"
+    },
+
+    {
+      "type": "text",
+      "id": "title2",
+      "label": "Title",
+      "default": "Newletter"
+    },
+      {
+        "type": "textarea",
+        "id": "des_new",
+        "label": "Description column 2",
+        "default": "Register to our newsletter to get the latest news  about events, offers and other cool stuff. "
+      },
+      {
+        "type": "text",
+        "id": "btn_submit",
+        "label": "Button submit name",
+        "default": "Subscribe"
+      }
+  ],
+
+  "presets": [
+    {
+      "name": "Blog v3",
+      "category": "Page Minim"
+    }
+  ]
+}
+{% endschema %}

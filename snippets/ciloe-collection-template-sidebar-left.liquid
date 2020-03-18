@@ -1,0 +1,36 @@
+<div class="shop_page">
+  {% include 'ciloe-banner' %}
+  
+  <div class="container content_shop space_top_70">
+    <div class="row">
+      {% include 'ciloe-sidebar' %}
+      <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 ">
+        {% include 'ciloe-btn-layout2' %}
+        <div class="row product_shop product-collection-grid">
+          {% for product in collection.products %}
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 layout_product_shop delay05">
+            {% include 'ciloe-product' %}
+          </div>
+          {% endfor %}
+          <div class="text-center col-md-12 col-xs-12 content_pagination">
+          	{% include 'pagination' %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+    .layout_product_shop.column-4:nth-child(3n+1) {
+    clear: none ;}
+    .layout_product_shop.column-4:nth-child(4n+5) {
+        clear: left;}
+  .layout_product_shop.column-20:nth-child(3n+1) {
+    clear: none ;}
+    .btn_layout_shop .filter_full .content_filter_full{    
+  	    transition: 2.5s;
+  }
+  .btn_layout_shop .filter_full.h_100 .content_filter_full{   
+  	background:{{section.settings.bg_filter_full}};
+  }
+</style>

@@ -1,0 +1,72 @@
+<div class="main-container no-sidebar single-post">
+    <div class="container">
+        <div class="row">
+            {% if article.image %}
+            <div class="post-image col-xs-12 col-sm-12 col-md-12">
+                <img src="{{ article.image.src | img_url: 'master' }}" class="img-responsive" alt="" />
+            </div>
+            {% endif %}
+            <div class="main-content col-xs-12 col-md-12 col-lg-12">
+                <div class="blog-post-container blog-page">
+                    <div class="blog-post-single blog-post-item">
+                        <div class="post-content">
+                          <div class="article_content">
+                            {{ article.content}}
+                          </div>
+                          {% if section.settings.show_special %}
+                          <div class="special_post margin_bottom_50">
+                            <p class="content">{{section.settings.special_content}}</p>
+                          </div>
+                          {% endif %}
+                          {% if section.settings.show_banner_article %}
+                          	<div class="banner_content">
+                              <a class="inline-block over-hidden col-sm-6 col-xs-12 clear-space-left" href="{{section.settings.url_banner_1}}">
+                                {% if section.settings.banner_content_1 != blank %}
+                              	<img src="{{section.settings.banner_content_1 | img_url:'master'}}" class="img-responsive hover-zoom-out">
+                                {% endif %}
+                              </a>
+                              <a class="inline-block over-hidden col-sm-6 col-xs-12 clear-space-right" href="{{section.settings.url_banner_2}}">
+                                {% if section.settings.banner_content_2 != blank %}
+                              	<img src="{{section.settings.banner_content_2 | img_url:'master'}}" class="img-responsive hover-zoom-out">
+                                {% endif %}
+                              </a>
+                          </div>
+                          {% endif %}
+                          {% if section.settings.show_excerpt_content %}
+                          <div class="article_content space_bot_80">
+                          	{{ article.excerpt}}
+                          </div>
+                          {% endif %}
+                          	{% if section.settings.show_social_share%}
+                            <div class="post-share">
+                              <h2 class="fz-12 lt-2 text-center">SHARE</h2>
+                                {% include 'social-share-article'%}
+                            </div>
+                          	{% endif %}
+                          	{% if section.settings.enable_post_rl %}
+                            <div class="post-related space_bot_60 margin_bottom_60 border-bot">
+                                {% include 'related-article'%}
+                            </div>
+                          	{% endif %}
+                          	{% if section.settings.enable_post_pd %}
+                            <div class="pd-article space_bot_60 margin_bottom_60 border-bot">
+                              {% assign col = section.settings.collection_post %}
+                              
+                              <div class="js-pd-article">
+                                {% for product in collections[col].products %}
+                                {% include 'ciloe-product' %}
+                                {% endfor %}
+                              </div>
+                              
+                            </div>
+                          	{% endif %}
+                            <!--commentlist-->
+                            {% include 'comment-article'%}
+                            <!--endcommentlist-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

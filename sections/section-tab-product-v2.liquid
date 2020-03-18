@@ -1,0 +1,246 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+<!--slide-->
+  <div class="container tab-pd-v2 margin_bottom_60">
+    <div class="row">
+      <ul class="nav nav-tabs flex title-tab-2 ">
+        {% if section.blocks.size > 0 %}
+        {%- assign i = 1 -%}
+        {% for block in section.blocks %}
+        <li class="{% if forloop.first %}active{% endif %}">
+          <a href="#{{i}}_{{ section.id }}" data-toggle="tab" class="fz-18 delay03">{{block.settings.tab_title}}</a>
+        </li>
+        {%- assign i = i | plus : 1 -%}
+        {% endfor %}
+        {% endif %}
+      </ul>
+      <div class="tab-content">
+        {% if section.blocks.size > 0 %}
+        {%- assign i = 1 -%}
+        {% for block in section.blocks %}
+
+        {% assign products_limit = block.settings.tab_limit %}
+        {% assign col = block.settings.tab_collection %}
+        <div id="{{i}}_{{ section.id }}" class="tab-pane fade {% if forloop.first %}active in{% endif %}">
+          
+            {% for product in collections[col].products limit: products_limit %}
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 product-tab-pd loader">
+            {% include 'ciloe-product' %}
+            </div>
+            {% endfor %}
+
+          
+        </div>
+        {%- assign i = i | plus : 1 -%}
+        {% endfor %}
+        {% endif %}
+      </div>
+      <div class="btn-loadmore text-center col-md-12 space_top_50">
+        <a href="#" id="loadMore" class="btn-ciloe inline-block fw-600 ">{{section.settings.btn_loadmore}}</a>
+      </div>
+    </div>
+  </div>
+<!--endslide-->
+</div>
+<style>
+
+  .btn-loadmore .btn-ciloe {
+    text-transform: capitalize;
+    padding: 12px 24px;
+    letter-spacing: 1px;
+    transition: .3s;
+    font-size:13px;
+    color:{{section.settings.color_button}};
+    background:{{section.settings.bg_button}};
+    
+}
+  .btn-loadmore .btn-ciloe:hover{
+     color:{{section.settings.color_button_hover}};
+    background:{{section.settings.bg_button_hover}};
+  }
+  .tab-pd-v2 .title-tab-2 {
+      align-items: baseline;
+    border-bottom:0;
+    margin-bottom:30px;
+    margin-top:10px;
+  }
+  .tab-content > .tab-pane.active{
+   width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+  .tab-pd-v2 .title-tab-2 li a{
+	opacity:0.7;
+    padding-bottom:20px;
+    position:relative;
+    background:transparent;
+    color:{{section.settings.color}};
+    font-size:18px;
+    font-weight:300;
+    border:0;
+    transition:0s;
+  }
+  .tab-pd-v2 .title-tab-2 li a:hover{
+	opacity:1;
+    border:0;
+    border-radius:0;
+    color:{{section.settings.color_active}};
+  }
+  .tab-pd-v2 .title-tab-2 li a:hover::before{
+	left:15px;
+    right:15px;
+    
+  }
+  .tab-pd-v2 .title-tab-2 li.active a{
+	opacity:1;
+    color:{{section.settings.color_active}};
+  }
+  .tab-pd-v2 .title-tab-2 li.active a:before{
+	left:15px;
+    right:15px;
+  }
+  .tab-pd-v2 .title-tab-2 li.active a:hover,.tab-pd-v2 .title-tab-2 li.active a:focus{
+	background:transparent;
+  }
+    @media(min-width:1025px){
+      .tab-pd-v2 .title-tab-2 li.active a{
+    font-size:36px;
+  }
+    .tab-pd-v2 .tab-content .product-tab-pd .product{
+    	margin-bottom:30px;
+    }
+    .tab-pd-v2 .tab-content .product-tab-pd .product .img-product img{
+    	width:100%;
+    }
+    .tab-pd-v2 .tab-content .product-tab-pd .product .img-product .product-icon .icon-quickview{
+    	margin-right:10px;
+      margin-top:10px;
+    }
+    .tab-pd-v2 .tab-content .product-tab-pd .product .img-product .product-icon .icon-heart {
+      margin-top:10px;
+    	margin-left:0;
+    }
+    .tab-pd-v2 .tab-content .product-tab-pd .product .img-product .product-icon {
+    right: 10px;
+    flex-direction: column;
+    width: inherit;
+      bottom:10px;
+    }
+    .tab-pd-v2 .tab-content .product-tab-pd .info-product .title-product{
+    	padding-bottom:10px;
+    }
+    .tab-pd-v2 .tab-content .product-tab-pd .info-product{
+    	text-align:left!important;
+          position: absolute;
+    padding-left: 20px;
+    bottom: 0;
+    }
+  }
+</style>
+{% schema %}
+{
+  "name": "Tab product v2",
+  "max_blocks": 5,
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      "type": "header",
+      "content": "Color Title"
+    },
+	{
+          "type": "color",
+          "id": "color",
+          "label": "Color Title Tab",
+	  	  "default":   "#999999"
+    },
+	{
+          "type": "color",
+          "id": "color_active",
+          "label": "Color Title Tab active",
+	  	  "default":   "#3c3c3c"
+    },
+	{
+      "type": "header",
+      "content": "Button load more"
+    },
+	{
+          "type": "color",
+          "id": "color_button",
+          "label": "Color button",
+	  	  "default":   "#3c3c3c"
+    },
+	{
+          "type": "color",
+          "id": "bg_button",
+          "label": "backdround button",
+	  	  "default":   "#0D4C82"
+    },
+	{
+          "type": "color",
+          "id": "color_button_hover",
+          "label": "Hover color button",
+	  	  "default":   "#fff"
+    },
+	{
+          "type": "color",
+          "id": "bg_button_hover",
+          "label": "Backdround hover button",
+	  	  "default":   "#0D4C82"
+    },
+	{
+          "type": "text",
+          "id": "btn_loadmore",
+          "label": "Button load more name",
+	  	  "default":   "All Product"
+    }
+  ],
+
+"blocks": [
+      {
+        "type": "image",
+        "name": "Image slide",
+        "settings": [
+		{
+          "type": "text",
+          "id": "tab_title",
+          "label": "Title tab",
+	  	  "default":   "New Products"
+        },
+		{
+          "type": "collection",
+          "id": "tab_collection",
+          "label": "Chose collection"
+        },
+		{
+          "type": "text",
+          "id": "tab_limit",
+          "label": "Limit product",
+	  	  "default":   "8"
+        }
+        ]
+      }
+    ],
+  "presets": [
+    {
+      "name": "Tab product v2",
+      "category": "Page Minim"
+    }
+  ]
+}
+{% endschema %}

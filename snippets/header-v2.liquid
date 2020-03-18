@@ -1,0 +1,176 @@
+<header id="header" class="header-v2 delay05 {% if settings.enable_fix_hdv2 %}fixed{% endif %}">
+  <div class="container">
+    <div class="row flex">
+      <div class="hidden-lg hidden-md col-sm-4 col-xs-4" style="padding-top:27px;">
+        <a href="#" class="link-menu delay03 inline-block hidden-md hidden-lg space_top_30 btn-push-menu icon-pushmenu">
+          {% if settings.icon-pushmenu == blank %}
+          <svg width="26" height="16" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 66 41" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
+            <g>
+              <line class="st0" x1="1.5" y1="1.5" x2="64.5" y2="1.5"></line>
+              <line class="st0" x1="1.5" y1="20.5" x2="64.5" y2="20.5"></line>
+              <line class="st0" x1="1.5" y1="39.5" x2="64.5" y2="39.5"></line>
+            </g>
+          </svg>
+          {% else %}
+          <i class="{{ settings.icon-pushmenu }}"></i>
+          {% endif %}
+        </a>
+      </div>
+      <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
+        <a href="#" class="delay03 inline-block hidden" id="btn-search">
+          {% if settings.icon-search == blank %}
+          <i class="icon-magnifier fz-18"></i>
+          {% else %}
+          <i class="{{ settings.icon-search }} fz-18"></i>
+          {% endif %}
+        </a>
+        <form method="get" class="searchform relative" action="/search" role="search">
+          <label class="sr-only"  >search</label>
+          <input type="hidden" name="type" value="product">
+          <input type="text" id="engo_autocomplate" value="{{ search.terms | escape }}" autocomplete="off" placeholder="Suchen..." aria-label="{{ 'general.search.placeholder' | t }}" name="q" />
+          <button type="button" class="submit absolute"><i class="{{ settings.icon-search }} fz-16" aria-hidden="true"></i></button>
+        </form>
+      </div>
+      <div class="col-lg-6 col-md-7 col-sm-4 col-xs-4 header-midle flex logo_header">
+        <div class="flex center logo delay05">
+          <a href="{{shop.url}}" class="left ">           
+
+          
+            {% if settings.hdv1_logo == blank %} 
+            <div class="logo_header-svg-link">      
+              {{ 'logo-svg.svg' | asset_url | img_tag }}
+            </div> 
+              {% comment %}
+            <img alt="{{shop.name}}" src="{{'logo.png' | asset_url}}" class="img-logo">
+              {% endcomment %}
+            {% else %}
+            
+            <img alt="{{shop.name}}" src="{{settings.hdv1_logo | img_url:'master'}}" class="img-logo">
+             
+            {% endif %}
+          
+       
+          </a>
+        </div>
+        <div class="hidden-sm hidden-xs flex center menu-header-v2">
+          {% include 'ciloe-horizon-menu' %}
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 text-right icon-main">
+        <div class="topbar-right inline-block hidden-xs">
+         
+          <div id="conveythis-element-leaguage" style="display: none;" class="element element-leaguage">         
+
+
+              
+
+
+                  
+                      <a id="label2" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">                        
+                        <span>{{settings.language_default}}</span>
+                        <span class="ion-ios-arrow-down f-10 e-arrow"></span>
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="label2">
+                        {%for i in (1..4)%}
+                        {%capture _enable%}language{{i}}_enable{%endcapture%}
+                        {%capture _text%}language{{i}}_text{%endcapture%}
+                        {%capture _url%}Language{{i}}_url{%endcapture%}
+
+                        {%assign enable = settings[_enable]%}
+                        {%assign text = settings[_text]%}
+                        {%assign url = settings[_url]%}
+                        <li><a href="{{url}}" title="{{text}}">{{text}}</a></li>
+                        {% endfor %}
+                      </ul>
+         
+          </div>
+                
+          <div class="element element-currency">
+            <a id="label3" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+              {% if shop.currency == "EUR" %}
+                   <span>€ {{shop.currency}} </span>
+                 {% else %} 
+                   <span> {{shop.currency}} </span>
+              {% endif %}
+
+              <span class="ion-ios-arrow-down f-10 e-arrow"></span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="label3">
+              {% assign supported = settings.supported_currencies | split: ' ' %}
+              {% for c in supported %}
+              <li><a data-currency="{{c}}">{{c}}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+        <a href="#" class="delay03 inline-block hidden-lg hidden-md btn-search">
+          {% if settings.style_icon_search == "icon" %}
+          {% if settings.icon_search == blank %}
+          <i class="icon-magnifier fz-18"></i>
+          {% else %}
+          <i class="{{ settings.icon-search }} fz-18"></i>
+          {% endif %}
+          {% else %}
+          {% if settings.image_search == blank %}
+          <img src="{{'iconsearch.png' | asset_url}}" class="img-responsive">
+          {% else %}
+          <img src="{{settings.image_search | img_url:'master'}}" class="img-responsive">
+          {% endif %}
+          {% endif %}
+        </a>
+        
+        {% if customer.email != blank %}
+        <a class="delay03 inline-block hidden-sm hidden-xs" href="/account/logout" title="logout">
+          {% if settings.icon-logout == blank %}
+          <i class="icon-power"></i>
+          {% else %}
+          <i class="{{ settings.icon-logout }}"></i>
+          {% endif %}
+        </a>
+        {% else %}
+        <!-- <a href="#login_form" class="delay03 inline-block hidden-sm hidden-xs" id="btn-login">
+          {% if settings.style_icon_login == "icon" %}
+          {% if settings.icon-login == blank %}
+          <i class="zoa-icon-user"></i>
+          {% else %}
+          <i class="{{ settings.icon-login }}"></i>
+          {% endif %}
+          {% else %}
+          {% if settings.image_login == blank %}
+          <img src="{{'iconlogin.png' | asset_url}}" class="img-responsive">
+          {% else %}
+          <img src="{{settings.image_login | img_url:'master'}}" class="img-responsive">
+          {% endif %}
+          {% endif %}
+        </a> -->
+        {% endif %}
+
+        <a href="#" class="delay03 relative inline-block text-center icon-cart" id="btn-cart">
+          {% if settings.style_icon_cart == "icon" %}
+          {% if settings.icon-cart == blank %}
+          <i class="icon-bag"></i>
+          {% else %}
+          <i class="{{ settings.icon-cart }}"></i>
+          {% endif %}S
+          {% else %}
+          {% if settings.image_cart == blank %}
+          <img src="{{'iconcar.png' | asset_url}}" class="img-responsive">
+          {% else %}
+          <img src="{{settings.image_cart | img_url:'master'}}" class="img-responsive">
+          {% endif %}
+          {% endif %}
+          <figure class="absolute label-cart enj-cartcount">{{ cart.item_count }}</figure>
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+</header>
+<style>
+  .header-v2{
+    background:{{settings.bg_header_v2}};
+  }
+
+</style>

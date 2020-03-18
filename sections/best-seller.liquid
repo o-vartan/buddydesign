@@ -1,0 +1,89 @@
+<div data-section-id="{{ section.id }}" data-section-type="best-seller" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+	<div class="product-tab">
+      <div class="container container-240">
+          <div class="ecome-heading style2 spc4">
+              <div class="title-icon e-gradient">
+                  {{section.settings.text1}}
+              </div>
+              <a href="{{section.settings.btn_url}}" class="btn-show">{{section.settings.btn_name}}<i class="ion-ios-arrow-forward"></i></a>
+          </div>
+          <div class="product-tab-pd js-multiple-row2">
+              {%for product in collections[section.settings.product_collection].products limit:section.settings.product_limit%}
+                  {% include 'product-grid-12' %}
+                      {% else %} 
+                  {% include 'empty-product-grid-24'%}
+              {% endfor %}
+          </div>
+      </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Best Seller",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      "type": "header",
+      "content": "Heading"
+    },
+	{
+      "type": "text",
+      "id": "text1",
+      "label": "Title",
+      "default": "BestSeller Products"
+    },
+	{
+      "type":"header",
+      "content":"Button"
+    },
+    {
+      "type": "text",
+      "id": "btn_name",
+      "label": "Title button",
+      "default": "Shop more"
+    },
+	{
+      "type": "url",
+      "id": "btn_url",
+      "label": "URL"
+    },
+	{
+      "type": "header",
+      "content": "List Products"
+    },
+    {
+      "type": "collection",
+      "id": "product_collection",
+      "label": "Select collection"
+    },
+    {
+      "type": "text",
+      "id": "product_limit",
+      "label": "Limit number",
+      "default": "8"
+    }
+],
+  "presets": [
+    {
+      "name": "Best Seller",
+      "category": "Products"
+    }
+  ]
+}
+{% endschema %}

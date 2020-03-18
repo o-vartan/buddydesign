@@ -1,0 +1,24 @@
+<div class="sidebar sidebar_mb hidden-lg hidden-md hidden-sm engoj-collection-sidebar">
+  <div class="margin_bottom_30">
+    <a href="#" class="close_sidebar_mb lt-2 fz-12"><i class="ti-close"></i>CLOSE</a>
+  </div>
+  {% if section.settings.enable_filter_cate %}
+  {% include 'ciloe-filter-cate' %}
+  {% endif %}
+  {% if section.settings.enable_filter_sort %}
+  {% include 'ciloe-filter-sort' %}
+  {% endif %}
+  {% if section.settings.enable_filter_color %}
+  {% include 'ciloe-filter-color' %}
+  {% endif %}
+  {% if section.settings.enable_filter_size %}
+  {% include 'ciloe-filter-size' %}
+  {% endif %}
+  {% if section.settings.enable_filter_price %}
+  {% include 'ciloe-filter-price' %}
+  {% endif %}
+  {% if section.settings.enable_filter_tag %}
+  {% include 'ciloe-filter-tag' %}
+  {% endif %}
+  
+</div>

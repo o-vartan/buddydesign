@@ -1,0 +1,81 @@
+<div class="topbar-left col-md-4 text-left">
+  <div class="topbar-option">
+    {% if shop.customer_accounts_enabled %}        
+    <div class="topbar-account">
+      {% if customer.email != blank %}
+      
+      <a href="/account/logout" title="logout"><i class="icon-logout f-15"></i></a>
+      {% else %}
+      <a href="/account/login" title="login"><i class="{{settings.hdv1_topbar_icon1}} f-15"></i></a>
+      {% endif %}
+      
+    </div>
+    {% endif %}
+    <div class="topbar-wishlist">
+      <a href="/pages/wish-list" title="wishlist">
+        <i class="icon-heart f-15"></i>
+        <span class="count wishlist-count"><i class="icon-bell"></i></span>
+      </a>
+    </div>
+    <div class="topbar-language dropdown">
+      <a id="label1" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+        <span>{{settings.language_default}}</span>
+        <span class="fa fa-caret-down f-10"></span>
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="label1">
+        {%for i in (1..6)%}
+        {%capture _enable%}language{{i}}_enable{%endcapture%}
+        {%capture _text%}language{{i}}_text{%endcapture%}
+        {%capture _url%}Language{{i}}_url{%endcapture%}
+
+        {%assign enable = settings[_enable]%}
+        {%assign text = settings[_text]%}
+        {%assign url = settings[_url]%}
+        <li><a href="{{url}}" title="{{text}}">{{text}}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <!--end topbar-option-->
+</div>
+<!--end topbar-left-->
+<div class="logo col-md-4 hidden-xs hidden-sm">
+  <a href="{{shop.url}}" title="{{shop.name}}">
+    <img {%if settings.hdv1_logo == blank%}src="{{'hdv1_logo.png'| asset_url }}" 
+         {%else%}src="{{settings.hdv1_logo | img_url:'master'}}" class="img-reponsive"{%endif%} alt="logo" />
+  </a>
+</div>
+<!--end logo-->
+<div class="topbar-right col-md-4 text-right">
+  <div class="topbar-option">
+    <div class="topbar-currency dropdown">
+      <a id="label2" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+        <span>{{shop.currency}}</span>
+        <span class="fa fa-caret-down f-10"></span>
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="label2">
+        {% assign supported = settings.supported_currencies | split: ' ' %}
+        {% for c in supported %}
+        <li><a data-currency="{{c}}">{{c}}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="topbar-search">
+      <div class="search-popup dropdown" data-toggle="modal" data-target="#myModal">
+        <a href="javascript:void(0)"><i class="{{settings.hdv1_topbar_icon2}} f-15"></i></a>
+      </div>
+    </div>
+    <div class="topbar-cart">
+      <a href="javascript:void(0)" class="icon-cart">
+        <i class="{{settings.hdv1_topbar_icon3}} f-15"></i>
+        <span class="count cart-count enj-cartcount">{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+  <!--end topbar-option-->
+</div>
+<!--end topbar-right-->
+
+

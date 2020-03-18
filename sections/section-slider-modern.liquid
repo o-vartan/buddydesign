@@ -1,0 +1,344 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+<!--slide-->
+  <div class="container-fluid slider-home-modern margin_bottom_30">
+    <div class="row">
+      	<div class="js-slider-home-modern">
+      {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+      	<div class="content-slider">
+          <div class="relative">
+            {% if block.settings.bg_img == blank %}
+          	<img src="{{'slider-classic-1.jpg' | asset_url}}" class="img-responsive img-bg-slider ciloe_img_fit">
+            {% else %}
+            <img src="{{block.settings.bg_img | img_url:'master'}}" class="img-responsive img-bg-slider ciloe_img_fit">
+            {% endif %}
+            
+            <div class="absolute img-slider">
+              {% if block.settings.img-slider != blank %}
+            	<img src="{{block.settings.img-slider | img_url:'master'}}" class="img-animate-1 img-responsive">
+              {% endif %}
+            </div>
+            
+            <div class="over-hidden absolute text-slider {% if block.settings.local_text == 'center' %} text-center {% elsif block.settings.local_text == 'left' %} text-left {% elsif block.settings.local_text == 'right' %} text-right {% endif %}">
+              
+              <p class="text-animate-1 lt-3 margin_bottom_20">{{block.settings.title-1}}</p>
+              
+              <h1 class="text-animate-2">{{block.settings.title-2}}</h1>
+             
+              
+              <h1 class="text-animate-3 margin_bottom_50">{{block.settings.title-3}}</h1>
+              
+              
+              
+              <div class="btn-slider">
+              <a class="ciloe-btn-default-2 delay03 fz-12 inline-block relative over-hidden" href="{{block.settings.url-btn}}" >{{block.settings.btn-name}}</a>
+              </div>
+            </div>
+            {% if block.settings.enable_dot %}
+            <div class="absolute dots_slider">
+              <div>
+                <span class="dot_current margin_right_20">0{{ forloop.index }}</span><span class="line inline-block margin_right_20"></span><span class="dot_length">0{{ forloop.length }}</span>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+      {% endif %}
+        </div>
+    </div>
+  </div>
+<!--endslide-->
+</div>
+<style>
+  {% if section.settings.hidden_btn %}
+  .slider-home-modern .js-slider-home-modern .slick-prev{
+  	z-index:1;
+    left:0;
+  }
+  .slider-home-modern .js-slider-home-modern .slick-prev{
+  	display:none !important;
+  }
+  .slider-home-modern .js-slider-home-modern .slick-next{
+  	display:none !important;
+  }
+  {% endif %}
+  {% if section.settings.hidden_slick_dot %}
+  .slider-home-modern .js-slider-home-modern .slick-dots{
+  	display:none !important;
+  }
+  {% endif %}
+  .slider-home-modern .js-slider-home-modern .slick-dots{
+  	right: 0;
+    transform: rotate(90deg);
+    bottom: 50%;
+  }
+  .slider-home-modern .js-slider-home-modern .slick-dots li button:before{
+  	color: transparent;
+    border: 2px solid #000;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    opacity:.5;
+  }
+  .slider-home-modern .js-slider-home-modern .slick-dots li.slick-active button:before{
+  	background: #000;
+    opacity:1;
+  }
+  .slider-home-modern .js-slider-home-modern .text-slider{
+  	bottom:30%;
+    left:15%;
+  }
+  .slider-home-modern .js-slider-home-modern .text-slider h1{
+  	font-size:80px;
+    transition: all 1.2s ease;
+  }
+  .slider-home-modern .js-slider-home-modern .text-slider .text-animate-1{
+  	transform: translateY(-50px);
+  }
+  .slider-home-modern .js-slider-home-modern .text-slider h1.text-animate-2{
+  	transform: translateX(-200px);
+  }
+  .slider-home-modern .js-slider-home-modern .text-slider h1.text-animate-3{
+  	transform: translateX(200px);
+  }
+  .slider-home-modern .js-slider-home-modern .text-slider p{
+    transition: all 1.2s ease;
+  }
+  .slider-home-modern .js-slider-home-modern .text-slider a.ciloe-btn-default-2{
+    transition: all 1.2s ease;
+    transform: translateY(50px);
+  }
+/*    */
+  .slider-home-modern .js-slider-home-modern .slick-current.slick-active .text-slider .text-animate-1{
+  	transform: translateY(0);
+  }
+  .slider-home-modern .js-slider-home-modern .slick-current.slick-active .text-slider h1.text-animate-2{
+  	transform: translateX(0);
+  }
+  .slider-home-modern .js-slider-home-modern .slick-current.slick-active .text-slider h1.text-animate-3{
+  	transform: translateX(0);
+  }
+  .slider-home-modern .js-slider-home-modern .slick-current.slick-active .text-slider a.ciloe-btn-default-2{
+    transform: translateY(0);
+  }
+/*    */
+  .slider-home-modern .js-slider-home-modern .img-slider{
+  	bottom:12%;
+    left:30%;
+    opacity:0;
+    transition:all .5s ease;
+  }
+  .slider-home-modern .js-slider-home-modern .slick-current.slick-active .img-slider{
+    opacity:1;
+  }
+  .slider-home-modern .js-slider-home-modern .dots_slider{
+  	bottom:12%;
+    right:15%;
+  }
+  .slider-home-modern .js-slider-home-modern .dots_slider .dot_current{
+  	font-size:80px;
+    font-weight:300;
+  }
+  .slider-home-modern .js-slider-home-modern .dots_slider .dot_length{
+  	font-size:30px;
+    font-weight:300;
+    opacity:.5;
+  }
+  .slider-home-modern .js-slider-home-modern .dots_slider .line{
+  	border-bottom: 1px solid #999999;
+  }
+  .ciloe-btn-default-2:before{
+  	background:#000;
+  }
+  .ciloe-btn-default-2:hover::before{
+  	background:#41cce5;
+  }
+  @media (max-width:991px){
+    .slider-home-modern .js-slider-home-modern .img-slider img{
+    	max-width:75%;
+    }
+    .slider-home-modern .js-slider-home-modern .text-slider h1{
+    	font-size:50px;
+    }
+    .slider-home-modern .js-slider-home-modern .text-slider{
+    	bottom: 15%;
+    }
+    .slider-home-modern .js-slider-home-modern .dots_slider{
+    	right: 15px;
+    }
+    .slider-home-modern .js-slider-home-modern .dots_slider .dot_current{
+    	    font-size: 30px;
+    }
+    .slider-home-modern .js-slider-home-modern .dots_slider .dot_length{
+    	font-size: 20px;
+    }
+    .slider-home-modern .js-slider-home-modern .dots_slider .line{
+    	width:20px;
+    }
+  }
+  @media (max-width:567px){
+    .slider-home-modern{
+    	margin-bottom:0;
+    }
+    .slider-home-modern .js-slider-home-modern .img-slider img{
+    	max-width:60%;
+    }
+    .slider-home-modern .js-slider-home-modern .text-slider h1{
+    	font-size:30px;
+    }
+    .slider-home-modern .js-slider-home-modern .text-slider h1.margin_bottom_50{
+    	margin-bottom: 20px;
+    }
+    .slider-home-modern .js-slider-home-modern .text-slider{
+    	bottom: 26%;
+      	left:3%;
+    }
+  }
+</style>
+{% schema %}
+{
+  "name": "Slide Modern",
+  "max_blocks": 5,
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      		"type": "header",
+      		"content": "Button arrow"
+    },
+    {
+      "type": "checkbox",
+      "id": "hidden_btn",
+      "label": "Hidden slick arrow",
+      "default": true
+    },
+	{
+      		"type": "header",
+      		"content": "Button slick dots"
+    },
+    {
+      "type": "checkbox",
+      "id": "hidden_slick_dot",
+      "label": "Hidden slick dots",
+      "default": false
+    }
+  ],
+
+"blocks": [
+      {
+        "type": "image",
+        "name": "Image slide",
+        "settings": [
+          {
+            "type": "image_picker",
+          	"id": "bg_img",
+          	"label": "Background Image Slider",
+			"info": "1920 x 1080px recommended"
+          },
+		  {
+      		"type": "header",
+      		"content": "Image slider"
+    	  },
+		  {
+            "type": "image_picker",
+          	"id": "img-slider",
+          	"label": "Image Content Slider"
+          },
+		  {
+      		"type": "header",
+      		"content": "Text"
+    	  },
+		  {
+   			"type":      "select",
+   			"id":        "local_text",
+   			"label":     "Location Text",
+   			"options": [
+     	  {
+     	    
+     	    "value": "center",
+       		"label": "Center"
+     	  },
+     	  {
+     	   
+     	    "value": "left",
+     	    "label": "Left"
+     	  },
+     	  {
+     	   
+     	    "value": "right",
+     	    "label": "Right"
+     	  }
+   		  ],
+   			"default":   "left"
+		  },
+		  {
+          	"type": "text",
+          	"id": "title-1",
+          	"label": "Title top",
+   			"default":   "TRENDING NOW"
+          },
+          {
+          	"type": "text",
+          	"id": "title-2",
+          	"label": "Title midle",
+   			"default":   "Hello"
+          },
+  		  {
+        	"type": "text",
+        	"id": "title-3",
+        	"label": "Title bottom",
+   			"default":   "Summer"
+      	  },
+		{
+      		"type": "header",
+      		"content": "Button slider"
+    	},
+  		{
+        "type": "url",
+        "id": "url-btn",
+        "label": "URL button",
+		"default": "/collections/all"
+      	},
+  		{
+        "type": "text",
+        "id": "btn-name",
+        "label": "button name",
+		"default": "shop now"
+      	},
+		{
+      		"type": "header",
+      		"content": "slick dots slider"
+    	},
+        {
+          "type": "checkbox",
+          "id": "enable_dot",
+          "label": "Enable dot-slick style",
+          "default": true
+        }
+        ]
+      }
+    ],
+  "presets": [
+    {
+      "name": "Slide Modern",
+      "category": "Slider"
+    }
+  ]
+}
+{% endschema %}

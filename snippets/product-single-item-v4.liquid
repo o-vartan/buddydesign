@@ -1,0 +1,97 @@
+{% assign product = all_products[section.settings.product_single_1] %}
+
+
+{% assign product_label_new = false %}
+{% capture _time %}{{settings.product_new_time | times:86400}}{% endcapture %} 
+{% assign time = _time|plus:0 %}
+{% assign now = 'now' | date: '%s'|plus:0 %}
+
+{% capture _value %}{{product.published_at | date: "%s" | plus : time }}{% endcapture %} 
+{% assign value = _value|plus:0 %}
+
+{% if now < value %}
+{% assign product_label_new = true %}
+{% endif %}
+
+
+{% assign label_popular = false %}
+{% if product.tags contains "popular" %}
+{% assign label_popular = true %}
+{% endif %} 
+
+{% assign label_hot = false %}
+{% if product.tags contains "hot" %}
+{% assign label_hot = true %}
+{% endif %}
+
+{% assign on_sale = false %}
+{% if product.compare_at_price > product.price %}
+{% assign on_sale = true %}
+{% endif %}
+
+{% assign sold_out = true %}
+{% if product.available %}
+{% assign sold_out = false %}
+{% endif %} 
+<div class="slick-item">
+    <div class="sp-item">
+        <div class="product-wrapper">
+            <div class="flex product-img-slide">
+                <div class="product-images v2">
+                    <div class="main-img v2 js-product-slider">
+                        {% for image in product.images %}
+                        <a href="#" onClick="return false;" class="hover-images effect"><img src="{{ image.src | img_url: 'master' }}" alt="{{ image.alt | escape }}" class="engoj_img_main img-reponsive">
+                        {% endfor %}</a>
+                    </div>
+                </div>
+                <div class="multiple-img-list-ver2 v2 js-click-product">
+                    {% for image in product.images %}
+                      <div class="product-col v2">
+                          
+                          <div class="engoj_img_variant img ">
+                              <img src="{{ image.src | img_url: 'master' }}" alt="{{ image.alt | escape }}" class="img-responsive">
+                          </div>
+                          
+                      </div>
+                  {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="text-box">
+            <div class="product-item-countd">
+                <div class="product-info">
+                    <div class="product-info-top">
+                        <h3 class="deal-title">{{section.settings.text1}}</h3>
+                        <h3 class="product-title v3"><a href="{{ product.url | within: collection }}">{{ product.title}}</a></h3>
+                        <div class="product-price thin-price">
+                            {% capture price %}{{ product.price | money }}{% endcapture %}
+                              <span class="{% if on_sale == true %}red {%endif%}">{% if product.price_varies %}{{ 'products.general.from_text_html' | t: price: price }}{% else %}{{ price }}{% endif %}</span>
+                              {% if on_sale %}<span class="old">{{ product.compare_at_price | money }}</span> {% endif %}
+                        </div>
+                        {%if section.settings.enable_progress%}
+                        <div class="deal-progress">
+                            <div class="deal-stock">
+                                <span class="stock-sold">19% already claimed</span>
+                                <span class="stock-available">Available: <strong>
+                                    {% if product.first_available_variant.inventory_management == "shopify" and product.first_available_variant.inventory_policy != "continue" %}
+                                {{ product.first_available_variant.inventory_quantity }} 
+                                {% endif %}
+                                </strong></span>
+                            </div>
+                            <div class="progress">
+                                <span class="progress-bar" style="width:27.5956%"></span>
+                            </div>
+                        </div>
+                        {%endif%}
+                    </div>
+                    <div class="time-cound">
+                        <p>{{section.settings.text2}}</p>
+                        <div class="countdown countdown-time v2" data-countdown="countdown" data-date="{{section.settings.hp_countdown}}">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

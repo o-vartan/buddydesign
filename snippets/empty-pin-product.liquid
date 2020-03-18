@@ -1,0 +1,25 @@
+{% comment %}
+Add default products to help with onboarding for collections/all only.
+
+The onboarding styles and products are only loaded if the
+store has no products.
+{% endcomment %}
+
+
+<div class="product-info lookbitem_content {% if block.settings.pin_style_select == 'p_s1'%}centerr 
+                {% elsif block.settings.pin_style_select == 'p_s2'%}centerl  
+                {% elsif block.settings.pin_style_select == 'p_s3'%} topl
+              {%endif%}">
+    <div class="product-img">
+                {{ 'product-1' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+
+
+    </div>
+    <h3 class="product-title">
+        <a title="ShopiLaunch Product" href="/admin/products">ShopiLaunch Product</a>
+    </h3>
+    <div class="product-price">
+        <span class="red">$1.450.00</span>
+        <span class="old">$1,215.00</span>
+    </div>
+</div>

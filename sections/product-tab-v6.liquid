@@ -1,0 +1,155 @@
+<div data-section-id="{{ section.id }}" data-section-type="product-tab-v6" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+	<!--wrapper product-->
+ <div class="bestseller2 {% if section.settings.layoutstyle_select == 's_s1'%}spc5 bg-gradient bg-insinde{%endif%}">
+      <div class="container container-240">
+          <div class="h-heading">
+              <div class="title-icon {% if section.settings.layoutstyle_select == 's_s2'%}t-inline{%endif%}">
+                	{% if section.settings.layoutstyle_select == 's_s2'%}
+                		<img src="{{'iconbs.png'|asset_url}}" alt="">
+                	{%endif%}
+                  <h3>{{section.settings.text1}}</h3>
+              </div>
+              <ul class="product-tab-sw2">
+                  {% if section.blocks.size > 0 %}
+                  {%- assign i = 1 -%}
+                  {% for block in section.blocks %}
+                  <li class="{% if forloop.first %}active{% endif %}">
+                      <a href="#{{i}}_{{ section.id }}" data-toggle="tab">{{block.settings.tab_title}}</a>
+                  </li>
+                  {%- assign i = i | plus : 1 -%}
+                  {% endfor %}
+                  {% endif %}
+              </ul>
+          </div>
+          <div class="tab-content">
+              {% if section.blocks.size > 0 %}
+              {%- assign i = 1 -%}
+              {% for block in section.blocks %}
+
+              {% assign products_limit = block.settings.tab_limit %}
+              {% assign col = block.settings.tab_collection %}
+              <div id="{{i}}_{{ section.id }}" class="tab-pane fade {% if forloop.first %}active in{% endif %}">
+                  <div class="row">
+                          {% if block.settings.product_single_1 != blank %}
+                          {% include 'product-single-item-v2' %}
+                        	{% else %}
+                          {% include 'empty-product-single-item-v2' %}
+                        {% endif %}
+                    {% if section.settings.layoutstyle_select == 's_s1'%}
+                      <div class="col-xs-12 col-sm-12 col-md-6">
+                          <div class="row">
+                              {% for product in collections[col].products limit: products_limit %}
+                                  {% include 'product-grid-4v2' %}
+                                {% else %}
+                                  {% include 'empty-product-grid-4v2' %}
+                                {% endfor %}
+                          </div>
+                      </div>
+                    {% else %}
+                    	<div class="col-xs-12 col-sm-12 col-md-6">
+                          <div class="row">
+                              {% for product in collections[col].products limit: products_limit %}
+                                  {% include 'product-grid-4v3' %}
+                                {% else %}
+                                  {% include 'empty-product-grid-4v3' %}
+                                {% endfor %}
+                          </div>
+                      </div>
+					{% endif %}
+                      
+                  </div>
+
+              </div>
+              {%- assign i = i | plus : 1 -%}
+              {% endfor %}
+              {% endif %}
+          </div>
+      </div>
+  </div>
+<!--end wrapper product-->
+</div>  
+{% schema %}
+{
+  "name": "Product Tab v6",
+  "class": "index-section",
+  "settings": [
+	{
+      "type": "select",
+      "id": "layoutstyle_select",
+      "options": [
+        {
+          "value": "s_s1",
+          "label": "Style 1"
+        },
+        {
+          "value": "s_s2",
+          "label": "Style 2"
+        }
+      ],
+      "label": "Layout Style"
+    },
+	{
+      "type": "header",
+      "content": "Heading"
+    },
+	{
+      "type": "text",
+      "id": "text1",
+      "label": "Title",
+      "default": "Best Seller"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Title",
+          "info": "Sale products"
+        },
+        {
+          "type": "collection",
+          "id": "tab_collection",
+          "label": "Choose Collection"
+        },
+        {
+          "type": "text",
+          "id": "tab_limit",
+          "label": "Limit number of products",
+          "default": "4"
+        },
+		{
+          "type": "product",
+          "id": "product_single_1",
+          "label": "Select product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Tab v6",
+      "category": "Product Tab"
+    }
+  ]
+}
+{% endschema %}

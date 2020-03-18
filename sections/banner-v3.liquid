@@ -1,0 +1,393 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="container-1300 banner-v3 space_top_100 space_bot_70"> 
+  <div class="container banner">
+
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 relative content-banner">
+        <div class="img1 relative">
+           <a href="{{section.settings.url_1}}" class="inline-block relative over-hidden {% if section.settings.enable_overlay %}overlay-banner{% endif %}">
+          <img src="{{section.settings.img_1 | img_url:'master'}}" class="img-responsive hover-zoom-out">
+        </a>
+        <div class="absolute text-banner column-70">
+        <h3 class="fw-400 {% if section.settings.local_text_1 == 'center' %} text-center {% elsif section.settings.local_text_1 == 'left' %} text-left {% elsif section.settings.local_text_1 == 'right' %} text-right {% endif %} capital margin_bottom_20">{{section.settings.text-mid-1}}</h3>
+        <div class="{% if section.settings.local_text_4 == 'center' %} text-center {% elsif section.settings.local_text_4 == 'left' %} text-left {% elsif section.settings.local_text_4 == 'right' %} text-right {% endif %}"><a href="{{section.settings.url_1}}" class="ciloe-btn-default inline-block fw-600">{{section.settings.btn-name}}</a></div>
+        </div>
+
+
+        </div>
+        <div class="img2 relative">
+        <a href="{{section.settings.url_2}}" class="inline-block relative over-hidden {% if section.settings.enable_overlay %}overlay-banner{% endif %}">
+          <img src="{{section.settings.img_2 | img_url:'master'}}" class="img-responsive hover-zoom-out">
+        </a>
+        <div class="absolute text-banner column-70 ">
+        <h3 class="fw-400 {% if section.settings.local_text_2 == 'center' %} text-center {% elsif section.settings.local_text_2 == 'left' %} text-left {% elsif section.settings.local_text_2 == 'right' %} text-right {% endif %} capital margin_bottom_20">{{section.settings.text-mid-2}}</h3>
+        <div class="{% if section.settings.local_text_2 == 'center' %} text-center {% elsif section.settings.local_text_2 == 'left' %} text-left {% elsif section.settings.local_text_2 == 'right' %} text-right {% endif %}"><a href="{{section.settings.url_2}}" class="ciloe-btn-default inline-block fw-600">{{section.settings.btn-name}}</a></div>
+        </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 relative content-banner">
+        <div class="img3 relative">
+        <a href="{{section.settings.url_3}}" class="inline-block relative over-hidden {% if section.settings.enable_overlay %}overlay-banner{% endif %}">
+          <img src="{{section.settings.img_3 | img_url:'master'}}" class="img-responsive hover-zoom-out">
+        </a>
+        <div class="absolute text-banner column-70 ">
+        <h3 class="fw-400 {% if section.settings.local_text_3 == 'center' %} text-center {% elsif section.settings.local_text_3 == 'left' %} text-left {% elsif section.settings.local_text_3 == 'right' %} text-right {% endif %} capital margin_bottom_20">{{section.settings.text-mid-3}}</h3>
+        <div class="{% if section.settings.local_text_3 == 'center' %} text-center {% elsif section.settings.local_text_3 == 'left' %} text-left {% elsif section.settings.local_text_3 == 'right' %} text-right {% endif %}"><a href="{{section.settings.url_3}}" class="ciloe-btn-default inline-block fw-600">{{section.settings.btn-name}}</a></div>
+        </div>
+        </div>
+        <div class="img4 relative">
+        <a href="{{section.settings.url_4}}" class="inline-block relative over-hidden {% if section.settings.enable_overlay %}overlay-banner{% endif %}">
+          <img src="{{section.settings.img_4 | img_url:'master'}}" class="img-responsive hover-zoom-out">
+        </a>
+        <div class="absolute text-banner column-70 ">
+        <h3 class="fw-400 {% if section.settings.local_text_4 == 'center' %} text-center {% elsif section.settings.local_text_4 == 'left' %} text-left {% elsif section.settings.local_text_4 == 'right' %} text-right {% endif %} capital margin_bottom_20">{{section.settings.text-mid-4}}</h3>
+        <div class="{% if section.settings.local_text_4 == 'center' %} text-center {% elsif section.settings.local_text_4 == 'left' %} text-left {% elsif section.settings.local_text_4 == 'right' %} text-right {% endif %}"><a href="{{section.settings.url_4}}" class="ciloe-btn-default inline-block fw-600">{{section.settings.btn-name}}</a></div>
+        </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  </div>
+</div>
+<style>
+    .banner-v3{
+   background:{{section.settings.bg-section}}
+  }
+ .content-banner .ciloe-btn-default:before {
+    content: "\f054";
+    font-family: FontAwesome;
+    margin-right: 10px;
+    font-size: 9px;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background: {{section.settings.bg_button}};
+    line-height: 30px;
+    text-align: center;
+    border-radius: 50%;
+    transition: .3s;
+   padding-left:2px;
+}
+  .content-banner .ciloe-btn-default:after {
+   display:none;
+  }
+    .banner .text-banner a:hover{
+  color:{{section.settings.color_hover}};
+  }
+  .banner .text-banner a{
+  color:{{section.settings.color_text1}};
+  }
+  .banner .content-banner .text-banner .ciloe-btn-default:hover:before{
+    background:{{section.settings.bg_button_hover}};
+  }
+  .banner .content-banner .img1{
+  	display: inline-block;
+    width: 100%;
+    padding-bottom:30px;
+  }
+  .banner .content-banner .img2{
+  	padding-bottom:30px;
+  }
+  .banner .content-banner .img3{
+  padding-bottom:30px;
+  }
+  .banner .content-banner .text-banner.v1 p{
+ 	 max-width: 280px;
+    line-height: 24px;
+  }
+  @media(min-width:1025px){
+  }
+  .banner .content-banner .text-banner.v1 h1{
+   color: #3f976d;
+  }
+  .banner .text-banner{
+  	top:70px;
+    left:12%;
+    right:10%;
+    color:{{section.settings.color_text}};
+  }
+  @media (max-width:1400px){
+    .banner .text-banner.v2{
+  	top:10%;
+  }
+  }
+  .banner .text-banner h4{
+  	margin-bottom:20px;
+  }
+  .banner .text-banner .line{
+    border-bottom: 1px solid {{section.settings.color_text}};
+    width:80px;
+  }
+</style>
+{% schema %}
+{
+  "name": "Banner v3",
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      "type": "header",
+      "content": "Enable overlay"
+    },
+	{
+            "type": "checkbox",
+          	"id": "enable_overlay",
+          	"label": "Enable?",
+			"default": true
+    },
+	{
+      "type": "header",
+      "content": "Color"
+    },
+	{
+      "type": "color",
+      "id": "bg-section",
+      "label": "Background section",
+      "default": "#f9f9f9"
+    },
+	{
+            "type": "color",
+          	"id": "color_text",
+          	"label": "Color",
+			"default": "#3c3c3c"
+    },
+	{
+            "type": "color",
+          	"id": "color_text1",
+          	"label": "Color button",
+			"default": "#999999"
+    },
+	{
+            "type": "color",
+          	"id": "color_hover",
+          	"label": "Hover button",
+			"default": "#333"
+    },
+		{
+            "type": "color",
+          	"id": "bg_button",
+          	"label": "Background button",
+			"default": "#e8e8e8"
+    },
+	{
+            "type": "color",
+          	"id": "bg_button_hover",
+          	"label": "Background hover button",
+			"default": "#0D4C82"
+    },
+		  {
+            "type": "header",
+          	"content": "banner 1"
+          },
+		  {
+   "type":      "select",
+   "id":        "local_text_1",
+   "label":     "Select local text",
+   "options": [
+     {
+       
+       "value": "center",
+       "label": "Center"
+     },
+     {
+       
+       "value": "left",
+       "label": "Left"
+     },
+     {
+       
+       "value": "right",
+       "label": "Right"
+     }
+   ],
+   "default":   "left"
+   
+			},
+		  {
+            "type": "url",
+          	"id": "url_1",
+          	"label": "Url",
+			"default": "/collections/all"
+          },
+          {
+            "type": "image_picker",
+          	"id": "img_1",
+          	"label": "Image banner",
+			"info": "400 x 400px recommended"
+          },
+          {
+            "type": "text",
+          	"id": "text-mid-1",
+          	"label": "Title  1",
+			"default": "Kitchen & Appliances"
+          },
+          {
+            "type": "text",
+          	"id": "btn-name",
+          	"label": "button name",
+			"default": "Shop Now"
+          },
+          {
+            "type": "header",
+          	"content": "banner 2"
+          },
+		  {
+   "type":      "select",
+   "id":        "local_text_2",
+   "label":     "Select local text",
+   "options": [
+     {
+       
+       "value": "center",
+       "label": "Center"
+     },
+     {
+       
+       "value": "left",
+       "label": "Left"
+     },
+     {
+       
+       "value": "right",
+       "label": "Right"
+     }
+   ],
+   "default":   "left"
+   
+			},
+		  {
+            "type": "url",
+          	"id": "url_2",
+          	"label": "Url",
+			"default": "/collections/all"
+          },
+          {
+            "type": "image_picker",
+          	"id": "img_2",
+          	"label": "Image banner",
+			"info": "400 x 400px recommended"
+          },
+          {
+            "type": "text",
+          	"id": "text-mid-2",
+          	"label": "Title 2",
+			"default": "Bathroom"
+          },
+          {
+            "type": "header",
+          	"content": "banner 3"
+          },
+		  {
+   "type":      "select",
+   "id":        "local_text_3",
+   "label":     "Select local text",
+   "options": [
+     {
+       
+       "value": "center",
+       "label": "Center"
+     },
+     {
+       
+       "value": "left",
+       "label": "Left"
+     },
+     {
+       
+       "value": "right",
+       "label": "Right"
+     }
+   ],
+   "default":   "left"
+   
+			},
+		  {
+            "type": "url",
+          	"id": "url_3",
+          	"label": "Url",
+			"default": "/collections/all"
+          },
+          {
+            "type": "image_picker",
+          	"id": "img_3",
+          	"label": "Image banner",
+			"info": "400 x 400px recommended"
+          },
+          {
+            "type": "text",
+          	"id": "text-mid-3",
+          	"label": "Title 3",
+			"default": "Home Decor"
+          },
+          {
+            "type": "header",
+          	"content": "banner 4"
+          },
+		  {
+   "type":      "select",
+   "id":        "local_text_4",
+   "label":     "Select local text",
+   "options": [
+     {
+       
+       "value": "center",
+       "label": "Center"
+     },
+     {
+       
+       "value": "left",
+       "label": "Left"
+     },
+     {
+       
+       "value": "right",
+       "label": "Right"
+     }
+   ],
+   "default":   "left"
+   
+			},
+		  {
+            "type": "url",
+          	"id": "url_4",
+          	"label": "Url",
+			"default": "/collections/all"
+          },
+          {
+            "type": "image_picker",
+          	"id": "img_4",
+          	"label": "Image banner",
+			"info": "400 x 400px recommended"
+          },
+          {
+            "type": "text",
+          	"id": "text-mid-4",
+          	"label": "Title 4",
+			"default": "Dining Chairs"
+          }
+  ],
+
+  "presets": [
+    {
+      "name": "Banner v3",
+      "category": "Page Minim"
+    }
+  ]
+}
+{% endschema %}

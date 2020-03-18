@@ -1,0 +1,278 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  
+  <div class="container-fluid slide_pinmapper margin_bottom_80 relative">
+    
+    <div class="row">
+     
+        <img src="{{section.settings.img | img_url:'master'}}" class="img-responsive ciloe_img_fit">
+      
+      
+      {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+       
+          <div class="absolute hover_popup" style="top:{{block.settings.top}}%;left:{{block.settings.left}}%;">
+
+            <div class="content_pd_popup relative">
+
+              <a href="{{block.settings.url}}" class="btn_popup inline-block delay03"><img src="{{block.settings.img_btn_popup | img_url:'master'}}" class="img-responsive"></a>
+              <div class="pd_popup absolute box-shadow {% if block.settings.enable_right_pd %} pd_popup_right {% endif %}">
+                	{% capture col %}pd_popup{% endcapture %}
+					{% assign product = all_products[block.settings[col]] %}
+                <h4><a href="{{ product.url | within: collection }}">{{product.title}}</a></h4>
+                <div class="flex border-bot price"><span class="left">{{ product.price | money }}</span>
+                  {% if product.review %}
+                  <span class="right">
+                    <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+                  </span>
+                  {% endif %}
+                </div>
+                <div class="border-bot flex info_popup">
+                  <a href="{{ product.url | within: collection }}" class="inline-block">
+                    <img src="{{ product.featured_image.src | img_url: '100x130' }}" class="img-responsive" alt="{{ product.featured_image.alt | escape }}">
+                  </a>
+                  <p class="space_left_10">{{product.description | truncatewords: 10}}</p>
+                </div>
+                <div>
+                  <form method="post" action="/cart/add" enctype="multipart/form-data" class="text-center icon-addcart">
+                    <input type="hidden" name="id" value="" />
+                    <button type="submit" name="add" class="enj-add-to-cart-btn btn-popup uppercase text-center delay03"><i class="icon-bag margin_right_10"></i>add to cart</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+       
+
+      
+      
+      {% endfor %}
+      {% endif %}
+    </div>
+
+  </div>
+
+</div>
+<style>
+  .slide_pinmapper .hover_popup .content_pd_popup .pd_popup{
+  	z-index: 3;
+    min-width: 310px;
+    background: {{section.settings.bg_popup}};
+    padding: 20px;
+    left: calc(100% + 8px) !important;
+    right:auto !important;
+    display: block;
+/*     border: 1px solid #f1f1f1;
+    border-radius: 3px; */
+    transform: translateY(-50%);
+    opacity: 0;
+    visibility: hidden;
+    transition:all .5s ease;
+  }
+  .slide_pinmapper .hover_popup .content_pd_popup .pd_popup.pd_popup_right{
+  	
+    right: calc(100% + 8px) !important;
+    left:auto !important;
+    
+  }
+  .slide_pinmapper .hover_popup .content_pd_popup .pd_popup:before{
+    left: -16px;
+    top: calc(50% - 20px);
+    content: '';
+    position: absolute;
+    z-index: 5;
+    border: 8px solid transparent;
+    border-right: 8px solid #fff;
+  }
+  .slide_pinmapper .hover_popup .content_pd_popup .pd_popup.pd_popup_right:before{
+    border-left: 8px solid #fff;
+    right: -8px;
+    border-right: unset;
+    left:unset;
+  }
+  
+  .slide_pinmapper .hover_popup .content_pd_popup:hover .pd_popup{
+  	opacity: 1;
+    visibility: visible;
+  }
+  .slide_pinmapper .hover_popup .content_pd_popup .pd_popup h4 a{
+  	font-weight:600;
+    font-size:16px;
+    margin-bottom:20px;
+    color:{{section.settings.color_title_pd}};
+  }
+  .slide_pinmapper .hover_popup .content_pd_popup .pd_popup h4 a:hover{
+  	font-weight:600;
+    font-size:16px;
+    margin-bottom:20px;
+    color:{{section.settings.color_hover_title_pd}};
+  }
+  .slide_pinmapper .hover_popup .content_pd_popup .pd_popup .price{
+    padding-bottom:20px;
+    color:{{section.settings.color_price}};
+  }
+  .slide_pinmapper .hover_popup .content_pd_popup .pd_popup .info_popup{
+  	padding:20px 0;
+  }
+  .slide_pinmapper .hover_popup .content_pd_popup .pd_popup form button{
+  	padding:20px 0 0 0;
+    color:{{section.settings.color_btn_add}};
+    font-weight:600;
+    font-size:12px;
+  }
+  .slide_pinmapper .hover_popup .content_pd_popup .pd_popup form button:hover{
+  	
+    color:{{section.settings.color_hover_btn_add}};
+    
+  }
+  @media (max-width:991px){
+    .slide_pinmapper .hover_popup .content_pd_popup .pd_popup{
+      left: auto !important;
+      right:calc(100% + 8px) !important;
+    }
+  }
+</style>
+{% schema %}
+{
+  "name": "slide Pinmapper",
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      "type": "image_picker",
+      "id": "img",
+      "label": "Image"
+    },
+	{
+      "type": "header",
+      "content": "Color"
+    },
+	{
+      "type": "header",
+      "content": "Background Color popup"
+    },
+    {
+      "type": "color",
+      "id": "bg_popup",
+      "label": "BG popup",
+      "default": "#fff"
+    },
+	{
+      "type": "header",
+      "content": "Color info popup"
+    },
+    {
+      "type": "color",
+      "id": "color_title_pd",
+      "label": "Color title product",
+      "default": "#000"
+    },
+	{
+      "type": "color",
+      "id": "color_hover_title_pd",
+      "label": "Color hover title product",
+      "default": "#41cce5"
+    },
+    {
+      "type": "color",
+      "id": "color_price",
+      "label": "Color price product",
+      "default": "#999"
+    },
+    {
+      "type": "color",
+      "id": "color_btn_add",
+      "label": "Color button add to cart product",
+      "default": "#000"
+    },
+	{
+      "type": "color",
+      "id": "color_hover_btn_add",
+      "label": "Color button add to cart product",
+      "default": "#41cce5"
+    }
+  ],
+"blocks": [
+      {
+        "type": "image",
+        "name": "Image",
+		"limit":12,
+        "settings": [
+	{
+      "type": "header",
+      "content": "Button popup"
+    },
+	{
+      "type": "header",
+      "content": "Image popup"
+    },
+	{
+      "type": "url",
+      "id": "url",
+      "label": "URL Image",
+      "default": "/collections/all"
+    },
+	{
+      "type": "image_picker",
+      "id": "img_btn_popup",
+      "label": "Image Button popup"
+    },
+	{
+      "type": "header",
+      "content": "Chose position for Button"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_right_pd",
+      "label": "Enable popup right",
+      "default": false
+    },
+	{
+      "type": "range",
+      "id": "top",
+      "label": "Chose position top",
+      "default": 50,
+	  "min":0,
+	  "max":100,
+	  "unit":"%"
+    },
+	{
+      "type": "range",
+      "id": "left",
+      "label": "Chose position left",
+      "default": 50,
+	  "min":0,
+	  "max":100,
+	  "unit":"%"
+    },
+	{
+      "type": "product",
+      "id": "pd_popup",
+      "label": "Chose product"
+    }
+]
+}
+],
+  "presets": [
+    {
+      "name": "Popup Pinmapper",
+      "category": "Home Pinmapper"
+    }
+  ]
+}
+{% endschema %}

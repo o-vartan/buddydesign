@@ -1,0 +1,329 @@
+{% include 'ciloe-banner' %}
+<div class="contact_page">
+		{% if section.settings.layout == 'contact1' %}
+			{% include 'page-contact-v1' %}
+      	{% elsif section.settings.layout == 'contact2' %}
+      		{% include 'page-contact-v2' %}
+      	{% endif %}
+</div>
+
+<style>
+  .e-contact label{
+  	font-weight:600;
+  }
+  form#contact_form {
+    display: block !important;
+  }
+</style>
+
+    <script>
+    function initMap() {
+
+        // Create a new StyledMapType object, passing it an array of styles,
+        // and the name to be displayed on the map type control.
+        var myLatLng = {lat: {{settings.gmap_latitude}}, lng: {{settings.gmap_longitude}}};
+        var map = new google.maps.Map(document.getElementById('googlemap1'), {
+            center: { lat: {{settings.gmap_latitude}}, lng: {{settings.gmap_longitude}} },
+            zoom: 10,
+            styles: [
+    {
+        "featureType": "administrative",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "lightness": 33
+            }
+        ]
+    },
+    {
+        "featureType": "landscape",
+        "elementType": "all",
+        "stylers": [
+            {
+                "color": "#f2e5d4"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.park",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#c5dac6"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.park",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "lightness": 20
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "all",
+        "stylers": [
+            {
+                "lightness": 20
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#c5c6c6"
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#e4d7c6"
+            }
+        ]
+    },
+    {
+        "featureType": "road.local",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#fbfaf7"
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "color": "#acbcc9"
+            }
+        ]
+    }
+]
+        });
+
+        var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: 'Hello World!'
+        });
+
+    }
+    </script>
+
+{% schema %}
+{
+  "name": "Page Contact Map",
+  "settings": [
+    {
+      "type": "select",
+        "id": "layout",
+        "label": "Layout",
+        "default": "contact1",
+        "options": [
+        {
+          "value": "contact1",
+          "label": "Contact v1"
+        },
+        {
+          "value": "contact2",
+          "label": "Contact v2"
+        }
+      ]
+    },
+	{
+      "type": "header",
+      "content": "Banner"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_banner",
+      "label": "Image banner",
+      "info": "1920x480px recommended"
+    },
+    {
+      "id": "url_banner",
+      "type": "url",
+      "default": "/collections/all",
+      "label": "Banner link"
+    },
+    {
+      "type": "header",
+      "content": "Text Banner"
+    },
+	{
+      "type": "select",
+        "id": "local_text",
+        "label": "Position Text",
+        "default": "center",
+        "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "title_page",
+      "label": "Title page",
+      "default": "Contact Us"
+    },
+	{
+      "type": "header",
+      "content": "Contact"
+    },
+	{
+      "type": "text",
+      "id": "title_info",
+      "label": "Title",
+      "default": "Contact Info"
+    },
+	{
+      "type": "text",
+      "id": "text_info",
+      "label": "Text ",
+      "default": "Some information that you want to know"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_phone",
+      "label": "Phone"
+    },
+	{
+      "type": "text",
+      "id": "abus_info_title3",
+      "label": "Title 1",
+      "default": "PHONE NUMER"
+    },
+	{
+      "type": "text",
+      "id": "abus_info_content1",
+      "label": "Phone",
+      "default": "+1 342 5860 282"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_add",
+      "label": "Address"
+    },
+    {
+      "type": "text",
+      "id": "abus_info_title1",
+      "label": "Title",
+      "default": "ADDRESS"
+    },
+    {
+      "type": "text",
+      "id": "abus_info_content3",
+      "label": "Add",
+      "default": "168 King Street"
+    },
+    {
+      "type": "text",
+      "id": "abus_info_content4",
+      "label": "Add2",
+      "default": "Manhattan. NYC 1001 United States"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_email",
+      "label": "Email"
+    },
+	{
+      "type": "text",
+      "id": "abus_info_title2",
+      "label": "Title",
+      "default": "Email"
+    },
+    {
+      "type": "text",
+      "id": "abus_info_content5",
+      "label": "Email",
+      "default": "guest@cititours.com"
+    },
+    {
+      "type": "header",
+      "content": "Section Contact"
+    },
+	{
+      "type": "text",
+      "id": "title_form",
+      "label": "Title ",
+      "default": "Leave Your Message"
+    },
+	{
+      "type": "text",
+      "id": "text_form",
+      "label": "Text",
+      "default": "Feel free to contact with us by using the form below"
+    },
+    {
+      "type": "text",
+      "id": "abus_contact_input1_name",
+      "label": "Input 1 name",
+      "default": "Name *"
+    },
+    {
+      "type": "text",
+      "id": "abus_contact_input2_name",
+      "label": "Input 2 name",
+      "default": "Email *"
+    },
+    {
+      "type": "text",
+      "id": "abus_contact_input4_name",
+      "label": "Input 2 name",
+      "default": "Subject (optional)"
+    },
+    {
+      "type": "text",
+      "id": "abus_contact_input3_name",
+      "label": "Input 3 name",
+      "default": "Message *"
+    },
+    {
+      "type": "text",
+      "id": "abus_contact_btn_name",
+      "label": "Button name",
+      "default": "Send Us"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Page Contact Map"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

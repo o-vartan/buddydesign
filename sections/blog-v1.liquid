@@ -1,0 +1,94 @@
+<div data-section-id="{{ section.id }}" data-section-type="blog-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <!--blog-->
+    <div class="our-blog bg">
+      <div class="container container-240">
+          <div class="ecome-heading style2">
+              <h3 class="v2">{{section.settings.blog_title}}</h3>
+              <a href="#" class="btn-show">View more<i class="ion-ios-arrow-forward"></i></a>
+          </div>
+          <p class="ecome-info spc2">{{section.settings.text2}}</p>
+          <div class="product-tab-pd owl-carousel owl-theme js-owl-blog owl-custom-dots v2">
+              {% for article in blogs[section.settings.blog_blog].articles limit: section.settings.blog_limit %}
+                  {% include 'blog_list-v1' %}
+              {% else %}
+                  {% include 'empty_blog-v1' %}
+              {% endfor %}
+          </div>
+      </div>
+  </div>
+    <!--end blog-->
+</div>
+
+{% schema %}
+
+  {
+    "name": "Blog v1",
+    "class" : "index-section",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Settings"
+      },
+      {
+        "type": "text",
+        "id": "blog_title",
+        "label": "Title",
+        "default": "From Our Blog"
+      },
+		{
+      "type": "text",
+      "id": "text2",
+      "label": "Description",
+      "default": "Real Activity Data from China Customs For Anyone"
+    },
+	{
+      "type":"header",
+      "content":"Button"
+    },
+    {
+      "type": "text",
+      "id": "btn_name",
+      "label": "Title button",
+      "default": "View more"
+    },
+	{
+      "type": "url",
+      "id": "btn_url",
+      "label": "URL"
+    },
+	  {
+        "type": "blog",
+        "id": "blog_blog",
+        "label": "Select blog"
+      },
+      {
+        "type": "text",
+        "id": "blog_limit",
+        "label": "Limit",
+        "default": "9"
+      },
+      {
+        "type": "header",
+        "content": "Section Space"
+      },
+      {
+        "type": "text",
+        "id": "margin_top",
+        "label": "Margin Top",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "margin_bottom",
+        "label": "Margin Bottom",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      }
+    ],
+    "presets": [
+      {
+        "name": "Blog v1",
+        "category": "Blog"
+      }
+    ]
+  }
+{% endschema %}

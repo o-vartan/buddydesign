@@ -1,0 +1,104 @@
+{% assign product_label_new = false %}
+{% capture _time %}{{settings.product_new_time | times:86400}}{% endcapture %} 
+{% assign time = _time|plus:0 %}
+{% assign now = 'now' | date: '%s'|plus:0 %}
+
+{% capture _value %}{{product.published_at | date: "%s" | plus : time }}{% endcapture %} 
+{% assign value = _value|plus:0 %}
+
+{% if now < value %}
+{% assign product_label_new = true %}
+{% endif %}
+
+
+{% assign label_popular = false %}
+{% if product.tags contains "popular" %}
+{% assign label_popular = true %}
+{% endif %} 
+
+{% assign label_hot = false %}
+{% if product.tags contains "hot" %}
+{% assign label_hot = true %}
+{% endif %}
+
+{% assign on_sale = false %}
+{% if product.compare_at_price > product.price %}
+{% assign on_sale = true %}
+{% endif %}
+
+{% assign sold_out = true %}
+{% if product.available %}
+{% assign sold_out = false %}
+{% endif %}	
+
+ <div class="col-xs-12 col-sm-6 {%if forloop.index == 1 %}col-md-12{%else%} col-md-6{%endif%} product-item engoj_grid_parent">
+        <div class="pd-bd product-inner">
+            <div class="product-img">
+                <a class="engoj_find_img" href="{{ product.url | within: collection }}"><img src="{{ product.featured_image.src | img_url: 'master' }}" alt="{{ product.featured_image.alt | escape }}" class="img-reponsive"></a>
+			{% if settings.show_sale_label and on_sale %}
+            <div class="ribbon-price red" style="background:{{settings.sale_label_color}};">
+                {% capture product_discount %}{{ product.variants.first.compare_at_price | minus:product.variants.first.price | times:100 | divided_by:product.variants.first.compare_at_price }}% {% endcapture %}
+                <span style="color:{{settings.sale_label_text_color}};font-size: {{settings.sale_label_text_size}}px;">{% if product.compare_at_price %}
+                    - {{product_discount}}{% endif %}
+                </span>
+            </div>
+            {% endif %}
+            </div>
+            <div class="product-info">
+                {%include 'select_color'%}
+                <div class="element-list element-list-left">
+                </div>
+                <div class="element-list element-list-middle">
+                    <p class="product-cate">{{product.type}}</p>
+                    <h3 class="product-title"><a href="{{ product.url | within: collection }}">{{ product.title}}</a></h3>
+                    <div class="product-bottom">
+                        <div class="product-price">
+                            {% capture price %}{{ product.price | money }}{% endcapture %}
+                            <span class="red">{% if product.price_varies %}{{ 'products.general.from_text_html' | t: price: price }}{% else %}{{ price }}{% endif %}</span>
+                            {% if on_sale %}<span class="old">{{ product.compare_at_price | money }}</span> {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+                <div class="product-button-group">
+                    {% if sold_out %}
+                <a class="btn-icon" href="{{ product.url | within: collection }}" data-toggle="tooltip" title="{{ 'products.product.unavailable' | t }}">
+                    
+                    {% if settings.pia_sold_show%}
+                  <span class="icon-bg {{settings.pia_sold}} f-20"></span>
+                  {%endif%} 
+                  
+                </a>
+                {% else %}
+                {% if product.variants.size > 1 %}
+                <a class="btn-icon" href="{{ product.url | within: collection }}" data-toggle="tooltip" title="{{ settings.pia_selectoption_name }}">
+                  {% if settings.pia_selectoption_show%}
+                  <span class="icon-bg {{settings.pia_selectoption}} f-20"></span>
+                  {%endif%}
+
+                          
+                </a>
+                {% else %}
+                <form method="post" action="/cart/add" class="btn-icon">
+                  <span class="sr-only">{{ 'products.product.addtocart' | t }}</span>
+                  <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+                  <button type="submit" name="add" id="AddToCart{{ product.id }}" class="addcart no-border text-uppercase enj-add-to-cart-btn" data-toggle="tooltip" title="{{ settings.pia_addcart_name }}">
+
+                    {%if settings.pia_addcart_show %}
+                    <span class="icon-bg {% if settings.icon_cart_display == 'default'%}icon-cart{%else%}{{settings.pia_addcart}} f-20{%endif%}"></span>
+                    {% endif %}
+                    
+                  </button>
+                </form>
+                {% endif %}
+                {% endif %}
+				{% if settings.pia_quickview_show%}
+                  <a href="javascript:void(0)" class="btn-icon btn-view engoj_btn_quickview" data-id="{{ product.handle }}" data-toggle="tooltip" title="{{ settings.pia_quickview_name }}">
+                     <span class="icon-bg {% if settings.icon_view_display == 'default'%}icon-view{%else%}{{settings.pia_quickview}} f-20{%endif%}"></span>
+                  </a>
+                {% endif %}
+                {% include 'add-wishlist-v1'%}
+                </div>
+            </div>
+        </div>
+</div>

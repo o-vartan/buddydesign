@@ -1,0 +1,229 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+
+  <div class="container-fluid container_35 banner_minimal margin_bottom_100 relative">
+
+    <div class="row flex">
+	{% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+      <div class="relative content-banner">
+        <a href="{{block.settings.url_1}}" class="inline-block relative overlay-banner">
+          <img src="{{block.settings.img_1 | img_url:'master'}}" class="img-responsive">
+        </a>
+        <div class="absolute text-banner">
+          <h4 class="lt-2 {% if block.settings.local_text_1 == 'center' %} text-center {% elsif block.settings.local_text_1 == 'left' %} text-left {% elsif block.settings.local_text_1 == 'right' %} text-right {% endif %}">{{block.settings.text-top-1}}</h4>
+          <h2 class="{% if block.settings.local_text_1 == 'center' %} text-center {% elsif block.settings.local_text_1 == 'left' %} text-left {% elsif block.settings.local_text_1 == 'right' %} text-right {% endif %} capital margin_bottom_10">{{block.settings.text-mid-1}}</h2>
+          <h2 class="{% if block.settings.local_text_1 == 'center' %} text-center {% elsif block.settings.local_text_1 == 'left' %} text-left {% elsif block.settings.local_text_1 == 'right' %} text-right {% endif %} capital">{{block.settings.text-mid-2}}</h2>
+          <div class="{% if block.settings.local_text_1 == 'center' %} text-center {% elsif block.settings.local_text_1 == 'left' %} text-left {% elsif block.settings.local_text_1 == 'right' %} text-right {% endif %}"><a href="{{block.settings.url_1}}" class="ciloe-btn-default-2 inline-block relative">{{block.settings.btn-name}}</a></div>
+        </div>
+      </div>
+	{% endfor %}
+    {% endif %}
+    </div>
+  </div>
+
+</div>
+<style>
+  .banner_minimal{
+  	padding:0 190px;
+  }
+  @media (max-width:1600px){
+  	.banner_minimal{
+  	padding:0 100px;
+  }
+  }
+  @media (max-width:1400px){
+  	.banner_minimal{
+  	padding:0 50px;
+  }
+  }
+  @media (max-width:991px){
+  	.banner_minimal{
+  	padding:0 35px;
+  }
+  }
+  @media (max-width:567px){
+  	.banner_minimal .flex{
+  	flex-direction: column;
+  }
+    .banner_minimal .flex .content-banner{
+  	padding-bottom:20px;
+  }
+  }
+  .banner_minimal .content-banner .overlay-banner:before{
+  	content:'';
+    display:inline-block;
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background:rgba(0,0,0,.7);
+    opacity:0;
+    transition:all .3s ease;
+  }
+  .banner_minimal .content-banner:hover .overlay-banner:before{
+    opacity:1;
+  }
+  .banner_minimal .text-banner{
+  	top:40%;
+    left:10%;
+    right:10%;
+    color:{{section.settings.color_text}};
+  }
+  .banner_minimal .text-banner h4{
+  	margin-bottom:20px;
+    font-size:50px;
+  }
+  .banner_minimal .text-banner .line{
+    border-bottom: 1px solid {{section.settings.color_text}};
+    width:80px;
+  }
+  .banner_minimal .text-banner a{
+    color:{{section.settings.color_text}};
+  }
+  .banner_minimal .content-banner .text-banner .ciloe-btn-default-2:before{
+  	background:{{section.settings.color_text}};
+  }
+  .banner_minimal .text-banner a:hover{
+    color:{{section.settings.color_text_hover}};
+  }
+  .banner_minimal .content-banner:hover .text-banner h4{
+  	animation:text-translate 1s ease;
+    -webkit-animation:text-translate 1s ease;
+  }
+  .banner_minimal .content-banner:hover .text-banner h2,.banner .content-banner:hover .text-banner p.line{
+  	animation:text-translate2 1s ease;
+    -webkit-animation:text-translate2 1s ease;
+  }
+  .banner_minimal .content-banner:hover .text-banner .ciloe-btn-default-2{
+  	animation:text-translate3 1.2s ease;
+    -webkit-animation:text-translate3 1.2s ease;
+  }
+  .banner_minimal .content-banner .text-banner .ciloe-btn-default-2:hover::before{
+  	background:{{section.settings.color_text_hover}};
+  }
+  @media (max-width:567px){
+    .banner_minimal .content-banner{
+    	padding-bottom:15px;
+    }
+  }
+</style>
+{% schema %}
+{
+  "name": "Banner Minimal",
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      "type": "header",
+      "content": "Chose color text"
+    },
+	{
+            "type": "color",
+          	"id": "color_text",
+          	"label": "Color",
+			"default": "#fff"
+    },
+	{
+            "type": "color",
+          	"id": "color_text_hover",
+          	"label": "Color hover button",
+			"default": "#41cce5"
+    }      
+  ],
+"blocks": [
+      {
+        "type": "image",
+        "name": "Image banner",
+		"limit":6,
+        "settings": [
+	{
+            "type": "header",
+          	"content": "banner"
+     },
+	 {
+   			"type":      "select",
+   			"id":        "local_text_1",
+   			"label":     "Select local text",
+   			"options": [
+     {
+       
+       "value": "center",
+       "label": "Center"
+     },
+     {
+       
+       "value": "left",
+       "label": "Left"
+     },
+     {
+       
+       "value": "right",
+       "label": "Right"
+     }
+   ],
+   "default":   "center"
+   
+			},
+		  {
+            "type": "url",
+          	"id": "url_1",
+          	"label": "Url",
+			"default": "/collections/all"
+          },
+          {
+            "type": "image_picker",
+          	"id": "img_1",
+          	"label": "Image banner",
+			"info": "48 x 39px recommended"
+          },
+          {
+            "type": "text",
+          	"id": "text-top-1",
+          	"label": "Title top",
+			"default": "trending"
+          },
+          {
+            "type": "text",
+          	"id": "text-mid-1",
+          	"label": "Title mid 1",
+			"default": "spring summer"
+          },
+          {
+            "type": "text",
+          	"id": "text-mid-2",
+          	"label": "Title mid 2",
+			"default": "collection"
+          },
+          {
+            "type": "text",
+          	"id": "btn-name",
+          	"label": "button name",
+			"default": "shop now"
+          }
+]
+}
+],
+  "presets": [
+    {
+      "name": "Banner Minimal",
+      "category": "Home Minimal"
+    }
+  ]
+}
+{% endschema %}

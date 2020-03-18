@@ -1,0 +1,111 @@
+{% include 'ciloe-banner' %}
+<div class="container container-240 page_faq">
+    
+    <div class="e-qa v2">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12">
+            {% if section.blocks.size > 0 %}
+            {% for block in section.blocks %}
+            <div class="{% unless forloop.last %}border-bot{% endunless %} content_faq">
+              <button class="accordion title">{{block.settings.title_content}}</button>
+              <div class="panel">
+                <br>
+                <p class="content">{{block.settings.content}}</p>
+                <br>
+                <br>
+              </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+          </div>
+            
+        </div>
+        
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "Page FAQs",
+  "settings": [
+	{
+      "type": "header",
+      "content": "Banner"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_banner",
+      "label": "Image banner",
+      "info": "1398x316px recommended"
+    },
+    {
+      "id": "url_banner",
+      "type": "url",
+      "default": "/collections/all",
+      "label": "Banner link"
+    },
+    {
+      "type": "header",
+      "content": "Text Banner"
+    },
+	{
+      "type": "select",
+        "id": "local_text",
+        "label": "Position Text",
+        "default": "center",
+        "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "title_page",
+      "label": "Title page",
+      "default": "FAQs"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faqblock",
+      "name": "FAQ block",
+      "settings": [
+		{
+          "type": "text",
+          "id": "title_content",
+          "label": "Title",
+          "default": "First question"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content",
+          "default": "Lorem ipsum dolor sit amet isse potenti. Vesquam ante aliquet lacusemper elit. Cras neque nulla, convallis non commodo et, euismod nonsese. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate provident, similique sunt in culpa qui offic"
+        }
+      ]
+    }
+      
+  ],
+  "presets": [
+    {
+      "name": "Page FAQs"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

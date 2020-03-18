@@ -1,0 +1,9 @@
+{% assign on_sale = false %}
+{% if product.compare_at_price > product.price %}
+{% assign on_sale = true %}
+{% endif %}
+{% if settings.enable_timer_product %}
+{% if on_sale %}
+<div class="time time-sale-product number-font absolute" data-countdown="countdown" data-date="{{settings.timer_sale_product}}"></div>
+{% endif %}
+{% endif %}

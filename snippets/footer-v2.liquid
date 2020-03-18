@@ -1,0 +1,41 @@
+<footer class="footer-v2 space_top_bot_50">
+  <div class=" container">
+    <div class="row">
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 space_top_bot_50 menu-footer-v2">
+        <div class="menu-footer text-center ">
+          {% assign footer_menu = settings.fv2_c2_menu %}
+          <ul class="flex center">
+            {% for link in linklists[footer_menu].links %}
+            <li class="space_right_30 "><a href="{{ link.url }}" title="{{ link.title }}" class="delay03 uppercase fw-400 fz-12">{{ link.title }}</a></li>
+            {%endfor%}
+          </ul>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 space_top_bot_50 text-center">
+        <div>
+          <a href="{{ shop.url }}">
+            {% if settings.fv2_logo == blank %}
+            <img alt="{{shop.name}}" src="{{'logo.png' | asset_url}}" class="img-logo">
+            {% else %}
+            <img alt="{{shop.name}}" src="{{settings.fv2_logo | img_url:'master'}}" class="img-logo">
+            {% endif %}
+          </a>
+        </div>
+        <p class="fz-12" style="color:{{settings.color_text}}; margin-top:20px; line-height:24px;">{{settings.fv2_text_copy}}</p>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 space_top_bot_50 incon-link">
+        <ul class="social flex right">
+          <li class="space_left_10">
+            <a href="{{settings.fv2_social_url1}}" class="fz-18" target="_blank"><i class="{{settings.fv2_social_icon1}}"></i></a>
+          </li>
+          <li class="space_left_10">
+            <a href="{{settings.fv2_social_url2}}" class="fz-18" target="_blank"><i class="{{settings.fv2_social_icon2}}"></i></a>
+          </li>
+          <li class="space_left_10">
+            <a href="{{settings.fv2_social_url3}}" class="fz-18" target="_blank"><i class="{{settings.fv2_social_icon3}}"></i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,264 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  
+  <div class="container instagram margin_bottom_20">
+    <h1 class="title-insta {% if section.settings.text == 'left' %} text-left {% elsif section.settings.text == 'right' %} text-right {% elsif section.settings.text == 'center' %} text-center {% endif %}margin_bottom_70">{{section.settings.title}}</h1>
+    <div class="flex center row ">
+      {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+      <div class="gr_ins_classic flex">
+        <div class="content-insta  relative {% if block.settings.hidden_content_1 %} hidden {% endif %}">
+          <a href="{{block.settings.url_1}}" class="inline-block over-hidden relative parent" target="_blank">
+            <img src="{{block.settings.img_1 | img_url:'master'}}" class="img-responsive delay07">
+            <div class="absolute infor-insta text-center delay05">
+              <a href="instagram.com" class="delay03 inline-block fz-18"><i class="ti-instagram"></i></a>
+            </div>
+          </a>
+        </div>
+        <div class="content-insta  relative {% if block.settings.hidden_content_2 %} hidden {% endif %}">
+          <a href="{{block.settings.url_2}}" class="inline-block over-hidden relative parent" target="_blank">
+            <img src="{{block.settings.img_2 | img_url:'master'}}" class="img-responsive delay07">
+            <div class="absolute infor-insta text-center delay05">
+              <a href="instagram.com" class="delay03 inline-block fz-18"><i class="ti-instagram"></i></a>
+            </div>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+    <div class="text-center button-ins space_top_50">
+	<a href="instagram.com" class="delay03 inline-block fz-18 ">{{section.settings.button}}</a>
+    </div>
+  </div>
+
+</div>
+<style>
+  .button-ins a{
+      height: 40px;
+    line-height: 40px;
+    border-radius: 999px;
+    font-size: 13px;
+    padding: 0px 20px;
+    border: 0;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: {{section.settings.color_button}};
+    background:{{section.settings.bg_button}};
+    transition: all .3s ease;
+    display: inline-block;
+  }
+  .button-ins a:hover{
+      background:{{section.settings.bg_button_hover}} ;
+    font-weight: 600;
+    color: {{section.settings.color_button_hover}};
+  }
+  .instagram .row.flex{
+  	margin-left:-5px;
+    margin-right:-5px;
+  }
+  .instagram .row.flex .content-insta{
+  	margin-left:5px;
+    margin-right:5px;
+  }
+  .instagram .title-insta{
+    font-size:{{section.settings.font_size_title}}px;
+    position:relative;
+    color:{{section.settings.color_title}};
+    text-transform: inherit;
+  }
+  .instagram .des-insta{
+    color:{{section.settings.color_des}};
+  }
+  .instagram .container_340{
+  	padding:0 340px;
+  }
+  .instagram .content-insta img{
+  	transition: all .7s ease;
+  }
+  .instagram .content-insta:hover img{
+  	transform:scale(1.2);
+  }
+  .instagram .content-insta .parent:before{
+  	content:'';
+    display:inline-block;
+    position:absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    background:rgba(0,0,0,.7);
+    opacity:0;
+    transition:all .3s ease;
+    z-index:2;
+  }
+  .instagram .content-insta:hover .parent::before{
+  	opacity:1;
+  }
+  .instagram .content-insta .infor-insta{
+  	top:50%;
+    width:100%;
+    transform:scale(0);
+    z-index:3;
+  }
+  .instagram .content-insta:hover .infor-insta{
+    transform:scale(1);
+  }
+  .instagram .content-insta:hover .infor-insta a{
+    color:#fff;
+  }
+  .instagram .content-insta:hover .infor-insta a:hover{
+    color:#41cce5;
+  }
+</style>
+{% schema %}
+{
+  "name": "Instagram v1",
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      "type": "select",
+      "id": "text",
+      "label": "Select local Title",
+      "default": "center",
+	  "options": [
+     {
+       
+       "value": "left",
+       "label": "Left"
+     },
+     {
+       
+       "value": "right",
+       "label": "Right"
+     },
+     {
+       
+       "value": "center",
+       "label": "Center"
+     }
+   	]
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Trending on Instagram"
+    },
+	{
+      "type": "color",
+      "id": "color_title",
+      "label": "Color title",
+      "default": "#000000"
+    },
+	{
+      "type": "range",
+      "id": "font_size_title",
+      "min":       14,
+      "max":       50,
+      "step":      1,
+      "unit":      "px",
+      "label":     "Font size title",
+      "default":   36
+    },
+    {
+      "type": "text",
+      "id": "button",
+      "label": "Button",
+      "default": "Follow @minim.store"
+    },
+	{
+      "type": "color",
+      "id": "color_button",
+      "label": "Color button",
+      "default": "#000000"
+    },
+	{
+      "type": "color",
+      "id": "bg_button",
+      "label": "Background button",
+      "default": "#0D4C82"
+    },
+	{
+      "type": "color",
+      "id": "color_button_hover",
+      "label": "Hover Color button",
+      "default": "#fff"
+    },
+	{
+      "type": "color",
+      "id": "bg_button_hover",
+      "label": "Hover background button ",
+      "default": "#0D4C82"
+    }
+	
+  ],
+"blocks": [
+      {
+        "type": "image",
+        "name": "Image slide",
+		"limit":10,
+        "settings": [
+		  {
+            "type": "checkbox",
+            "id": "hidden_content_1",
+            "label": "Hidden content 1",
+            "default": false
+          },
+		  {
+            "type": "url",
+          	"id": "url_1",
+          	"label": "Url 1",
+			"default": "/collections/all"
+          },
+          {
+            "type": "image_picker",
+          	"id": "img_1",
+          	"label": "Image brand 1",
+			"info": "48 x 39px recommended"
+          },
+		  {
+            "type": "url",
+          	"id": "url_2",
+          	"label": "Url 2",
+			"default": "/collections/all"
+          },
+          {
+            "type": "image_picker",
+          	"id": "img_2",
+          	"label": "Image brand 2",
+			"info": "300 x 300px recommended"
+          },
+          {
+            "type": "checkbox",
+            "id": "hidden_content_2",
+            "label": "Hidden content 2",
+            "default": false
+          }
+    
+]
+}
+],
+  "presets": [
+    {
+      "name": "Instagram v1",
+      "category": "Page Minim"
+    }
+  ]
+}
+{% endschema %}

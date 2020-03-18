@@ -1,0 +1,252 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+<!--slide-->
+  <div class="container-fluid container_35 tab-pd-clean margin_bottom_30 {% if section.settings.enable_line_bot %}border-bot{% endif %}">
+    <div class="row">
+      {% if section.settings.tab_ver == 'ver1' %}
+      <ul class="nav nav-tabs flex center title-tab text-center">
+        {% if section.blocks.size > 0 %}
+        {%- assign i = 1 -%}
+        {% for block in section.blocks %}
+        <li class="{% if forloop.first %}active{% endif %}">
+          <a href="#{{i}}_{{ section.id }}" data-toggle="tab" class="fz-18 delay03">{{block.settings.tab_title}}</a>
+        </li>
+        {%- assign i = i | plus : 1 -%}
+        {% endfor %}
+        {% endif %}
+      </ul>
+      {% else %}
+      <ul class="nav nav-tabs flex center title-tab-2 text-center">
+        {% if section.blocks.size > 0 %}
+        {%- assign i = 1 -%}
+        {% for block in section.blocks %}
+        <li class="{% if forloop.first %}active{% endif %}">
+          <a href="#{{i}}_{{ section.id }}" data-toggle="tab" class="fz-18 delay03">{{block.settings.tab_title}}</a>
+        </li>
+        {%- assign i = i | plus : 1 -%}
+        {% endfor %}
+        {% endif %}
+      </ul>
+      {% endif %}
+      <div class="tab-content">
+        {% if section.blocks.size > 0 %}
+        {%- assign i = 1 -%}
+        {% for block in section.blocks %}
+
+        {% assign products_limit = block.settings.tab_limit %}
+        {% assign col = block.settings.tab_collection %}
+        <div id="{{i}}_{{ section.id }}" class="tab-pane fade {% if forloop.first %}active in{% endif %}">
+          
+            {% for product in collections[col].products limit: products_limit %}
+            <div class="col-lg-2 col-md-3 col-sm-6 col-xs-6 product-tab-pd loader">
+            {% include 'ciloe-product' %}
+            </div>
+            {% endfor %}
+
+          
+        </div>
+        {%- assign i = i | plus : 1 -%}
+        {% endfor %}
+        {% endif %}
+      </div>
+      {% comment %}
+      <div class="btn-loadmore text-center col-md-12">
+        <a href="#" id="loadMore" class="btn-ciloe-2 inline-block"><i class="ti-reload"></i>{{section.settings.btn_loadmore}}</a>
+      </div>
+      {% endcomment %}
+    </div>
+  </div>
+<!--endslide-->
+</div>
+<style>
+  .tab-pd-clean .title-tab li a{
+    color:{{section.settings.color}};
+    background:{{section.settings.bg}};
+  }
+  .tab-pd-clean .title-tab li.active a{
+    color:{{section.settings.color_active}};
+    background:{{section.settings.bg_active}};
+  }
+  .tab-pd-clean .title-tab li a:hover{
+    color:{{section.settings.color_active}};
+    background:{{section.settings.bg_active}};
+  }
+  
+  .tab-pd-clean .title-tab-2{
+  	border-bottom:0;
+  }
+  .tab-pd-clean .title-tab-2 li a{
+	opacity:0.7;
+    padding-bottom:20px;
+    position:relative;
+    background:transparent;
+    color:#000;
+    font-size:24px;
+    font-weight:500;
+    border:0;
+    margin:0 20px;
+  }
+  .tab-pd-clean .title-tab-2 li a:before{
+	content:'';
+    display:inline-block;
+    position:absolute;
+    left:50%;
+    right:50%;
+    bottom:0;
+    height:2px;
+    background:{{section.settings.color}};
+    transition:all .3s ease;
+  }
+  .tab-pd-clean .title-tab-2 li a:hover{
+	opacity:1;
+    border:0;
+    border-radius:0;
+  }
+  .tab-pd-clean .title-tab-2 li a:hover::before{
+	left:15px;
+    right:15px;
+  }
+  .tab-pd-clean .title-tab-2 li.active a{
+	opacity:1;
+  }
+  .tab-pd-clean .title-tab-2 li.active a:before{
+	left:15px;
+    right:15px;
+  }
+  .tab-pd-clean .title-tab-2 li.active a:hover,.tab-pd-clean .title-tab-2 li.active a:focus{
+	background:transparent;
+  }
+  @media (max-width: 767px){
+    .tab-pd-clean .title-tab-2{
+      flex-direction: column;
+    }
+    .tab-pd-clean .title-tab-2 li{
+      display: inline-flex;
+      justify-content: center;
+    }
+  }
+</style>
+{% schema %}
+{
+  "name": "Tab product Clean",
+  "max_blocks": 5,
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      "type": "header",
+      "content": "Line"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_line_bot",
+      "label": "Enable line bottom",
+      "default": false
+    },
+	{
+      "type": "header",
+      "content": "Select style button tab"
+    },
+	{
+   "type":      "select",
+   "id":        "tab_ver",
+   "label":     "Style version",
+   "options": [
+     {
+       "value": "ver1",
+       "label": "Style 1"
+     },
+     {
+       "value": "ver2",
+       "label": "Style 2"
+     }
+   ],
+   	"default":   "ver1"
+	},
+	{
+      "type": "header",
+      "content": "Color Title"
+    },
+	{
+          "type": "color",
+          "id": "color",
+          "label": "Color Title Tab",
+	  	  "default":   "#666666"
+    },
+	{
+          "type": "color",
+          "id": "bg",
+          "label": "Background Color Title Tab",
+	  	  "default":   "#fff"
+    },
+	{
+          "type": "color",
+          "id": "color_active",
+          "label": "Color Title Tab active",
+	  	  "default":   "#fff"
+    },
+	{
+          "type": "color",
+          "id": "bg_active",
+          "label": "Background Color Title Tab active",
+	  	  "default":   "#41cce5"
+    },
+	{
+      "type": "header",
+      "content": "Button load more"
+    },
+	{
+          "type": "text",
+          "id": "btn_loadmore",
+          "label": "Button load more name",
+	  	  "default":   "load more"
+    }
+  ],
+
+"blocks": [
+      {
+        "type": "image",
+        "name": "Image slide",
+        "settings": [
+		{
+          "type": "text",
+          "id": "tab_title",
+          "label": "Title tab",
+	  	  "default":   "New Products"
+        },
+		{
+          "type": "collection",
+          "id": "tab_collection",
+          "label": "Chose collection"
+        },
+		{
+          "type": "text",
+          "id": "tab_limit",
+          "label": "Limit product",
+	  	  "default":   "10"
+        }
+        ]
+      }
+    ],
+  "presets": [
+    {
+      "name": "Tab product Clean",
+      "category": "Home Clean"
+    }
+  ]
+}
+{% endschema %}

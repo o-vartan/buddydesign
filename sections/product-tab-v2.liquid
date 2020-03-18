@@ -1,0 +1,147 @@
+<div data-section-id="{{ section.id }}" data-section-type="product-tab-v2" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+	<!--wrapper product-->
+   <div class="feature-product spc3">
+      <div class="container container-240">
+          <div class="ecome-heading style2">
+              <h3>{{section.settings.text1}}</h3>
+              <a href="{{section.settings.btn_url}}" class="btn-show">{{section.settings.btn_name}}<i class="ion-ios-arrow-forward"></i></a>
+          </div>
+          <p class="ecome-info spc3">{{section.settings.text2}}</p>
+          <div class="row">
+              <div class="col-md-3 col-sm-4 col-xs-12">
+                  <ul class="tab-link">
+                      {% if section.blocks.size > 0 %}
+                      {%- assign i = 1 -%}
+                      {% for block in section.blocks %}
+                      <li class="{% if forloop.first %}active{% endif %}">
+                          <a href="#{{i}}_{{ section.id }}" data-toggle="tab">
+                              <div class="tab-link-info flex align-center">
+                                  <img {%if block.settings.category_img == blank%}src="{{'1.png'| asset_url }}" 
+                                      {%else%}src="{{block.settings.category_img | img_url:'master'}}" class="img-reponsive"{%endif%} alt="images" />
+                                  <span>{{block.settings.tab_title}}</span>
+                              </div>
+                          </a>
+                      </li>
+                      {%- assign i = i | plus : 1 -%}
+                      {% endfor %}
+                      {% endif %}
+                  </ul>
+              </div>
+              <div class="col-md-9 col-sm-8 col-xs-12">
+                  <div class="tab-content">
+                      {% if section.blocks.size > 0 %}
+                      {%- assign i = 1 -%}
+                      {% for block in section.blocks %}
+
+                      {% assign products_limit = block.settings.tab_limit %}
+                      {% assign col = block.settings.tab_collection %}
+                      <div id="{{i}}_{{ section.id }}" class="tab-pane fade {% if forloop.first %}active in{% endif %}">
+                          <div class="row engoc-equal-row">
+                              {% for product in collections[col].products limit: products_limit %}
+                                {% include 'product-grid-6' %}
+                                    {% else %} 
+                                {% include 'empty-product-grid-6'%}
+                              {% endfor %}
+                          </div>
+                      </div>
+                    {%- assign i = i | plus : 1 -%}
+                    {% endfor %}
+                    {% endif %}
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+<!--end wrapper product-->
+</div>  
+{% schema %}
+{
+  "name": "Product Tab v2",
+  "class": "index-section",
+  "settings": [
+	{
+      "type": "header",
+      "content": "Heading"
+    },
+	{
+      "type": "text",
+      "id": "text1",
+      "label": "Title",
+      "default": "BestSeller Products"
+    },
+	{
+      "type": "text",
+      "id": "text2",
+      "label": "Description",
+      "default": "Real Activity Data from China Customs For Anyone"
+    },
+	{
+      "type":"header",
+      "content":"Button"
+    },
+    {
+      "type": "text",
+      "id": "btn_name",
+      "label": "Title button",
+      "default": "Shop more"
+    },
+	{
+      "type": "url",
+      "id": "btn_url",
+      "label": "URL"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Title",
+          "info": "Sale products"
+        },
+		{
+          "type": "image_picker",
+          "id": "category_img",
+          "label": "Image"
+        },
+        {
+          "type": "collection",
+          "id": "tab_collection",
+          "label": "Choose Collection"
+        },
+        {
+          "type": "text",
+          "id": "tab_limit",
+          "label": "Limit number of products",
+          "default": "6"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Tab v2",
+      "category": "Product Tab"
+    }
+  ]
+}
+{% endschema %}

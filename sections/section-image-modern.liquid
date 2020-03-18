@@ -1,0 +1,123 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  
+    
+  <div class="container-fluid margin_bottom_80 image_modern">
+   
+    <div class="row">
+      <div class="img_banner col-lg-6 col-md-6 col-sm-12 col-xs-12 {% if section.settings.local_img_1 == 'left' %} clear-space-left {% elsif section.settings.local_img_1 == 'right' %} clear-space-right {% elsif section.settings.local_img_1 == 'center' %} center {% endif %}">
+        <a href="{{section.settings.url_1}}" class=" over-hidden">
+          <img src="{{section.settings.img_banner_1 | img_url:'master'}}" class="img-responsive  {% if section.settings.local_img_1 == 'left' %} left {% elsif section.settings.local_img_1 == 'right' %} right {% elsif section.settings.local_img_1 == 'center' %} center {% endif %}" {% if section.settings.local_img_1 == 'center' %}style="margin:0 auto"{% endif %}>
+        </a>
+      </div>
+      <div class="img_banner col-lg-6 col-md-6 col-sm-12 col-xs-12 {% if section.settings.local_img_2 == 'left' %} clear-space-left {% elsif section.settings.local_img_2 == 'right' %} clear-space-right {% elsif section.settings.local_img_2 == 'center' %} center {% endif %}">
+        <a href="{{section.settings.url_2}}" class=" over-hidden">
+          <img src="{{section.settings.img_banner_2 | img_url:'master'}}" class="img-responsive {% if section.settings.local_img_2 == 'left' %} left {% elsif section.settings.local_img_2 == 'right' %} right {% elsif section.settings.local_img_2 == 'center' %} center {% endif %}" {% if section.settings.local_img_2 == 'center' %}style="margin:0 auto"{% endif %}>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  
+</style>
+{% schema %}
+{
+  "name": "Image Modern",
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      "type": "header",
+      "content": "Image 1"
+    },
+	{
+      "type": "url",
+      "id": "url_1",
+      "label": "URL image 1",
+      "default": "/collections/all"
+    },
+	{
+      "type": "image_picker",
+      "id": "img_banner_1",
+      "label": "Image"
+    },
+	{
+   	  "type":      "select",
+   	  "id":        "local_img_1",
+   	  "label":     "Chose Position Image",
+   	  "options": [
+     {
+       "value": "left",
+       "label": "Left"
+     },
+     {
+       "value": "center",
+       "label": "Center"
+     },
+     {
+       "value": "right",
+       "label": "Right"
+     }
+   ],
+   	"default":   "center"
+	},
+	{
+      "type": "header",
+      "content": "Image 2"
+    },
+	{
+      "type": "url",
+      "id": "url_2",
+      "label": "URL image 2",
+      "default": "/collections/all"
+    },
+	{
+      "type": "image_picker",
+      "id": "img_banner_2",
+      "label": "Image"
+    },
+	{
+   	  "type":      "select",
+   	  "id":        "local_img_2",
+   	  "label":     "Chose Position Image",
+   	  "options": [
+     {
+       "value": "left",
+       "label": "Left"
+     },
+     {
+       "value": "center",
+       "label": "Center"
+     },
+     {
+       "value": "right",
+       "label": "Right"
+     }
+   ],
+   	"default":   "center"
+	}
+  ],
+
+  "presets": [
+    {
+      "name": "Image Modern",
+      "category": "Home Modern"
+    }
+  ]
+}
+{% endschema %}

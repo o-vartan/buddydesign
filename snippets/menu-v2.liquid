@@ -1,0 +1,83 @@
+<!-- begin site-nav -->
+{% assign main_menu = section.settings.menu_ver2%}
+<ul class="nav navbar-nav js-menubar">{% for link in linklists[main_menu].links %}
+  {% assign item = link.title | downcase %}
+  {% assign child_list_handle = link.title | handleize %}
+
+  {%capture logomenu%}logo_menu{%endcapture%}
+  {%if item == settings[logomenu] and section.settings.select_hds == "header_v4" or section.settings.select_hds_all == "header_ver4" %}
+  <li class="level1 hidden-xs hidden-sm">
+    <a href="{{shop.url}}" title="{{shop.name}}">
+      <img {%if settings.hdv4_logo == blank%}src="{{'h_logo.png'| asset_url }}" 
+           {%else%}src="{{settings.hdv4_logo | img_url:'master'}}" class="img-reponsive"{%endif%} alt="logo" />
+    </a>
+  </li>
+
+  {% else %}
+  
+  {% capture megamenu_1 %}megamenu_1_parent{% endcapture %}
+  {% capture megamenu_2 %}megamenu_2_parent{% endcapture %}
+
+  {% if settings[megamenu_1] == item or settings[megamenu_2] == item %}
+  
+    {% for i in (1..2) %}
+    {%capture megamenu%}megamenu_{{i}}_parent{%endcapture%}
+    {% if settings[megamenu] == item %}
+    <li class="level1 dropdown hassub">
+      <a href="{{ link.url }}">{{ link.title }}</a>
+      <span class="plus js-plus-icon"></span>
+      <div class="menu-level-1 dropdown-menu">
+        <ul class="level1">	
+          {% for j in (1..2) %}
+          {% capture mega_title %}megamenu_{{ i }}_column_{{ j }}_title{% endcapture %}
+          {% capture mega_col %}megamenu_{{ i }}_column_{{ j }}_menu{% endcapture %}
+          {% capture mega_image %}megamenu_{{ i }}_column_{{ j }}_image.jpg{% endcapture %}
+          {% capture mega_image_url %}megamenu_{{ i }}_column_{{ j }}_image_url{% endcapture %}
+          <li class="level2 col-6 space-padding-10">
+            <a>{{ settings[mega_title] }}</a>
+            <ul class="menu-level-2 col-6">
+              {% for link in linklists[settings[mega_col]].links %}
+              <li class="level3"><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {% endfor %}
+            </ul>
+            <div class="mega-product col-6">
+              <a href="{{ setting[mega_image_url] }}"><img src="{{ mega_image | asset_url }}" alt="" class="img-responsive"></a>
+            </div>
+            <div class="cleafix"></div>
+            {% endfor %}
+          </li>
+
+
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+    </li>
+    {% endif %} 
+    {% endfor %}
+  
+  {% else %}
+  
+    {% if linklists[child_list_handle].links != blank %}
+    <li class="level1 active dropdown">
+      <a href="{{ link.url }}" class="">{{ link.title }}</a>
+      <span class="plus js-plus-icon"></span>
+      <ul class="dropdown-menu menu-level-1">
+        {% for childlink in linklists[child_list_handle].links %}
+        <li{% if childlink.active %} class="level2"{% endif %}>
+          <a href="{{ childlink.url }}" class="">{{ childlink.title | escape }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </li>
+    {% else %}
+    <li class="level1 active" {% if link.active %}class="dropdown"{% endif %}>
+      <a href="{{ link.url }}" class="">{{ link.title }}</a>
+    </li>
+    {% endif %}
+  
+  {% endif %}
+  
+  {% endif %}
+  {% endfor %}
+</ul>
+<!-- //site-nav -->

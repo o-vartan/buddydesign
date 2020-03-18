@@ -1,0 +1,108 @@
+<div class="ciloe_content_des_pd">
+  {% if section.settings.img_avatar_tab != blank %}
+  <div class="img_avatar text-center">
+    <img src="{{section.settings.img_avatar_tab | img_url:'master'}}" class="img-responsive inline-block margin_bottom_40">
+  </div>
+  {% endif %}
+  {% if section.settings.title_des_tab != blank %}
+  <div>
+    <h1 class="text-center margin_bottom_40 title_des_tab">{{section.settings.title_des_tab}}</h1>
+  </div>
+  {% endif %}
+  {% if section.settings.des_des_tab != blank %}
+  <p class="text-center margin_bottom_60 content_des_tab">{{section.settings.des_des_tab}}</p>
+  {% endif %}
+  <div class="bg_content_bottom">
+    {% if section.settings.banner_des_tab != blank %}
+    <div class="img_banner_tab text-center margin_bottom_50">
+      <img src="{{section.settings.banner_des_tab | img_url:'master'}}" class="img-responsive inline-block">
+    </div>
+    {% endif %}
+    {% if section.settings.enable_border %}
+    <div class="border_content_des flex">
+      <span class="line_left"></span>
+      <div class="container_15">
+        <img src="{{section.settings.icon_border | img_url:'master'}}" class="img-responsive">
+      </div>
+      <span class="line_right"></span>
+    </div>
+    {% endif %}
+    {% if section.settings.enable_content_image %}
+    <div class="flex content_mid space_top_bot_80">
+      <div class="flex column center content_mid_1 text-center col-md-4 col-sm-12 col-xs-12">
+        {% if section.settings.img_des_1 != blank %}
+        <img src="{{section.settings.img_des_1 | img_url:'master'}}" class="img-responsive inline-block margin_bottom_50">
+        {% endif %}
+        <h1 class="margin_bottom_30 text-center">{{section.settings.title_mid_1}}</h1>
+        <p class="line margin_bottom_30" style="margin: 0 auto 30px"></p>
+        <p class="text-center">{{section.settings.des_content_mid_1}}</p>
+      </div>
+      <!--      -->
+      <div class="flex column center content_mid_2 text-center col-md-4 col-sm-12 col-xs-12">
+        {% if section.settings.img_des_2 != blank %}
+        <img src="{{section.settings.img_des_2 | img_url:'master'}}" class="img-responsive inline-block">
+        {% endif %}
+        <h1 class="margin_bottom_30 text-center">{{section.settings.title_mid_2}}</h1>
+        <p class="line margin_bottom_30" style="margin: 0 auto 30px"></p>
+        <p class="text-center">{{section.settings.des_content_mid_2}}</p>
+      </div>
+      <!--      -->
+      <div class="flex column center content_mid_3 text-center col-md-4 col-sm-12 col-xs-12">
+        {% if section.settings.img_des_3 != blank %}
+        <img src="{{section.settings.img_des_3 | img_url:'master'}}" class="img-responsive inline-block margin_bottom_50">
+        {% endif %}
+        <h1 class="margin_bottom_30 text-center">{{section.settings.title_mid_3}}</h1>
+        <p class="line margin_bottom_30" style="margin: 0 auto 30px"></p>
+        <p class="text-center">{{section.settings.des_content_mid_3}}</p>
+      </div>
+    </div>
+    {% endif %}
+    {% if section.settings.enable_border %}
+    <div class="border_content_des flex">
+      <span class="line_left"></span>
+      <div class="container_15">
+        <img src="{{section.settings.icon_border_2 | img_url:'master'}}" class="img-responsive">
+      </div>
+      <span class="line_right"></span>
+    </div>
+    {% endif %}
+    {% if section.settings.enable_feature %}
+    <div class="text-center feature_des_tab space_top_bot_50">
+      <h1 class="text-center margin_bottom_40">{{section.settings.title_feature}}</h1>
+      {% if section.settings.img_feature != blank %}
+      <img src="{{section.settings.img_feature | img_url:'master'}}" class="img-responsive inline-block">
+      {% endif %}
+    </div>
+    {% endif %}
+  </div>
+  {% if section.settings.enable_purchase_tab %}
+  <div class="relative purchase_tab" style="background-image:url({{section.settings.bg_img_purchase | img_url:'master'}});background-size:cover">
+    <h1 class="text-center margin_bottom_40">{{section.settings.title_purchase}}</h1>
+    <div class="text-center"><a href="{{section.settings.link_purchase}}" class="inline-block">{{section.settings.btn_name_des}}</a></div>
+  </div>
+  {% endif %}
+</div>
+<style>
+  .single-product-tab .tab-content{
+    padding:0 0 80px;
+  }
+  .single-product-tab .tab-content p.content_des_tab{
+    width:100%;
+    max-width: 888px;
+    margin: 0 auto 60px;
+  }
+  @media (min-width:1400px){
+    .ciloe_content_des_pd .content_mid{
+      padding: 80px 150px;
+    }
+  }
+  @media (max-width:991px){
+    .ciloe_content_des_pd .content_mid{
+      flex-direction: column;
+      padding:30px 0;
+    }
+    .single-product-tab .tab-content p.content_des_tab{
+      margin: 0 auto 30px;
+    }
+  }
+</style>

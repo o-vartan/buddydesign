@@ -1,0 +1,43 @@
+<div class="main-container blog--listing">
+  <div class="container">
+    <div class="row">
+      {% for article in blog.articles %}
+      <div class="col-md-12 blog-post-item-list">
+        <div class="blog-post-item v2">
+          {% if article.image %}
+          <div class="blog-img">
+            <a class="hover-images" href="{{ article.url }}">
+              <img src="{{ article.image.src | img_url: 'master' }}" alt="{{ article.title }}" class="img-reponsive">
+            </a>
+          </div>
+          {% endif %}
+
+          <div class="blog-post-info">
+            <div class="post-metas ver-list">
+              {% if section.settings.blog_show_date %}
+              <div class="post-date">{{ article.created_at | date: "%B %d, %Y" }}</div>
+              {% endif %}
+              <span class="post-comments-number">{{article.comments_count}}</span>
+            </div>
+            <div class="clearfix"></div>
+            <h3 class="post-name "><a href="{{ article.url }}">{{ article.title }}</a></h3>
+            <div class="post-desc">
+              {{article.excerpt}}
+            </div>
+            <div class="categories">
+              {% for tag in article.tags %}
+              <a href="{{ blog.url }}/tagged/{{ tag | handle }}" rel="category tag">{{ tag }}</a>{% unless forloop.last %},{% endunless %}
+              {% endfor %}
+            </div>
+            <a href="{{ article.url }}" class="readmore--ver2">Read more</a>
+          </div>
+
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="pagination-container button-v v6">
+       {% include 'pagination'%}
+    </div>
+  </div>
+</div>

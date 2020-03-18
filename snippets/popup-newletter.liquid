@@ -1,0 +1,76 @@
+{%assign newletter_title= settings.popup_newletter_title %}
+{%assign newletter_des= settings.popup_newletter_des %}
+{%assign newletter_des2= settings.popup_newletter_des2 %}
+{%assign newletter_button= settings.popup_newletter_button_title %}
+{%assign newletter_input= settings.popup_newletter_input_title %}
+{% if settings.newsletter_form_action != blank %}
+{% assign form_action = settings.newsletter_form_action %}
+{% else %}
+{% assign form_action = '#' %}
+{% endif %}
+
+<div class="newsletterwrapper hidden-xs hidden-sm">
+  <div id="email-modal">
+    <div class="modal-overlay"></div>
+    <div class="modal-window">
+      <div class="window-window">
+        <div class="window-content clearfix">
+          <a class="btn close" title="Close">
+            <span class="icon icon-remove">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" version="1.1" height="12px" viewBox="0 0 64 64" enable-background="new 0 0 64 64">
+              <g><path fill="#FFFFFF" d="M28.941,31.786L0.613,60.114c-0.787,0.787-0.787,2.062,0,2.849c0.393,0.394,0.909,0.59,1.424,0.59   c0.516,0,1.031-0.196,1.424-0.59l28.541-28.541l28.541,28.541c0.394,0.394,0.909,0.59,1.424,0.59c0.515,0,1.031-0.196,1.424-0.59   c0.787-0.787,0.787-2.062,0-2.849L35.064,31.786L63.41,3.438c0.787-0.787,0.787-2.062,0-2.849c-0.787-0.786-2.062-0.786-2.848,0   L32.003,29.15L3.441,0.59c-0.787-0.786-2.061-0.786-2.848,0c-0.787,0.787-0.787,2.062,0,2.849L28.941,31.786z"/></g>
+            </svg>
+            </span>
+          </a>
+          
+          <div class="left">
+            <img src="{% if settings.show_popup != blank %}{{settings.show_popup | img_url: "master"}}{% else %}https://placehold.it/380x520{% endif %}" alt="">
+          </div>
+          <div class="right">
+            <h1 class="title text-center lt-2 margin_bottom_10 uppercase space_top_50" style="font-size:14px;font-weight:600">{{settings.newletter_title}}</h1>           
+            <p class="sub-title text-center margin_bottom_20" style="font-size:24px;font-weight:500;">{{settings.newletter_title_2}}</p>
+            <p class="line" style="margin:0 auto 20px"></p>
+            <p class="text-center margin_bottom_40" style="color:#999;line-height:2;">{{settings.newletter_des}}</p>
+            <div id="mailchimp-email-subscibe ">
+              <div id="mc_embed_signup">
+                <form action="{{ form_action }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank"  class="subscible-form flex column center full-width">
+                  <div class="form-group">
+
+                    <input style="padding-left: 0; border:0;border-bottom:2px solid #ddd;font-weight:600;padding-bottom:10px;" class="engoc-input-form full-width" type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{newletter_input}}" name="EMAIL" id="mail" aria-label="{{ 'general.newsletter_form.newsletter_email' | t }}" autocorrect="off" autocapitalize="off">
+
+                  </div>
+
+                  <div class="form-submit text-center margin_bottom_40 margin_top_30">
+                    <input type="submit" class="engoc-input-btn btn-back lt-2"  name="subscribe" id="subscribe" value="{{newletter_button}}" style="letter-spacing: 2px; font-size: 12px;width:190px;height:60px;line-height:47px; max-width: 190px;">
+                  </div>
+
+                </form>
+              </div>
+            </div>
+            <h2 class="message text-center" style="font-size:12px; color:#999;line-height:1.5;font-weight:400;"><span class="red">* </span>{{newletter_des2}}</h2>
+            {%if settings.show_popup_newletter_social%}
+            <div class="product-socials">
+              {{settings.popup_newletter_social_content}}
+            </div>
+            {%endif%}
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  if (!jQuery.cookie('brilliant_pop_newletter') || jQuery.cookie('brilliant_pop_newletter') == null) {    
+      jQuery(window).load(function() {
+        setTimeout($('#email-modal').show(), {{settings.popup_delay}} * 1000);
+        jQuery('#email-modal .close , #email-modal .modal-overlay').click(function(e) {
+          e.preventDefault();
+          jQuery('#email-modal').hide(); 
+          jQuery.cookie('brilliant_pop_newletter', '1', {expires: 1, path:'/', domain: '{{ shop.domain }}' });
+        });
+      });
+     } else {
+        $('.newsletterwrapper').remove();
+     }
+</script>

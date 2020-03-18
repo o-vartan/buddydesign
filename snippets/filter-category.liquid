@@ -1,0 +1,7 @@
+<div class="filter filter-cate">
+    <ul class="wiget-content v2">
+        {% for collection in collections %}
+          <li {% if collection_title == collection.title %}class="active" {% endif %}><a  href="{{ collection.url }}" title="{{ collection.title }}">{{ collection.title }} </a></li>
+      {% endfor %}
+    </ul>
+</div>

@@ -1,0 +1,183 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+<!--slide-->
+  <div class="container-fluid container_35 history-minimal margin_bottom_80">
+    
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 content-text">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 space_bot_20">
+            <h1>{{section.settings.title}}</h1>
+            {% if section.settings.enable_line %}
+            <p class="line"></p>
+            {% endif %}
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 relative space_bot_20">
+            <p class="space_bot_20">{{section.settings.content}}</p>
+            <div>
+            	<img src="{{section.settings.img-content | img_url:'master'}}" class="img-responsive">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 content-image text-center">
+        <img src="{{section.settings.img-banner | img_url:'master'}}" class="img-responsive inline-block">
+      </div>
+    </div>
+  </div>
+<!--endslide-->
+</div>
+<style>
+  .history-minimal{
+    background:{{section.settings.bg}};
+    padding-top:60px;
+    margin-bottom:360px;
+  }
+  .history-minimal .line{
+    border-bottom: 1px solid {{section.settings.bg_line}};
+    width:160px;
+    margin-left: 38%;
+  }
+  .history-minimal .content-text{
+    padding-top: 5%;
+  }
+  .history-minimal .content-text h1{
+    color:{{section.settings.color_title}};
+    font-size:50px;
+    margin-bottom:25px;
+    padding-left: 38%;
+  }
+  .history-minimal .content-text p{
+    color:{{section.settings.color_content}};
+    line-height: 2;
+  }
+  .history-minimal .content-text img{
+    position:absolute;
+    top: 132%;
+  }
+  @media (max-width:1400px){
+  .history-minimal{
+    margin-bottom:200px;
+  }
+    .history-minimal .content-text img{
+    top: 110%;
+  }
+  }
+  @media (max-width:991px){
+  	.history-minimal{
+    margin-bottom:50px;
+  }
+    .history-minimal .line{
+    margin-left: 0;
+  }
+    .history-minimal .content-text{
+    	padding-bottom:20px;
+    }
+    .history-minimal .content-text h1{
+    padding-left: 0;
+  }
+    .history-minimal .content-text img{
+    position:relative;
+    top: unset;
+  }
+  }
+</style>
+{% schema %}
+{
+  "name": "History Minimal",
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      "type": "header",
+      "content": "Color"
+    },
+	{
+          "type": "color",
+          "id": "bg",
+          "label": "Background color",
+	  	  "default":   "#f8f8f8"
+    },
+	{
+          "type": "color",
+          "id": "color_title",
+          "label": "Color title",
+	  	  "default":   "#000000"
+    },
+	{
+          "type": "color",
+          "id": "color_content",
+          "label": "Color content",
+	  	  "default":   "#999999"
+    },
+	{
+          "type": "color",
+          "id": "bg_line",
+          "label": "Color line",
+	  	  "default":   "#000000"
+    },
+	{
+      "type": "header",
+      "content": "Title"
+    },
+	{
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+	  	  "default":   "The<br>history."
+    },
+	{
+          "type": "checkbox",
+          "id": "enable_line",
+          "label": "Enable line?",
+	  	  "default":   true
+    },
+	{
+      "type": "header",
+      "content": "Content"
+    },
+	{
+          "type": "textarea",
+          "id": "content",
+          "label": "Content",
+	  	  "default":   "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventoreLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim"
+    },
+	{
+          "type": "image_picker",
+          "id": "img-content",
+          "label": "Image"
+    },
+	{
+      "type": "header",
+      "content": "Banner"
+    },
+		{
+          "type": "image_picker",
+          "id": "img-banner",
+          "label": "Image banner"
+        }
+  ],
+
+
+  "presets": [
+    {
+      "name": "History Minimal",
+      "category": "Home Minimal"
+    }
+  ]
+}
+{% endschema %}

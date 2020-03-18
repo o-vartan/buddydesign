@@ -1,0 +1,17 @@
+ <div class="blog-post-item v3">
+    <div class="blog-img">
+        <a href="{{article.url}}" class="hover-images"><img src="{{article.image.src| img_url:'master'}}" alt="images" /></a>
+    </div>
+    <div class="heading-blog flex align-center">
+        <div class="blog-post-date e-gradient">
+            <span class="b-date">{{article.published_at | date: "%d" }}</span>
+            <span class="b-month">{{article.published_at | date: "%b"}}</span>
+        </div>
+        <h3 class="blog-post-title"><a href="{{ article.url }}">{{article.title}}</a></h3>
+    </div>
+    <p class="blog-post-desc">{{article.excerpt}}</p>
+    <div class="blog-post-author">
+        <div class="author">{{ 'blogs.article.poster_by' | t }} <span class="c-black">{{article.author}}</span></div>
+        <div class="blog-post-comment"><span class="c-black"></span>{{article.comments_count}}</div>
+    </div>
+</div>

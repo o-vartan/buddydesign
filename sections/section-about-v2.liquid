@@ -1,0 +1,308 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+
+{% if section.settings.show_content_about %}
+  <div class="container space_top_100 banner_about_v2">
+
+    <div class="row">
+     <div class="title col-lg-4 col-md-4 col-sm-12 col-xs-12">
+        <h1 class="margin_bottom_30">{{section.settings.title}}</h1>
+      </div>
+      <div class="content col-lg-8 col-md-8 col-sm-12 col-xs-12">
+        <div class="row">
+          <div class="text_content col-lg-6 col-md-6 col-sm-6 col-xs-6 space_bot_60">
+            <img src="{{section.settings.img_icon | img_url:'master'}}" class="img-responsive">
+            <h4 class="margin_bottom_30 space_top_30 fw-500">{{section.settings.title_content}}</h4>
+            <p class=" content">{{section.settings.des}}</p>
+          </div>
+                    <div class="text_content col-lg-6 col-md-6 col-sm-6 col-xs-6 space_bot_60">
+            <img src="{{section.settings.img_icon2 | img_url:'master'}}" class="img-responsive">
+            <h4 class="margin_bottom_30 space_top_30 fw-500">{{section.settings.title_content2}}</h4>
+            <p class=" content">{{section.settings.des2}}</p>
+          </div>
+                    <div class="text_content col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <img src="{{section.settings.img_icon3 | img_url:'master'}}" class="img-responsive">
+            <h4 class="margin_bottom_30 space_top_30 fw-500">{{section.settings.title_content3}}</h4>
+            <p class=" content">{{section.settings.des3}}</p>
+          </div>
+                    <div class="text_content col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <img src="{{section.settings.img_icon4 | img_url:'master'}}" class="img-responsive">
+            <h4 class="margin_bottom_30 space_top_30 fw-500">{{section.settings.title_content4}}</h4>
+            <p class=" content">{{section.settings.des4}}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  {% endif %}
+  {% if section.settings.show_content_tes %}
+  <div class="container-fluid">
+     <div class="row">
+    <div class="bg-2 col-lg-5 col-md-5 col-sm-5 col-xs-12">
+    <img src="{{section.settings.bg_v2 | img_url:'master'}}" class="img-responsive">
+    </div>
+    <div class="content v2 col-lg-7 col-md-7 col-sm-7 col-xs-12">
+      <p class="line "></p>
+      <h3 class=" content  space_bot_40">{{section.settings.des5}}</h3>
+      <img src="{{section.settings.img_icon5 | img_url:'master'}}" class="img-responsive inline-block space_right_20"><span class="fw-500">{{section.settings.text2}}</span>
+    </div>
+    </div>
+  </div>
+  {% endif %}
+</div>
+<style>
+  .bg-2{
+  	padding-left:0;
+  }
+  .content.v2{  	
+    padding-left:3%;
+  }
+  .content.v2 .line{
+    padding-top:30px;
+    }
+  .content.v2 h3{
+  color:{{section.settings.color_content2}};
+  }
+  .banner_about_v2 .text_content p {
+  	line-height:30px;
+    color:{{section.settings.color_des}};
+  }
+  @media (max-width:768px){
+    .content.v2{
+    	padding-bottom:30px;
+    }
+  }
+  @media (min-width:1400px){
+    .content.v2 .line{
+    padding-top:140px;
+    }
+    .content.v2 h3{
+    padding-top:140px;
+    }
+    .content.v2{  	
+    padding-left:4.2%;
+  }
+  }
+    @media (min-width:1025px){
+      .content.v2 h3{
+      line-height:45px;
+      }
+          .content.v2 .line{
+    padding-top:70px;
+    }
+    .content.v2 h3{
+    padding-top:70px;
+    }
+      .banner_about_v2 .text_content{
+      	padding-left:122px;
+      }
+      .banner_about_v2 .title h1{
+      	font-size:48px;
+      }
+  }
+  .banner_about_v2 .title h1{
+  	color:{{section.settings.color_title}};
+  }
+  .banner_about_v2 .title h1 span{
+   color:#000;
+  }
+    .banner_about_v2 .title h1 span.v2{
+   color:#3e976b;
+  }
+</style>
+{% schema %}
+{
+  "name": "Banner About v2",
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+   	{
+      "type": "header",
+      "content": "Content About"
+    },
+	{
+      "type": "checkbox",
+      "id": "show_content_about",
+      "label": "Show content About",
+      "default": true
+    },
+	{
+   "type":      "select",
+   "id":        "local_text",
+   "label":     "Chose position title",
+   "options": [
+     {
+       "value": "left",
+       "label": "Left"
+     },
+     {
+       "value": "center",
+       "label": "Center"
+     },
+     {
+       "value": "right",
+       "label": "Right"
+     }
+   ],
+   		"default":   "center"
+	},
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Title",
+      "default": "Minim — is an furniture store dedicated to modern home."
+    },
+	{
+            "type": "color",
+          	"id": "color_title",
+          	"label": "Color Title",
+			"default": "#cbcbcb"
+    },
+	{
+      "type": "header",
+      "content": "Content"
+    },
+	{
+            "type": "color",
+          	"id": "color_des",
+          	"label": "Color content",
+			"default": "#999"
+    },
+	{
+      "type": "image_picker",
+      "id": "img_icon",
+      "label": "icon 1"
+    },
+    {
+      "type": "text",
+      "id": "title_content",
+      "label": "Title 1",
+      "default": "Furniture"
+    },
+	{
+      "type": "textarea",
+      "id": "des",
+      "label": "Des 1",
+      "default": "Maecenas rhoncus eu lacus eu viverra. Nunc interdum lorem a lacus mattis blandit. Donec id rutrum eros."
+    },
+	{
+      "type": "image_picker",
+      "id": "img_icon2",
+      "label": "icon 2"
+    },
+    {
+      "type": "text",
+      "id": "title_content2",
+      "label": "Title 2",
+      "default": "Decoration"
+    },
+	{
+      "type": "textarea",
+      "id": "des2",
+      "label": "Des 2",
+      "default": "Maecenas rhoncus eu lacus eu viverra. Nunc interdum lorem a lacus mattis blandit. Donec id rutrum eros."
+    },
+	{
+      "type": "image_picker",
+      "id": "img_icon3",
+      "label": "icon 3"
+    },
+    {
+      "type": "text",
+      "id": "title_content3",
+      "label": "Title 3",
+      "default": "Lighting"
+    },
+	{
+      "type": "textarea",
+      "id": "des3",
+      "label": "Des 3",
+      "default": "Maecenas rhoncus eu lacus eu viverra. Nunc interdum lorem a lacus mattis blandit. Donec id rutrum eros."
+    },
+	{
+      "type": "image_picker",
+      "id": "img_icon4",
+      "label": "icon 4"
+    },
+    {
+      "type": "text",
+      "id": "title_content4",
+      "label": "Title 4",
+      "default": "Textiles"
+    },
+	{
+      "type": "textarea",
+      "id": "des4",
+      "label": "Des 4",
+      "default": "Maecenas rhoncus eu lacus eu viverra. Nunc interdum lorem a lacus mattis blandit. Donec id rutrum eros."
+    },
+    {
+      "type": "text",
+      "id": "btn_name",
+      "label": "Button name",
+      "default": "Learn more about us"
+    },
+   	{
+      "type": "header",
+      "content": "Content Testimonial"
+    },
+	{
+      "type": "checkbox",
+      "id": "show_content_tes",
+      "label": "Show content Testimonial",
+      "default": true
+    },
+	{
+      "type": "image_picker",
+      "id": "bg_v2",
+      "label": "Img"
+    },	
+	{
+            "type": "color",
+          	"id": "color_content2",
+          	"label": "Color Content",
+			"default": "#cbcbcb"
+    },
+	{
+      "type": "textarea",
+      "id": "des5",
+      "label": "des",
+      "default": "Minim is an American furniture design based, founded in 2010 by Jonathan Evans who had strong vision to create timeless and beautiful design, based on an ethical business strategy."
+    },
+	{
+      "type": "image_picker",
+      "id": "img_icon5",
+      "label": "icon"
+    },
+	{
+      "type": "textarea",
+      "id": "text2",
+      "label": "Title",
+      "default": "Architect Magazine"
+    }
+
+  ],
+
+  "presets": [
+    {
+      "name": "Banner About v2",
+      "category": "Page Minim"
+    }
+  ]
+}
+{% endschema %}

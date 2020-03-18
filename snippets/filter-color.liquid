@@ -1,0 +1,17 @@
+<div class="widget filter  space_bot_30 border-bot filter-tag woocommerce widget_product_categories filter-tag filter-color filter-brand filter-inside">
+  <div class="flex margin_bottom_20">
+    <h4 class="fz-12 widget_title ">{{section.settings.title_color}}</h4>
+  </div>
+  <ul class="e-filter brand-filter">
+    {% assign tags = section.settings.shop_by_color_list_tags | split: ',' %}
+
+    {% for t in tags %}
+    {% assign tag = t | strip %}
+    {% assign tag_value = tag | handleize %}
+    <li class="cat-item{% if current_tags contains tag %} current-cat{% endif %}">
+      <input class="hidden" type="checkbox" value="{{ tag_value | split: '|' | first }}" {% if current_tags contains tag %}checked{% endif %}/>
+      <a href="javascript:void(0)" style="background:{{tag}};" title="{{tag}}">
+      </a>
+      {% endfor %}
+  </ul>
+</div>

@@ -1,0 +1,13 @@
+<div class="bestseller single-space">
+    <div class="ecome-heading style5v3 spc5v3">
+        <h3>{{section.settings.similar_title}}</h3>
+        <a href="{{section.settings.similar_btn_url}}" class="btn-show">{{section.settings.similar_btn_name}}<i class="ion-ios-arrow-forward"></i></a>
+    </div>
+    <div class="owl-carousel owl-theme owl-cate v2 js-owl-cate">
+        {%for product in collections[section.settings.similar_product_collection].products limit:section.settings.similar_product_limit%}
+              {% include 'product-grid-12' %}
+                  {% else %} 
+              {% include 'empty-product-grid-12'%}
+          {% endfor %}
+    </div>
+</div>

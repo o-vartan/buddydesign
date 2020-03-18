@@ -1,0 +1,17 @@
+<div class="widget woocommerce widget_product_categories filter-tag filter filter-color">
+  <h3 class="filtertitle" data-init="widgetToggle">{{section.settings.shop_by_color_title}}</h3>
+  <ul class="product-categories widget-inlineblock filter-content">
+    {% assign tags = section.settings.shop_by_color_list_tags | split: ',' %}
+    
+    {% for t in tags %}
+    {% assign tag = t | strip %}
+    {% assign tag_value = tag | handleize %}
+    <li class="cat-item{% if current_tags contains tag %} current-cat{% endif %}">
+      <input type="checkbox" value="{{ tag_value | split: '|' | first }}" {% if current_tags contains tag %}checked{% endif %}/>
+      <a href="javascript:void(0)" title="{{tag}}">{{tag}}</a>
+    </li>
+    {% endfor %}
+    
+  </ul>
+  <!-- /.product-categories -->
+</div>

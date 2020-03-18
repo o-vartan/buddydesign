@@ -1,0 +1,106 @@
+<div data-section-id="{{ section.id }}" data-section-type="feature-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="feature
+              {% if section.settings.spacestyle_select == 's_s2'%}v2
+     			 
+              {%endif%}"style="background:{{section.settings.bg_color}};">
+      <div class="container container-240">
+          <div class="feature-inside">
+              {% if section.blocks.size > 0 %} 
+                  {% for block in section.blocks %}
+              <div class="feature-block text-center {% if section.settings.spacestyle_select == 's_s2'%}v2{%endif%}">
+                  <div class="feature-block-img">
+                    <img  {%if block.settings.fea_icon_img == blank%}src="{{'truck.png'| asset_url }}" 
+                                  {%else%}src="{{block.settings.fea_icon_img| img_url:'master'}}"{%endif%} alt="images" />
+                  </div>
+                  <div class="feature-info {% if section.settings.spacestyle_select == 's_s2'%}v2{%endif%}">
+                      <h3>{{block.settings.fea_text1}}</h3>
+                      <p>{{block.settings.fea_text2}}</p>
+                  </div>
+              </div>
+              {%endfor%}
+            {%endif%}
+          </div>
+      </div>
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "Feature v1",
+	"max_blocks":4,
+  "class": "index-section",
+  "settings": [
+	{
+      "type": "select",
+      "id": "spacestyle_select",
+      "options": [
+        {
+          "value": "s_s1",
+          "label": "Style 1"
+        },
+        {
+          "value": "s_s2",
+          "label": "Style 2"
+        }
+      ],
+      "label": "Style"
+    },
+	{
+      "type": "header",
+      "content": "color"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "background color"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+	"blocks":[
+		{
+			"type":"feature",
+			"name":"Feature",
+			"settings":[
+			{
+                "type": "image_picker",
+                "id": "fea_icon_img",
+                "label": "icon_img",
+                "info": "Please add icon image"
+              },
+              {
+                 "type": "text",
+                 "id": "fea_text1",
+                 "label": "Feature title"
+              },
+              {
+                 "type": "text",
+                 "id": "fea_text2",
+                 "label": "Feature desc"
+              }
+			]
+		}
+	],
+  "presets": [
+    {
+      "name": "Feature v1",
+      "category": "Feature"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,140 @@
+<div data-section-id="{{ section.id }}" data-section-type="category-carousel" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+	<div class="category-list spc5">
+      <div class="container container-240">
+          <div class="ecome-heading style5 spc5v2">
+              <h3>{{section.settings.text1}}</h3>
+              <a href="{{section.settings.btn_url1}}" class="btn-show">{{section.settings.btn_name1}}<i class="ion-ios-arrow-forward"></i></a>
+          </div>
+
+          <div class="owl-carousel owl-theme owl-cate v3 js-owl-cate">
+              {% if section.blocks.size > 0 %} 
+                  {% for block in section.blocks %}
+                  {% assign links_menu = block.settings.linklist %}
+              <div class="category-item">
+                  <div class="bd-7 pd30">
+                      <div class="cate-img">
+                          <a href="{{block.settings.category_url}}">
+                              <img {%if block.settings.category_img == blank%}src="{{'tv3.jpg'| asset_url }}" 
+                          {%else%}src="{{block.settings.category_img | img_url:'master'}}" {%endif%} alt="images" />
+                          </a>
+                      </div>
+                      <div class="cate-content">
+                          <h3>{{block.settings.category_linklist_title}}</h3>
+                          <div class="abs">
+                              <a href="{{block.settings.btn_url2}}" class="btn-shopcate btn-gradient">{{block.settings.btn_name2}}<i class="ion-ios-arrow-forward"></i></a>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="cate-bg pd30">
+                      <ul class="cate-list">
+                          {% for link in linklists[links_menu].links %}
+                          <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+                          {% endfor %}
+                      </ul>
+                  </div>
+              </div>
+                  {% endfor %}
+              {% endif %}
+          </div>
+      </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Category",
+	"max_blocks": 9,
+  "class": "index-section",
+  "settings": [
+	{
+      "type": "header",
+      "content": "Heading"
+    },
+	{
+      "type": "text",
+      "id": "text1",
+      "label": "Title",
+      "default": "Categories"
+    },
+	{
+      "type": "text",
+      "id": "btn_name1",
+      "label": "Button Name",
+		"default": "Shop more"
+    },
+    {
+      "id": "btn_url1",
+      "type": "url",
+      "default": "/collections/all",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+	"blocks": [
+      {
+        "type": "linklist",
+        "name": "Linklist",
+        "settings": [
+          
+		{
+             "type": "text",
+             "id": "category_linklist_title",
+             "default": "Quick links",
+             "label": "Category link list heading"
+          },
+          {
+          	"type": "url",
+          	"id": "category_url",
+          	"label": "URL"
+          },
+
+			{
+            "type": "image_picker",
+            "id": "category_img",
+            "label": "Image",
+            "info": "Please add image with size 320 x 320px recommended"
+          },
+          {
+             "type":      "link_list",
+             "id":        "linklist",
+             "label":     "List Menu",
+             "info":      "Menu category link"
+          },
+			{
+            "type": "text",
+            "id": "btn_name2",
+            "label": "Button Name",
+              "default": "Shop now"
+          },
+          {
+            "id": "btn_url2",
+            "type": "url",
+            "default": "/collections/all",
+            "label": "Button link"
+          }
+        ]
+      }
+    ],
+  "presets": [
+    {
+      "name": "Category",
+      "category": "Category"
+    }
+  ]
+}
+{% endschema %}

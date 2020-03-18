@@ -1,0 +1,22 @@
+<div class="widget woocommerce widget_product_categories filter-tag filter filter-size">
+  <h3 class="filtertitle" data-init="widgetToggle">{{section.settings.shop_by_size_title}}</h3>
+  <div class="filter-content">
+    <div class="dropdown">
+      <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">Choose any size...
+        <span class="caret"></span><span class="dropdown-label"></span></button>
+      <ul class="product-categories widget-inlineblock dropdown-menu">
+        {% assign tags = section.settings.shop_by_size_list_tags | split: ',' %}
+
+        {% for t in tags %}
+        {% assign tag = t | strip %}
+        {% assign tag_value = tag | handleize %}
+        <li class="cat-item{% if current_tags contains tag %} current-cat{% endif %}">
+          <input type="checkbox" value="{{ tag_value | split: '|' | first }}" {% if current_tags contains tag %}checked{% endif %}/>
+          <a href="javascript:void(0)" title="{{tag}}">{{tag}}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <!-- /.product-categories -->
+</div>

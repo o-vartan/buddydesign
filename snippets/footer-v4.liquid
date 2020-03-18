@@ -1,0 +1,65 @@
+{% if settings.newsletter_form_action != blank %}
+{% assign form_action = settings.newsletter_form_action %}
+{% else %}
+{% assign form_action = '#' %}
+{% endif %}
+<footer class="footer-v4">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 content-1">
+        <div class="margin_bottom_30">
+          <a href="{{ shop.url }}">
+            {% if settings.fv4_logo == blank %}
+            <img alt="{{shop.name}}" src="{{'logo.png' | asset_url}}" class="img-logo">
+            {% else %}
+            <img alt="{{shop.name}}" src="{{settings.fv4_logo | img_url:'master'}}" class="img-logo">
+            {% endif %}
+          </a>
+        </div>
+        <div class="copy_fv4">
+          <p>{{settings.copy_fv4}}</p>
+        </div>
+        <ul class="social flex">
+          <li class="">
+            <a href="{{settings.fv4_social_url1}}" class="fz-18" target="_blank"><i class="{{settings.fv4_social_icon1}}"></i></a>
+          </li>
+          <li class="">
+            <a href="{{settings.fv4_social_url2}}" class="fz-18" target="_blank"><i class="{{settings.fv4_social_icon2}}"></i></a>
+          </li>
+          <li class="">
+            <a href="{{settings.fv4_social_url3}}" class="fz-18" target="_blank"><i class="{{settings.fv4_social_icon3}}"></i></a>
+          </li>
+        </ul>
+      </div>
+       <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 space_bot_30">
+        <h1 class="title-fv3 margin_bottom_30 fw-600">{{settings.title_fv4_1}}</h1>
+        {% assign footer_menu = settings.fv4_menu_1 %}
+        <ul class="menu_fv3_1">
+          {% for link in linklists[footer_menu].links %}
+          <li><a href="{{ link.url }}" title="{{ link.title }}" class="delay03">{{ link.title }}</a></li>
+          {%endfor%}
+        </ul>
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 space_bot_30">
+        <h1 class="title-fv3 margin_bottom_30 fw-600">{{settings.title_fv4_2}}</h1>
+        {% assign footer_menu_2 = settings.fv4_menu_2 %}
+        <ul class="menu_fv3_2">
+          {% for link in linklists[footer_menu_2].links %}
+          <li><a href="{{ link.url }}" title="{{ link.title }}" class="delay03">{{ link.title }}</a></li>
+          {%endfor%}
+        </ul>
+      </div>
+      <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6 content-2">
+        <h1 class="title-fv4 margin_bottom_30 ">{{settings.title_fv4}}</h1>
+        <p>{{settings.des_fv4}}</p>
+        <form action="{{ form_action }}" method="post" name="mc-embedded-subscribe-form" target="_blank"  class="subscible-form relative">
+            <input class="engoc-input-form" type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{settings.input_placeholder_footer4}}" name="EMAIL" aria-label="{{ 'general.newsletter_form.newsletter_email' | t }}" autocorrect="off" autocapitalize="off">
+            <button type="submit" class=" absolute"  name="subscribe"><i class="{{settings.icon-submit-footer4}}"></i></button>
+        </form>
+      </div>
+      
+    </div>
+    
+  </div>
+</footer>

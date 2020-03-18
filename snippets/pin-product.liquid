@@ -1,0 +1,51 @@
+{% assign product = all_products[block.settings.product_single_1] %}
+
+{% assign product_label_new = false %}
+{% capture _time %}{{settings.product_new_time | times:86400}}{% endcapture %} 
+{% assign time = _time|plus:0 %}
+{% assign now = 'now' | date: '%s'|plus:0 %}
+
+{% capture _value %}{{product.published_at | date: "%s" | plus : time }}{% endcapture %} 
+{% assign value = _value|plus:0 %}
+
+{% if now < value %}
+{% assign product_label_new = true %}
+{% endif %}
+
+
+{% assign label_popular = false %}
+{% if product.tags contains "popular" %}
+{% assign label_popular = true %}
+{% endif %} 
+
+{% assign label_hot = false %}
+{% if product.tags contains "hot" %}
+{% assign label_hot = true %}
+{% endif %}
+
+{% assign on_sale = false %}
+{% if product.compare_at_price > product.price %}
+{% assign on_sale = true %}
+{% endif %}
+
+{% assign sold_out = true %}
+{% if product.available %}
+{% assign sold_out = false %}
+{% endif %}
+<div class="product-info lookbitem_content {% if block.settings.pin_position_select == 'p_s1'%}centerr 
+                {% elsif block.settings.pin_position_select == 'p_s2'%}centerl  
+                {% elsif block.settings.pin_position_select == 'p_s3'%} topl
+              {%endif%}">
+    <div class="product-img">
+        <a href="{{ product.url | within: collection }}"><img src="{{ product.featured_image.src | img_url: 'master' }}" alt="{{ product.featured_image.alt | escape }}" class="img-reponsive"></a>
+
+    </div>
+    <h3 class="product-title">
+        <a href="{{ product.url | within: collection }}">{{ product.title}}</a>
+    </h3>
+    <div class="product-price">
+        {% capture price %}{{ product.price | money }}{% endcapture %}
+                          <span class="{% if on_sale == true %}red {%endif%}">{% if product.price_varies %}{{ 'products.general.from_text_html' | t: price: price }}{% else %}{{ price }}{% endif %}</span>
+                          {% if on_sale %}<span class="old">{{ product.compare_at_price | money }}</span> {% endif %}
+    </div>
+</div>

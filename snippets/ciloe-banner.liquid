@@ -1,0 +1,73 @@
+<div class="container-fluid  relative banner_page margin_bottom_20 {% if template.name contains 'collection' %} hidden-xs {% endif %}">
+  <div class="row">
+    <a href="{{section.settings.url_banner}}" class="effect_img2">
+      {% if section.settings.img_banner != blank %}
+      <img src="{{section.settings.img_banner | img_url:'master'}}" class="img-responsive">
+      {% endif %}
+    </a>
+  </div>
+  <div class="{% if section.settings.img_banner != blank %}absolute text_banner{% endif %}">
+
+ 
+
+    <h1 class="margin_bottom_20 {% if section.settings.local_text == 'left' %} text-left {% elsif section.settings.local_text == 'center' %} text-center {% elsif section.settings.local_text == 'right' %} text-right {% endif %}">{{ collection.title }}</h1>
+    <div class=" {% if section.settings.local_text == 'left' %} text-left {% elsif section.settings.local_text == 'center' %} text-center {% elsif section.settings.local_text == 'right' %} text-right {% endif %}">
+    	{% include 'breadcrumb' %}
+    </div>
+  </div>
+</div>
+{% if template.name contains 'collection' %}
+<div class="banner_collection hidden-lg hidden-md hidden-sm container_15 {% if section.settings.enable_line_top %}border-top{% endif %}">
+  <h1 class="title_shop">{{section.settings.shop_name_mb}}
+    <span class="right">
+      {% if section.settings.btn_list == 'image' %}
+        {% if section.settings.img_list == blank %}
+          <img src="{{ 'btn_list.png' | asset_url }}" class="img-responsive inline-block btn_list_layout">
+         {% else %}
+          <img src="{{section.settings.img_list | img_url:'master'}}" class="img-responsive inline-block btn_list_layout">
+        {% endif %}
+      {% else %}
+      	<i class="{{section.settings.icon_list}} btn_list_layout"></i>
+      {% endif %}
+<!--        -->
+      {% if section.settings.btn_grid == 'image' %}
+      {% if section.settings.img_grid == blank %}
+      <img src="{{ 'btn_grid.png' | asset_url }}" class="img-responsive inline-block btn_grid_layout">
+      {% else %}
+      <img src="{{section.settings.img_grid | img_url:'master'}}" class="img-responsive inline-block btn_grid_layout">
+      {% endif %}
+      {% else %}
+      <i class="{{section.settings.icon_grid}} btn_grid_layout"></i>
+      {% endif %}
+<!--        -->
+      
+    </span>
+  </h1>
+<!--    -->
+  <div class="gr_btn_mb border-right border-left border-top border-bot inline-block full-width space_top_bot_20 margin_bottom_20">
+    <div class="column-50 btn_function border-right left text-center">
+      <div class="wrap-filter-sorting">
+        <div class="dropdown">
+          <button class="dropdown-toggle btn_sorting btn_sorting_mb" data-click-state="0">
+            {{ 'collections.sorting.title' | t }}
+            <span class="dropdown-label">{{ 'collections.sorting.featured' | t }}</span>
+          </button>
+          <ul class="dropdown_menu_sorting">
+            <li><a href="manual">{{ 'collections.sorting.featured' | t }}</a></li>   
+            <li><a href="best-selling">{{ 'collections.sorting.best_selling' | t }}</a></li>
+            <li><a href="title-ascending">{{ 'collections.sorting.az' | t }}</a></li>
+            <li><a href="title-descending">{{ 'collections.sorting.az' | t }}</a></li>
+            <li><a href="price-descending">{{ 'collections.sorting.price_descending' | t }}</a></li>
+            <li><a href="price-ascending">{{ 'collections.sorting.price_ascending' | t }}</a></li>
+            <li><a href="created-ascending">{{ 'collections.sorting.date_ascending' | t }}</a></li>
+            <li><a href="created-descending">{{ 'collections.sorting.date_descending' | t }}</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="column-50 left text-center btn_filter_mb">
+      <a href="#" class="btn_filter">FILTER</a>
+    </div>
+  </div>
+</div>
+{% endif %}

@@ -1,0 +1,201 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v2" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+<!--slide-->
+  <div class="container-fluid  relative banner_page v2 margin_bottom_90 {% if template.name contains 'collection' %} hidden-xs {% endif %}">
+  <div class="row">
+    <a href="{{section.settings.url_banner2}}" class="effect_img2">
+      {% if section.settings.img_banner2 != blank %}
+      <img src="{{section.settings.img_banner2 | img_url:'master'}}" class="img-responsive">
+      {% endif %}
+    </a>
+  </div>
+  <div class="absolute text_banner">
+    <p class="margin_bottom_20 uppercase lt-2 {% if section.settings.local_text == 'left' %} text-left {% elsif section.settings.local_text == 'center' %} text-center {% elsif section.settings.local_text == 'right' %} text-right {% endif %}">{{section.settings.title_page22}}</p>
+    <h1 class="margin_bottom_20 {% if section.settings.local_text == 'left' %} text-left {% elsif section.settings.local_text == 'center' %} text-center {% elsif section.settings.local_text == 'right' %} text-right {% endif %}">{{section.settings.title_page2}}</h1>
+    <div class="space_top_20  {% if section.settings.local_text == 'left' %} text-left {% elsif section.settings.local_text == 'center' %} text-center {% elsif section.settings.local_text == 'right' %} text-right {% endif %}">
+      <a href="{{section.settings.url_banner3}}" class=" button-about"> {{section.settings.button2}}</a>
+    </div>
+  </div>
+</div>
+        <!--endslide-->
+</div>
+<style>
+  @media(min-width:1025px){
+    .banner_page.v2 .text_banner h1{
+        line-height: 60px;
+    	font-size: 56px;	
+    }
+  }
+    .text_banner .button-about {
+    width: 145px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 999px;
+    font-size: 13px;
+    padding: 0;
+    border: 0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: {{section.settings.color_button}};
+    background: {{section.settings.bg_button}};
+    transition: all .3s ease;
+    display:inline-block;
+}
+  .text_banner .button-about:hover{
+  	background: {{section.settings.bg_button_hover}};
+    font-weight: 600;
+    color: {{section.settings.color_button_hover}};
+  }
+  .banner_page.v2 .text_banner h1{
+  	    text-transform: inherit;
+    color: {{section.settings.color_title}};
+  }
+  .banner_page.v2 .text_banner{
+  	top:32%;
+  }
+    .banner_page.v2 .text_banner p{
+  	color: {{section.settings.color_title1}};
+    font-weight: 600;
+    font-size: 12px;
+  } 
+</style>
+{% schema %}
+{
+  "name": "Slide Home2",
+	
+  "class": "index-section",
+  "settings": [
+  {
+    "type": "header",
+    "content": "Section Space"
+  },
+  {
+    "type": "text",
+    "id": "margin_top",
+    "label": "Margin Top",
+    "info": "Defined in pixels. Do not add the 'px' unit."
+  },
+  {
+    "type": "text",
+    "id": "margin_bottom",
+    "label": "Margin Bottom",
+    "info": "Defined in pixels. Do not add the 'px' unit."
+  },
+	{
+      "type": "header",
+      "content": "Chose color text"
+    },
+	{
+            "type": "color",
+          	"id": "color_button",
+          	"label": "Color button",
+			"default": "#000000"
+    },
+	{
+            "type": "color",
+          	"id": "bg_button",
+          	"label": "Background button",
+			"default": "#0D4C82"
+    },
+	{
+            "type": "color",
+          	"id": "color_button_hover",
+          	"label": "Hover Color button",
+			"default": "#fff"
+    },
+	{
+            "type": "color",
+          	"id": "bg_button_hover",
+          	"label": "Hover Background button ",
+			"default": "#3e976b"
+    },
+	{
+            "type": "color",
+          	"id": "color_title1",
+          	"label": "Color title top",
+			"default": "#84c7a6"
+    },
+	{
+            "type": "color",
+          	"id": "color_title",
+          	"label": "Color tiele",
+			"default": "#3e976b"
+    },
+    {
+      "type": "header",
+      "content": "Text Banner"
+    },
+	{
+      "type": "select",
+        "id": "local_text",
+        "label": "Position Text",
+        "default": "center",
+        "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "title_page",
+      "label": "Title page",
+      "default": "About us"
+    },
+   	{
+      "type": "header",
+      "content": "Banner 2"
+    },
+    {
+      "id": "url_banner2",
+      "type": "url",
+      "default": "/collections/all",
+      "label": " Banner Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_banner2",
+      "label": "Image banner",
+      "info": "1920x516px recommended"
+    },
+    {
+      "type": "text",
+      "id": "title_page22",
+      "label": "Title Top",
+      "default": "Welcome to minim"
+    },
+    {
+      "type": "text",
+      "id": "title_page2",
+      "label": "Title Midde",
+      "default": "Art with an attitude"
+    },
+    {
+      "type": "text",
+      "id": "button2",
+      "label": "Button",
+      "default": "Discover Now"
+    },
+    {
+      "id": "url_banner3",
+      "type": "url",
+      "default": "/collections/all",
+      "label": "Link botton"
+    }
+],
+  "presets": [
+    {
+      "name": "Slide Home2",
+      "category": "Page Minim"
+    }
+  ]
+}
+{% endschema %}

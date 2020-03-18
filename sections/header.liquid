@@ -1,0 +1,104 @@
+<!-- /sections/header.liquid -->
+
+{% if template contains 'index' %}
+  {% if section.settings.select_hds == "header_v1" %}
+  {% include 'header-v1' %}
+  {% elsif section.settings.select_hds == "header_v2" %}
+  {% include 'header-v2' %}
+  {% elsif section.settings.select_hds == "header_v3" %}
+  {% include 'header-v3' %}
+  {% elsif section.settings.select_hds == "header_v4" %}
+  {% include 'header-v4' %}
+  {% elsif section.settings.select_hds == "header_v5" %}
+  {% include 'header-v5' %}
+  {% endif %}
+{% else %}
+  {% if section.settings.select_hds_all == "header_ver1" %}
+  {% include 'header-v1' %}
+  {% elsif section.settings.select_hds_all == "header_ver2" %}
+  {% include 'header-v2' %}
+  {% elsif section.settings.select_hds_all == "header_ver3" %}
+  {% include 'header-v3' %}
+  {% elsif section.settings.select_hds_all == "header_ver4" %}
+  {% include 'header-v4' %}
+  {% elsif section.settings.select_hds_all == "header_ver5" %}
+  {% include 'header-v5' %}
+  {% endif %}
+{% endif %}
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "select_hds",
+      "label": "Select Header Style for Homepage",
+      "options": [
+        {
+          "value": "header_v1",
+          "label": "Header v1"
+        },
+        {
+          "value": "header_v2",
+          "label": "Header v2"
+        },
+        {
+          "value": "header_v3",
+          "label": "Header v3"
+        },
+        {
+          "value": "header_v4",
+          "label": "Header v4"
+        },
+        {
+          "value": "header_v5",
+          "label": "Header v5"
+        }
+      ],
+      "default": "header_v1",
+      "info": "[View image with header designs](https://cdn.shopify.com/s/files/1/2205/2399/files/header.jpg?9714239087420014233)"
+    },
+    {
+      "type": "select",
+      "id": "select_hds_all",
+      "label": "Select Header Style for All page (unless Homepage)",
+      "options": [
+        {
+          "value": "header_ver1",
+          "label": "Header v1"
+        },
+        {
+          "value": "header_ver2",
+          "label": "Header v2"
+        },
+        {
+          "value": "header_ver3",
+          "label": "Header v3"
+        },
+        {
+          "value": "header_ver4",
+          "label": "Header v4"
+        },
+        {
+          "value": "header_ver5",
+          "label": "Header v5"
+        }
+      ],
+      "default": "header_ver1",
+      "info": "[View image with header designs](https://cdn.shopify.com/s/files/1/2205/2399/files/header.jpg?9714239087420014233)"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_ver1",
+      "label": "Select Menu version 1"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_ver2",
+      "label": "Select Menu version 2"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,122 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="container-fluid container_40">
+  <div class="container-fluid container_80 product-v3">
+    {% assign products_limit = section.settings.limit %}
+    {% assign col = section.settings.collection %}
+      {%- assign i = 2 -%}
+<div class=" space_top_bot_140"> 
+    <div class=" btn_function left space_bot_30 ">
+                     <div class="product-tags fz-14">
+            <label>Categories :</label>            
+            {{ collections[col].title }}            
+          </div> 
+  </div>
+    <div class="row" id="fade-it-1">
+    
+    {% for product in collections[col].products limit: products_limit %}
+    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 layout_product_shop " id="fade-it-{{i}}">
+      {% include 'ciloe-product' %}
+    </div>
+      {%- assign i = i | plus : 1 -%}
+    {% endfor %}
+    </div>
+        {% if section.settings.enable_btn %}
+      <div class="btn-loadmore text-center col-md-12">
+        <a href="#" id="loadMore" class="btn-ciloe inline-block  "><img alt="" src="{{'loadmore.png' | asset_url}}" class="img-logo"></a>
+      </div>
+    {% endif %}
+  </div>
+  </div>
+  </div>
+</div>
+<style>
+  .product-v3 .product .info-product {
+  	text-align:left!important;
+  }
+    .recent-product .product .img-product{
+  	background:{{section.settings.bg_img}}
+  }
+  .recent-product .product .info-product {
+  	background:{{section.settings.bg_infor}}
+  }
+  .product-v3{
+  	background:{{section.settings.bg_section}}
+  }
+</style>
+{% schema %}
+{
+  "name": "Product v3",
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+            "type": "color",
+          	"id": "bg_section",
+          	"label": "Background section",
+			"default": "#fff"
+    },
+	{
+            "type": "color",
+          	"id": "bg_img",
+          	"label": "Background img",
+			"default": "#fdfdfd"
+    },
+	{
+            "type": "color",
+          	"id": "bg_infor",
+          	"label": "Background infor",
+			"default": "#f9f9f9"
+    },
+	{
+      "type": "text",
+      "id": "limit",
+      "label": "Limit product",
+      "default": "16"
+    },
+	{
+      "type": "collection",
+      "id": "collection",
+      "label": "Chose collection"
+    },
+	{
+      "type": "header",
+      "content": "Button load more"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_btn",
+      "label": "Enable button",
+      "default": true
+    },
+
+	{
+          "type": "text",
+          "id": "btn_loadmore",
+          "label": "Button load more name",
+	  	  "default":   "load more"
+    }
+
+  ],
+  "presets": [
+    {
+      "name": "Product v3",
+      "category": "Page Minim"
+    }
+  ]
+}
+{% endschema %}

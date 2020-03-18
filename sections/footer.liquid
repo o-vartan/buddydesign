@@ -1,0 +1,81 @@
+<!-- /sections/footer.liquid -->
+{% if template contains 'index' %}
+  {% if section.settings.select_fts == "footer_v1" %}
+  {% include 'footer-v1' %}
+  {% elsif section.settings.select_fts == "footer_v2" %}
+  {% include 'footer-v2' %}
+  {% elsif section.settings.select_fts == "footer_v3" %}
+  {% include 'footer-v3' %}
+  {% elsif section.settings.select_fts == "footer_v4" %}
+  {% include 'footer-v4' %}
+  {% endif %}
+{% else %}
+  {% if section.settings.select_fts_all == "footer_ver1" %}
+  {% include 'footer-v1' %}
+  {% elsif section.settings.select_fts_all == "footer_v2" %}
+  {% include 'footer-v2' %}
+  {% elsif section.settings.select_fts_all == "footer_v3" %}
+  {% include 'footer-v3' %}
+  {% elsif section.settings.select_fts_all == "footer_v4" %}
+  {% include 'footer-v4' %}
+  {% endif %}
+{% endif %}
+
+{% schema %}
+{
+  "name": "Footer",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "select_fts",
+      "label": "Select Footer Style for Homepage",
+      "options": [
+        {
+          "value": "footer_v1",
+          "label": "Footer v1"
+        },
+		{
+          "value": "footer_v2",
+          "label": "Footer v2"
+        },
+		{
+          "value": "footer_v3",
+          "label": "Footer v3"
+        },
+		{
+          "value": "footer_v4",
+          "label": "Footer v4"
+        }
+      ],
+      "default": "footer_v1",
+      "info": "[View image with footer designs](https://cdn.shopify.com/s/files/1/2205/2399/files/footer-all.png?9240561800325444624)"
+    },
+    {
+      "type": "select",
+      "id": "select_fts_all",
+      "label": "Select Footer Style for All page (unless Homepage)",
+      "options": [
+        {
+          "value": "footer_ver1",
+          "label": "Footer v1"
+        },
+		{
+          "value": "footer_v2",
+          "label": "Footer v2"
+        },
+		{
+          "value": "footer_v3",
+          "label": "Footer v3"
+        },
+		{
+          "value": "footer_v4",
+          "label": "Footer v4"
+        }
+      ],
+      "default": "footer_ver1",
+      "info": "[View image with footer designs](https://cdn.shopify.com/s/files/1/2205/2399/files/footer-all.png?9240561800325444624)"
+    }
+  ]
+}
+{% endschema %}

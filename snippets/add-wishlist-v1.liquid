@@ -1,0 +1,42 @@
+{% if customer %}
+{% assign value = product.id %}
+{% capture productID %}{{ product.id }}{% endcapture %}
+
+{% for tag in customer.tags %}
+{% capture tagID %}{{ tag }}{% endcapture %}
+{% if tagID contains productID %}
+{% capture value %}x{{ tagID }}{% endcapture %}
+{% endif %}
+{% if value.size == 0 %}{% assign value = productID %}{% endif %}
+{% endfor %}
+
+{%assign t = 0 %}
+{% for tag in customer.tags %}{% if tag contains productID %}{% assign t = t |plus:1 %}{% endif %}{% endfor %}
+{% assign check = t | modulo:2 %}
+
+{% if check == 0 %}{% assign display = 'true' %}{%else%}{% assign display = 'false' %}{% endif %}
+
+{% if display == 'true'%}
+{% form 'customer' %}
+<input type="hidden" name="contact[email]" value="{{ customer.email }}"/>
+<input type="hidden" name="contact[tags]" value="{{ value }}" />
+
+<button class="btn-icon" type="submit" data-toggle="tooltip" title="{{settings.pia_wishlist_name}}">
+  <span class="icon-bg {% if settings.icon_wishlist_display == 'default'%}icon-wishlist{%else%}{{settings.pia_wishlist}} f-20{%endif%}"></span>
+</button>
+
+{% endform %} 
+
+{% else %}
+  <a class="btn-icon" href="/pages/wish-list" data-toggle="tooltip" title="{{settings.pia_wishlist_name_added}}">
+    <span class="icon-bg {% if settings.icon_wishlist_display == 'default'%}icon-wishlist{%else%}{{settings.pia_wishlist}} f-20{%endif%}"></span>
+  </a>
+
+
+{% endif %}
+
+{% else %}
+<a class="btn-icon" href="/account/login" data-toggle="tooltip" title="{{settings.pia_wishlist_name}}">
+  <span class="icon-bg {% if settings.icon_wishlist_display == 'default'%}icon-wishlist{%else%}{{settings.pia_wishlist}} f-20{%endif%}"></span>
+</a>
+{% endif %}

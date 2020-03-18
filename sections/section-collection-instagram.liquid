@@ -1,0 +1,168 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  
+  <div class="container-fluid container_35 collection_instagram margin_bottom_80">
+
+    <div class="row flex">
+      {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+      <div class="relative content_collection container_15 text-center">
+
+        <div class="relative collection">
+          <a href="{{block.settings.url}}" class="inline-block relative overlay_banner over-hidden">
+            <img src="{{block.settings.img | img_url:'master'}}" class="img-responsive hover-zoom-out">
+          </a>
+          <div class="absolute text_collection">
+            <div class="over-hidden text-center"><a href="{{block.settings.url}}" class="btn_collection inline-block over-hidden delay03">{{block.settings.btn_name}}</a></div>
+          </div>
+        </div>
+
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+
+  </div>
+
+</div>
+<style>
+  .collection_instagram{
+  	padding-top:50px;
+  }
+  .collection_instagram .content_collection .collection img{
+  	margin:0 auto;
+  }
+  .collection_instagram .content_collection .collection .overlay_banner:before{
+  	content:'';
+    display:inline-block;
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background:rgba(0,0,0,.7);
+    opacity:0;
+    transition:all .3s ease;
+    
+  }
+  .collection_instagram .content_collection .collection:hover .overlay_banner:before{
+    opacity:1;
+    z-index:1;
+  }
+  .collection_instagram .content_collection .collection:hover img{
+    transform:scale(1.05);
+  }
+  .collection_instagram .content_collection .collection .text_collection{
+  	top:45%;
+    left:0;
+    right:0;
+    z-index:2;
+  }
+  .collection_instagram .content_collection .collection .text_collection .btn_collection{
+    color:{{section.settings.color_btn}};
+    background:{{section.settings.bg_color_btn}};
+    padding:25px 80px;
+    font-weight:600;
+    font-size:20px;
+  }
+  .collection_instagram .content_collection .collection .text_collection .btn_collection:hover{
+  	color:{{section.settings.color_hover_btn}};
+    background:{{section.settings.bg_color_hover_btn}};
+  }
+
+  .collection_instagram .content_collection .collection:hover .text_collection .btn_collection{
+  	animation:text-translate3 1.2s ease;
+    -webkit-animation:text-translate3 1.2s ease;
+  }
+  @media (max-width:1200px){
+    .collection_instagram .row.flex{
+    	flex-direction: column;
+    }
+    .collection_instagram .content_collection{
+    	padding-bottom:20px;
+    }
+  }
+</style>
+{% schema %}
+{
+  "name": "Collection Instagram",
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      "type": "header",
+      "content": "Chose color"
+    },
+	{
+            "type": "color",
+          	"id": "color_btn",
+          	"label": "Color Button",
+			"default": "#000"
+    },
+	{
+            "type": "color",
+          	"id": "bg_color_btn",
+          	"label": "Background Color button",
+			"default": "#fff"
+    },
+	{
+            "type": "color",
+          	"id": "color_hover_btn",
+          	"label": "Color hover button",
+			"default": "#fff"
+    },
+	{
+            "type": "color",
+          	"id": "bg_color_hover_btn",
+          	"label": "Background Color hover button",
+			"default": "#41cce5"
+    }
+  ],
+"blocks": [
+      {
+        "type": "image",
+        "name": "Image banner",
+		"limit":6,
+        "settings": [
+	{
+      "type": "url",
+      "id": "url",
+      "label": "URL collection",
+      "default": "/collections/all"
+    },
+	{
+      "type": "image_picker",
+      "id": "img",
+      "label": "Image collection"
+    },
+	{
+      "type": "text",
+      "id": "btn_name",
+      "label": "Button collection",
+      "default": "SHOP MEN"
+    }
+]
+}
+],
+  "presets": [
+    {
+      "name": "Collection Instagram",
+      "category": "Home Instagram"
+    }
+  ]
+}
+{% endschema %}

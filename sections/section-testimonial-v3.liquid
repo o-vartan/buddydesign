@@ -1,0 +1,183 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+    <div class="container-fluid container_40">
+  <div class="container-fluid container_80 BG-section Testimonal">
+    <div class="ciloe-title-section  container relative margin_top_50">
+      <h2 class="margin_bottom_60 text-center fw-600">{{section.settings.title}}</h2>
+    </div>
+    <div class="container margin_bottom_100">
+      <div class="slick-Testimonal3">
+        {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+        <div class="content-comment relative delay03 text-center ">
+          <p class="stt ">{{block.settings.stt}}</p>
+          <p class="des-comment  margin_top_40 color-text">{{block.settings.content}}</p>
+          <div class=" text-center space_top_30">
+          <p class=" author-comment color-text capital fw-700">{{block.settings.author}}</p> <span class="capital model fw-500 lt-1">{{block.settings.infor}}</span>
+          </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+    <div class="container img-tes">
+    <img src="{{section.settings.bg5 | img_url:'900x200'}}" class="img-responsive">
+    </div>
+  </div>
+</div>
+</div>
+<style>
+  .img-tes img{
+  margin:auto;
+        width: 76%;
+  }
+    .slick-initialized .slick-slide{
+      margin-left: 15px;
+    margin-right: 15px;
+  }
+    @media (min-width:1025px){
+      .slick-Testimonal3 .slick-next {
+      right:-160px;
+      }
+            .slick-Testimonal3 .slick-prev {
+      left:-160px;
+      }
+  .slick-initialized .slick-slide{
+      margin-left: 40px;
+    margin-right: 40px;
+  }
+    }
+
+  .slick-Testimonal .content-comment{
+    padding:30px;
+    
+}
+    .BG-section{
+    background:{{section.settings.bg-color}};
+  }
+  .slick-Testimonal3 .des-comment{
+  color:{{section.settings.color-des}};
+    font-weight:300;
+    font-size:18px;
+  }
+  .slick-Testimonal .author-comment{
+  	color:{{section.settings.color-author}};
+  }
+  .slick-Testimonal .content-comment span{
+    padding-left:5px;
+  color:{{section.settings.color-model}};
+  }
+  .slick-Testimonal{
+  	width:50%;
+    margin:auto;
+  }
+  .slick-Testimonal .content-comment  img{
+    margin:auto;
+}
+  @media (max-width:567px){
+    .slick-Testimonal{
+  	width:90%;
+  }
+    .slick-Testimonal .des-comment{
+    	font-size:14px;
+      line-height:30px;
+    }
+  }
+</style>
+{% schema %}
+{
+  "name": "Testimonal v3",
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      "type": "color",
+      "id": "bg-color",
+      "label": "Background Color",
+      "default": "#fff"
+    },
+	{
+      "type": "color",
+      "id": "color-des",
+      "label": "Color des",
+      "default": "#999999"
+    },
+	{
+      "type": "color",
+      "id": "color-author",
+      "label": "Color author",
+      "default": "#3c3c3c"
+    },
+	{
+      "type": "color",
+      "id": "color-model",
+      "label": "Color model",
+      "default": "#cfcfcf"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "testimonial"
+    },
+	{
+      "type": "image_picker",
+      "id": "bg5",
+      "label": "Img"
+    }
+  ],
+"blocks": [
+      {
+        "type": "image",
+        "name": "Image slide",
+		"limit":10,
+        "settings": [
+	{
+      "type": "text",
+      "id": "stt",
+      "label": "Stt"
+    },
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "Content Tetimonal",
+      "default": "Top notch quality of product. Everything is simple but not boring at all. I wisht I could buy all stuff in here. The customer services are incredible with kindness & careful. I would recommend Minim for all of you guys."
+    },
+	{
+      "type": "text",
+      "id": "author",
+      "label": "Author",
+      "default": "Paul Wilson"
+    },
+	{
+      "type": "text",
+      "id": "infor",
+      "label": "Information",
+      "default": "|  San Jose"
+    }
+		
+]
+}
+],
+  "presets": [
+    {
+      "name": "Testimonal v3",
+      "category": "Page Minim"
+    }
+  ]
+}
+{% endschema %}

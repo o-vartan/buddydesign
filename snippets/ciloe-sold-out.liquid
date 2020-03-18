@@ -1,0 +1,7 @@
+{% assign sold_out = true %}
+{% if product.available %}
+{% assign sold_out = false %}
+{% endif %}	
+<div class="sold-out absolute full-width">
+  <a href="{{ product.url | within: collection }}" class="uppercase">sold out</a>
+</div>

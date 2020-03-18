@@ -1,0 +1,198 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="BG-section margin_bottom_100 Testimonal">
+    {% include 'ciloe-title-section' %}
+  <div class="container-fluid container_35 margin_bottom_100">
+
+    <div class="slick-Testimonal">
+      {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+      <div class="content-comment relative delay03">
+        {% if block.settings.special != blank %}
+        <div>
+          <img src="{{block.settings.special | img_url:'master'}}" class="img-responsive">
+        </div>
+        {% endif %}
+        <p class="des-comment space_top_bot_30 color-text">{{block.settings.content | truncatewords: 30}}</p>
+        <div class="flex">
+          {% if block.settings.avatar != blank %}
+         <img src="{{block.settings.avatar | img_url:'104x104'}}" class="img-responsive">
+          {% endif %}
+          <div class="flex-col">
+            <p class="uppercase author-comment color-text lt-2">{{block.settings.author}}</p><span class="capital model">{{block.settings.infor}}</span>
+          </div>
+        </div>
+        
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+
+  </div>
+</div>
+</div>
+<style>
+  {% if section.settings.select_color == 'image' %}
+  .BG-section{
+  	background-image:url({{section.settings.bg-img | img_url:'master'}});
+    background-position:center center;
+    background-size:cover;
+  }
+  {% else %}
+  .BG-section{
+    background:{{section.settings.bg-color}};
+  }
+  {% endif %}
+  .slick-Testimonal .content-comment{
+    background:{{section.settings.bg-content}};
+    padding:30px;
+    min-height:380px;
+    
+}
+  .slick-Testimonal .content-comment .flex img{
+    border-radius:50%;
+    
+}
+  .slick-Testimonal .content-comment:hover{
+    transform:translateY(-15px);
+    
+}
+  .Testimonal .slick-initialized .slick-slide{
+  	margin-right:40px;
+  }
+</style>
+{% schema %}
+{
+  "name": "Testimonal Classic",
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+   "type":      "select",
+   "id":        "select_color",
+   "label":     "Select background",
+   "options": [
+     {
+      
+       "value": "image",
+       "label": "Image"
+     },
+     {
+      
+       "value": "color",
+       "label": "Color"
+     }
+   ],
+   "default":   "image"
+	},
+	{
+      "type": "image_picker",
+      "id": "bg-img",
+      "label": "Background Image",
+      "info": "1920x1000 px"
+    },
+	{
+      "type": "color",
+      "id": "bg-color",
+      "label": "Background Color",
+      "default": "#fff"
+    },
+	{
+      "type": "color",
+      "id": "bg-content",
+      "label": "Color content",
+      "default": "#fff"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Top sale"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_btn",
+      "label": "Enable button",
+      "default": false
+    },
+	{
+      "type": "url",
+      "id": "url",
+      "label": "URL button",
+      "default": "/collections/all"
+    },
+	{
+      "type": "text",
+      "id": "btn_name",
+      "label": "button name",
+      "default": "shop now"
+    },
+    {
+      "type": "textarea",
+      "id": "des",
+      "label": "Description",
+      "default": "Get the latest news & updates from Ciloe"
+    }
+  ],
+"blocks": [
+      {
+        "type": "image",
+        "name": "Image slide",
+		"limit":10,
+        "settings": [
+          {
+            "type": "image_picker",
+          	"id": "special",
+          	"label": "Icon special",
+			"info": "48 x 39px recommended"
+          },
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "Content Tetimonal",
+      "default": "Maecenas vel mi et magna aliquet gravida eget eget turpis. Integer et sodales augue. Vestibulum ante ipsum in faucibus orci luctus et ultrices "
+    },
+	{
+            "type": "image_picker",
+          	"id": "avatar",
+          	"label": "Avatar",
+			"info": "50 x 50px recommended"
+    },
+	{
+      "type": "text",
+      "id": "author",
+      "label": "Author",
+      "default": "chipu single"
+    },
+	{
+      "type": "text",
+      "id": "infor",
+      "label": "Information",
+      "default": "single"
+    }
+		
+]
+}
+],
+  "presets": [
+    {
+      "name": "Testimonal Classic",
+      "category": "Home Classic"
+    }
+  ]
+}
+{% endschema %}

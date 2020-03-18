@@ -1,0 +1,166 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+<!--slide-->
+  <div class="container-fluid pd-featured-minimal margin_bottom_80">
+    <h1 class="margin_bottom_20 {% if section.settings.local_text_1 == 'center' %} text-center {% elsif section.settings.local_text_1 == 'left' %} text-left {% elsif section.settings.local_text_1 == 'right' %} text-right {% endif %}">{{section.settings.title}}</h1>
+    <p class="margin_bottom_80{% if section.settings.local_text_1 == 'center' %} text-center {% elsif section.settings.local_text_1 == 'left' %} text-left {% elsif section.settings.local_text_1 == 'right' %} text-right {% endif %}">{{section.settings.des}}</p>
+    
+    <div class="row">
+			{% assign products_limit = section.settings.tab_limit %}
+        	{% assign col = section.settings.tab_collection %}
+            {% for product in collections[col].products limit: products_limit %}
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 product-minimal loader">
+            {% include 'ciloe-product' %}
+            </div>
+            {% endfor %}
+
+      <div class="btn-loadmore text-center col-md-12">
+        <a href="#" id="loadMore" class="btn-ciloe-2 inline-block"><i class="ti-reload"></i>{{section.settings.btn_loadmore}}</a>
+      </div>
+    </div>
+  </div>
+<!--endslide-->
+</div>
+<style>
+  .pd-featured-minimal{
+  	padding:0 365px;
+  }
+  @media (max-width:1600px){
+  	.pd-featured-minimal{
+  	padding:0 100px;
+  }
+  }
+  @media (max-width:1400px){
+  	.pd-featured-minimal{
+  	padding:0 50px;
+  }
+  }
+  @media (max-width:991px){
+  	.pd-featured-minimal{
+  	padding:0 20px;
+  }
+  }
+  
+  .pd-featured-minimal h1{
+  	font-size:36px;
+  }
+  .loader {
+    display:none;
+}
+</style>
+{% schema %}
+{
+  "name": "Product featured Minimal",
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+   			"type":      "select",
+   			"id":        "local_text_1",
+   			"label":     "Select local title",
+   			"options": [
+     {
+       
+       "value": "center",
+       "label": "Center"
+     },
+     {
+       
+       "value": "left",
+       "label": "Left"
+     },
+     {
+       
+       "value": "right",
+       "label": "Right"
+     }
+   ],
+   "default":   "center"
+   
+			},
+	{
+      "type": "header",
+      "content": "Title"
+    },
+	{
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+	  	  "default":   "Featured"
+    },
+	{
+      "type": "header",
+      "content": "Color Title"
+    },
+	{
+          "type": "color",
+          "id": "color_title",
+          "label": "Color Title",
+	  	  "default":   "#000"
+    },
+	{
+      "type": "header",
+      "content": "Description"
+    },
+	{
+          "type": "textarea",
+          "id": "des",
+          "label": "Description",
+	  	  "default":   "Browse our website for the hottest items in the marketplace now."
+    },
+	{
+      "type": "header",
+      "content": "Color Description"
+    },
+	{
+          "type": "color",
+          "id": "color_des",
+          "label": "Color Description",
+	  	  "default":   "#999999"
+    },
+		{
+          "type": "collection",
+          "id": "tab_collection",
+          "label": "Chose collection"
+        },
+		{
+          "type": "text",
+          "id": "tab_limit",
+          "label": "Limit product",
+	  	  "default":   "20"
+        },
+	{
+      "type": "header",
+      "content": "Button load more"
+    },
+	{
+          "type": "text",
+          "id": "btn_loadmore",
+          "label": "Button load more name",
+	  	  "default":   "load more"
+    }
+  ],
+
+
+  "presets": [
+    {
+      "name": "Product featured Minimal",
+      "category": "Home Minimal"
+    }
+  ]
+}
+{% endschema %}

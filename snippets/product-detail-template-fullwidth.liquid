@@ -1,0 +1,168 @@
+<style>
+  @media screen and (min-width: 768px) {
+    .selector-wrapper {
+      max-width: 50%;
+      margin: 0 auto 20px;
+    }
+
+    .multiple-img-featured {
+      max-width: 455px;
+      margin: 0 auto;
+      padding-bottom: 200px;
+    }
+  }
+</style>
+
+<div class="container container-42">
+  {% include 'breadcrumb'%}
+  <div class="single-product-detail single-product-fullwidth space-50">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="product-images" style="background-color: {{section.settings.bg_color}};">
+          <div class="multiple-img-featured js-product-slider-v2">
+            {% for image in product.images %}
+            <img src="{{ image.src | img_url: 'master' }}" alt="{{ image.alt | escape }}" class="engoj_img_main img-reponsive">
+            {% endfor %}
+          </div>
+          <div class="multiple-img-list js-click-product-v2">
+            {% for image in product.images %}
+            <div class="product-col">
+              <div class="img engoj_img_variant">
+                <img src="{{ image.src | img_url: 'master' }}" alt="{{ image.alt | escape }}" class="img-responsive">
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="single-product-info">
+          {% if section.settings.show_rating%}
+          <div class="rating-star">
+            <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+          </div>
+          {% endif %}
+          <h3 class="product-title"><a href="{{product.url}}">{{product.title}}</a></h3>
+          <div class="product-price enj-product-price">
+            {% if product.compare_at_price > product.price %}
+            <span class="price old">{{ product.compare_at_price | money }}</span>
+            {% endif %}
+            <span class="price engoj_price_main">{{ product.price | money }}</span>
+            
+          </div>
+          
+          {% if section.settings.show_sdes %}
+          <p class="product-desc space-v1">
+            {{product.metafields.engo_summary.summary_content}}
+          </p>
+          {% endif %}
+          
+          <form action="/cart/add" method="post" enctype="multipart/form-data" class="product-form product-form-{{ section.id }}{% unless section.settings.show_variant_labels %} product-form--hide-variant-labels{% endunless %}" data-section="{{ section.id }}">
+            <select name="id" id="productSelect" class="engoj-except-select2 product-single__variants">
+              {% for variant in product.variants %}
+              {% if variant.available %}
+              {% assign sku = variant.sku %}
+
+              <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
+
+              {% else %}
+              <option disabled="disabled">
+                {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+              </option>
+              {% endif %}
+              {% endfor %}
+            </select>
+            
+            <style>
+              .action.v7 {
+                margin: 0 auto;
+                display: table;
+              }
+            </style>
+            <div class="action v7">
+            {% if product.available and product.variants.size > 1 %}
+            {% for option in product.options %}
+            {% include 'swatch' with option %}
+            {% endfor %}
+            {% endif %}
+            </div>
+            
+            {% if product.metafields.engo_external.external_name != blank %}
+            <div class="action v2">
+              <a href="{{product.metafields.engo_external.external_url}}" class="link-ver1 add-cart">{{product.metafields.engo_external.external_name}}</a>
+              {% include 'add-wishlist-pd'%}
+            </div>
+            {% else %}
+            <div class="action v7">
+              {% if section.settings.show_quantity %}
+              <input type="number" id="Quantity" name="quantity" value="1" min="1" class="product-form__input" pattern="[0-9]*">
+              {% endif %}
+
+              {% unless product.metafields.engo_external.external_name != blank %}
+              {% include 'add-wishlist-pd'%}
+              {% endunless %}
+            </div>
+            
+            <div class="action v7">
+              <button type="submit" name="add" id="AddToCart" {% unless current_variant.available %}disabled="disabled"{% endunless %} class="link-ver1 add-cart{% if product.options.size == 1 and product.variants[0].title == 'Default Title' %} product-form__cart-submit--small{% endif %}">
+                <span id="AddToCartText-{{ section.id }}">
+                  {% unless current_variant.available %}
+                  {{ 'products.product.sold_out' | t }}
+                  {% else %}
+                  {{ 'products.product.addtocart' | t }}
+                  {% endunless %}
+                </span>
+              </button>
+            </div>
+            {% endif %}
+          </form>
+          {% if section.settings.show_share%}
+          {% include 'social-share-productdetail'%}
+          {% endif%}
+        </div>
+      </div>
+    </div>
+    <!--single-product-detail-->
+    {% if section.settings.enable_alltab %}
+    {% include 'product-detail-tab' %}
+    {% endif %}
+    <!--single-product-tab-->
+  </div>
+</div>
+
+{% if section.settings.show_sku or section.settings.show_list_collection or section.settings.show_tag %}
+<div class="information">
+  <ul>
+    {% if section.settings.show_sku%}
+    <li class="info-center text-center">
+      {% assign current_variant = product.selected_or_first_available_variant %}
+      <span>SKU :</span>
+      <a class="engoj-variant-sku" href="">{{ current_variant.sku }}</a>
+    </li>
+    {%endif%}
+    
+    {% if section.settings.show_list_collection %}
+    <li class="info-center bd-rl text-center">
+      <span>Categories :</span>
+      {% capture collection_title %}{{ collection.title }}{% endcapture %}
+      {% for collection in product.collections %}
+      <a href="{{collection.url}}"> {{ collection.title }}{% unless forloop.last %},{% endunless %}</a>
+
+      {% endfor %}
+    </li>
+    {%endif%}
+    
+    {% if section.settings.show_tag %}
+    <li class="info-center text-center">
+      <span>Tags :</span>
+      {% for tag in product.tags %}
+      <a href="/collections/all?constraint={{ tag | handle }}">{{ tag }}</a>{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+
+    </li>
+    {%endif%}
+  </ul>
+</div>
+{% endif %}
+
+{% if section.settings.show_product_related %}
+{% include 'related-product'%}
+{% endif %}

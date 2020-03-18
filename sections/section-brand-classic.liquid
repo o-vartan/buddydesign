@@ -1,0 +1,95 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  
+  <div class="container-fluid brand margin_bottom_40 border-bot">
+
+    <div class="slick-brand">
+      {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+      <div class="content-brand">
+        <a href="{{block.settings.url}}">
+          <img src="{{block.settings.img | img_url:'master'}}" class="img-responsive delay03">
+        </a>
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+
+  </div>
+
+</div>
+<style>
+  
+  .brand .content-brand img{
+  	margin:0 auto;
+  }
+  .brand .content-brand img:hover{
+  	opacity:.5;
+  }
+  {% if section.settings.enable_prev %}
+  .slick-brand .slick-prev{
+  	display:none !important;
+  }
+  .slick-brand .slick-next{
+  	display:none !important;
+  }
+  {% endif %}
+</style>
+{% schema %}
+{
+  "name": "Brand Classic",
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_prev",
+      "label": "Hidden button Prev + next",
+      "default": false
+    }
+	
+  ],
+"blocks": [
+      {
+        "type": "image",
+        "name": "Image slide",
+		"limit":10,
+        "settings": [
+		  {
+            "type": "url",
+          	"id": "url",
+          	"label": "Url",
+			"default": "/collections/all"
+          },
+          {
+            "type": "image_picker",
+          	"id": "img",
+          	"label": "Image brand",
+			"info": "48 x 39px recommended"
+          }
+    
+]
+}
+],
+  "presets": [
+    {
+      "name": "Brand Classic",
+      "category": "Home Classic"
+    }
+  ]
+}
+{% endschema %}

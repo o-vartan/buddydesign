@@ -1,0 +1,38 @@
+<div class="filter margin_bottom_30 space_bot_30 border-bot filter-tag"><div class="flex margin_bottom_20">
+  <h4 class="fz-12 widget_title lt-2">{{section.settings.title_sort}}</h4>
+  </div>
+  <ul class="filter-brand engoj-sortby">
+    <li><a href="javascript:void(0)" data-jsortby="manual">{{ 'collections.sorting.featured' | t }}</a></li>   
+    <li><a href="javascript:void(0)" data-jsortby="best-selling">{{ 'collections.sorting.best_selling' | t }}</a></li>
+    <li><a href="javascript:void(0)" data-jsortby="title-ascending">{{ 'collections.sorting.az' | t }}</a></li>
+    <li><a href="javascript:void(0)" data-jsortby="title-descending">{{ 'collections.sorting.za' | t }}</a></li>
+    <li><a href="javascript:void(0)" data-jsortby="price-descending">{{ 'collections.sorting.price_descending' | t }}</a></li>
+    <li><a href="javascript:void(0)" data-jsortby="price-ascending">{{ 'collections.sorting.price_ascending' | t }}</a></li>
+    <li><a href="javascript:void(0)" data-jsortby="created-ascending">{{ 'collections.sorting.date_ascending' | t }}</a></li>
+    <li><a href="javascript:void(0)" data-jsortby="created-descending">{{ 'collections.sorting.date_descending' | t }}</a></li>
+  </ul>
+</div>
+
+<script>
+  /*============================================================================
+    Inline JS because collection liquid object is only available
+    on collection pages and not external JS files
+  ==============================================================================*/
+  Shopify.queryParams = {};
+  if (location.search.length) {
+    for (var aKeyValue, i = 0, aCouples = location.search.substr(1).split('&'); i < aCouples.length; i++) {
+      aKeyValue = aCouples[i].split('=');
+      if (aKeyValue.length > 1) {
+        Shopify.queryParams[decodeURIComponent(aKeyValue[0])] = decodeURIComponent(aKeyValue[1]);
+      }
+    }
+  }
+
+  $(function() {
+    $('.engoj-sortby a')
+    .bind('click', function() {
+      Shopify.queryParams.sort_by = jQuery(this).data('jsortby');
+      location.search = jQuery.param(Shopify.queryParams);
+    });
+  });
+</script>

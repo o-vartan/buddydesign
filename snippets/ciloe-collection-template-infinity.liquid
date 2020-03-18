@@ -1,0 +1,67 @@
+<div class="shop_page">
+  {% include 'ciloe-banner' %}
+  {% include 'ciloe-btn-layout' %}
+  <div class="container-fluid container_35 content_shop">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 product_shop product-collection-grid product_full">
+        <div class="row">
+          {%- assign i = 1 -%}
+          {% for product in collection.products %}
+          
+          <div class="col-lg-2 col-md-3 col-sm-6 col-xs-6 layout_product_shop delay05 layout_pd_5c fade-it-{{i}}">
+            {% include 'ciloe-product' %}
+          </div>
+          {%- assign i = i | plus : 1 -%}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  @media (min-width:992px){
+  .layout_pd_list_shop:nth-child(2n+1){
+  	clear:left;
+  }
+  .layout_pd_list_shop:nth-child(5n+1){
+  	clear:none;
+  }
+  .layout_pd_5c.column-3:nth-child(3n+1){
+  	clear:left !important;
+  }
+  .layout_pd_5c.column-3:nth-child(5n+1){
+  	clear:none !important;
+  }
+  .layout_pd_5c.column-4:nth-child(5n+1){
+  	clear:none !important;
+  }
+  .layout_pd_5c.column-4:nth-child(4n+1){
+  	clear:left !important;
+  }
+  .layout_pd_5c.column-6:nth-child(5n+1){
+  	clear:none !important;
+  }
+  .layout_pd_5c.column-6:nth-child(6n+1){
+  	clear:left !important;
+  }
+  .layout_pd_5c.column-3{
+  	width: 33.33333%;
+  }
+  .layout_pd_5c.column-4{
+  	width: 25%;
+  }
+  .layout_pd_5c.column-6{
+  	width: 16.6666667%;
+  }
+  .layout_pd_5c.column-50{
+  	width: 50%;
+  }
+  
+  .layout_pd_5c.column-50:nth-child(5n+1){
+  	clear:none!important;
+  }
+  .layout_pd_5c.column-50:nth-child(2n+1){
+  	clear:left!important;
+  }
+  }
+</style>

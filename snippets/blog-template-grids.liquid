@@ -1,0 +1,34 @@
+<div class="blog-grid">
+    <div class="row">
+        {% for article in blog.articles %}
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 blog-post-item">
+            {% if article.image %}
+            <div class="blog-img">
+                <a href="{{ article.url }}" class="hover-images">{{ article | img_url: 'master' | img_tag: article.title }}</a>
+                {% if section.settings.blog_show_date %}
+                <div class="blog-post-date abs flex fz-12 lt-3">
+                    
+                  <span class="b-month">{{article.published_at | date: "%b"}}</span>
+                  <span class="b-date">.{{article.published_at | date: "%d" }}</span>
+                  
+                </div>
+                {%endif%}
+            </div>
+            {% endif %}
+          <div class="blog-info">
+            <div class="blog-post-author">
+              <div class="author uppercase lt-2 fz-12"><span>{{article.author}}</span></div>
+              
+              <div class="blog-post-comment"><span class="c-black"></span>{{article.comments_count}}</div>
+              
+            </div>
+            <h3 class="blog-post-title"><a href="{{ article.url }}">{{ article.title }}</a></h3>
+            <a href="{{ article.url }}" class="ciloe-btn-default-2 relative over-hidden inline-block">Read more</a>
+          </div>
+        </div>
+        {% endfor %}
+      <div class="text-center col-md-12 content_pagination space_bot_80">
+        {% include 'pagination' %}
+      </div>
+    </div>
+</div>

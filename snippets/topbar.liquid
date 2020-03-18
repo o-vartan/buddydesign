@@ -1,0 +1,103 @@
+<div class="topbar">
+  <div class="container container-240">
+      <div class="row flex">
+          <div class="col-md-6 col-sm-6 col-xs-4 flex-left">
+              <div class="topbar-left">
+                  <div class="element element-store hidden-xs hidden-sm">
+                      <a id="label1" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                      	{%if settings.topbar_icon_type_1 =='Image' %}
+                              <img src="{{'icon-map.png'|asset_url}}" alt="">
+                              {%else%}
+                              <i class="{{settings.topbar_icon_1}}"></i>
+                       	{% endif %}
+                        <span>{{settings.location_default}}</span>
+
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="label1">
+                          {%for i in (1..6)%}
+                              {%capture _enable%}location{{i}}_enable{%endcapture%}
+                                {%capture _text%}location{{i}}_text{%endcapture%}
+                                {%capture _url%}Location{{i}}_url{%endcapture%}
+
+                                {%assign enable = settings[_enable]%}
+                                {%assign text = settings[_text]%}
+                              {%assign url = settings[_url]%}
+                        <li><a href="{{url}}" title="{{text}}">{{text}}</a></li>
+                      {% endfor %}
+                      </ul>
+                  </div>
+                  <div class="element hidden-xs hidden-sm">
+                      <a href="{{settings.topbar_text1_url}}">
+                        {%if settings.topbar_icon_type_2 =='Image' %}
+                              <img src="{{'icon-track.png'|asset_url}}" alt="">
+                              {%else%}
+                              <i class="{{settings.topbar_icon_2}}"></i>
+                       	{% endif %}
+                        <span>{{settings.topbar_text1}}</span>
+                      </a>
+                  </div>
+                  <div class="element element-account hidden-md hidden-lg">
+                    {% if customer.email != blank %}
+                    <a href="/account/logout" title="logout">{{settings.topbar_text6}}</a>
+                    {%else%}
+                      <a href="/account/login">{{settings.topbar_text5}}</a>
+                    {%endif%}
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-8 flex-right">
+              <div class="topbar-right">
+                  <div class="element hidden-xs hidden-sm">
+                      <a href="{{settings.topbar_text2_url}}">{{settings.topbar_text2}} </a>
+                  </div>
+                  <div class="element hidden-xs hidden-sm">
+                      <a href="{{settings.topbar_text3_url}}">{{settings.topbar_text3}}</a>
+                  </div>
+                  <div class="element hidden-xs hidden-sm">
+                      <a href="{{settings.topbar_text4_url}}">
+                        {%if settings.topbar_icon_type_3 =='Image' %}
+                              <img src="{{'icon-phone.png'|asset_url}}" alt="">
+                              {%else%}
+                              <i class="{{settings.topbar_icon_3}}"></i>
+                       	{% endif %}
+                        <span>{{settings.topbar_text4}}</span>
+                      </a>
+                  </div>
+                  <div class="element element-leaguage">
+                      <a id="label2" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <img src="{{'icon-l.png'|asset_url}}" alt="">
+                        
+                        <span>{{settings.language_default}}</span>
+                        <span class="ion-ios-arrow-down f-10 e-arrow"></span>
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="label2">
+                          {%for i in (1..6)%}
+                            {%capture _enable%}language{{i}}_enable{%endcapture%}
+                            {%capture _text%}language{{i}}_text{%endcapture%}
+                            {%capture _url%}Language{{i}}_url{%endcapture%}
+
+                            {%assign enable = settings[_enable]%}
+                            {%assign text = settings[_text]%}
+                            {%assign url = settings[_url]%}
+                            <li><a href="{{url}}" title="{{text}}">{{text}}</a></li>
+                           {% endfor %}
+                      </ul>
+                  </div>
+                  <div class="element element-currency">
+                      <a id="label3" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+                        <span>{{shop.currency}}</span>
+                        <span class="ion-ios-arrow-down f-10 e-arrow"></span>
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="label3">
+                          {% assign supported = settings.supported_currencies | split: ' ' %}
+                          {% for c in supported %}
+                          <li><a data-currency="{{c}}">{{c}}</a></li>
+                          {% endfor %}
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<div class="form-search delay03 text-center">
+  <i class="ti-close" id="close-search"></i>
+  <h3 class="text-center title-font">what are<br>your looking for ?</h3>
+  <form method="get" action="/search" role="search">
+    <input type="text" class="form-control control-search des-font" id="engo_autocomplate" value="{{ search.terms | escape }}" autocomplete="off" placeholder="Enter Search ..." aria-label="{{ 'general.search.placeholder' | t }}" name="q">
+    <button class="button_search title-font" type="submit">search</button>
+  </form>
+</div>

@@ -1,0 +1,97 @@
+<div class="container container-240 shop-collection">
+    {% include 'breadcrumb'%}
+    <div class="filter-collection-left hidden-lg hidden-md">
+      <a class="btn">{{section.settings.text_filter2}}</a>
+    </div>
+    <div class="row shop-colect r-sidebar">
+        <div class="col-md-3 col-sm-3 col-xs-12 col-left collection-sidebar" id="filter-sidebar">
+            {% include 'collection-filter'%}
+        </div>
+        <div class="col-md-9 col-sm-12 col-xs-12 collection-list">
+            <div class="e-product">
+                <div class="pd-banner">
+                   <a href="{{section.settings.bg_url2}}" class="image-bd effect_img2">
+                    <img {%if section.settings.bg_img2 == blank%}src="{{'shop-banner_2.jpg'| asset_url }}" 
+                            {%else%}
+                        src="{{section.settings.bg_img2 | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" />
+                    </a> 
+                </div>
+                <div class="pd-top">
+                    <h3 class="title">{{collection.title}}</h3>
+                    <div class="show-element"> <span>{{ 'collections.showby.show' | t }}  
+                        {{ paginate.current_offset | plus: 1 }} -
+                        {% if paginate.next %}
+                        {{ paginate.current_offset | plus: paginate.page_size }}
+                        {% else %}
+                        {{ paginate.items }} 
+                        {% endif %}
+                        {{ 'collections.showby.of' | t }} 
+                        {{ paginate.items }} 
+                        {{ 'collections.showby.results' | t }}</span>
+                    </div>
+                </div>
+                <div class="pd-middle">
+                    <div class="view-mode view-group">
+                        <a class="grid-icon col active"><img src="{{'grid.png'| asset_url }}" alt=""></a>
+                        <a class="grid-icon col2"><img src="{{'grid2.png'| asset_url }}" alt=""></a>
+                        <a class="list-icon list"><img src="{{'list.png'| asset_url }}" alt=""></a>
+                    </div>
+                    <div class="pd-sort">
+                        {% include 'collection-sorting'%}
+                    </div>
+                </div>
+                <div class="product-collection-grid product-grid">
+                    <div class="row">
+                    {% for product in collection.products %}
+                      {% include 'product-collection-sidebar'%}
+                      {% else %}
+                      {% comment %}
+                      Add default products to help with onboarding for collections/all only.
+
+                      The onboarding styles and products are only loaded if the
+                      store has no products.
+                      {% endcomment %}
+                      {% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}
+                      <div class="grid__item">
+                        <div class="grid grid--uniform">
+                          {% for i in (1..limit) %}
+                          <div class="grid__item {{ grid_item_width }}">
+                            <div class="grid-view-item">
+                              <a href="#" class="grid-view-item__link">
+                                <div class="grid-view-item__image">
+                                  {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                                  {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                                </div>
+                                <div class="h4 grid-view-item__title">{{ 'homepage.onboarding.product_title' | t }}</div>
+                                <div class="grid-view-item__meta">
+                                  <span class="product-price__price">$19.99</span>
+                                </div>
+                              </a>
+                            </div>
+                          </div>
+                          {%endfor%}
+                        </div>
+                      </div>
+                      {% else %}
+                      {%- assign is_empty_collection = true -%}
+                      {% endif %}
+                      {% endfor %}
+
+                        </div>
+                        {% if is_empty_collection %}
+                        <div class="grid__item small--text-center">
+                          <p class="text-center">{{ 'collections.general.no_matches' | t }}</p>
+                        </div>
+                        {% endif %}
+                  <div class="clearfix"></div>
+                </div>
+                <div class="pd-middle space-v1">
+                    {% include 'pagination'%}
+                    <div class="pd-sort">
+                        {% include 'collection-sorting'%}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

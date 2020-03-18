@@ -1,0 +1,197 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="BG-section  Testimonal space_top_bot_70">
+    <div class="ciloe-title-section  container relative margin_top_50">
+      <p class="margin_bottom_10 text-center lt-3 uppercase">{{section.settings.title}}</p>
+      
+    </div>
+    <div class="container ">
+      <div class="slick-Testimonal4">
+        {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+        <div class="content-comment relative delay03 text-center">
+          
+          {% if block.settings.avatar != blank %}
+          <img src="{{block.settings.avatar | img_url:'104x104'}}" class="img-responsive">
+          {% endif %}
+          <div class=" center space_top_20">
+          <p class=" author-comment color-text capital fw-700 space_bot_10">{{block.settings.author}}</p> <span class="capital model fw-500 lt-1 ">{{block.settings.infor}}</span>
+          </div>
+          <p class="des-comment space_bot_40 space_top_30 color-text">{{block.settings.content}}</p>
+        </div>
+        {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .Testimonal .ciloe-title-section p{
+      line-height: 27px;
+    color:{{section.settings.color_title}};
+  }
+    {% if section.settings.select_color == 'image' %}
+  .BG-section.Testimonal{
+  	background-image:url({{section.settings.bg-img | img_url:'master'}});
+    background-position:center center;
+    background-size:cover;
+  }
+  {% else %}
+  .BG-section.Testimonal{
+    background:{{section.settings.bg_tes}};
+  }
+  {% endif %}
+  .slick-Testimonal4 .content-comment{
+    padding:30px;
+    
+}
+  .slick-Testimonal4 .des-comment{
+  color:{{section.settings.color-des}};
+    font-weight:300;
+  }
+  .slick-Testimonal4 .author-comment{
+  	color:{{section.settings.color-author}};
+  }
+  .slick-Testimonal4 .content-comment span{
+    padding-left:5px;
+  color:{{section.settings.color-model}};
+  }
+  .slick-Testimonal4{
+  	width:51%;
+    margin:auto;
+  }
+  .slick-Testimonal4 .content-comment  img{
+    margin:auto;
+}
+  @media (max-width:567px){
+    .slick-Testimonal4{
+  	width:90%;
+  }
+    .slick-Testimonal4 .des-comment{
+    	font-size:14px;
+      line-height:30px;
+    }
+  }
+</style>
+{% schema %}
+{
+  "name": "Testimonal v4",
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+   "type":      "select",
+   "id":        "select_color",
+   "label":     "Select background",
+   "options": [
+     {
+      
+       "value": "image",
+       "label": "Image"
+     },
+     {
+      
+       "value": "color",
+       "label": "Color"
+     }
+   ],
+   "default":   "image"
+	},
+	{
+      "type": "image_picker",
+      "id": "bg-img",
+      "label": "Background Image"
+    },
+
+    {
+      "type": "color",
+      "id": "bg_tes",
+      "label": "Background Section blog"
+    },
+	{
+      "type": "color",
+      "id": "color_title",
+      "label": "Color Title",
+      "default": "#0D4C82"
+    },
+	{
+      "type": "color",
+      "id": "color-des",
+      "label": "Color des",
+      "default": "#999999"
+    },
+	{
+      "type": "color",
+      "id": "color-author",
+      "label": "Color author",
+      "default": "#3c3c3c"
+    },
+	{
+      "type": "color",
+      "id": "color-model",
+      "label": "Color model",
+      "default": "#cfcfcf"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Don’t hear from us only.<br> Listen to our customers too."
+    }
+  ],
+"blocks": [
+      {
+        "type": "image",
+        "name": "Image slide",
+		"limit":10,
+        "settings": [
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "Content Tetimonal",
+      "default": "“To be honest, this is one of the best interior store. They have a lot of things for you to explore. The price is reasonable and customer service is dedicated.”"
+    },
+	{
+      "type": "image_picker",
+      "id": "avatar",
+      "label": "Avatar",
+	  "info": "50 x 50px recommended"
+    },
+	{
+      "type": "text",
+      "id": "author",
+      "label": "Author",
+      "default": "Paul Wilson"
+    },
+	{
+      "type": "text",
+      "id": "infor",
+      "label": "Information",
+      "default": "San Jose"
+    }
+		
+]
+}
+],
+  "presets": [
+    {
+      "name": "Testimonal v4",
+      "category": "Page Minim"
+    }
+  ]
+}
+{% endschema %}

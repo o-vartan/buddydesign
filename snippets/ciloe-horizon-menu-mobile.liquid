@@ -1,0 +1,117 @@
+<ul class="nav-home5 js-menubar qqqq">
+
+  {% for link in linklists.main-menu.links %}
+  {% assign item = link.title | downcase %}
+  {% assign child_list_handle = link.title | handleize %}
+  
+  {% capture megamenu_1 %}megamenu2_1_parent{% endcapture %}
+  {% capture megamenu_2 %}megamenu2_2_parent{% endcapture %}
+  {% capture megamenu_3 %}megamenu2_3_parent{% endcapture %}
+  {% capture megamenu_4 %}megamenu2_4_parent{% endcapture %}
+  
+  {% if settings[megamenu_1] == item or settings[megamenu_2] == item or settings[megamenu_3] == item or settings[megamenu_4] == item %}
+    {% for i in (1..4) %}
+    {%capture megamenu%}megamenu2_{{i}}_parent{%endcapture%}
+    {% if settings[megamenu] == item %}
+    {% capture _mega_style_select %}megamenu2_{{i}}_select{% endcapture %}
+    {% if settings[_mega_style_select] == "m_s1" %}
+    <li class="level1 active dropdown">
+      <a href="{{ link.url }}">{{link.title | split: '[' | first }}</a>
+      <span class="icon-sub-menu"></span>
+      <ul class="menu-level1 style1 js-open-menu delay05">
+        {% for k in (1..8) %} 
+        {% capture mega_title %}megamenu2_{{ i }}_column_{{ k }}_title{% endcapture %}
+        {% capture mega_col %}megamenu2_{{ i }}_column_{{ k }}_menu{% endcapture %}
+        {% capture mega_image %}img-{{ i }}-home{{k}}{% endcapture %}
+        <li class="level2">
+          {% for link in linklists[settings[mega_col]].links %}
+          <div class="demo-img" >
+            <a href="{{ link.url }}">
+              <img src="{% if settings[mega_image] == blank %}{{'home_1_menu-min.png' | asset_url }}{% else %}{{settings[mega_image] | img_url:'master'}}{% endif %}" alt="" class="img-responsive">
+            </a>
+            <h3 class="demo-text"><a href="{{ link.url }}">{{link.title | split: '[' | first }}</a></h3>
+          </div>
+          {% endfor %}
+        </li>
+        {% endfor %}
+      </ul>
+    </li>
+    {% elsif settings[_mega_style_select] == "m_s2" %}
+    <li class="level1 active dropdown"><a href="{{ link.url }}">{{link.title | split: '[' | first }}</a>
+      <span class="icon-sub-menu"></span>
+
+      <div class="menu-level1 js-open-menu delay05">
+        <ul class="level1">
+          {% for k in (1..4) %} 
+          {% capture mega_title_shop %}megamenu2_{{ i }}_column_{{ k }}_title{% endcapture %}
+          {% capture mega_col_shop %}megamenu2_{{ i }}_column_{{ k }}_menu{% endcapture %}
+
+          <li class="level2">
+            <a href="#">{{ settings[mega_title_shop] }} </a>
+            <ul class="menu-level-2">
+              {% for link in linklists[settings[mega_col_shop]].links %}
+              <li class="level3"><a href="{{ link.url }}" title="">{{link.title | split: '[' | first }}</a></li>
+              {% endfor %}
+            </ul>
+          </li>
+          {% endfor %}
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+    </li>
+
+    {% elsif settings[_mega_style_select] == "m_s3" %}
+    <li class="level1 active dropdown"><a href="{{ link.url }}">{{link.title | split: '[' | first }}</a>
+      <span class="icon-sub-menu"></span>
+
+      <div class="menu-level1 js-open-menu delay05">
+        <ul class="level1">
+          {% for k in (1..3) %} 
+          {% capture mega_title_shop %}megamenu2_{{ i }}_column_{{ k }}_title{% endcapture %}
+          {% capture mega_col_shop %}megamenu2_{{ i }}_column_{{ k }}_menu{% endcapture %}
+
+          <li class="level2">
+            <a href="#">{{ settings[mega_title_shop] }} </a>
+            <ul class="menu-level-2">
+              {% for link in linklists[settings[mega_col_shop]].links %}
+              <li class="level3"><a href="{{ link.url }}" title="">{{link.title | split: '[' | first }}</a></li>
+              {% endfor %}
+            </ul>
+          </li>
+          {% endfor %}
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+    </li>
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+  
+  {% else %}
+  
+    {% if linklists[child_list_handle].links != blank %}
+    <li class="level1">
+      <a href="{{ link.url }}">{{link.title | split: '[' | first }}</a>
+      {% if link.links != blank %}
+      <span class="icon-sub-menu"></span>
+      <ul class="menu-level1 js-open-menu delay05">
+        {% for child_link in link.links %}
+        <li class="level2"><a href="{{child_link.url}}" title="{{child_link.title}}">{{ child_link.title | escape }}</a></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </li>
+    {% else %}
+    <li class="level1">
+      <a href="{{ link.url }}">{{link.title | split: '[' | first }}</a>
+    </li>
+    {% endif %}
+  
+  {% endif %}
+  {% endfor %}
+  {% if customer.email != blank %}
+  <li class="level1">
+    <a href="/account/logout"><i class="icon-power"></i> LOGOUT</a>
+  </li>
+  {% endif %}
+</ul>

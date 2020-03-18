@@ -1,0 +1,78 @@
+<!-- begin site-nav -->
+
+<ul class="nav-home5 js-menubar">{% for link in linklists.main-menu.links %}
+  {% assign item = link.title | downcase %}
+  {% assign child_list_handle = link.title | handleize %}
+  
+  {% capture megamenu_1 %}megamenu_1_parent{% endcapture %}
+  {% capture megamenu_2 %}megamenu_2_parent{% endcapture %}
+  
+  {% if settings[megamenu_1] == item or settings[megamenu_2] == item %}
+    {% for i in (1..5) %}
+    {%capture megamenu%}megamenu_{{i}}_parent{%endcapture%}
+    {% if settings[megamenu] == item %}
+    <li class="level1 active dropdown">
+      {% if link.title contains '[' %}
+      <a href="{{ link.url }} " onClick="return false;">{{link.title | split: '[' | first }}</a>
+      {%else%}
+      <a href="{{ link.url }}" onClick="return false;">{{link.title | split: '[' | first }}</a>
+      {% endif %}
+      <span class="icon-sub-menu"></span>
+      <div class="menu-level1 js-open-menu">
+        <ul class="level1">	
+          {% for j in (1..5) %}
+          {% capture mega_title %}megamenu_{{ i }}_column_{{ j }}_title{% endcapture %}
+          {% capture mega_col %}megamenu_{{ i }}_column_{{ j }}_menu{% endcapture %}
+
+          <li class="level2">
+            <a>{{ settings[mega_title] }}</a>
+            <ul class="menu-level-2">
+              {% for link in linklists[settings[mega_col]].links %}
+              <li class="level3">
+                {% if link.title contains '[' %}
+                <a href="{{ link.url }} ">{{link.title | split: '[' | first }}</a>
+                {%else%}
+                <a href="{{ link.url }}" >{{link.title | split: '[' | first }}</a>
+                {% endif %}
+              </li>
+              {% endfor %}
+            </ul>
+            {% endfor %}
+          </li>
+
+
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+    </li>
+    {% endif %} 
+    {% endfor %}
+  
+  {% else %}
+  
+    {% if linklists[child_list_handle].links != blank %}
+    <li class="level1 active dropdown">
+      {% if link.title contains '[' %}
+      <a href="{{ link.url }} " onClick="return false;">{{link.title | split: '[' | first }}</a>
+      {%else%}
+      <a href="{{ link.url }}" onClick="return false;">{{link.title | split: '[' | first }}</a>
+      {% endif %}
+      <span class="icon-sub-menu"></span>
+      <ul class="menu-level1 js-open-menu">
+        {% for childlink in linklists[child_list_handle].links %}
+        <li class="level2" {% if childlink.active %} {% endif %}>
+          <a href="{{ childlink.url }}" class="">{{ childlink.title | escape }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </li>
+    {% else %}
+    <li {% if link.active %}class="level1 active dropdown"{% endif %}>
+      <a href="{{ link.url }}" class="">{{ link.title }}</a>
+    </li>
+    {% endif %}
+  
+  {% endif %}
+  {% endfor %}
+</ul>
+<!-- //site-nav -->

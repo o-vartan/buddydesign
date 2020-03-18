@@ -1,0 +1,40 @@
+<div class="blog-single-post">
+    <div class="row">
+      	{% include 'sidebar-article' %}
+        <div class="blog-content  col-md-9  col-xs-12">
+            <div class="blog-post-item v2">
+                {% if article.image %}
+                <div class="blog-img">
+                    <a href="#" class="hover-images"><img src="{{ article.image.src | img_url: 'master' }}" class="img-responsive" alt="" /></a>
+                    <div class="blog-post-date e-gradient abs lt-2">
+                        <span class="b-date">{{article.published_at | date: "%d" }}.</span>
+                        <span class="b-month">{{article.published_at | date: "%b"}}</span>
+                    </div>
+                </div>
+                {% endif %}
+                <div class="blog-info-bd">
+                    <div class="blog-info">
+                        <h3 class="blog-post-title v2">{{ article.title }}</h3>
+                        <div class="blog-post-desc">
+                            {{ article.content}}
+                        </div>
+                    </div>
+                    <div class="blog-post-author v2">
+                        <div class="blog-post-tags">
+                            {% for tag in article.tags %}
+                            <a href="{{ blog.url }}/tagged/{{ tag | handle }}" rel="category tag">{{ tag }}</a>{% unless forloop.last %},{% endunless %}
+                            {% endfor %}
+                        </div>
+                        {% if section.settings.enable_widget_social%}
+                        <div class="blog-post-social">
+                            {{section.settings.widget_social_content2}}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% include 'comment-article'%}
+        </div>
+        
+    </div>
+</div>

@@ -1,0 +1,555 @@
+
+<div class="aboutus">
+		{% if section.settings.layout == 'about1' %}
+			{% include 'page-about-v1' %}
+      	{% elsif section.settings.layout == 'about2' %}
+      		{% include 'page-about-v2' %}
+      	{% endif %}
+  {% if section.settings.show_testimonial %}
+  <div class="container testimonia margin_bottom_100 " style="padding-top:70px;">
+    <p class="title-testi text-center uppercase lt-3 space_bot_50">{{section.settings.title_testi}}</p>
+    <div class="slick-testimonial">
+      {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+      {% if block.type == 'testimonia' %}
+      <div class="content-tes text-center">
+        <img src="{{block.settings.img_tes | img_url:'master'}}" class="img-responsive delay03">
+        <p class="name space_top_20">{{block.settings.name}}<br><span class="space_top_10">{{block.settings.name1}}</span></p>
+        <h4 class="content-tes space_top_50">{{block.settings.content-tes}}</h4>
+      </div>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+    </div>
+
+  </div>
+  {% endif %}
+   {% if section.settings.show_content_counter %}
+  <div class="warppage cuter ">
+    <div class="container counter">
+      <div class="row counter1">
+        <div class="col-md-3 col-sm-3 col-xs-6 space_bot_30 text-center">
+          <div class="counte counte1 space_bot_10" data-count="{{section.settings.title_counter1}}">0</div>
+          <p>{{section.settings.title_counter11}}</p>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6 space_bot_30 text-center">
+          <div class="counte counte1 space_bot_10" data-count="{{section.settings.title_counter2}}">0</div>
+          <p>{{section.settings.title_counter22}}</p>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6 space_bot_30 text-center">
+          <div class="counte counte1 space_bot_10" data-count="{{section.settings.title_counter3}}">0</div>
+          <p>{{section.settings.title_counter33}}</p>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6 space_bot_30 text-center">
+          <div class="counte counte1 space_bot_10" data-count="{{section.settings.title_counter4}}">0</div>
+          <p>{{section.settings.title_counter44}}</p>
+        </div>
+      </div>
+    </div>
+  </div>	
+  {% endif %}
+  {% if section.settings.show_content_team %}
+  <div class="container-fluid team margin_top_100">
+    <h1 class="title-insta text-center margin_bottom_50">{{section.settings.title}}</h1>
+    <div class="container">
+      <div class="row">
+        <div class="slick-team">
+      {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+      {% if block.type == 'team' %}
+      <div class="content-team {% if block.settings.space_right %}margin_right_30{% endif %} relative">
+          <img src="{{block.settings.img_team | img_url:'master'}}" class="img-responsive delay07">
+        <div class="name-team text-center">
+        <p class="name space_top_20 space_bot_20 ">{{block.settings.name-team}}<br><span class="">{{block.settings.name-team1}}</span></p>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+    </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Page About Us",
+  "settings": [
+    {
+      "type": "select",
+        "id": "layout",
+        "label": "Layout",
+        "default": "about1",
+        "options": [
+        {
+          "value": "about1",
+          "label": "About v1"
+        },
+        {
+          "value": "about2",
+          "label": "About v2"
+        }
+      ]
+    },
+	{
+      "type": "header",
+      "content": "Enable show section"
+    },
+	{
+      "type": "checkbox",
+      "id": "show_content_1",
+      "label": "Show content About us 1",
+      "default": true
+    },
+	{
+      "type": "checkbox",
+      "id": "show_content_2",
+      "label": "Show content About us 2",
+      "default": true
+    },
+	{
+      "type": "checkbox",
+      "id": "show_testimonial",
+      "label": "Show Testimonial",
+      "default": true
+    },
+	{
+      "type": "checkbox",
+      "id": "show_content_counter",
+      "label": "Show content Counter",
+      "default": true
+    },
+	{
+      "type": "checkbox",
+      "id": "show_content_team",
+      "label": "Show content Team",
+      "default": true
+    },
+   	{
+      "type": "header",
+      "content": "Banner"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_banner",
+      "label": "Image banner",
+      "info": "1398x316px recommended"
+    },
+    {
+      "id": "url_banner",
+      "type": "url",
+      "default": "/collections/all",
+      "label": "Banner link"
+    },
+
+    {
+      "type": "header",
+      "content": "Text Banner"
+    },
+	{
+      "type": "select",
+        "id": "local_text",
+        "label": "Position Text",
+        "default": "center",
+        "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "title_page",
+      "label": "Title page",
+      "default": "About us"
+    },
+   	{
+      "type": "header",
+      "content": "Banner 2"
+    },
+    {
+      "id": "url_banner2",
+      "type": "url",
+      "default": "/collections/all",
+      "label": " Banner Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_banner2",
+      "label": "Image banner",
+      "info": "1920x316px recommended"
+    },
+    {
+      "type": "text",
+      "id": "title_page22",
+      "label": "Title Top",
+      "default": "Welcome to minim"
+    },
+    {
+      "type": "text",
+      "id": "title_page2",
+      "label": "Title Midde",
+      "default": "Make your house into a home"
+    },
+    {
+      "type": "text",
+      "id": "button2",
+      "label": "Button",
+      "default": "Learn More"
+    },
+    {
+      "id": "url_banner3",
+      "type": "url",
+      "default": "/collections/all",
+      "label": "Link botton"
+    },
+	{
+      "type": "header",
+      "content": "About"
+    },
+	{
+      "type": "header",
+      "content": "content 1"
+    },
+	{
+      "type": "image_picker",
+      "id": "about_img_1",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "title_about_1",
+      "label": "Title",
+      "default": "Our Missions"
+    },
+	{
+      "type": "textarea",
+      "id": "content_about_1",
+      "label": "Content",
+      "default": "One of our mission is to make sure that everyone could be able to afford our products, in general. So with this in mind, we’ve worked hard to reduce the cost and bring our the best offer for our beloved customers."
+    },
+	{
+      "type": "header",
+      "content": "content 2"
+    },
+	{
+      "type": "image_picker",
+      "id": "about_img_2",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "title_about_2",
+      "label": "Title",
+      "default": "Furnishing Your Dreams"
+    },
+	{
+      "type": "textarea",
+      "id": "content_about_2",
+      "label": "Content",
+      "default": "We’ve got everything to help you create a living room that’s ready for entertaining."
+    },
+	{
+      "type": "image_picker",
+      "id": "about_img_3",
+      "label": "Image"
+    },
+	{
+      "type": "header",
+      "content": "About Us "
+    },
+	{
+      "type": "image_picker",
+      "id": "about2_img_1",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "title_about2_1",
+      "label": "Title",
+      "default": "Who we are"
+    },
+    {
+      "type": "text",
+      "id": "title_about2_11",
+      "label": "Content",
+      "default": "Whether you need a living room, bedroom or dining room set you will find it here in our feet beautifully decorated showroom."
+    },
+	{
+      "type": "url",
+      "id": "url1",
+      "label": "URL button",
+      "default": "/collections/all"
+    },
+	{
+      "type": "image_picker",
+      "id": "about2_img_2",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "title_about2_2",
+      "label": "Title",
+      "default": "Who we are"
+    },
+    {
+      "type": "text",
+      "id": "title_about2_22",
+      "label": "Content",
+      "default": "Whether you need a living room, bedroom or dining room set you will find it here in our feet beautifully decorated showroom."
+    },
+	{
+      "type": "url",
+      "id": "url2",
+      "label": "URL button",
+      "default": "/collections/all"
+    },
+	{
+      "type": "image_picker",
+      "id": "about2_img_3",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "title_about2_3",
+      "label": "Title",
+      "default": "Who we are"
+    },
+    {
+      "type": "text",
+      "id": "title_about2_33",
+      "label": "Content",
+      "default": "Whether you need a living room, bedroom or dining room set you will find it here in our feet beautifully decorated showroom."
+    },
+	{
+      "type": "url",
+      "id": "url3",
+      "label": "URL button",
+      "default": "/collections/all"
+    },
+	{
+      "type": "header",
+      "content": "Choose us"
+    },
+	{
+      "type": "header",
+      "content": "section Testimonial "
+    },
+    {
+      "type": "text",
+      "id": "title_choose",
+      "label": "Title",
+      "default": "Why Choose Us"
+    },
+    {
+      "type": "text",
+      "id": "title_content_choose1",
+      "label": "Title Content 1",
+      "default": "Reasonable Price"
+    },
+    {
+      "type": "text",
+      "id": "content_choose1",
+      "label": "Content 1",
+      "default": "One of our mission is to make sure that everyone could be able to afford our products, in general."
+    },
+    {
+      "type": "text",
+      "id": "title_content_choose2",
+      "label": "Title Content 2",
+      "default": "Better Quality"
+    },
+    {
+      "type": "text",
+      "id": "content_choose2",
+      "label": "Content 2",
+      "default": "Quality doesn’t have to be expensive. You heard that right. We aim to make better product with less price tag. "
+    },
+	{
+      "type": "image_picker",
+      "id": "choose_img",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "title_content_choose3",
+      "label": "Title Content 3",
+      "default": "Quick Delivery"
+    },
+    {
+      "type": "text",
+      "id": "content_choose3",
+      "label": "Content 3",
+      "default": "One of our mission is to make sure that everyone could be able to afford our products, in general."
+    },
+    {
+      "type": "text",
+      "id": "title_content_choose4",
+      "label": "Title Content 4",
+      "default": "Dedicated Support"
+    },
+    {
+      "type": "text",
+      "id": "content_choose4",
+      "label": "Content 4",
+      "default": "Quality doesn’t have to be expensive. You heard that right. We aim to make better product with less price tag. "
+    },
+	{
+      "type": "text",
+      "id": "title_testi",
+      "label": "Title",
+      "default": "Don’t hear from us only. Listen to our customers too."
+    },
+	{
+      "type": "header",
+      "content": "section Counter "
+    },
+	{
+      "type": "text",
+      "id": "title_counter1",
+      "label": "Number",
+      "default": "236"
+    },
+	{
+      "type": "text",
+      "id": "title_counter11",
+      "label": "Design Awards",
+      "default": "Design Awards"
+    },
+	{
+      "type": "text",
+      "id": "title_counter2",
+      "label": "Number",
+      "default": "5204"
+    },
+	{
+      "type": "text",
+      "id": "title_counter22",
+      "label": "Satisfied Customers",
+      "default": "Satisfied Customers"
+    },
+	{
+      "type": "text",
+      "id": "title_counter3",
+      "label": "Number",
+      "default": "143"
+    },
+	{
+      "type": "text",
+      "id": "title_counter33",
+      "label": "On Media",
+      "default": "On Media"
+    },
+	{
+      "type": "text",
+      "id": "title_counter4",
+      "label": "Number",
+      "default": "1592"
+    },
+	{
+      "type": "text",
+      "id": "title_counter44",
+      "label": "Happy Feedbacks",
+      "default": "Happy Feedbacks"
+    },
+	{
+      "type": "header",
+      "content": "section Team"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Meet Our Team"
+    },
+	{
+      "type": "range",
+      "id": "font_size_title",
+      "min":       14,
+      "max":       50,
+      "step":      1,
+      "unit":      "px",
+      "label":     "Font size title",
+      "default":   36
+    }
+  ],
+	"blocks": [
+    {
+      "type": "team",
+      "name": "About Team",
+      "settings": [
+          {
+            "type": "image_picker",
+          	"id": "img_team",
+          	"label": "Image Team",
+			"info": "200 x 400px team"
+          },
+    {
+      "type": "text",
+      "id": "name-team",
+      "label": "Name 1",
+      "default": "Jennifer Barret"
+    },
+    {
+      "type": "text",
+      "id": "name-team1",
+      "label": "Name 2",
+      "default": "CEO/Founder"
+    }
+]
+},
+{
+      "type": "testimonia",
+      "name": "About Testimonial",
+      "settings": [
+          {
+            "type": "image_picker",
+          	"id": "img_tes",
+          	"label": "Image brand",
+			"info": "48 x 39px recommended"
+          },
+    {
+      "type": "text",
+      "id": "name",
+      "label": "Name 1",
+      "default": "Mark Collins"
+    },
+    {
+      "type": "text",
+      "id": "name1",
+      "label": "Name 2",
+      "default": "Arizona"
+    },
+    {
+      "type": "text",
+      "id": "content-tes",
+      "label": "Content",
+      "default": "“To be honest, this is one of the best interior store. They have a lot of things for you to explore. The price is reasonable and customer service is dedicated.”"
+    }
+]
+}
+  ],
+  "presets": [
+    {
+      "name": "Page About Us"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

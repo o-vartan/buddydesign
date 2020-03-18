@@ -1,0 +1,187 @@
+<div data-section-id="{{ section.id }}" data-section-type="slide-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  
+    
+  <div class="container-fluid container_35 margin_bottom_80 banner_pinmapper">
+   
+    <div class="row">
+      <div class="img_banner col-lg-6 col-md-6 col-sm-12 col-xs-12">
+      	<img src="{{section.settings.img_banner | img_url:'master'}}" class="img-responsive">
+      </div>
+      <div class="text_banner col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="relative">
+          <h1 class="margin_bottom_30">{{section.settings.title}}</h1>
+          <p class="line margin_bottom_30"></p>
+          <div class="content_bottom">
+            <p class="column-70 content">{{section.settings.des}}</p>
+            <a href="{{section.settings.url}}" class="inline-block over-hidden ciloe-btn-default-2 relative">{{section.settings.btn_name}}</a>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<style>
+  .banner_pinmapper .img_banner img{
+  	float:right;
+  }
+ .banner_pinmapper .text_banner{
+  	padding-top:8%;
+   	padding-left:100px;
+  }
+  .banner_pinmapper .text_banner p.content	{
+  	font-size:16px;
+    color:#999;
+    line-height:2;
+    padding-bottom:60px;
+  }
+  .banner_pinmapper .text_banner a.ciloe-btn-default-2 {
+  	font-size:12px;
+    font-weight:600;
+  }
+  .banner_pinmapper .text_banner a.ciloe-btn-default-2:before {
+  	background:#000;
+  }
+  .banner_pinmapper .text_banner a.ciloe-btn-default-2:hover::before {
+  	background:#41cce5;
+  }
+  .banner_pinmapper .text_banner .content_bottom{
+    padding-left:{{section.settings.padding_left}}px;
+  }
+  .banner_pinmapper .text_banner .line{
+    width:{{section.settings.width_line}}px;
+    border-bottom: {{section.settings.width_border}}px solid {{section.settings.color_border}};
+  }
+  @media (max-width:767px){
+    .banner_pinmapper .text_banner{
+      padding-left:15px;
+    }
+    .banner_pinmapper .text_banner .content_bottom{
+    	padding-left: 30px;
+    }
+    .banner_pinmapper .text_banner .content_bottom .column-70.content{
+    	width:90%;
+      padding-top:20px;
+      padding-bottom:20px;
+    }
+  }
+</style>
+{% schema %}
+{
+  "name": "Banner Pinmapper",
+  "settings": [
+	
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      "type": "image_picker",
+      "id": "img_banner",
+      "label": "Image"
+    },
+	{
+   "type":      "select",
+   "id":        "local_text",
+   "label":     "Chose position title",
+   "options": [
+     {
+       "value": "left",
+       "label": "Left"
+     },
+     {
+       "value": "center",
+       "label": "Center"
+     },
+     {
+       "value": "right",
+       "label": "Right"
+     }
+   ],
+   		"default":   "center"
+	},
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Ciloe is a minimal & unique shop"
+    },
+	{
+      "type": "header",
+      "content": "Line"
+    },
+	{
+      "type": "range",
+      "id": "width_line",
+      "label": "Width line",
+      "default": 50,
+	  "min":0,
+	  "max":100,
+	  "unit":"px"
+    },
+	{
+      "type": "range",
+      "id": "width_border",
+      "label": "Height line",
+      "default": 1,
+	  "min":0,
+	  "max":5,
+	  "unit":"px"
+    },
+	{
+      "type": "color",
+      "id": "color_border",
+      "label": "Color line",
+      "default": "#41cce5"
+    },
+	{
+      "type": "header",
+      "content": "Content"
+    },
+	{
+      "type": "text",
+      "id": "padding_left",
+      "label": "Space left",
+      "default": "0",
+      "info": "pixel"
+    },
+	{
+      "type": "textarea",
+      "id": "des",
+      "label": "Content",
+      "default": "Synergistically grow interactive relationships for transparent materials. Synergistically redefine strategic data business channels. Interactively generate an expanded array of imperatives through progressive data. Phosfluorescently empower multimedia based value with optimal meta-services. "
+    },
+	{
+      "type": "url",
+      "id": "url",
+      "label": "URL button",
+      "default": "/collections/all"
+    },
+    {
+      "type": "text",
+      "id": "btn_name",
+      "label": "Button name",
+      "default": "LEARN MORE"
+    }
+  ],
+
+  "presets": [
+    {
+      "name": "Banner Pinmapper",
+      "category": "Home Pinmapper"
+    }
+  ]
+}
+{% endschema %}

@@ -1,2 +1,2 @@
 # buddydesign
-Sopify
+shopify

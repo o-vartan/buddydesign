@@ -1,0 +1,86 @@
+<div class="single-product-tab ver3 margin_bottom_50">
+    <div class="cmt-title text-center abs">
+        <ul class="nav nav-tabs v3 text-center ">
+            {%if section.settings.enable_description_tab%}
+            <li class=""><a class=" " data-toggle="tab" href="#desc">{{section.settings.destab_title}}</a></li>
+            {%endif%}
+            {% if section.settings.enable_custom_tab%}
+            <li><a class=" " data-toggle="tab" href="#info">{{section.settings.customtab_title}}</a></li>
+            {%endif%}
+            {%if section.settings.enable_review_tab%}
+            <li><a class="active " data-toggle="tab" href="#review">{{section.settings.reviewtab_title}}</a></li>
+            {%endif%}
+        </ul>
+    </div>
+    <div class="tab-content" style="display: flex;  justify-content: center;">
+        {%if section.settings.enable_description_tab%}
+        <div id="desc" class="tab-pane fade in active">
+            {% if section.settings.custom_tab_des == 'default' %}
+            <p>{{product.description}}</p>
+            {% elsif section.settings.custom_tab_des == 'pin' %}
+            {% include 'ciloe_pin_pd_detail' %}
+            {% elsif section.settings.custom_tab_des == 'page' %}
+            {% include 'ciloe_description_pd_detail' %}
+            {% endif %}
+        </div>
+        {%endif%}
+        {% if section.settings.enable_custom_tab%}
+        <div id="info" class="tab-pane fade ">
+            {% if section.settings.custom_tab_option == "ct_ops_image" %}
+            <div class="img">
+                <img {%if section.settings.ct_option_1 == blank%}src="{{'destabimg.jpg'| asset_url }}" {%else%}
+                    src="{{section.settings.ct_option_1 | img_url:'master'}}" class="img-reponsive" {%endif%} alt="" />
+            </div>
+            {% elsif section.settings.custom_tab_option == "ct_ops_html" %}
+
+            {{section.settings.ct_option_2}}
+            {% elsif section.settings.custom_tab_option == "ct_ops_page" %}
+            {{section.settings.ct_option_3}}
+            {% endif %}
+        </div>
+        {%endif%}
+        {%if section.settings.enable_review_tab%}
+        <div id="review" class="tab-pane   ">
+            <div class="entry-inside v3">
+                <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+            </div>
+            <div class="blog-comment-bottom">
+                <div class="cmt-title text-center ">
+                    <h3 class="margin_bottom_20">{{ section.settings.cmt_title }} "{{product.title}}"</h3>
+                    <p>Your email address will not be published. Required fields are marked *</p>
+                </div>
+                <div class="cmt-form">
+                    <div class="login-form">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 col-xs-12">
+                                    <input type="text" id="author" class="form-control bdr" name="comment[author]"
+                                        value="{{ form.author }}" placeholder="{{ 'blogs.comments.name' | t }}">
+                                </div>
+                                <div class="col-md-6 col-xs-12">
+                                    <input type="email" id="email" class="form-control bdr" name="comment[email]"
+                                        value="{{ form.email }}" placeholder="{{ 'blogs.comments.email' | t }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <textarea id="message" class="form-control" name="comment[body]" rows="12"
+                                        placeholder="{{ 'blogs.comments.message' | t }}">{{form.body}}</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group ">
+                            <button type="submit" class="btn btn-submit">
+                                <p> {{ section.settings.btn_submit }}</p>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {%endif%}
+    </div>
+</div>

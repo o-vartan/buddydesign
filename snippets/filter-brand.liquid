@@ -1,0 +1,14 @@
+<div class="widget filter woocommerce widget_product_categories filter-brand filter-inside">
+    <div class="flex margin_bottom_20">
+    <h4 class="fz-12 widget_title ">{{section.settings.shop_by_brand_title}}</h4>
+  </div>
+    <ul class="product-categories filter-content e-filter brand-filter">
+        {% for product_vendor in collection.all_vendors %}
+        <li class="cat-item">
+          {{ product_vendor | link_to_vendor }}
+        </li>
+          {% endfor %}
+    </ul>
+  	
+</div>
+

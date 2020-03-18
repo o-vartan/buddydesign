@@ -1,0 +1,15 @@
+<div class="widget woocommerce widget_product_categories filter-tag filter-brand filter-price filter-inside">
+    <h3>{{section.settings.shop_by_price_title}}</h3>
+    <ul class="e-filter brand-filter">
+        {% assign tags = section.settings.shop_by_price_list_tags | split: ',' %}
+    
+        {% for t in tags %}
+        {% assign tag = t | strip %}
+        {% assign tag_value = tag | handleize %}
+        <li class="cat-item{% if current_tags contains tag %} current-cat{% endif %}">
+          <input type="checkbox" value="{{ tag_value | split: '|' | first }}" {% if current_tags contains tag %}checked{% endif %}/>
+          <a href="javascript:void(0)" title="{{tag}}">{{tag}}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>

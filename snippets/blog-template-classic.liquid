@@ -1,0 +1,42 @@
+<div class="blog-single-post blog-standar">
+    <h3 class="blog-heading text-center">Blog</h3>
+    <div class="row">
+        <div class="blog-content  col-md-9  col-xs-12">
+            {% for article in blog.articles %}
+            <div class="blog-post-item v2">
+                {% if article.image %}
+                <div class="blog-img">
+                    <a href="{{ article.url }}" class="hover-images">{{ article | img_url: 'master' | img_tag: article.title }}</a>
+                    <div class="blog-post-date e-gradient abs v2">
+                        <span class="b-date">{{article.published_at | date: "%d" }}</span>
+                        <span class="b-month">{{article.published_at | date: "%b"}}</span>
+                    </div>
+                </div>
+                {% endif %}
+                <div class="blog-info-bd">
+                    <div class="blog-info">
+                        <h3 class="blog-post-title v2"><a href="{{ article.url }}">{{ article.title }}</a></h3>
+                        <div class="blog-post-desc">
+                            {{article.content | strip_html | strip_newlines | truncatewords: 90}}
+                        </div>
+                    </div>
+                    <div class="blog-post-author v2">
+                        <div class="blog-post-tags v2">
+                            <div class="author">{{ 'blogs.article.poster_on' | t }} {{ article.created_at | date: "%B %d, %Y" }}</div>
+                            <div class="blog-tag">
+                                {% for tag in article.tags %}
+                                <a href="{{ blog.url }}/tagged/{{ tag | handle }}" rel="category tag">{{ tag }}</a>{% unless forloop.last %},{% endunless %}
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="blog-post-comment"><span class="c-black"></span>{{article.comments_count}}</div>
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+            {% include 'pagination'%}
+        </div>
+        {% include 'blog-sidebar' %}
+    </div>
+</div>

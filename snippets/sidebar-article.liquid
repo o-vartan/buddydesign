@@ -1,0 +1,113 @@
+<div class="blog-sidebar col-md-3 col-xs-12">
+  {% if section.settings.enable_widget_search %}
+  <div class="blog-widget blog-widget-search">
+    <form method="get" action="/search" role="search">
+      <input type="text" class="form-control control-search" value="" autocomplete="off" placeholder="{{section.settings.serch_placeholder}}" aria-label="SEARCH" name="q">
+      <button class="button_search" type="submit"><i class="icon-magnifier"></i></button>
+    </form> 
+  </div>
+   {% endif %}
+    {% if section.settings.enable_widget_categories %}
+    <div class="blog-widget blog-widget-category">
+        <h3 class="widget-blog-title">{{section.settings.widget_categories_title}}</h3>
+        {% assign sidebar_menu = section.settings.widget_categories_menu %}
+        <ul class="wiget-content">
+            {% for link in linklists[sidebar_menu].links %}
+            <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+  {% comment %}
+    {% if section.settings.enable_widget_social %}
+    <div class="blog-widget blog-widget-social">
+        <h3 class="widget-blog-title">{{section.settings.widget_social_title}}</h3>
+        <div class="social">
+            {{section.settings.widget_social_content}}
+        </div>
+    </div>
+    {% endif %}
+   {% endcomment %}
+    {% if section.settings.enable_widget_rposts %}
+    <div class="blog-widget blog-widget-popular">
+        <h3 class="widget-blog-title">Popular post</h3>
+        <div class="owl-carousel owl-theme js-owl-post">
+            {% if section.blocks.size > 0 %} 
+                          {% for block in section.blocks %}
+                    {% if block.type == 'pproduct' %}
+                    {% assign block_limit = block.settings.blog_limit %}
+          			{% assign col = block.settings.blog_collection %}
+            <div class="item">
+                {% for article in blogs[col].articles limit: block_limit %}
+                <div class="post-item">
+                    <div class="post-img">
+                        {{ article | img_url: '83x83' | img_tag: article.title }}
+                    </div>
+                    <div class="post-info">
+                        <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
+                        <p>{{article.published_at | date: "%b.%d.%Y" }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}  
+                  {% endfor %}
+                      {% endif %}  
+
+        </div>
+    </div>
+    {% endif %}
+    {% if section.settings.enable_widget_newletter %}
+    <div class="blog-widget blog-widget-newsletter">
+        <h3 class="widget-blog-title">{{section.settings.newletter_title}}</h3>
+        <div class="newsletter">
+          {% if settings.newsletter_form_action != blank %}
+          {% assign form_action = settings.newsletter_form_action %}
+          {% else %}
+          {% assign form_action = '#' %}
+          {% endif %}
+          <h3 class="title_newletter text-center">{{section.settings.title_newletter}}</h3>
+            <form class="form_newsletter text-center" action="{{form_action}}" method="post">
+                <input type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{section.settings.newletter_placeholder}}" name="EMAIL" id="mail2" class="newsletter-input form-control">
+                <button id="subscribe2" class="button_mini btn" type="submit">
+                    {{section.settings.btn_submit_form}}
+                </button>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+    {% if section.settings.enable_widget_instagram %}
+    {% assign instafeed_img = '{{image}}' %}
+    {% assign instafeed_link = '{{link}}' %}
+    <script>
+    jQuery(document).ready(function($) {
+      var feed = new Instafeed({
+        get: 'user',
+        userId: '{{section.settings.instagram_userid}}',
+        accessToken: '{{section.settings.instagram_access_token}}',
+        template: '<a href="{{instafeed_link}}"><img src="{{instafeed_img}}" alt="" class="img-responsive"></a>',
+        target: 'engoj_instagram_blogsidebar',
+        resolution: 'standard_resolution',
+        limit: '{{section.settings.instagram_limit_number}}'
+
+      });
+      feed.run();
+
+
+    });
+    </script>
+    <div class="blog-widget blog-widget-instagram">
+        <h3 class="widget-blog-title">{{section.settings.widget_instagram_title}}</h3>
+        <div class="instagram" id="engoj_instagram_blogsidebar">
+        </div>
+    </div>
+    {% endif %}
+  	{% if section.settings.enable_widget_banner %}
+    <div class="blog-widget-banner blog-widget">
+      <h3 class="widget-blog-title">{{section.settings.widget_tag_title}}</h3>
+      {% for tag in blog.all_tags %}
+        {{ tag | link_to_add_tag: tag }}
+      {% endfor %}
+    </div>
+  	{% endif %}
+</div>

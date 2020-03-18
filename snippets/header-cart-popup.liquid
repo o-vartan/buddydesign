@@ -1,0 +1,55 @@
+<div class="pushmenu pushmenu-left cart-box-container">
+  <div class="cart-list">
+    <span  class="close-left js-close">x</span>
+    <h3 class="cart-title">Your Cart</h3>
+    <div class="enj-minicart-ajax">
+      {% if cart.item_count > 0 %}
+      <ul class="list">
+        {% for item in cart.items %}
+        <li>
+
+
+          <a href="{{item.url}}" class="img-responsive">
+            <img src="{{ item.image | product_img_url: '88x88' }}" alt="{{ item.title }}">
+          </a>
+
+          <div class="text">
+            <p class="product-name"><a href="{{ item.url }}" tabindex="0">{{ item.title}}</a></p>
+            <p class="product-price">{{ item.price | money }}</p>
+            <div class="quantity input-group">x{{ item.quantity }}</div>
+            <div class="clearfix"></div>    
+          </div>
+          <!-- .product-mini__body -->
+
+          <!-- .product-mini -->
+          <!-- .product-mini__img -->
+
+
+          <!-- .product-mini__button -->
+
+        </li>
+        {% endfor %}
+      </ul>
+      <div class="cart-bottom">
+        <p class="total"><span>Subtotal</span>{{cart.total_price | money}}</p>
+		<div class="clearfix"></div>   
+        <div class="cart-button">
+          <a href="/checkout" class="checkout">{{ 'minicart.general.checkout' | t }}</a>
+
+          <a href="/cart" class="edit-cart ">{{ 'minicart.general.view_cart' | t }}</a>
+        </div>
+        <a href="#" class="text">Our Shipping & Return Policy</a>
+      </div>
+
+      <!-- .product-mini__action -->
+      {% else %}
+      <div class="nocart-list">
+        <div class="empty-cart">
+          <h4 class="nocart-title">{{ 'minicart.general.empty' | t }}</h4>
+          <a href="/collections/all" class="btn-shop btn-return">{{ 'minicart.general.shop_now' | t }}<span class="icon-arr"></span></a>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+{% if settings.enable_sticky%}
+<div class="sticky-header text-center{% if settings.enable_hiden_topbar %} hidden-xs{% endif %}">
+  <div class="text">
+    <a href="{{settings.sticky_url1}}"><span class="u-line">{{settings.sticky_text1}}</span></a> {{settings.sticky_text2}}
+  </div>
+</div>
+{% endif %}
